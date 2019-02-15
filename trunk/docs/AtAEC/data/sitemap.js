@@ -1,0 +1,8 @@
+﻿var sitemap = 
+
+(function() {
+    var _ = function() { var r={},a=arguments; for(var i=0; i<a.length; i+=2) r[a[i]]=a[i+1]; return r; }
+    var _creator = function() { return _(b,[_(c,d,e,f,g,h,i,[_(c,j,e,f,g,k),_(c,l,e,f,g,m),_(c,n,e,f,g,o)]),_(c,p,e,f,g,q,i,[_(c,r,e,f,g,s),_(c,t,e,f,g,u),_(c,v,e,f,g,w)]),_(c,x,e,f,g,y,i,[_(c,z,e,f,g,A)]),_(c,B,e,f,g,C),_(c,D,e,f,g,E),_(c,F,e,f,g,G),_(c,H,e,f,g,I,i,[_(c,J,e,f,g,K)]),_(c,L,e,f,g,M,i,[_(c,N,e,f,g,O),_(c,P,e,f,g,Q)]),_(c,R,e,f,g,S),_(c,T,e,f,g,U),_(c,V,e,f,g,W,i,[_(c,X,e,f,g,Y),_(c,Z,e,f,g,ba),_(c,bb,e,f,g,bc),_(c,bd,e,f,g,be),_(c,bf,e,f,g,bg),_(c,bh,e,f,g,bi),_(c,bj,e,f,g,bk)]),_(c,bl,e,f,g,bm,i,[_(c,bn,e,f,g,bo),_(c,bp,e,f,g,bq),_(c,br,e,f,g,bs),_(c,bt,e,f,g,bu),_(c,bv,e,f,g,bw)])]);}; 
+var b="rootNodes",c="pageName",d="加载页",e="type",f="Wireframe",g="url",h="加载页.html",i="children",j="引导页1",k="引导页1.html",l="引导页2",m="引导页2.html",n="引导页3",o="引导页3.html",p="登陆导航",q="登陆导航.html",r="服务器导航",s="服务器导航.html",t="企业导航",u="企业导航.html",v="工程项目导航",w="工程项目导航.html",x="概览",y="概览.html",z="通知",A="通知.html",B="主菜单",C="主菜单.html",D="主题",E="主题.html",F="虚拟场景",G="虚拟场景.html",H="工程日历",I="工程日历.html",J="事件详情",K="事件详情.html",L="工程任务",M="工程任务.html",N="我的任务",O="我的任务.html",P="任务详情",Q="任务详情.html",R="工程云盘",S="工程云盘.html",T="联系人",U="联系人.html",V="扫一扫",W="扫一扫.html",X="清单选择",Y="清单选择.html",Z="通用清单",ba="通用清单.html",bb="通用构件",bc="通用构件.html",bd="物料清单",be="物料清单.html",bf="物料构件",bg="物料构件.html",bh="工量标签",bi="工量标签.html",bj="安全点位",bk="安全点位.html",bl="设置",bm="设置.html",bn="菜单设置",bo="菜单设置.html",bp="锁屏设置",bq="锁屏设置.html",br="下载设置",bs="下载设置.html",bt="用户信息",bu="用户信息.html",bv="程序信息",bw="程序信息.html";
+return _creator();
+})();

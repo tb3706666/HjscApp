@@ -1,0 +1,593 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>联系人</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+	</head>
+	<style>
+		.mui-bar {
+			background-color: #43484e;
+		}
+		
+		.mui-bar .mui-title {
+			color: #fff;
+		}
+		
+		.mui-icon-back:before,
+		.mui-icon-left-nav:before {
+			color: #fff;
+		}
+		
+		#list .mui-table-view {
+			margin-top: 63px;
+		}
+		
+		.imgwz {
+			position: absolute;
+			right: 20px;
+			top: 14px;
+			color: #D34747;
+			display: none;
+		}
+		
+		.mui-search {
+			position: relative;
+			top: 51px;
+			z-index: 3;
+			background: #fff;
+			padding-top: 10px;
+			padding-left: 17px;
+			padding-right: 17px;
+		}
+		
+		.userimg {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.search-result {
+			text-align: center;
+			color: #4A4A4A;
+			font-weight: bold
+		}
+		
+		.circle {
+			position: absolute;
+			right: 18px;
+			top: 40px;
+			background: #fff;
+			border: 1px solid #ccc;
+			border-radius: 20px;
+			padding: 4px;
+		}
+		
+		.but_add {
+			position: absolute;
+			bottom: 0px;
+			text-align: center;
+			width: 100%;
+			display: none;
+			z-index: 12;
+		}
+		
+		.but_add .inp {
+			background: #64B3DF;
+			color: #fff;
+			margin-top: 10px;
+			width: 250px;
+			height: 40px;
+			disabled: true;
+			margin-bottom: 10px;
+			border: none;
+		}
+		
+		.but_add2 {
+			position: absolute;
+			bottom: 0px;
+			text-align: center;
+			width: 100%;
+			display: none;
+			background: #fff;
+		}
+		
+		.but_add3 {
+			position: absolute;
+			bottom: 0px;
+			text-align: center;
+			width: 100%;
+			display: none;
+			background: #fff;
+		}
+		
+		.mui-search .mui-placeholder {
+			top: 10px;
+			right: auto;
+			left: 25px;
+		}
+		
+		.mui-active::before {
+			top: 34px;
+			right: auto;
+			left: 25px !important;
+		}
+		
+		input[type=search] {
+			margin-bottom: 10px;
+		}
+		
+		#search {
+			text-align: center;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+		
+		.mui-icon-clear {
+			right: 13px !important;
+		}
+		
+		.mui-icon-clear::before {
+			line-height: 40px;
+		}
+		
+		.mui-bar-nav~.mui-content {
+			background: #fff;
+		}
+		/*底部弹出框样式start*/
+		
+		.mui-popover.mui-popover-action .mui-table-view {
+			margin: 0px;
+			margin-top: 6px;
+			border-radius: 0px;
+		}
+		
+		.mui-popover .mui-table-view {
+			background: #fff;
+		}
+		
+		#share {
+			background: transparent;
+			font-size: 16px;
+		}
+		
+		#share .mui-table-view-cell {
+			padding: 15px 15px;
+		}
+		
+		#delete .mui-table-view-cell {
+			padding: 15px 15px;
+		}
+		
+		.cancel-share {
+			color: #333 !important;
+		}
+		
+		.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after {
+			background-color: #f2f2f2;
+		}
+		
+		.op-img {
+			width: 45px;
+			height: 45px;
+		}
+		
+		.op {
+			display: inline-block;
+			width: 32%;
+		}
+		
+		.op-font {
+			font-size: 12px;
+			color: #666;
+		}
+		
+		#share .mui-table-view-cell.mui-active {
+			background-color: #fff;
+		}
+		
+		.tip {
+			font-size: 14px;
+			color: #999 !important;
+		}
+		
+		.del {
+			font-size: 16px;
+			color: #cc0a0a !important;
+		}
+		
+		.cancel {
+			font-size: 16px;
+			color: #333 !important;
+		}
+		/*底部弹出框样式end*/
+		
+		.mui-icon-checkmarkempty {
+			background: #0487d0 !important;
+			padding: 0px !important;
+			width: auto;
+			height: auto;
+			font-size: 16px;
+			color: #ffffff;
+			border: none;
+		}
+		
+		.mui-bar-nav~.mui-content .mui-pull-top-pocket {
+			top: 100px;
+		}
+		
+		.hid_switch {
+			color: #fff;
+			float: right;
+			margin-top: 15px;
+			font-size: 15px;
+		}
+		
+		.mui-bar-nav.mui-bar .mui-icon {
+			line-height: 29px;
+		}
+		
+		.mui-bar-nav~.mui-content {
+			margin-top: 44px;
+			padding-top: 0;
+		}
+		a{
+			touch-action: none;
+		}
+	</style>
+
+	<body>
+
+		<!-- 主页面标题 -->
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" style="pointer-events: none;">选择联系人(<span id="count"></span>)</h1>
+			<span id="selectAll" class="hid_switch">全选</span>
+		</header>
+
+		<!--<div class="mui-input-row mui-search" id="searchview">
+					<input type="search" id="searchVal" class="mui-input-clear" placeholder="姓名/账户/邮箱" @keyup.enter="getsearch">
+				</div>
+				<span class="search-result">
+			<span id="search-result" class="search-result2">该用户不存在</span>
+				</span>-->
+
+		<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll" id="chanpin_list">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media" v-for="(item,index) in items" :accesskey="index">
+						<img class="mui-media-object mui-pull-left" :src="item.imgUuid ==null ? item.userImg: item.imgUuid" onerror="this.src='../../img/timg.jpg';this.onerror=null" style="border-radius: 100px;">
+						<div class="mui-media-body">
+							<div class="list_title hbox">{{item.userName}}
+								<a href="#delete"><span class="imgwz" :userid="item.userId" class="deluserid">删除</span></a>
+								<div class="circle" :index="index"></div>
+							</div>
+							<p><img src="../../icon/lxr_user.png" style="width: 15px;height: 15px;" />&nbsp;{{item.account}}</p>
+							<p class="mui-ellipsis"><img src="../../icon/lxr_email.png" style="width: 15px;height: 15px;" />&nbsp;{{item.email}}</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--当为查询出来的数据之后-->
+			<div class="but_add">
+				<input type="button" class="but_add inp" value="添加到当前群组" onclick="addgroup()" />
+			</div>
+			<div class="but_add2">
+				<input type="button" style="margin-bottom: 53px;color: #FFFFFF;margin-top: 30px;width: 250px;background: #0487D0;" value="发送电子邮件邀请" />
+			</div>
+		</div>
+
+		<!--删除的弹出框-->
+		<div id="delete" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="tip">删除后改联系人将从列表中清除</a>
+				</li>
+				<!--<li class="mui-table-view-cell" >-->
+				<li class="mui-table-view-cell" onclick="deleuser()">
+					<a href="#" class="del">删除</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#delete" class="cancel">取消</a>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			// 返回页面时，调用发表主题页面的获取本地缓存方法
+			mui.plusReady(function() {
+				var old_back = mui.back;
+				mui.back = function() {
+					var wobj = plus.webview.getWebviewById("published"); //注意 HBuilder 是   1.html 的 ID  你如果1.html 有ID   要替换掉HBuilder，
+					mui.fire(wobj, 'loadMan');
+					old_back()
+				}
+			});
+
+			// 圆圈选中样式
+			var CLASSNAME = 'mui-icon mui-icon-checkmarkempty';
+
+			// 选中的联系人
+			var SELECTEDMAN = "";
+
+			// 全选和取消全选
+			$("#selectAll").on('tap', function() {
+
+				var font = $("#selectAll").html();
+				if(font == '全选') {
+					font = '取消全选';
+					$('.circle').css('padding', '7px').addClass('padding').addClass(CLASSNAME);
+				} else {
+					font = '全选';
+					$('.circle').css('padding', '4px').removeClass('padding').removeClass(CLASSNAME);
+				}
+				$("#selectAll").html(font);
+			});
+
+			// 返回的时候把选择的联系人存入到本地缓存
+			$("#back").on('tap', function(e) {
+
+				var selected = $(".mui-icon-checkmarkempty");
+				selected.each(function() {
+					var index = $(this).attr("index");
+					var userName = chanpin.items[index].userName;
+					SELECTEDMAN += "@" + userName + " ";
+				})
+				userInfo = getGlobalUserInfo(); //获取对象
+				var selectedMan = userInfo.selectedMan;
+				userInfo.selectedMan = SELECTEDMAN;
+				setGlobalUserInfo(userInfo);
+			});
+
+			//数据
+			var itemsdata = [];
+
+			$(function() {
+				ugid = ""; //获取当前群组
+				userInfo = getGlobalUserInfo(); //获取对象
+				getuserlist(); //获取所有联系人
+			});
+
+			//页面
+			var chanpin = new Vue({
+				el: '#chanpin_list',
+				data: {
+					items: [],
+				},
+				methods: {
+					delId: function() {
+						//						alert(11);
+					}
+				},
+				watch: {
+					items: function() {
+						this.$nextTick(function() {
+							xr();
+						})
+					}
+				},
+
+			});
+
+			function getuserlist() {
+			  
+			  if(userInfo.groupId==undefined){
+				//当加载页面时获取当前群组的值  4.1
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/cloud/getGroupList?type=json',
+					data: {
+						'projectId': userInfo.projId,
+						'tokenId': userInfo.tokenId
+					},
+					dataType: 'JSON',
+					success: function(data) {
+						//登录失效
+						if(data.obj===false) {
+							tokenInvalid(data);
+							return;
+							}
+						if(data.userGroupList == undefined) {
+							mui.toast(data.responseInfo.responseMessage);
+						} else {
+							var list = data.userGroupList;
+							for(var i = 0; i < data.userGroupList.length; i++) {
+								if(list[i].groupName == '默认群组') {
+									ugid = list[i].groupId;
+								}
+							}
+						}
+					}
+				})
+				  }
+			  ugid=userInfo.groupId;
+				//2.1       获取全部联系人信息
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/mobile/showUserList',
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenID', userInfo.tokenId);
+					},
+					data: {
+						'projId': userInfo.projId,
+						'entId': userInfo.entid,
+						'ugId': ugid, //组群id需要先获取组群列表   4.1的接口中获取
+						'pageNo': 1,
+						'pageSize': 1000
+					},
+					async: true,
+					success: function(data) {
+						//登录失效
+						if(data.obj===false) {
+							tokenInvalid(data);
+							return;
+							}
+						console.log(data);
+						if(data.success) {
+							chanpin.items = data.obj;
+							$("#count").html(data.obj.length);
+						} else {
+							mui.toast(data.msg);
+						}
+
+					}
+				})
+
+			}
+
+			/**
+			 * 搜索
+			 */
+			function searchIng() {
+				var val = $('#searchVal').val().trim();
+				if(val == "" || val == undefined) { //查询的列表为空则展示全部
+					downclass();
+					getuserlist();
+				} else {
+					//进来搜索 获取值，判断查询的是用户还是邮箱
+					var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+					var isemail = pattern.test(val);
+					$.ajax({ //2.3  ok
+						type: "get",
+						url: userInfo.url + "/mobile/getUserByKeyWord",
+						async: true,
+						beforeSend: function(request) {
+							request.setRequestHeader('tokenID', userInfo.tokenId);
+						},
+						data: {
+							params: val,
+						},
+						success: function(data) {
+							//登录失效
+						if(data.obj===false) {
+							tokenInvalid(data);
+							return;
+							}
+							
+							if(data.success) { //判断是否有返回值
+								if(data.obj.length == undefined) { //判断为单个或者多个
+									obj = [data.obj];
+									chanpin.items = obj;
+								} else {
+									chanpin.items = data.obj;
+								}
+								//打开样式，添加div
+								openclass();
+							} else {
+								downclass();
+								chanpin.items = [];
+								if(isemail) { //查询的为邮箱
+									//									$('#search-result').html('没有找到使用该邮箱注册过BDMS账户的用户，您可以选择发送电子邮件邀请添加');
+									mui.toast('没有找到使用该邮箱注册过BDMS账户的用户你可以选择发送电子邮件添加');
+									//							   $('.search-result').show();
+									//							   openclass2();
+								} else { //查询的普通账户
+									//								$('#search-result').html('用户不存在');
+									//								$('.search-result').show();
+									mui.toast('用户不存在');
+								}
+
+							}
+						}
+					});
+				}
+			}
+
+			function openclass() {
+				$('.circle').show();
+				$('.imgwz').hide(); //删除显示隐藏
+				$('.but_add').show();
+				//				$('.search-result').hide();
+			}
+
+			function openclass2() {
+				$('.circle').show();
+				$('.imgwz').hide(); //删除显示隐藏
+				$('.but_add2').show();
+				//				$('.search-result').hide();
+			}
+
+			function downclass() {
+				$('.circle').hide();
+				$('.imgwz').show(); //删除显示隐藏
+				$('.but_add').hide();
+				$('.but_add2').hide();
+			}
+
+			mui('#home_scroll').scroll();
+			xr();
+			//渲染事件
+			function xr() {
+				$('.mui-table-view-cell').on('tap', function() {
+
+					if($(this).find('.circle').hasClass(CLASSNAME)) {
+						$(this).find('.circle').removeClass(CLASSNAME);
+
+						//判断是否还有选中的列表
+						if(!$('#chanpin_list').find('.circle').hasClass(CLASSNAME)) {
+
+							$('.circle').css('padding', '4px').removeClass('padding');
+							$('.inp').css('background-color', '#64B3DF');
+							return;
+						}
+
+					} else {
+						$('.circle').css('padding', '7px').addClass('padding');
+						$(this).find('.circle').addClass(CLASSNAME);
+						$('.inp').css('background-color', '#0487d0');
+					}
+
+				})
+			}
+
+			//分页，下拉加载
+
+			//			mui.init({
+			//				pullRefresh: {
+			//					container: '#home_scroll',
+			//					down: {
+			//						style: 'circle',
+			//						callback: pulldownRefresh
+			//					},
+			//					up: {
+			//						auto: false,
+			//						contentrefresh: '正在加载...',
+			//						callback: pullupRefresh
+			//					}
+			//				}
+			//			});
+			//加载刷新
+			//			function pulldownRefresh() {
+			//				pageNums=1;
+			//				getuserlist();
+			//				mui('#home_scroll').pullRefresh().endPulldownToRefresh();
+			//				// 重置上拉加载
+			//				mui('#home_scroll').pullRefresh().refresh(true);
+			//			}
+			//
+			//			function pullupRefresh() {
+			//				setTimeout(function() {
+			////					var isHave = pageNums >= totalPage;
+			//                 
+			//					mui('#home_scroll').pullRefresh().endPullupToRefresh( isHave );
+			//					if(!isHave){
+			//						pageNums++;
+			//					 getuserlist();
+			//					}
+			//				}, 1000);
+			//				
+			//			}
+		</script>
+	</body>
+
+</html>

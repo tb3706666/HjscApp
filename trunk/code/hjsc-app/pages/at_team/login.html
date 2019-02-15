@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>登录</title>
+		<!--css-->
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<!--css-->
+
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			.link-area {
+				display: block;
+				margin-top: 25px;
+				text-align: center;
+			}
+			
+			.spliter {
+				color: #bbb;
+				padding: 0px 8px;
+			}
+			
+			.oauth-area {
+				/*position: absolute;
+	bottom: 0px;*/
+				left: 0px;
+				text-align: center;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+				height: 83px;
+				background: #ffffff;
+			}
+			
+			.oauth-area .oauth-btn {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				background-size: 30px 30px;
+				background-position: center center;
+				background-repeat: no-repeat;
+				margin: 0px 20px;
+				/*-webkit-filter: grayscale(100%); */
+				border: solid 1px #ddd;
+				border-radius: 25px;
+			}
+			
+			.oauth-area .oauth-btn:active {
+				border: solid 1px #aaa;
+			}
+			
+			.oauth-area .oauth-btn.disabled {
+				background-color: #ddd;
+			}
+			
+			.mui-card {
+				height: 8rem;
+				width: 100%;
+				margin: 0px;
+				box-shadow: none;
+			}
+			
+			.mui-card-header {
+				height: 100%;
+				background-image: url(../../img/login.png);
+			}
+			
+			.at-aec {
+				width: 5rem;
+				height: 1rem;
+				font-size: 1.2rem;
+				line-height: 0px;
+				letter-spacing: 0px;
+				color: #0487d0;
+				margin-top: 37px;
+				margin-bottom: 5px;
+				display: inline-block;
+			}
+			
+			.mui-content {
+				background-color: #ffffff;
+			}
+			
+			.at-aec-out {
+				text-align: center;
+			}
+			
+			.pwd {
+				margin-top: 20px;
+			}
+			
+			.mui-input-group:before,
+			.mui-input-group:after {
+				height: 0px;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				height: 0px;
+			}
+			
+			.mui-input {
+				border: solid 1px #d9d9d9 !important;
+				height: 48px !important;
+				width: 13rem !important;
+				border-radius: 4px !important;
+			}
+			
+			.mui-input-group .mui-input-row {
+				height: auto;
+				text-align: center;
+			}
+			
+			.rememer {
+				width: 12px !important;
+				height: 12px !important;
+				border: 1px solid #ccc !important;
+				-webkit-appearance: checkbox;
+				background-color: transparent;
+				border-radius: 4px !important;
+				vertical-align: middle;
+			}
+			
+			.rememer-forget {
+				text-align: center;
+				margin: 0 auto;
+				margin-top: 3px;
+			}
+			
+			.rememerFont {
+				font-size: 14px;
+				color: #666666;
+			}
+			
+			.rememer-forget-inner {
+				width: 100%;
+			}
+			
+			.rememerPwd {
+				float: left;
+				margin-left: 1.5rem;
+			}
+			
+			.forgetPwd {
+				font-size: 14px;
+				color: #0487d0;
+				float: right;
+				margin-right: 1.5rem;
+			}
+			
+			.mui-btn-primary {
+				height: 2rem;
+				width: 13rem;
+				margin-top: 1rem;
+				display: inline-block;
+			}
+			
+			.mui-content-padded {
+				text-align: center;
+			}
+			
+			.bottom {
+				width: 100%;
+				height: 48px;
+				background-color: #43484e;
+				color: #ffffff;
+				line-height: 48px;
+				font-size: 14px;
+			}
+			
+			.regist {
+				font-family: FZHTJW--GB1-0;
+				font-size: 16px;
+				font-weight: normal;
+				font-stretch: normal;
+				line-height: 0px;
+				letter-spacing: 0px;
+				color: #0487d0;
+				margin-bottom: 25px;
+				display: inline-block;
+			}
+			
+			body {
+				background-color: #ffffff;
+				z-index: 11111;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+			}
+			
+			.mui-card-header,
+			.mui-card {
+				border-radius: 0px;
+			}
+			
+			.mui-content>.mui-card:first-child {
+				margin-top: 0px;
+			}
+			
+			.big,
+			.mui-content {
+				height: 100%;
+				background: #FFFFFF;
+			}
+			
+			#login {
+				background-color: #0487D0;
+			}
+		</style>
+		<!--js-->
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<!--js-->
+
+		<script>
+			$(function() {
+				var ht = $('.mui-content').height() - 83;
+				$('.mui-content').height(ht);
+			})
+		</script>
+	</head>
+
+	<body>
+
+		<div class="big">
+
+			<div class="mui-content">
+
+				<header class="mui-card">
+					<div class="mui-card-header mui-card-media"></div>
+					<!--<img src="img/login.png" />-->
+				</header>
+
+				<div class="at-aec-out">
+					<span class="at-aec">At AEC</span>
+				</div>
+				<form id='login-form' class="mui-input-group">
+					<div class="mui-input-row">
+						<input id='account' type="text" class="mui-input mui-input" placeholder="用户名">
+					</div>
+					<div class="mui-input-row pwd">
+						<input id='password' type="password" class="mui-input mui-input" placeholder="密码">
+					</div>
+					<div class="rememer-forget">
+						<div class="rememer-forget-inner">
+							<div class="rememerPwd">
+								<input class="rememer" type="checkbox" id="remember" value="true" />
+								<span class="rememerFont">记住密码</span>
+							</div>
+
+							<div class="forgetPwd">
+								忘记密码
+							</div>
+
+						</div>
+
+					</div>
+				</form>
+
+				<div class="mui-content-padded">
+					<button id='login' type="button" class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				</div>
+
+			</div>
+
+			<div class="oauth-area">
+				<span class="regist">注册账号</span>
+
+				<div class="bottom">
+					<span>华建数创（上海）科技有限公司</span>
+				</div>
+
+			</div>
+
+		</div>
+
+		<script src="../../js/md5.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../js/login.js"></script>
+		<script>
+			mui.init({
+          	beforeback: function() {
+          	var tqr=plus.webview.getWebviewById('regist');
+          	var tqr1=plus.webview.getWebviewById('forget');
+			if(tqr||tqr1){
+				if(tqr){
+					plus.webview.getWebviewById('regist').close();
+					mui.toast().close();
+				}else{
+					plus.webview.getWebviewById('forget').close();
+					mui.toast().close();
+				}
+			}else{
+				plus.runtime.quit();
+				mui.toast().close();
+			}
+			
+			}
+			})
+			//注册
+			$('.regist').on('tap', function() {
+				mui.openWindow({
+					url: 'https://bdms.arctron.cn/arctron-usercenter/register/registerIndex',
+					id: 'regist',
+					styles:{
+						titleNView: {
+							autoBackButton:'true',
+							backgroundColor:'#43484E',
+							titleColor:'#fff'
+						}
+					},
+				})
+			})
+			//忘记密码
+			$('.forgetPwd').on('tap', function() {
+				mui.openWindow({
+					url: 'https://bdms.arctron.cn/arctron-usercenter/register/forgetPwd',
+					id: 'forget',
+					styles:{
+						titleNView: {
+							autoBackButton:'true',
+							backgroundColor:'#43484E',
+							titleColor:'#fff'
+						}
+					},
+				})
+			})
+
+			mui.plusReady(function() {
+
+				/**
+				 * 当还有下载任务在下载的时候，然后强制关闭应用，然后下次再打开应用的时候，
+				 * 循环遍历之前未完成的任务，把状态设置5暂停状态
+				 */
+				plus.downloader.enumerate(function(downloads) {
+					downloads.forEach((data) => {
+						data.resume();
+						data.pause();
+					});
+				});
+
+				/**
+				 * 获取本地存储中launchFlag的值
+				 * http://www.html5plus.org/doc/zh_cn/storage.html#plus.storage.getItem
+				 * 若存在，说明不是首次启动，直接进入首页；
+				 * 若不存在，说明是首次启动，进入引导页；
+				 */
+				var launchFlag = plus.storage.getItem("launchFlag");
+				if(launchFlag) {
+					//                  mui.openWindow({
+					//                      url: "login.html",
+					//                      id: "login",
+					//                  });
+				} else {
+					mui.openWindow({
+						url: "guide.html",
+						id: "guide"
+					});
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

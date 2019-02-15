@@ -1,0 +1,214 @@
+<!doctype html>   
+<html>   
+   <head>   
+    <meta charset="UTF-8">   
+    <title>扫描订单二维码</title>   
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />   
+    <link href="../../css/mui.min.css" rel="stylesheet" />
+    <style type="text/css">   
+        #bcid{   
+            width: 100%;   
+            height: 100%;   
+            position: absolute;   
+            background: #000000;
+        }
+        html,body,div{   
+            height:100%;
+            width: 100%;
+        }
+        .fbt{   
+            color: #0E76E1;   
+            width: 50%;   
+            background-color: #ffffff;   
+            float: left;    
+            line-height: 44px;   
+            text-align: center;   
+        }
+        /*.mui-bar .mui-title,.mui-bar{
+        	height: 50px;
+        	line-height: 50px;
+        }*/
+        .bgui{
+        	background-color: #43484E;
+        	color: #fff;
+        	box-shadow: none;
+        	height: 50px;
+        	line-height: 50px;
+        }
+        
+    </style>   
+   </head>   
+  <body>   
+    <header class="mui-bar mui-bar-nav bgui">   
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>   
+      <h1 class="mui-title bgui">扫描订单二维码</h1>   
+      <span class="mui-icon mui-icon-spinner-cycle mui-spin mui-pull-right" id="turnTheLight"></span>   
+    </header>   
+           
+    <div id="bcid">      
+         <!--盛放扫描控件的div-->           
+    </div>   
+           
+    <div class="mui-bar mui-bar-footer" style="padding: 0px;">   
+        <div class="fbt bgui" onclick="scanPicture();">从相册选择二维码</div>   
+        <div class="fbt bgui mui-action-back">取　 消</div>   
+        <!--mui-action-back--> 
+    </div>
+    
+    
+    
+    <script src="../../js/mui.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="../../js/globalVariable.js"></script>
+    <script type="text/javascript">  
+    //拼接请求链接
+    var newurl='http://bimqr.cn/Public/GetSourceURI?short_url_param=';
+    //获取tokenId
+    userInfo = getGlobalUserInfo();
+     $('.close').on('tap',function(){
+     		//停止扫描
+//			scan.cancel();
+			//关闭扫描
+			scan.close();
+			mui.back();
+     })
+     
+    var height = window.innerHeight + 'px';//获取页面实际高度   
+    var width = window.innerWidth + 'px';   
+    document.getElementById("bcid").style.height= height;   
+    document.getElementById("bcid").style.width= width;   
+     
+        scan = null;//扫描对象
+        mui.plusReady(function () {  
+        //通过mui初始化扫描
+          mui.init({
+          	beforeback: function() {
+          		scan.close();
+          		var tqr=plus.webview.getWebviewById('newqr');
+			if(tqr){
+//				有窗口
+				plus.webview.getWebviewById('newqr').close();
+			}else{
+//				无窗口
+				location.href='../../pages/at_team/gailan.html'
+			}
+			}
+          });
+          startRecognize();
+        });
+               
+        function startRecognize(){  //开启扫描
+           try{
+             var filter;
+             //自定义的扫描控件样式
+             var styles = {frameColor: "#29E52C",scanbarColor: "#29E52C",background: ""}   
+            //扫描控件构造
+            scan = new plus.barcode.Barcode('bcid',filter,styles);
+            scan.onmarked = onmarked;
+            scan.onerror = onerror;//扫描错误
+            scan.start();
+            //打开关闭闪光灯处理
+            var flag = false;
+            document.getElementById("turnTheLight").addEventListener('tap',function(){
+               if(flag == false){
+                  scan.setFlash(true);
+                  flag = true;
+               }else{
+                 scan.setFlash(false);
+                 flag = false;
+               }
+            });
+          }catch(e){
+            alert("错误"+e);
+             }
+          };
+            function onerror(e){  //错误弹框 
+                    alert('错误:'+e);   
+            };   
+            function onmarked( type, result ) {
+                    var text = '';
+                    //type是扫描二维码回调的类型 
+                    switch(type){
+                    	//二维码的编码格式
+                        case plus.barcode.QR:   
+                        text = 'QR: ';   
+                        break;   
+                        case plus.barcode.EAN13:   
+                        text = 'EAN13: ';   
+                        break;   
+                        case plus.barcode.EAN8:   
+                        text = 'EAN8: ';   
+                        break;   
+                    }
+					//result
+					var str1=result.lastIndexOf('/')+1;
+					var newresult=result.substring(str1,result.length);
+					$.ajax({
+						type:"get",
+						url:newurl+newresult,
+						async:true,
+						dataType: 'JSON',
+						success:function(data){
+							if(data.result===false){
+								mui.toast(data.msg);
+								setTimeout(function(){
+									scan.start();
+								},1000);
+							}else{
+								//token是否失效
+								$.ajax({
+									type:"GET",
+									url:userInfo.url+"//mobile/getNewVersion?upId=BC1503IN17006&productType=1",
+									async:true,
+									beforeSend:function(request){
+										request.setRequestHeader('tokenId',userInfo.tokenId);
+									},
+									success:function(data){
+									if(data.obj===false) {
+										var curr = plus.webview.currentWebview();
+										var wvs=plus.webview.all();
+										for(var i=0;i<wvs.length;i++){
+											if(wvs[i].getURL()!=curr.getURL()){
+												plus.webview.close(wvs[i]);
+											}
+										}
+										plus.webview.open('../../pages/at_team/login.html');
+										curr.close();
+										plus.nativeUI.closeWaiting();
+										mui.toast('请重新登陆');
+										return;
+										}
+									}
+								  });
+								
+								mui.openWindow({
+									id:'newqr',
+									url:data.obj.source_url+'_haveToken='+userInfo.tokenId,
+								})
+								
+								scan.stop();
+							}
+						},
+						error: function() {
+							mui.toast('发生异常');
+						}
+					});
+                    
+            };     
+                   
+        // 从相册中选择二维码图片    
+        function scanPicture() {  //可以直接识别二维码图片 
+            plus.gallery.pick(function(path){   
+                plus.barcode.scan(path,onmarked,function(error){   
+//                  plus.nativeUI.alert( "无法识别此图片" );
+                    mui.toast('无法识别此图片');
+                });
+            },function(err){   
+//              plus.nativeUI.alert("Failed: "+err.message);
+                mui.toast('未选择二维码');
+            });   
+        }          
+                   
+        </script>   
+    </body>   
+</html> 

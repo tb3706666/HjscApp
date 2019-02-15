@@ -1,0 +1,415 @@
+{
+    "@platforms": ["android", "iPhone", "iPad"],
+    "id": "H50CC180C",/*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name": "At AEC",/*应用名称，程序桌面图标名称*/
+    "version": {
+        "name": "1.0",/*应用版本名称*/
+        "code": ""
+    },
+    "description": "",/*应用描述信息*/
+    "icons": {
+        "72": "icon.png"
+    },
+    "launch_path": "pages/at_team/login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "developer": {
+        "name": "",/*开发者名称*/
+        "email": "",/*开发者邮箱地址*/
+        "url": ""/*开发者个人主页地址*/
+    },
+    "permissions": {
+        "Messaging":{
+        	"description": "短彩邮件插件"
+        },
+        "Cache": {
+            "description": "管理应用缓存"
+        },
+        "Console": {
+            "description": "跟踪调试输出日志"
+        },
+        "Contacts": {
+            "description": "访问系统联系人信息"
+        },
+        "Events": {
+            "description": "应用扩展事件"
+        },
+        "Maps": {
+            "description": "管理地图插件"
+        },
+        "Speech": {
+            "description": "管理语音识别插件"
+        }
+    },
+    "plus": {
+        "splashscreen": {
+            "autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+            "waiting": false,"delay":"0"/*是否在程序启动界面显示等待雪花，true表示显示，false表示不显示。*/
+        },
+        "popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+        "runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+        "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+        "distribute": {
+            "apple": {
+                "appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+                "mobileprovision": "",/*iOS应用打包配置文件*/
+                "password": "",/*iOS应用打包个人证书导入密码*/
+                "p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+                "devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+                "frameworks":[
+                ]/*调用Native.js调用原生Objective-c API需要引用的FrameWork，如需调用GameCenter，则添加"GameKit.framework"*/
+            },
+            "google": {
+                "packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+                "keystore": "",/*Android应用打包使用的密钥库文件*/
+                "password": "",/*Android应用打包使用密钥库中证书的密码*/
+                "aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+               "permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+				/*使用Native.js调用原生安卓API需要使用到的系统权限*/
+            },
+            "orientation": [
+                "portrait-primary"
+            ],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+            "icons": {
+                "ios": {
+                    "prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+                     /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+                    "iphone": {
+                        "normal": "", /*iPhone3/3GS程序图标，分辨率：57x57*/
+                        "retina": "", /*iPhone4程序图标，分辨率：114x114*/
+                         /*iPhone4S/5/6程序图标，分辨率：120x120*/
+			 /*iPhone6 Plus程序图标，分辨率：180x180*/
+                        "spotlight-normal": "", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+                        "spotlight-retina": "", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+                         /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+                        "settings-normal": "", /*iPhone4设置页面程序图标，分辨率：29x29*/
+                         /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+			"app@2x":"unpackage/res/icons/120x120.png","app@3x":"unpackage/res/icons/180x180.png","settings@3x":"unpackage/res/icons/87x87.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","spotlight@3x":"unpackage/res/icons/120x120.png","notification@3x":"unpackage/res/icons/60x60.png","notification@2x":"unpackage/res/icons/40x40.png" /*iPhone6Plus设置页面程序图标，分辨率：87x87*/
+                    },
+                    "ipad": {
+                        "normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
+                        "retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
+                         /*iPad iOS7程序图标，分辨率：76x76*/
+                         /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+                        "spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+                        "spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+                        /*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+                        /*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+                        /*iPad设置页面程序图标，分辨率：29x29*/
+                        "app":"unpackage/res/icons/76x76.png","app@2x":"unpackage/res/icons/152x152.png","settings":"unpackage/res/icons/29x29.png","proapp@2x":"unpackage/res/icons/167x167.png","spotlight":"unpackage/res/icons/40x40.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","notification":"unpackage/res/icons/20x20.png","notification@2x":"unpackage/res/icons/40x40.png" /*iPad高分屏设置页面程序图标，分辨率：58x58*/
+                    },"appstore":"unpackage/res/icons/1024x1024.png"
+                },
+                "android": {
+                    "mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+                    "ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+                    "hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"/*1080P 高分屏程序图标，分辨率：144x144*/
+                }
+            },
+            "splashscreen": {
+                "ios": {
+                    "iphone": {
+                        "default": "", /*iPhone3启动图片选，分辨率：320x480*/
+                        "retina35": "img/start720.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+                        "retina40": "img/start720.png",/*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
+                        "retina47": "img/start720.png",/*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
+                        "retina55": "img/start1080.png",/*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
+                        "retina55l": ""/*5.5 英寸设备(iPhone6 Plus)横屏启动图片，分辨率：2208x1242*/
+                    },
+                    "ipad": {
+                        "portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+                        "portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+                        "landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+                        "landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+                        "portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+                        "portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+                        "landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+                        "landscape-retina7": ""/*iPad iOS7高分屏横屏启动图片，分辨率：2048x1536*/
+                    }
+                },
+                "android": {
+                    "mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+                    "ldpi": "", /*大屏启动图片，分辨率：320x442*/
+                    "hdpi": "img/start480.png", /*高分屏启动图片，分辨率：480x762*/
+                    "xhdpi": "img/start720.png", /*720P高分屏启动图片，分辨率：720x1242*/
+                    "xxhdpi": "img/start1080.png"/*1080P高分屏启动图片，分辨率：1080x1882*/
+                }
+            }
+        },"adid":"128024080308"
+    },
+	"dependencies": {
+		"pages": {
+			"pages/at_team/login.html": {
+				"resources": [],
+				"refer": [
+					"pages/at_team/guide.html",
+					"pages/at_team/enterprise_navigation.html"
+				],
+				"priority": 0
+			},
+			"pages/at_team/enterprise_navigation.html": {
+				"resources": [],
+				"refer": [
+					"pages/at_team/gailan.html"
+				],
+				"priority": 0
+			},
+			"pages/at_team/gailan.html": {
+				"resources": [],
+				"refer": [
+					"pages/at_add/qr_code.html"
+				],
+				"priority": 0
+			},
+			"pages/at_add/qr_code.html": {
+				"resources": [],
+				"refer": [
+					"pages/at_team/gailan.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"icon/tz1.png",
+				"img/start480.png",
+				"icon/office4.jpg",
+				"pages/at_team/download_settings.html",
+				"icon/cpsldh6.png",
+				"img/index1.png",
+				"css/project_navigation.css",
+				"lc/cloud_project_share/cloud_project_shareContent/cloud_project_shareContent.css",
+				"js/mui.previewimage.js",
+				"js/mui.view.js",
+				"lc/cloud_project/cloud_project_file_list/cloud_project_file_list.css",
+				"icon/qydh3.png",
+				"icon/qydh2.png",
+				"lc/cloud_project/cloud_project_file_list/cloud_project_file_list.html",
+				"icon/qydh5.png",
+				"fonts/mui.ttf",
+				"icon/gcyp_mp4.png",
+				"img/index2.png",
+				"pages/at_team/information.html",
+				"icon/qydh4.png",
+				"icon/gcyp_bmp.png",
+				"js/subject.js",
+				"js/published.js",
+				"icon/gcyp_default.png",
+				"icon/gl7.png",
+				"icon/zt_2.png",
+				"icon/gcyp_ss4.png",
+				"icon/zt_b3.png",
+				"icon/glz9.png",
+				"project_navigation/project_navigation.js",
+				"icon/gcyp_mp3.png",
+				"pages/at_team/team_program_information.html",
+				"icon/ztg_1.png",
+				"icon/gcyp_pdf.png",
+				"project_navigation/project_navigation.css",
+				"icon/ztlc_3.png",
+				"icon/glz5.png",
+				"icon/zt_4.png",
+				"img/start720.png",
+				"pages/at_team/chanpin_sldh.html",
+				"icon/gl1.png",
+				"lc/menu_settings/test.html",
+				"icon/cpsldh4.png",
+				"icon/glz_tit1.png",
+				"icon/ztlc_1.png",
+				"icon/cpsldh2.png",
+				"pages/at_team/gesture.html",
+				"icon/buid.png",
+				"js/vue2.5.js",
+				"icon/gl8.png",
+				"icon/userinfo2.png",
+				"icon/xncj3.png",
+				"icon/gl2.png",
+				"icon/xncj1.png",
+				"icon/ztg_3.png",
+				"css/dragula.css",
+				"icon/ztg_2_1.png",
+				"lc/menu_settings/menu_settings.html",
+				"testjson/test1.json",
+				"icon/tz8.png",
+				"js/pub.js",
+				"pages/at_team/notification_settings.html",
+				"icon/tz5.png",
+				"icon/gcyp_ss2.png",
+				"icon/ztlc_1_1.png",
+				"js/mui.zoom.js",
+				"img/login.png",
+				"icon/gl.png",
+				"icon/zt_1.png",
+				"js/jquery-3.2.1.min.js",
+				"lc/cloud_project_share/cloud_project_shareContent/cloud_project_shareContent.html",
+				"icon/tz3.png",
+				"pages/at_team/subject.html",
+				"icon/qydh6.png",
+				"icon/gcyp2.png",
+				"pages/at_cloud/cloud_project_file_list.html",
+				"icon/tz6.png",
+				"icon/ztlc_3_1.png",
+				"icon/gcyp_excel.png",
+				"icon/glz12.png",
+				"img/upshelf1.png",
+				"icon/gcyp_ppt.png",
+				"icon/office1.jpg",
+				"icon/ztzw_4.png",
+				"icon/gl3.png",
+				"icon/xncj2.png",
+				"components/newscroll.js",
+				"icon/xncj5.png",
+				"icon/zt_3.png",
+				"pages/at_team/theme_content.html",
+				"img/zt.jpg",
+				"icon/glz3.png",
+				"icon/gcyp_gmd.png",
+				"icon/gcyp_sc5.png",
+				"icon/loading.gif",
+				"js/login.js",
+				"icon/gcyp_text.png",
+				"icon/gcyp_rvt.png",
+				"js/globalVariable.js",
+				"icon/gl9.png",
+				"img/upshelf3.png",
+				"icon/gcyp_jpg.png",
+				"js/dragula.js",
+				"lc/menu_settings/menu_settings.css",
+				"pages/at_team/tz.html",
+				"project_navigation/project_navigation.html",
+				"icon/gcyp_ss5.png",
+				"icon/ztg_2.png",
+				"icon/userinfo1.png",
+				"img/60x60.png",
+				"pages/at_team/Thematic.html",
+				"js/project_navigation.js",
+				"icon/gl6.png",
+				"img/word.png",
+				"icon/gcyp_sc1.png",
+				"icon/cpsldh1.png",
+				"js/mui.js",
+				"icon/zzz4.png",
+				"lc/cloud_project_share/cloud_project_share/cloud_project_share.js",
+				"icon/glz8.png",
+				"icon/gl12.png",
+				"pages/at_team/select_document.html",
+				"lc/menu_settings/test2.html",
+				"img/ztcs.jpg",
+				"icon/glz4.png",
+				"icon/tz7.png",
+				"pages/at_team/project_navigation.html",
+				"pages/at_team/Space_container_test.html",
+				"icon/qydh7.png",
+				"icon/gl11.png",
+				"index.html",
+				"icon/hjicon.png",
+				"css/subject.css",
+				"pages/at_team/Space_container.html",
+				"icon/gl5.png",
+				"pages/at_team/menu_settings.html",
+				"icon/gl10.png",
+				"icon/glz6.png",
+				"icon/gcyp_zip.png",
+				"js/md5.js",
+				"icon/gcyp4.png",
+				"icon/zzz1.png",
+				"icon/gcyp_ss3.png",
+				"icon/glz2.png",
+				"icon/gcyp_sc3.png",
+				"icon/glz1.png",
+				"img/index3.png",
+				"icon/gcyp1.png",
+				"img/start1080.png",
+				"lc/menu_settings/js/test.html",
+				"icon/xia_sanjiao.png",
+				"icon/cpsldh5.png",
+				"js/mui.min.js",
+				"icon/ztzw_2.png",
+				"icon/cpsldh3.png",
+				"icon/ztlc_4_1.png",
+				"icon/gl13.png",
+				"icon/gcyp_fx1.png",
+				"icon/gl4.png",
+				"icon/gcyp3.png",
+				"icon/glz13.png",
+				"pages/at_cloud/cloud_project_share.html",
+				"icon/ztlc_2.png",
+				"icon/gcyp_fx3.png",
+				"pages/at_cloud/cloud_project_list.html",
+				"icon/glz10.png",
+				"icon/ztg_5.png",
+				"icon/gcyp_word.png",
+				"icon/zt_b1.png",
+				"components/leftlist.js",
+				"icon/zzz3.png",
+				"css/mui.min.css",
+				"icon/ztlc_4.png",
+				"icon/glz11.png",
+				"lc/cloud_project/cloud_project_search/cloud_project_search.css",
+				"js/mui.locker.js",
+				"icon/lock.png",
+				"pages/at_cloud/transmission.html",
+				"icon/office2.jpg",
+				"pages/at_cloud/cloud_project_shareContent.html",
+				"icon/gl14.png",
+				"icon/gcyp_sc2.png",
+				"lc/menu_settings/test4.html",
+				"pages/at_team/select_linkman.html",
+				"icon/gcyp_sc4.png",
+				"pages/at_cloud/cloud_project_recentFiles.html",
+				"icon/ztlc_5.png",
+				"icon/gcyp_cad.png",
+				"pages/at_team/linkman.html",
+				"icon/gcyp_ss1.png",
+				"icon/glz7.png",
+				"icon/circle.png",
+				"icon/lxr_email.png",
+				"lc/cloud_project/cloud_project_search/cloud_project_search.js",
+				"icon/ztg_6.png",
+				"pages/at_team/theme_contentb.html",
+				"icon/gcyp5.png",
+				"pages/at_team/unlock.html",
+				"icon/close.png",
+				"icon/gcyp_wjj.png",
+				"icon/zt_b2.png",
+				"lc/cloud_project_share/cloud_project_share/cloud_project_share.css",
+				"lc/cloud_project_share/cloud_project_share/cloud_project_share.html",
+				"icon/zzz2.png",
+				"lc/menu_settings/js/dragula.css",
+				"lc/cloud_project/cloud_project_list/cloud_project_list.html",
+				"icon/tz4.png",
+				"pages/at_team/published.html",
+				"icon/cpsldh7.png",
+				"icon/qydh1.png",
+				"pages/at_cloud/cloud_project_station.html",
+				"icon/ztzw_3.png",
+				"icon/xncj4.png",
+				"lc/menu_settings/test3.html",
+				"icon/ztzw_5.png",
+				"icon/lxr_user.png",
+				"icon/gl15.png",
+				"pages/at_cloud/cloud_project_search.html",
+				"css/index.css",
+				"icon/zt_b5.png",
+				"icon/tz2.png",
+				"img/upshelf2.png",
+				"icon/zt_b4.png",
+				"components/attachIcon.js",
+				"img/gailan.png",
+				"icon/ztlc_5_1.png",
+				"icon/ztzw_1.png",
+				"icon/office3.jpg",
+				"lc/menu_settings/js/dragula.js",
+				"pages/at_team/setup.html",
+				"icon/userinfo3.png",
+				"pages/at_team/gailan_add.html",
+				"lc/cloud_project/cloud_project_search/cloud_project_search.html",
+				"icon/cdsz_drag.png",
+				"img/timg.jpg",
+				"icon/glz_tit2.png",
+				"icon/ztg_4.png",
+				"css/leftlist.css",
+				"icon/gcyp_fx2.png"
+			]
+		}
+	}
+}

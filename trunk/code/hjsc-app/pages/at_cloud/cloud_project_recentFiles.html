@@ -1,0 +1,587 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>最近文档</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.list_title {
+			width: 45%;
+			display: block;
+			/*height: 20px;*/
+		}
+		
+		#recent_file {
+			margin-top: 50px;
+		}
+		/*未勾选框*/
+		
+		.mui-checkbox input[type=checkbox],
+		.mui-radio input[type=radio] {
+			right: 10px;
+		}
+		
+		.mui-checkbox input[type=checkbox]:before,
+		.mui-radio input[type=radio]:before {
+			font-size: 13px;
+		}
+		/*勾选框*/
+		
+		.mui-checkbox input[type=checkbox]:checked:before,
+		.mui-radio input[type=radio]:checked:before {
+			color: #007aff;
+			font-size: 16px;
+		}
+		/*.size {
+			margin-left: 40px;
+		}*/
+		/*.dates {
+			display: inline-block;
+		}
+		
+		.mui-radio {
+			float: right;
+			width: 28px;
+			height: 28px;
+		}*/
+		/*.mui-radio input[type="checkbox"] {
+			position: unset;
+		}
+		
+		.mui-popover {
+			height: 189px;
+			width: 100%;
+			position: fixed;
+			bottom: 0;
+			text-align: center;
+			color: #0479bb;
+		}
+		.mui-radio input[type=checkbox]:checked:before {
+			content: '\e442';
+		}
+		*/
+		/*.ban0{
+			float: left;
+		}
+		.ban{
+			float: right;
+		}*/
+		/*第三行文字 */
+		/*复选框*/
+		
+		.mui-input-row {
+			overflow: initial;
+		}
+		/*.filling {
+			background: #F2F2F2;
+			height: 0px;
+			padding: 3px;
+		}*/
+		/*第一行*/
+		
+		.zjban {
+			position: absolute;
+			top: 10px;
+			left: 51%;
+			margin-left: 0 !important;
+		}
+		/*第二行*/
+		
+		.zjt {
+			width: 35%;
+		}
+		
+		.zjt1 {
+			width: 42%;
+			position: absolute;
+			bottom: 13px;
+			left: 45%;
+		}
+		/*复选框*/
+		
+		.mui-checkbox label,
+		.mui-radio label {
+			display: none;
+		}
+		
+		.zjcheck {
+			position: absolute;
+			top: 15px;
+			right: 0;
+		}
+		/*分享*/
+		
+		.mui-popover.mui-popover-action .mui-table-view {
+			margin: 0;
+			color: #3B3B3B;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
+		
+		.mui-popover {
+			height: auto;
+		}
+		
+		.mui-popover.mui-popover-action .mui-table-view {
+			border-radius: inherit;
+		}
+		
+		.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after {
+			background-color: #fff;
+		}
+		
+		.mui-table-view-cell:after {
+			left: 0;
+		}
+		
+		.op {
+			width: 33%;
+			float: left;
+			margin: 10px 0;
+		}
+		
+		.op-img {
+			height: 50px;
+			width: 50px;
+			margin-bottom: 10px;
+			margin-left: 5px;
+		}
+		
+		.op-font {
+			font-size: 14px;
+			font-weight: normal;
+			color: #666666;
+		}
+		/*footer*/
+		
+		.footer {
+			width: 100%;
+			height: 50px;
+			z-index: 999;
+			position: fixed;
+			bottom: 0px;
+			background-color: #333;
+			display: none;
+			color: #fff;
+			font-size: 12px;
+			text-align: center;
+		}
+		
+		.footer-img-out {
+			position: initial;
+			bottom: 0;
+			text-align: center;
+			float: left;
+			width: 25%;
+			padding-top: 4px;
+		}
+		
+		.mui-icon-checkmarkempty {
+			background: #0487d0 !important;
+			padding: 0px !important;
+			width: auto;
+			height: auto;
+			font-size: 16px;
+			color: #fff;
+			border: none;
+		}
+		
+		.footer-img {
+			width: 18px;
+			margin-left: 3px;
+		}
+		
+		.footer-font {
+			margin-top: 1px;
+			display: inline-block;
+			color: #fff;
+		}
+		/*防止误操作*/
+		
+		.circle:after {
+			top: -20px;
+		}
+	</style>
+
+	<body>
+		<div id="files">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">最近文档</h1>
+			</header>
+
+			<ul class="mui-table-view" id="recent_file" style="display: none;">
+				<li class="mui-table-view-cell mui-media" v-for="(item,index) in items" :accesskey="index">
+					<a :href="item.nameurl" id="yulan" :fileId="item.fileId" :fileName="item.fileName">
+						<img class="mui-media-object mui-pull-left" :src="item | format">
+						<div class="mui-media-body">
+							<p class="list_title">
+								<span class="zjname hone">{{item.fileName | changeName}}</span>
+							</p>
+							<p class="zjban">
+								<small class="ban" :class="{kai:k1,'zheng':z1}">版本{{item.fileVersion}}</small>
+								<small class="size">{{item.fileSize | changeSize}}</small>
+							</p>
+
+							<p class="mui-ellipsis zjt">
+								<small>{{item.fileLog}}</small>
+							</p>
+							<p class="mui-ellipsis zjt1">
+								<small>{{item.fileName.substring(item.fileName.lastIndexOf('.'))}}</small>
+								<small>{{item.fileCreateTime | switchingTime}}</small>
+							</p>
+
+						</div>
+					</a>
+
+					<div class="mui-input-row mui-checkbox zjcheck" :index="index" :filename="item.fileName">
+						<label></label>
+						<input name="checkbox1" type="checkbox" class="circle">
+					</div>
+
+				</li>
+			</ul>
+
+			<div class="footer">
+				<div class="footer-img-out" id="download">
+					<img class="footer-img" src="../../icon/zzz1.png" />
+					<br />
+					<span class="footer-font">打开</span>
+				</div>
+
+				<div class="footer-img-out" id="downloads">
+					<img class="footer-img" src="../../icon/gcyp_ss1.png" />
+					<br />
+					<span class="footer-font">下载</span>
+				</div>
+
+				<div class="footer-img-out">
+					<a href="#share">
+						<img class="footer-img" src="../../icon/gcyp_ss2.png" />
+						<br />
+						<span class="footer-font">分享</span>
+					</a>
+				</div>
+				<div class="footer-img-out">
+					<a href="#">
+						<img class="footer-img del" src="../../icon/gcyp_ss3.png" />
+						<br />
+						<span class="footer-font">删除</span>
+					</a>
+				</div>
+
+			</div>
+
+			<!--分享选项-->
+			<div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<div class="op" data-id="1">
+							<img class="op-img" src="../../icon/gcyp_fx2.png" />
+							<br />
+							<span class="op-font">用户中转站</span>
+						</div>
+						<div class="op" data-id="2">
+							<img class="op-img" src="../../icon/gcyp_fx3.png" />
+							<br />
+							<span class="op-font">密钥分享</span>
+						</div>
+						<div class="op" data-id="3">
+							<img class="op-img" src="../../icon/gcyp_fx1.png" />
+							<br />
+							<span class="op-font">公共分享</span>
+						</div>
+					</li>
+					<li class="mui-table-view-cell btf2">
+						<a href="#share" style="color: #333; font-weight: normal;">取消</a>
+					</li>
+				</ul>
+			</div>
+
+			<!--删除选项-->
+			<!--<div id="delete" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+				<small style="color: #999999;">只从最近文档列表里删除,不删除原目录内的文档</small>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="fs16 delcolor" @click="del()">删除</p>
+				</ul>
+			<ul class="mui-table-view fs16">
+				<li class="mui-table-view-cell">
+					<a href="#delete">取消</a>
+				</li>
+			</ul>
+		</div>-->
+
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript">
+			
+			//页面
+							var obj = new Vue({
+								el: '#files',
+								data: function() {
+									return {
+										k1: true,
+										z1: false,
+										items: [],
+										fileId: "",
+									}
+								},
+								watch: {
+									items: function() {
+										this.$nextTick(function() {
+											if(userInfo.isShowAllFilesName) {
+												$(".hone").css('display', 'block');
+											} else {
+												$(".hone").css('display', '-webkit-box');
+											}
+
+										});
+									}
+								},
+							});
+			
+			
+			mui('.mui-scroll-wrapper').scroll();
+			var itemsdata = [];
+			var obj;
+			var urlStr;
+			//绑定数据
+			$(function() {
+				
+				//获取
+				mui.plusReady(function() {
+					userInfo = getGlobalUserInfo(); //获取对象
+					console.log(userInfo);
+					//					plus.nativeUI.showWaiting("加载中...");
+					$.ajax({
+						type: 'GET',
+						url: userInfo.url + '/cloud/getRecentDocList?type=json',
+						beforeSend: function(request) {
+							request.setRequestHeader('appType', 7);
+						},
+						data: {
+							tokenId: userInfo.tokenId,
+							projectId: userInfo.projId,
+							groupId: userInfo.groupId,
+						},
+						dataType: 'JSON',
+						success: function(data) {
+							if(data.responseInfo.responseMessage == "最近文档为空") {
+								mui.toast(data.responseInfo.responseMessage);
+							}
+							//登陆失效
+							if(data.responseInfo.responseCode == 101) {
+								tokenInvalid(data);
+								return;
+							}
+							
+							obj.items = data.fileList;
+							
+							Vue.filter('format', function(value) {
+								var i = tool.getAttachIcon(value.fileName);
+								//console.log("文件名:",value.fileName);
+								//var name=value.fileName;
+								//var lastname=name.substring(name.lastIndexOf('.'));
+								//console.log("文件后缀:",lastname);
+								//console.log(data.fileList)
+								return '../../' + i.src;
+							});
+
+							/*转换日期类型*/
+							Vue.filter('switchingTime', function(time) {
+								var finish = new Date(parseInt(time) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+								return finish;
+							});
+
+							//						plus.nativeUI.closeWaiting();
+							$("#recent_file").css('display', 'block');
+						}
+					});
+				});
+				
+				
+				//选中状态
+				$(document).on('tap', '.zjcheck', function() {
+					urlStr = $(this).attr("filename");
+					$(this).toggleClass('t1');
+					var ctrue = $('.zjcheck').hasClass('t1');
+					//mui.toast('选中');
+					if(ctrue) {
+						$('.footer').show();
+						$('#recent_file').css('padding-bottom', '45px');
+					} else {
+						$('.footer').hide();
+						$('#recent_file').css('padding-bottom', '0px');
+					}
+
+				});
+
+				//分享
+				$(document).on('tap', '.op', function() {
+					var fileIdList = "";
+					var shareName = [];
+					$('.t1').each(function() {
+						var index = $(this).attr("index");
+						fileIdList = fileIdList + "," + obj.items[index].fileId;
+						shareName.push(obj.items[index].fileName);
+					})
+					var id = $(this).data("id");
+					fileIdList = fileIdList.substring(1)
+					//						console.log("fileIdList:" + fileIdList);
+					$.ajax({
+						type: 'POST',
+						url: userInfo.url + '/cloud/shareFile?type=json&tokenId=' + userInfo.tokenId + "&projectId=" + userInfo.projId + "&groupId=" + userInfo.groupId + "&shareType=" + id + "&shareName=" + shareName[0] + "&fileIdList=" + fileIdList,
+						beforeSend: function(request) {
+
+						},
+						dataType: 'json',
+						success: function(data) {
+							//登陆失效
+							if(data.responseInfo.responseCode == 101) {
+								tokenInvalid(data);
+								return;
+							}
+							//								console.log("4.9", data);
+							mui.toast(data.responseInfo.responseMessage);
+							if(id == 2) {
+								mui.alert("您的分享链接为：" + data.shareInfo.shareUrl + "\n" + "密码为：" + data.shareInfo.sharePassword);
+							}
+							if(id == 3) {
+								mui.alert("您的分享链接为：" + data.shareInfo.shareUrl);
+							}
+						}
+					});
+
+					//					mui('#share').popover('toggle');
+					//					obj.fileId = "";
+					//					obj.fileIdList = "";
+					//					obj.folderIdList = "";
+					//					//				$('.footer').hide();
+					//					$('.circle').css('padding', '4px').css('top', '30px').removeClass('padding mui-icon mui-icon-checkmarkempty');
+
+				});
+			});
+
+			function getFileUrl(id) {
+				$.ajax({
+					type: 'POST',
+					url: userInfo.url + '/cloud/downloadFile?type=json',
+					beforeSend: function(request) {},
+					data: {
+						projectId: userInfo.projId,
+						groupId: userInfo.groupId,
+						fileId: id,
+						tokenId: userInfo.tokenId
+					},
+					success: function(data) {
+						//登陆失效
+						if(data.responseInfo.responseCode == 101) {
+							tokenInvalid(data);
+							return;
+						}
+						var jsons = JSON.parse(data);
+						fileUrl = jsons.fileUrl;
+						console.log(data);
+						createDownload();
+					}
+				});
+			}
+
+			/*预览 先下载再打开*/
+			$(document).on('tap', '#yulan', function() {
+				var fileId = $(this).attr('fileId');
+				console.log('文件Id:' + fileId);
+				fileName = $(this).attr('fileName');
+				getFileUrl(fileId);
+			});
+			//下载
+			$(document).on('tap', '#download', function() {
+				//判断选择的为几个
+				var length = $('.t1').length;
+				if(length == 1) {
+					var index = $('.t1').attr('index');
+					var fileId = obj.items[index].fileId;
+					fileName = obj.items[index].fileName;
+					getFileUrl(fileId);
+
+				} else {
+					mui.toast("只能选择一个文件打开");
+				}
+			});
+
+			/*下载并打开文件 开始*/
+			function createDownload() {
+				//var urlStr = encodeURI(fileName);
+				//console.log("文件名称"+fileName);
+				//判断文件是否已经下载
+				plus.io.resolveLocalFileSystemURL('_downloads/' + urlStr, function(entry) {
+					if(entry.isFile) {
+						mui.toast('已经下载');
+						plus.runtime.openFile('_downloads/' + urlStr, {}, function(e) { //调用第三方应用打开文件
+							alert('打开失败');
+						});
+					}
+				}, function(e) {
+					dBase();
+				});
+			}
+
+			function dBase() {
+				//var urlStr = encodeURI(fileName);
+				//初始化下载对象
+				plus.nativeUI.showWaiting("加载中...");
+				var dtask = null;
+				if(dtask) {
+					mui.toast('下载任务已经存在,请耐心等待');
+					return;
+				}
+				dtask = plus.downloader.createDownload(fileUrl, {
+					method: 'GET'
+				}, function(d, status) {
+					plus.runtime.openFile(d.filename, {}, function(e) { //调用第三方应用打开文件
+						alert('打开失败');
+					});
+				});
+				dtask.addEventListener("statechanged", function(task, status) {
+					if(!dtask) {
+						return;
+					}
+					switch(task.state) {
+						case 1:
+							mui.toast('开始下载...');
+							break; //开始
+						case 2:
+							mui.toast('链接到服务器...');
+							break; //链接到服务器
+						case 3:
+							break;
+						case 4:
+							plus.nativeUI.closeWaiting();
+							mui.toast('下载完成');
+							break;
+					}
+				});
+				dtask.start();
+			}
+			/*下载并打开文件 结束*/
+
+			/*转换文件大小*/
+			Vue.filter('changeSize', function(value) {
+				return changeSize(value);
+			});
+		</script>
+	</body>
+
+</html>

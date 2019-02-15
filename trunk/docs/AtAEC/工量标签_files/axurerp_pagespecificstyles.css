@@ -1,0 +1,2790 @@
+﻿body {
+    margin: 0px;
+}
+
+div {
+    background-repeat: no-repeat;
+}
+
+.raw_image {
+    width: 100%;
+    height: 100%;
+}
+
+.preload {
+    display: none;
+}
+#main_container {
+}
+
+.form_sketch {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.u0_normal {
+    background-image: url('../工量标签_files/u0_normal.png');
+}
+
+.u0_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:720px;
+    height:1080px;
+}
+
+#u0_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:1086px;
+}
+
+.u1 {
+    position:absolute;
+    left:2px;
+    top:532px;
+    width:716px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u2_normal {
+    background-image: url('../工量标签_files/u2_normal.png');
+}
+
+.u2_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:720px;
+    height:60px;
+}
+
+#u2_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u3 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u4_normal {
+    background-image: url('../工量标签_files/u4_normal.png');
+}
+
+.u4_container {
+    position:absolute;
+    left:20px;
+    top:16px;
+    width:17px;
+    height:30px;
+}
+
+#u4_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:23px;
+    height:36px;
+}
+
+.u5 {
+    position:absolute;
+    left:2px;
+    top:7px;
+    width:13px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u6_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u6_container {
+    position:absolute;
+    left:0px;
+    top:60px;
+    width:720px;
+    height:60px;
+}
+
+#u6_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u7 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u8_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u8_container {
+    position:absolute;
+    left:0px;
+    top:120px;
+    width:720px;
+    height:60px;
+}
+
+#u8_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u9 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u10 {
+    position:absolute;
+    left:2px;
+    top:182px;
+    width:722px;
+    height:205px
+}
+
+.u11_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u11_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:300px;
+    height:40px;
+}
+
+#u11_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u12 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u13_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u13_container {
+    position:absolute;
+    left:300px;
+    top:0px;
+    width:417px;
+    height:40px;
+}
+
+#u13_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u14 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u15_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u15_container {
+    position:absolute;
+    left:0px;
+    top:40px;
+    width:300px;
+    height:40px;
+}
+
+#u15_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u16 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u17_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u17_container {
+    position:absolute;
+    left:300px;
+    top:40px;
+    width:417px;
+    height:40px;
+}
+
+#u17_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u18 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u19_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u19_container {
+    position:absolute;
+    left:0px;
+    top:80px;
+    width:300px;
+    height:40px;
+}
+
+#u19_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u20 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u21_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u21_container {
+    position:absolute;
+    left:300px;
+    top:80px;
+    width:417px;
+    height:40px;
+}
+
+#u21_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u22 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u23_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u23_container {
+    position:absolute;
+    left:0px;
+    top:120px;
+    width:300px;
+    height:40px;
+}
+
+#u23_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u24 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u25_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u25_container {
+    position:absolute;
+    left:300px;
+    top:120px;
+    width:417px;
+    height:40px;
+}
+
+#u25_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u26 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u27_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u27_container {
+    position:absolute;
+    left:0px;
+    top:160px;
+    width:300px;
+    height:40px;
+}
+
+#u27_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u28 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u29_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u29_container {
+    position:absolute;
+    left:300px;
+    top:160px;
+    width:417px;
+    height:40px;
+}
+
+#u29_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u30 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u31_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u31_container {
+    position:absolute;
+    left:0px;
+    top:382px;
+    width:720px;
+    height:60px;
+}
+
+#u31_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u32 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u33_normal {
+    background-image: url('../工量标签_files/u33_normal.png');
+}
+
+.u33_container {
+    position:absolute;
+    left:20px;
+    top:461px;
+    width:180px;
+    height:50px;
+}
+
+#u33_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:56px;
+}
+
+.u34 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u35_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u35_container {
+    position:absolute;
+    left:0px;
+    top:896px;
+    width:720px;
+    height:60px;
+}
+
+#u35_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u36 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u37_normal {
+    background-image: url('../工量标签_files/u33_normal.png');
+}
+
+.u37_container {
+    position:absolute;
+    left:270px;
+    top:461px;
+    width:180px;
+    height:50px;
+}
+
+#u37_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:56px;
+}
+
+.u38 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u39_normal {
+    background-image: url('../工量标签_files/u33_normal.png');
+}
+
+.u39_container {
+    position:absolute;
+    left:496px;
+    top:461px;
+    width:180px;
+    height:50px;
+}
+
+#u39_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:56px;
+}
+
+.u40 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u41_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u41_container {
+    position:absolute;
+    left:0px;
+    top:753px;
+    width:720px;
+    height:60px;
+}
+
+#u41_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u42 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u43 {
+    position:absolute;
+    left:652px;
+    top:81px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u44 {
+    position:absolute;
+    left:652px;
+    top:139px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u45 {
+    position:absolute;
+    left:652px;
+    top:405px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u46 {
+    position:absolute;
+    left:652px;
+    top:774px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u47 {
+    position:absolute;
+    left:652px;
+    top:924px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u48 {
+    position:absolute;
+    left:2px;
+    top:816px;
+    width:722px;
+    height:85px
+}
+
+.u49_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u49_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:180px;
+    height:40px;
+}
+
+#u49_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u50 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u51_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u51_container {
+    position:absolute;
+    left:180px;
+    top:0px;
+    width:180px;
+    height:40px;
+}
+
+#u51_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u52 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u53_normal {
+    background-image: url('../工量标签_files/u53_normal.png');
+}
+
+.u53_container {
+    position:absolute;
+    left:360px;
+    top:0px;
+    width:356px;
+    height:40px;
+}
+
+#u53_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:362px;
+    height:46px;
+}
+
+.u54 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:352px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u55_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u55_container {
+    position:absolute;
+    left:0px;
+    top:40px;
+    width:180px;
+    height:40px;
+}
+
+#u55_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u56 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u57_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u57_container {
+    position:absolute;
+    left:180px;
+    top:40px;
+    width:180px;
+    height:40px;
+}
+
+#u57_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u58 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u59_normal {
+    background-image: url('../工量标签_files/u53_normal.png');
+}
+
+.u59_container {
+    position:absolute;
+    left:360px;
+    top:40px;
+    width:356px;
+    height:40px;
+}
+
+#u59_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:362px;
+    height:46px;
+}
+
+.u60 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:352px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u61 {
+    position:absolute;
+    left:2px;
+    top:591px;
+    width:722px;
+    height:165px
+}
+
+.u62_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u62_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:300px;
+    height:40px;
+}
+
+#u62_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u63 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u64_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u64_container {
+    position:absolute;
+    left:300px;
+    top:0px;
+    width:417px;
+    height:40px;
+}
+
+#u64_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u65 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u66_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u66_container {
+    position:absolute;
+    left:0px;
+    top:40px;
+    width:300px;
+    height:40px;
+}
+
+#u66_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u67 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u68_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u68_container {
+    position:absolute;
+    left:300px;
+    top:40px;
+    width:417px;
+    height:40px;
+}
+
+#u68_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u69 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u70_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u70_container {
+    position:absolute;
+    left:0px;
+    top:80px;
+    width:300px;
+    height:40px;
+}
+
+#u70_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u71 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u72_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u72_container {
+    position:absolute;
+    left:300px;
+    top:80px;
+    width:417px;
+    height:40px;
+}
+
+#u72_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u73 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u74_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u74_container {
+    position:absolute;
+    left:0px;
+    top:120px;
+    width:300px;
+    height:40px;
+}
+
+#u74_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u75 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u76_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u76_container {
+    position:absolute;
+    left:300px;
+    top:120px;
+    width:417px;
+    height:40px;
+}
+
+#u76_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u77 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u78_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u78_container {
+    position:absolute;
+    left:0px;
+    top:521px;
+    width:720px;
+    height:60px;
+}
+
+#u78_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u79 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u80 {
+    position:absolute;
+    left:652px;
+    top:544px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u81_normal {
+    background-image: url('../工量标签_files/u0_normal.png');
+}
+
+.u81_container {
+    position:absolute;
+    left:773px;
+    top:0px;
+    width:720px;
+    height:1080px;
+}
+
+#u81_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:1086px;
+}
+
+.u82 {
+    position:absolute;
+    left:2px;
+    top:532px;
+    width:716px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u83_normal {
+    background-image: url('../工量标签_files/u2_normal.png');
+}
+
+.u83_container {
+    position:absolute;
+    left:773px;
+    top:0px;
+    width:720px;
+    height:60px;
+}
+
+#u83_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u84 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u85_normal {
+    background-image: url('../工量标签_files/u4_normal.png');
+}
+
+.u85_container {
+    position:absolute;
+    left:793px;
+    top:16px;
+    width:17px;
+    height:30px;
+}
+
+#u85_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:23px;
+    height:36px;
+}
+
+.u86 {
+    position:absolute;
+    left:2px;
+    top:7px;
+    width:13px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u87_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u87_container {
+    position:absolute;
+    left:773px;
+    top:60px;
+    width:720px;
+    height:60px;
+}
+
+#u87_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u88 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u89_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u89_container {
+    position:absolute;
+    left:773px;
+    top:120px;
+    width:720px;
+    height:60px;
+}
+
+#u89_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u90 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u91 {
+    position:absolute;
+    left:775px;
+    top:182px;
+    width:722px;
+    height:205px
+}
+
+.u92_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u92_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:300px;
+    height:40px;
+}
+
+#u92_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u93 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u94_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u94_container {
+    position:absolute;
+    left:300px;
+    top:0px;
+    width:417px;
+    height:40px;
+}
+
+#u94_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u95 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u96_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u96_container {
+    position:absolute;
+    left:0px;
+    top:40px;
+    width:300px;
+    height:40px;
+}
+
+#u96_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u97 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u98_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u98_container {
+    position:absolute;
+    left:300px;
+    top:40px;
+    width:417px;
+    height:40px;
+}
+
+#u98_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u99 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u100_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u100_container {
+    position:absolute;
+    left:0px;
+    top:80px;
+    width:300px;
+    height:40px;
+}
+
+#u100_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u101 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u102_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u102_container {
+    position:absolute;
+    left:300px;
+    top:80px;
+    width:417px;
+    height:40px;
+}
+
+#u102_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u103 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u104_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u104_container {
+    position:absolute;
+    left:0px;
+    top:120px;
+    width:300px;
+    height:40px;
+}
+
+#u104_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u105 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u106_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u106_container {
+    position:absolute;
+    left:300px;
+    top:120px;
+    width:417px;
+    height:40px;
+}
+
+#u106_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u107 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u108_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u108_container {
+    position:absolute;
+    left:0px;
+    top:160px;
+    width:300px;
+    height:40px;
+}
+
+#u108_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u109 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u110_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u110_container {
+    position:absolute;
+    left:300px;
+    top:160px;
+    width:417px;
+    height:40px;
+}
+
+#u110_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u111 {
+    position:absolute;
+    left:2px;
+    top:12px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u112_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u112_container {
+    position:absolute;
+    left:773px;
+    top:382px;
+    width:720px;
+    height:60px;
+}
+
+#u112_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u113 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u114_normal {
+    background-image: url('../工量标签_files/u33_normal.png');
+}
+
+.u114_container {
+    position:absolute;
+    left:811px;
+    top:461px;
+    width:180px;
+    height:50px;
+}
+
+#u114_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:56px;
+}
+
+.u115 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u116_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u116_container {
+    position:absolute;
+    left:772px;
+    top:937px;
+    width:720px;
+    height:60px;
+}
+
+#u116_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u117 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u118_normal {
+    background-image: url('../工量标签_files/u33_normal.png');
+}
+
+.u118_container {
+    position:absolute;
+    left:1043px;
+    top:461px;
+    width:180px;
+    height:50px;
+}
+
+#u118_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:56px;
+}
+
+.u119 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u120_normal {
+    background-image: url('../工量标签_files/u33_normal.png');
+}
+
+.u120_container {
+    position:absolute;
+    left:1269px;
+    top:461px;
+    width:180px;
+    height:50px;
+}
+
+#u120_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:56px;
+}
+
+.u121 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u122_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u122_container {
+    position:absolute;
+    left:773px;
+    top:753px;
+    width:720px;
+    height:60px;
+}
+
+#u122_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u123 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u124 {
+    position:absolute;
+    left:1425px;
+    top:81px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u125 {
+    position:absolute;
+    left:1425px;
+    top:139px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u126 {
+    position:absolute;
+    left:1425px;
+    top:405px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u127 {
+    position:absolute;
+    left:1425px;
+    top:774px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u128 {
+    position:absolute;
+    left:1424px;
+    top:965px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u129 {
+    position:absolute;
+    left:775px;
+    top:816px;
+    width:721px;
+    height:125px
+}
+
+.u130_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u130_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:180px;
+    height:40px;
+}
+
+#u130_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u131 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u132_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u132_container {
+    position:absolute;
+    left:180px;
+    top:0px;
+    width:180px;
+    height:40px;
+}
+
+#u132_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u133 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u134_normal {
+    background-image: url('../工量标签_files/u53_normal.png');
+}
+
+.u134_container {
+    position:absolute;
+    left:360px;
+    top:0px;
+    width:356px;
+    height:40px;
+}
+
+#u134_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:362px;
+    height:46px;
+}
+
+.u135 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:352px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u136_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u136_container {
+    position:absolute;
+    left:0px;
+    top:40px;
+    width:180px;
+    height:40px;
+}
+
+#u136_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u137 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u138_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u138_container {
+    position:absolute;
+    left:180px;
+    top:40px;
+    width:180px;
+    height:40px;
+}
+
+#u138_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u139 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u140_normal {
+    background-image: url('../工量标签_files/u53_normal.png');
+}
+
+.u140_container {
+    position:absolute;
+    left:360px;
+    top:40px;
+    width:356px;
+    height:40px;
+}
+
+#u140_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:362px;
+    height:46px;
+}
+
+.u141 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:352px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u142_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u142_container {
+    position:absolute;
+    left:0px;
+    top:80px;
+    width:180px;
+    height:40px;
+}
+
+#u142_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u143 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u144_normal {
+    background-image: url('../工量标签_files/u49_normal.png');
+}
+
+.u144_container {
+    position:absolute;
+    left:180px;
+    top:80px;
+    width:180px;
+    height:40px;
+}
+
+#u144_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:186px;
+    height:46px;
+}
+
+.u145 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:176px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u146_normal {
+    background-image: url('../工量标签_files/u53_normal.png');
+}
+
+.u146_container {
+    position:absolute;
+    left:360px;
+    top:80px;
+    width:356px;
+    height:40px;
+}
+
+#u146_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:362px;
+    height:46px;
+}
+
+.u147 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:352px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+#u148 {
+    position:absolute;
+    left:775px;
+    top:591px;
+    width:722px;
+    height:165px
+}
+
+.u149_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u149_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:300px;
+    height:40px;
+}
+
+#u149_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u150 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u151_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u151_container {
+    position:absolute;
+    left:300px;
+    top:0px;
+    width:417px;
+    height:40px;
+}
+
+#u151_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u152 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u153_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u153_container {
+    position:absolute;
+    left:0px;
+    top:40px;
+    width:300px;
+    height:40px;
+}
+
+#u153_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u154 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u155_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u155_container {
+    position:absolute;
+    left:300px;
+    top:40px;
+    width:417px;
+    height:40px;
+}
+
+#u155_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u156 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u157_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u157_container {
+    position:absolute;
+    left:0px;
+    top:80px;
+    width:300px;
+    height:40px;
+}
+
+#u157_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u158 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u159_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u159_container {
+    position:absolute;
+    left:300px;
+    top:80px;
+    width:417px;
+    height:40px;
+}
+
+#u159_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u160 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u161_normal {
+    background-image: url('../工量标签_files/u11_normal.png');
+}
+
+.u161_container {
+    position:absolute;
+    left:0px;
+    top:120px;
+    width:300px;
+    height:40px;
+}
+
+#u161_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u162 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:296px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u163_normal {
+    background-image: url('../工量标签_files/u13_normal.png');
+}
+
+.u163_container {
+    position:absolute;
+    left:300px;
+    top:120px;
+    width:417px;
+    height:40px;
+}
+
+#u163_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:423px;
+    height:46px;
+}
+
+.u164 {
+    position:absolute;
+    left:2px;
+    top:8px;
+    width:413px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u165_normal {
+    background-image: url('../工量标签_files/u6_normal.png');
+}
+
+.u165_container {
+    position:absolute;
+    left:773px;
+    top:521px;
+    width:720px;
+    height:60px;
+}
+
+#u165_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:726px;
+    height:66px;
+}
+
+.u166 {
+    position:absolute;
+    left:2px;
+    top:14px;
+    width:716px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u167 {
+    position:absolute;
+    left:1425px;
+    top:544px;
+    width:46px;
+    height:24px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+

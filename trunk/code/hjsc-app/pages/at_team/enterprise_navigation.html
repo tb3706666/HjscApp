@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>企业导航</title>
+		
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+
+		<style>
+			/*上边线*/
+			.mui-table-view:before{
+				height: 0;
+			}
+			
+			.mui-table-view {
+				background-color: #fff;
+			}
+			
+			.area {
+				width: 100%;
+				padding: 5px 0;
+				font-size: 16px;
+				line-height: 18px;
+				color: #333;
+				border-left: 2px solid #0487d0;
+				margin-left: 18px;
+				display: inline-block;
+				margin-top: 16px;
+				margin-bottom: 13px;
+			}
+			
+			.img-title {
+				width: 107px;
+				height: auto;
+			}
+			
+			.detail {
+				margin-top: 7px;
+				font-weight: normal;
+				font-stretch: normal;
+				color: #333;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				font-size: 28px;
+			}
+			
+			.mui-table-view-cell {
+				padding: 12px 15px;
+			}
+			a{
+				touch-action: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<h1 class="mui-title">企业导航</h1>
+		</header>
+
+		<div class="mui-content" id="content">
+			<div v-cloak v-for="(item,index) in listTest">
+				<span class="area" :class="'area'+index" @click="tshow(index)" v-if="item.infos.length>0">&nbsp;{{item.type | gettype}}</span>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" v-for="info in item.infos" :entId="info.companyId" :companyName="info.companyName">
+						<div>
+							<a class="mui-navigate-right">
+								<img class="img-title" src="../../icon/qydh_logo.png"/>
+							</a>
+							<div class="detail">{{info.companyName}}</div>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js" ></script>
+		<script>
+				var app=new Vue({
+				el: '#content',
+				data: {
+					list:[],
+					listTest:[],
+				},
+				watch: {
+					list: function() {
+						this.$nextTick(function() {
+							flush();
+						})
+					}
+				},
+				methods:{
+					tshow:function(index){
+						var dq=$('.area'+index).next();
+						if(dq.is(':hidden')){
+							dq.show();
+						}else{
+							dq.hide();
+						}
+					}
+				}
+
+			})
+				
+				var obj ={
+					1:'华东',
+					2:'华南',
+					3:'华北',
+					4:'西南',
+					5:'东北',
+					6:'西北'
+				}
+			
+			Vue.filter('gettype',function(item){
+				return obj[item];
+			});
+			var b=[];
+			var b2=[];
+			var b3=[];
+			var b4=[];
+			var b5=[];
+			var b6=[];
+			$(function (){
+				 userInfo = getGlobalUserInfo();
+//				 gurl=getGlobalUrl();
+				//1.2   企业导航
+				$.ajax({
+					type:"GET",
+					url:userInfo.url+"/mobile/getUserLoginInfo",
+					 beforeSend:function(request){
+						request.setRequestHeader('tokenId',userInfo.tokenId);
+					},
+               	  data:{
+               	  	appType:7
+               	  },
+               	  success:function(data){
+               	  	console.log(data.obj);
+               	  	if(data.success==false){
+               	  		mui.toast(data.msg);
+               	  	}else{
+                    if(data.obj.ents == undefined || data.obj.ents == null){  //假设不存在ents 说明只有一个或者一个都没有
+                    	if(data.obj.companyName == undefined){
+                    		mui.toast('您没有任何权限');
+                    	}else{  //说明存在一个权限
+                    		  console.log(data.obj);
+                              userInfo.entid=data.obj.entId;
+                              userInfo.imgUuid = data.obj.imgUuid;
+                              userInfo.companyName=data.obj.companyName;
+                              setGlobalUserInfo(userInfo);
+               	  		     jumpPage();
+                    	}
+                    }else{
+                    	$.each(data.obj.ents, function(i,e) {
+                    		if(e.type==1){
+                    			var a={adminId:e.adminId,companyId:e.companyId,companyName:e.companyName}
+                    			b.push(a);
+                    		}
+                    		if(e.type==2){
+                    			var a={adminId:e.adminId,companyId:e.companyId,companyName:e.companyName}
+                    			b2.push(a);
+                    		}
+                    		if(e.type==3){
+                    			var a={adminId:e.adminId,companyId:e.companyId,companyName:e.companyName}
+                    			b3.push(a);
+                    		}
+                    		if(e.type==4){
+                    			var a={adminId:e.adminId,companyId:e.companyId,companyName:e.companyName}
+                    			b4.push(a);
+                    		}
+                    		if(e.type==5){
+                    			var a={adminId:e.adminId,companyId:e.companyId,companyName:e.companyName}
+                    			b5.push(a);
+                    		}
+                    		if(e.type==6){
+                    			var a={adminId:e.adminId,companyId:e.companyId,companyName:e.companyName}
+                    			b6.push(a);
+                    		}
+                    	});
+                    	let newJsons1={
+            				type:1,
+            				infos:b
+            			}
+                    	let newJsons2={
+            				type:2,
+            				infos:b2
+            			}
+                    	let newJsons3={
+            				type:3,
+            				infos:b3
+            			}
+                    	let newJsons4={
+            				type:4,
+            				infos:b4
+            			}
+                    	let newJsons5={
+            				type:5,
+            				infos:b5
+            			}
+                    	let newJsons6={
+            				type:6,
+            				infos:b6
+            			}
+                    	app.listTest.push(newJsons1,newJsons2,newJsons3,newJsons4,newJsons5,newJsons6);
+                    	console.log(JSON.stringify(app.listTest));
+                       app.list=data.obj.ents; 
+               	  	}
+               	  }
+               	  	}
+				});
+			});
+			
+			function flush(){
+			$('.mui-table-view-cell').on('tap',function(){
+				var entid=$(this).attr('entId');
+				var companyName=$(this).attr("companyName");
+				 userInfo.entid=entid;
+				 userInfo.companyName=companyName;
+                 setGlobalUserInfo(userInfo);
+                 project_navigation();
+				 //jumpPage();
+			});
+			}
+			
+			
+			//跳转下个页面
+			function jumpPage(){
+				mui.openWindow({
+					url:'project_navigation.html',
+					id:'project_navigation'
+				})
+			}
+			
+			$("#back").on("tap",function(){
+				var opener = plus.webview.currentWebview().opener();
+					mui.fire(opener, 'letuse', {}); 
+			});
+			
+		
+		</script>
+
+	</body>
+
+</html>

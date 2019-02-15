@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <title></title>
+	</head>
+
+	<body>
+
+		<div id="dataSourceOne" ondrop="drop(event,this)" data='111111' ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)">TVSou</div>
+		<div id="dataSourceTwo" ondrop="drop(event,this)" data='222222' ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)">KanKanTV</div>
+		
+		
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript">
+			function allowDrop(ev) {
+				ev.preventDefault();
+			}
+			var srcdiv = null;
+
+			function drag(ev, divdom) {
+				//alert($(divdom).attr('data'));
+				srcdiv = divdom;
+				ev.dataTransfer.setData("text/html", divdom.innerHTML);
+			}
+
+			function drop(ev, divdom) {
+				alert($(divdom).attr('data'));
+				ev.preventDefault();
+				if(srcdiv != divdom) {
+					srcdiv.innerHTML = divdom.innerHTML;
+					divdom.innerHTML = ev.dataTransfer.getData("text/html");
+				}
+			}
+		</script>
+	</body>
+
+</html>

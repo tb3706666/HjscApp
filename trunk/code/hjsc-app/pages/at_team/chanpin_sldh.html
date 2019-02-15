@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>产品实例导航</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.mui-table-view{
+			margin-top: 50px;
+		}
+		.disabled{
+			pointer-events: none !important;
+		}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">产品实例导航</h1>
+		</header>
+
+		<ul class="mui-table-view" id="chanpin_list">
+			<li class="mui-table-view-cell mui-media" v-for="(item,index) in items" :accesskey="index" :url="item | appendUrl" :fileUrl="item.fileUrl" >
+				<a :href="item.nameurl" class="mui-navigate-right">
+					<img class="mui-media-object mui-pull-left" src="../../icon/cpsldh1.png">
+					<div class="mui-media-body">
+						<p class="list_title hbox">{{item.name}}<small class="ban" :class="{kai:k,'zheng':z}" v-if="item.type==0">开发版</small><small class="ban" :class="{kai:k,'zheng':z}" v-if="item.type==1">正式版</small></p>
+						<p>ID:{{item.upId}}</p>
+						<p class="mui-ellipsis">用户：{{item.entUser}}</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			
+//正式外文件地址
+//https://file.arctron.cn
+//正式外
+//var URL = 'https://bdms.arctron.cn';
+//外
+//var URL = 'http://203.156.220.3:8080';
+//内
+//var URL = 'http://10.252.26.240:8080';
+
+			Vue.filter('appendUrl',
+				function(item) {
+					var hardCode = item.hardCode;
+					var ip = item.ip;
+					var port = item.port;
+					var midUrl = item.midUrl;
+					var urlAddress = hardCode + '://' + ip + ':' + port + midUrl;
+					return urlAddress;
+				});
+
+			//页面
+			var chanpin = new Vue({
+				el: '#chanpin_list',
+				data: function() {
+					return {
+						k: true,
+						z: false,
+						items: [],
+					}
+				},
+				watch: {
+					items: function() {
+						this.$nextTick(function() {
+							flush();
+						})
+					}
+				},
+
+			})
+
+			$(function() {
+				getInstanceList();
+			});
+
+			function getInstanceList() {
+				//得到tonid
+				userInfo = getGlobalUserInfo();
+//				console.log("========" + userInfo);
+				$.ajax({
+					type: 'GET',
+					url: userInfo.httpurl+'/arctron-usercenter/UserApp/getInstanceList.json?pCode=BS1803',
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenId', userInfo.tokenId);
+					},
+					dataType: 'JSON',
+					success: function(data) {
+						console.log(data);
+						if(data.userInstance == undefined) { //不存在对象
+							mui.toast('您没有权限');
+						} else {
+							chanpin.items = data.userInstance;
+							/*var jumpPlace = data.userInstance.length > 1 ? true : false;
+							console.log(jumpPlace);
+							if(!jumpPlace) {
+								var hardCode = data.userInstance[0].hardCode;
+								var ip = data.userInstance[0].ip;
+								var port = data.userInstance[0].port;
+								var midUrl = data.userInstance[0].midUrl;
+								var urlAddress = hardCode + '://' + ip + ':' + port + midUrl;
+								//将url保存起来再进行跳转
+								jumpPage(urlAddress);
+							}*/
+						}
+					}
+				});
+			}
+
+			//接收参数
+			//			mui.plusReady(function() {
+			//				var self = plus.webview.currentWebview();
+			//				var name = self.name;
+			//				var pid = self.pid;
+			//				alert(name + '--' + pid)
+			//			});
+
+			function flush() {
+				$('.mui-table-view-cell').on('tap', function() {
+					$('.mui-media').addClass("disabled");
+					//将url保存起来
+					var url = $(this).attr('url'); //att获取自定义熟悉  prop获取标签自带属性
+					//上传文件路径
+					var fileUrl = $(this).attr('fileUrl');
+					jumpPage(url,fileUrl);
+					//$('.mui-media').removeClass("disabled");
+				});
+			}
+			//保存
+			function jumpPage(url,fileUrl) {
+				//				setGlobalUrl(url);
+				userInfo.url = url;
+				userInfo.fileUrl = fileUrl;
+				setGlobalUserInfo(userInfo);
+				enterprise_navigation();
+				/*mui.openWindow({
+					url: 'enterprise_navigation.html',
+					id: 'enterprise_navigation'
+				})*/
+			}
+			
+			window.addEventListener('letuse', function() {
+				setTimeout(function(){
+					$('.mui-media').removeClass("disabled");
+				},500);
+				
+			});
+			
+		</script>
+	</body>
+
+</html>

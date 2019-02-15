@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>任务详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		
+	</head>
+	<style>
+		.tit-right{
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: #fff;
+		}
+		.w100{
+			width: 100%;
+			padding: 10px 15px 5px 15px;
+			display: inline-block;
+			border-bottom: 1px solid #EEEEEE;
+		}
+		
+		.list-img {
+			width: 45px;
+			margin-top: 5px;
+		}
+		
+		.list-title {
+			font-size: 14px;
+			color: #333;
+		}
+		.list-detail{
+			float: left;
+			padding-left: 10px;
+			width: 80%;
+		}
+		.fwb{
+			letter-spacing: 1px;
+		}
+		.edit{
+			width: 15px;
+			height: 15px;
+			margin-left: 5px;
+		}
+		.mui-table-view:before,.mui-table-view:after{
+			display: none;
+		}
+		/*右侧箭头*/
+		.mui-navigate-right:after, .mui-push-right:after{
+			top: 50%;
+			right: 35px;
+		}
+		/*右侧文字*/
+		.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){
+			margin-right: -95px;
+		}
+		
+		
+	</style>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">任务详情</h1>
+			<a class="mui-pull-right tit-right" href="javascript:void(0)">编辑</a>
+		</header>
+				<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll" id="sz_app">
+				
+				<ul class="mui-table-view table" id="tableList">
+					<p class="w100"><span class="fl">#12</span><span class="fr">正常进行</span></p>
+					
+					<li class="mui-table-view-cell filelist">
+						<div class="list-detail-img fl">
+							<img class="list-img" src="../../icon/cpsldh1.png" />
+						</div>
+						<div class="list-detail list-detail-font">
+							<p class="list-title fl"><small class="fl fblue fwb">#2.1</small><span class="hone fl mw80 fwb">李白写字楼</span><img src="../../icon/ztzw_4.png" class="edit"/></p><br/>
+							<p class="list-time f6e">计划状态 :未开始</p>
+							<p class="list-time fgreen">实际状态 :未开始</p>
+						</div>
+
+					</li>
+				</ul>
+						
+					<!--第一栏-->
+					<ul class="mui-table-view mui-table-view-chevron mt16">
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span>任务组别</span>
+									<span class="fr btn">请选择日期</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span>优先级</span>
+									<span class="fr">1级</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<span>关键任务</span>
+								<div name="myswitch" index="0" class="mui-switch mui-switch-mini mui-switch-blue">
+									<div class="mui-switch-handle"></div>
+								</div>
+							</li>
+					</ul>
+					
+					<!--第二栏-->
+					<ul class="mui-table-view mui-table-view-chevron mt16">
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span>计划开始</span>
+									<span class="fr btn1">请选择日期</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span>计划结束</span>
+									<span class="fr">1级</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span>实际开始</span>
+									<span class="fr btn1">请选择日期</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span>实际结束</span>
+									<span class="fr btn1">请选择日期</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">计划天数</span>
+									<span class="fr">5天</span>
+								</a>
+							</li>
+					</ul>
+					
+					<!--第三栏-->
+					<ul class="mui-table-view mui-table-view-chevron mt16">
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">负责群组</span>
+									<span class="fr">李白项目组</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">负责人</span>
+									<span class="fr">李白</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">计划群组</span>
+									<span class="fr">李白项目组</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">计划人</span>
+									<span class="fr">李白</span>
+								</a>
+							</li>
+					</ul>
+					
+					<!--第四栏-->
+					<ul class="mui-table-view mui-table-view-chevron mt16">
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">图片</span>
+									<span class="fr">1</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">清单</span>
+									<span class="fr">2</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">文档</span>
+									<span class="fr">3</span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0)" class="mui-navigate-right">
+									<span class="fl">核实记录</span>
+									<span class="fr">2</span>
+								</a>
+							</li>
+					</ul>
+						
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js" ></script>
+		<script type="text/javascript" src="../../js/mui.picker.min.js" ></script>
+		<script type="text/javascript">
+			//日期框
+			//年:e.y.value,月:e.m.value,(同理),日:d,时:h,分:i。(minutes 的第二个字母)
+			//年月日时分
+			$('.btn').on('tap',function(){
+			var dtPicker = new mui.DtPicker();
+				dtPicker.show((selectItems)=> {
+					$(this).text(selectItems.text);
+				});
+			})
+			//年月日
+			$('.btn1').on('tap',function(){
+			var dtPicker = new mui.DtPicker();
+				dtPicker.show((selectItems)=> {
+					$(this).text(selectItems.y.value+'-'+selectItems.m.value+'-'+selectItems.d.value);
+				});
+			})
+			
+			mui('#home_scroll').scroll();
+		</script>
+	</body>
+
+</html>

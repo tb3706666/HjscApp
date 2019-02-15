@@ -1,0 +1,580 @@
+/*重置样式*/
+body,ul,ol,p,h1,h2,h3,h4,h5,dl,dd,form,input,textarea,td,th,button,strong,em,select,video,
+canvas {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+ul,ol {
+	list-style: none;
+	vertical-align: top;
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+textarea {
+	resize: none;
+	overflow: auto;
+}
+
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+em {
+	font-style: normal;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+/*屏蔽阴影;ios android去除自带阴影的样式*/
+
+a,input,img {
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* 禁止长按链接与图片弹出菜单 */
+
+a,img {
+	-webkit-touch-callout: none;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, "STHeiTi", sans-serif;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-tap-highlight-color: transparent;
+}
+
+html {
+	font-size: 20px;
+}
+[v-cloak]{
+    display:none;
+}
+
+/*自定义样式*/
+
+html,body {
+	background-color: #F2F2F2;
+}
+
+/*清除日期框默认样式*/
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+	/*display: none;*/
+	opacity: 0;
+}
+
+input[type="date"]::-webkit-clear-button {
+	display: none;
+}
+
+
+/*placeholder颜色*/
+
+input::-webkit-input-placeholder {
+	color: skyblue;
+}
+
+input::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	color: skyblue;
+}
+
+input:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	color: skyblue;
+}
+
+input:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: skyblue;
+}
+/*进度条*/
+.progress{
+	display: inline-block;
+	width: 100%;
+	background: #2989d8; /* Old browsers */
+	background: -moz-linear-gradient(45deg, #2989d8 33%, #7db9e8 34%, #7db9e8 59%, #2989d8 60%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(33%,#2989d8), color-stop(34%,#7db9e8), color-stop(59%,#7db9e8), color-stop(60%,#2989d8)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* IE10+ */
+	background: linear-gradient(45deg, #2989d8 33%,#7db9e8 34%,#7db9e8 59%,#2989d8 60%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2989d8', endColorstr='#2989d8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background-size: 60px 30px;
+	text-align: center;
+	color:#fff;
+	-webkit-animation:load 3s ease-in;
+}
+
+/*倒三角*/
+
+.d_sanjiao {
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid #b3b3b3;
+}
+
+
+/*背景三角*/
+
+.bg_sanjiao {
+	background: url(../icon/xia_sanjiao.png)no-repeat right center;
+	background-size: 16px 10px;
+}
+
+
+/*表格样式*/
+
+/*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+
+th,
+td {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	width: 105px;
+	border: 1px solid #ccc;
+}
+
+.contentd {
+	width: 100%;
+	height: 100%;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.dnone {
+	display: none;
+}
+
+.mg16 {
+	margin: 16px;
+}
+
+.mt16 {
+	margin-top: 16px;
+}
+
+.mb16 {
+	margin-bottom: 16px;
+}
+
+.ml16 {
+	margin-left: 16px;
+}
+
+.mr16 {
+	margin-right: 16px;
+}
+
+.pd16 {
+	padding: 16px;
+}
+
+.pt16 {
+	padding-top: 16px;
+}
+
+.pr10 {
+	padding-right: 10px;
+}
+
+.pr16 {
+	padding-right: 16px;
+}
+
+.pb16 {
+	padding-bottom: 16px;
+}
+.pl10{
+	padding-left: 10px;
+}
+.pl16 {
+	padding-left: 16px;
+}
+
+.plb {
+	padding-left: 10px;
+	padding-bottom: 23px;
+}
+
+.mr10 {
+	margin-right: 10px;
+}
+
+.pd10 {
+	padding: 10px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+
+.rot45 {
+	transform: rotate(45deg);
+}
+
+.mr32 {
+	margin-right: 32px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.mt50 {
+	margin-top: 50px;
+}
+
+.fs13 {
+	font-size: 13px;
+}
+
+.fs16 {
+	font-size: 16px;
+}
+
+.fs24 {
+	font-size: 24px;
+}
+
+.bdr30 {
+	border-radius: 30px;
+}
+.img40{
+	height: 40px !important;
+	width: 40px !important;
+}
+/*上边框划分线*/
+.btf2{
+	border-top: 1px solid #f2f2f2 !important;
+}
+
+/*长图标*/
+
+.cicon {
+	width: 16px;
+	height: 21px;
+	vertical-align: sub;
+}
+
+
+/*小图标*/
+
+.xicon {
+	width: 15px;
+	height: 15px;
+	vertical-align: sub;
+	margin-right: 5px;
+}
+
+
+/*中图标*/
+
+.zicon {
+	height: 22px;
+	width: 22px;
+	vertical-align: sub;
+	margin-right: 10px;
+}
+
+
+/*一般图标*/
+
+.yicon {
+	height: 35px;
+	width: 35px;
+	vertical-align: sub;
+}
+
+/*大图标*/
+
+.dicon {
+	height: 45px;
+	width: 45px;
+	vertical-align: sub;
+}
+
+/*间距1*/
+
+.ls1 {
+	letter-spacing: 1px;
+}
+
+.ls2 {
+	letter-spacing: 2px;
+}
+
+.ls3 {
+	letter-spacing: 3px;
+}
+
+
+/*颜色*/
+
+.border_b {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.bg_028fd0 {
+	background-color: #028fd0;
+}
+
+.bgfff {
+	background-color: #fff;
+}
+
+.fcolor {
+	color: #0094d8;
+}
+/*偏蓝字*/
+.fblue{
+	color: #0486D1;
+}
+/*偏灰字*/
+.f6e{
+	color: #6E6E6E;
+}
+/*偏绿字*/
+.fgreen{
+	color: #1EBA31;
+}
+/*一般提示文字颜色*/
+.fcolor999 {
+	color: #999;
+}
+/*一般加粗文字颜色*/
+.fcolor_b{
+	color:#3B3B3B;
+	font-weight: bold;
+}
+/*粗字体*/
+.fwb{
+	font-weight: bold;
+}
+/*一般删除文字颜色*/
+.delcolor{
+	color:#D02626;
+}
+.img60 {
+	width: 60px;
+	height: 60px;
+}
+
+/*start*/
+/*slider标题头*/
+
+
+/*注意点:tab切换滑动选项卡,高度确定则
+ .mui-slider{
+ 	position: fixed;
+ }
+ .mui-control-content {
+	min-height: -webkit-fill-available;
+}
+ * */
+
+.mui-bar,#cs_slider {
+	height: 50px;
+	background-color: #43484e;
+}
+
+.mui-bar .mui-title,.mui-bar .mui-icon,#cs_slider a {
+	color: #fff;
+}
+
+
+/*整体容器*/
+
+.mui-bar .mui-title {
+	height: 50px;
+	line-height: 50px;
+}
+
+.mui-table-view-cell:after {
+	background-color: #E5E5E5;
+}
+
+.mui-bar-nav {
+	box-shadow: none;
+}
+
+.bsnone {
+	box-shadow: none;
+}
+
+/*整体容器*/
+
+.mui-table-view-cell {
+	padding: 13px 15px;
+}
+
+/*右侧箭头*/
+
+.mui-navigate-right:after,.mui-push-right:after {
+	right: 5px;
+	content: '\e583';
+	top: 30%;
+	font-size: 30px;
+	color: #CCCCCC;
+	font-size: 26px;
+}
+
+
+/*消除上下点击1px*/
+.mui-table-view-cell>a:not(.mui-btn) {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	margin: -15px -15px;
+	padding: inherit;
+	text-overflow: ellipsis;
+	color: inherit;
+	white-space: inherit;
+}
+
+.list_title {
+	color: #333;
+	font-family: 'Helvetica';
+	font-weight: bold;
+}
+
+
+/*开发版small样式*/
+
+.ban {
+	padding: 1px 4px;
+	border-radius: 4px;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+
+.zheng {
+	border: 1px solid #02bf1b;
+	color: #02bf1b;
+}
+
+.kai {
+	border: 1px solid #00abbf;
+	color: #00abbf;
+}
+
+.h50{
+	height: 50px;
+}
+/*防止误操作*/
+.circle:after{
+	content: '';
+	float: right;
+	height:65px;
+	width: 50px; 
+	position: absolute;
+	top: -30px;
+	right: -18px;
+}
+.usuallyh{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+	word-break: break-all;
+}
+.hone{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+	word-break: break-all;
+}
+.two_h {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	word-break: break-all;
+/*字母也会+..*/
+}
+/*超出换行,注：让框架中含white-space属性需设为inherit;*/
+.hbox {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	width: 85%;
+}
+.nws{
+	white-space: nowrap;
+}
+.w80{
+	width: 80%;
+}
+.mw80{
+	max-width: 80%;
+}
+/*导航头部*/
+.mui-bar .mui-icon:active {
+	opacity: 1;
+}
+
+/*线条去空*/
+		.mui-table-view-cell:after{
+			left: 0;
+		}
+/*导航头，左边蓝色边框，右边字*/
+.ntitle {
+	width: 100%;
+	height: 18px;
+	line-height: 18px;
+	font-size: 16px;
+	color: #333;
+	border-left: 3px solid #0487d0;
+	margin: 16px 0 13px 18px;
+	padding-left: 10px;
+	font-weight: bold;
+	display: inline-block;
+	position: relative;
+}
+
+/*导航栏底部下划线*/
+.ntitle:after {
+	content: '';
+	background-color: #f2f2f2;
+	width: 91%;
+	height: 1px;
+	position: absolute;
+	left: 0;
+	bottom: -13px;
+}
+
+/*退出边线*/
+.mui-popup-inner:after{
+	background-color: rgba(0,0,0,.1);
+}

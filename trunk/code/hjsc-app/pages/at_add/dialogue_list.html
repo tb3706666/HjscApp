@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>对话</title>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+
+		<style>
+			/*进入样式*/
+			
+			.addSubject {
+				font-size: 15px;
+			}
+			
+			.mui-bar-nav.mui-bar .mui-icon {
+				line-height: 30px;
+			}
+			
+			.title-select {
+				display: inline-block;
+				width: 25%;
+				margin: 0 12px;
+			}
+			
+			.title {
+				height: 44px;
+				background-color: #fff;
+				text-align: center;
+				line-height: 44px;
+				font-size: 14px;
+				color: #666;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 49px;
+			}
+			/*子调父侧边栏*/
+			
+			.furight {
+				transform: translate3d(70%, 0px, 0px);
+			}
+			
+			.fushow {
+				visibility: visible;
+			}
+			
+			.mui-icon-plusempty {
+				font-size: 44px !important;
+				line-height: 11px !important;
+				margin-right: -20px !important;
+			}
+			
+			.head-img,
+			.title-detail {
+				float: left;
+			}
+			
+			.head-img {
+				width: 18%;
+				position: relative;
+			}
+			
+			.title-detail {
+				width: 80%;
+			}
+			
+			.head-img img {
+				width: 50px;
+				height: 50px;
+				border-radius: 10px;
+			}
+			
+			.list-out {
+				width: 98%;
+				height: 67px;
+				margin-top: 18px;
+				margin-left: 10px;
+				border-bottom: 1px solid #E6E6E6;
+			}
+			
+			.name {
+				float: left;
+			}
+			
+			.time {
+				float: right;
+				font-size: 12px;
+				color: #999999;
+				margin-top: 4px;
+			}
+			
+			.name div:nth-of-type(1) {
+				font-size: 16px;
+				margin-top: 3px;
+			}
+			
+			.name div:nth-of-type(2) {
+				font-size: 14px;
+				color: #666666;
+				margin-top: 5px;
+			}
+			
+			.time img {
+				width: 16px;
+				height: 16px;
+				margin-top: 6px;
+				position: absolute;
+				right: 10px;
+			}
+			
+			.mui-scroll {
+				background-color: #ffffff;
+			}
+			
+			.circle {
+				background: red;
+				border-radius: 40px;
+				width: 11px;
+				height: 11px;
+				position: absolute;
+				right: lef;
+				left: 42px;
+				top: -4px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		<!-- 侧滑导航根容器 -->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 菜单容器 -->
+				<aside id="offCanvasSide" class="mui-off-canvas-left">
+					<div id="left_scroll" class="mui-scroll-wrapper">
+						<!--菜单内容开始-->
+
+						<div class="mui-scroll">
+							<!--头部-->
+							<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+							<div id="glz_slide">
+								<leftlist :gl='gl' :items='items'></leftlist>
+							</div>
+						</div>
+						<!--菜单内容结束-->
+
+					</div>
+				</aside>
+
+				<!-- 主页面标题 -->
+				<span id="lefts" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" disabled="none"></span>
+				<header class="mui-bar mui-bar-nav">
+					<a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<h1 style="pointer-events: none;" id="title" class="mui-title">对话</h1>
+					<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)" id="add"><span class="mui-icon mui-icon-plusempty"></span></a>
+				</header>
+
+				<!-- 主页面内容容器 -->
+				<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll" style="height: 100%;">
+
+						<div class="list-out">
+							<div class="head-img">
+								<img src="../../img/slider2.png" />
+								<span class="circle"></span>
+							</div>
+							<div class="title-detail">
+								<div class="name">
+									<div>王明明</div>
+									<div>办公室大楼效果图修改</div>
+								</div>
+								<div class="time">
+									<span>40分钟前</span>
+									<br />
+									<img src="../../icon/test.png" />
+								</div>
+							</div>
+						</div>
+
+						<div class="list-out">
+							<div class="head-img">
+								<img src="../../img/slider2.png" />
+								<span class="circle"></span>
+							</div>
+							<div class="title-detail">
+								<div class="name">
+									<div>王明明</div>
+									<div>办公室大楼效果图修改</div>
+								</div>
+								<div class="time">
+									<span>40分钟前</span>
+									<br />
+									<img src="../../icon/test.png" />
+								</div>
+							</div>
+						</div>
+
+						<div class="list-out">
+							<div class="head-img">
+								<img src="../../img/slider2.png" />
+								<span class="circle"></span>
+							</div>
+							<div class="title-detail">
+								<div class="name">
+									<div>王明明</div>
+									<div>办公室大楼效果图修改</div>
+								</div>
+								<div class="time">
+									<span>40分钟前</span>
+									<br />
+									<img src="../../icon/dhpb.png" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+
+		<!--新建时展开背景 mui-active,display:block触发-->
+		<div class="mui-popup-backdrop mui-active addpop" style="display: none;"></div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/leftlist.js"></script>
+		<script src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+
+		<!--<script src="../../js/subject.js"></script>-->
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</body>
+
+</html>

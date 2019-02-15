@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>侧滑栏</title>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+
+		<style>
+			/*进入样式*/
+			
+			.addSubject {
+				font-size: 15px;
+			}
+			
+			.mui-bar-nav.mui-bar .mui-icon {
+				line-height: 30px;
+			}
+			
+			.title-select {
+				display: inline-block;
+				width: 25%;
+				margin: 0 12px;
+			}
+			
+			.title {
+				height: 44px;
+				background-color: #fff;
+				text-align: center;
+				line-height: 44px;
+				font-size: 14px;
+				color: #666;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 49px;
+			}
+			/*子调父侧边栏*/
+			
+			.furight {
+				transform: translate3d(70%, 0px, 0px);
+			}
+			
+			.fushow {
+				visibility: visible;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		<!-- 侧滑导航根容器 -->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 菜单容器 -->
+				<aside id="offCanvasSide" class="mui-off-canvas-left">
+					<div id="left_scroll" class="mui-scroll-wrapper">
+						<!--菜单内容开始-->
+
+						<div class="mui-scroll">
+							<!--头部-->
+							<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+							<div id="glz_slide">
+								<leftlist :gl='gl' :items='items'></leftlist>
+							</div>
+						</div>
+						<!--菜单内容结束-->
+
+					</div>
+				</aside>
+
+				<!-- 主页面标题 -->
+				<span id="lefts" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" disabled="none"></span>
+				<!--<header class="mui-bar mui-bar-nav">
+					<span id="lefts" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></span>
+					<h1 style="pointer-events: none;" id="title" class="mui-title"></h1>
+					<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)" id="add"><span class="addSubject">发表主题</span></a>
+				</header>-->
+
+				<!-- 主页面内容容器 -->
+				<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll" style="background: #F5F5F5;height: 100%;">
+
+						<iframe id="iframe" name="iframe" src="" style="border: none;height: 100%;width: 100%;"></iframe>
+
+					</div>
+				</div>
+				<!--<div class="mui-off-canvas-backdrop"></div>-->
+			</div>
+		</div>
+
+		<!--新建时展开背景 mui-active,display:block触发-->
+		<div class="mui-popup-backdrop mui-active addpop" style="display: none;"></div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/leftlist.js"></script>
+		<script src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+
+		<!--<script src="../../js/subject.js"></script>-->
+		<script type="text/javascript">
+			//发表成功后调用此方法
+			window.addEventListener('ztrefresh', function() {
+				//		window.children.ff();
+				document.getElementById("iframe").contentWindow.ff();
+			});
+
+			window.addEventListener('loadPath', function() {
+				document.getElementById("iframe").contentWindow.loadPath();
+			});
+
+			//从主题正文返回主题列表
+			window.addEventListener('resetCollect', function(event) {
+				//获得事件参数
+				var index = event.detail.index;
+				var status = event.detail.status;
+				document.getElementById("iframe").contentWindow.resetCollect(index, status);
+			});
+
+			$(function() {
+				var page = GetQueryString('page');
+				var isCould = GetQueryString('isCould');
+				if(isCould == 'yes') {
+					$("#iframe").prop('src', '../at_cloud/' + page + '.html');
+				} else {
+					$("#iframe").prop('src', page + '.html');
+				}
+
+			});
+
+			mui.init();
+
+			function jump(url) {
+				location.href = url;
+			}
+
+			//			$('#lefts').on('click',function(){
+			////				$('.mui-inner-wrap').toggleClass('furight');
+			//				alert(1)
+			//			})
+			document.getElementById("lefts").addEventListener("tap", function() {
+				$('.mui-inner-wrap').toggleClass('furight').css('transition', '.3s');
+				$('#offCanvasSide').addClass('fushow');
+				$('.swzz').toggleClass('swpop');
+			});
+
+			function lefts() {
+				$('.mui-inner-wrap').toggleClass('furight mui-backdrop').css('transition', '.3s');
+				$('#offCanvasSide').addClass('fushow');
+			}
+
+			//			主题滑动优化
+			//右滑
+			function sright() {
+				$('.mui-inner-wrap').addClass('furight').css('transition', '.3s');
+				$('#offCanvasSide').addClass('fushow');
+				$('.swzz').toggleClass('swpop');
+			}
+			//左滑
+			function sleft() {
+				$('.mui-inner-wrap').removeClass('furight');
+				$('.swzz').toggleClass('swpop');
+			}
+
+			//			
+			//			$('.mui-scroll').on('swipeup',function(){
+			//				pulldownRefresh();
+			////				alert(2)
+			//			})
+			//			
+			//			function pulldownRefresh() {
+			//              setTimeout(function () {
+			//                  getMgEAStatus();//实现更新页面的操作
+			//                  mui('#card').pullRefresh().endPulldownToRefresh(); //refresh completed
+			//              }, 1500);
+			//          };
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,135 @@
+.mui-bar a{
+	line-height: 30px;
+}
+
+#home_scroll .mui-table-view {
+    margin-top: 8px;    	
+}
+.mui-content {
+	background-color: #ffffff;
+}
+.list-img {
+	width: 33px;
+}
+
+.list-title {
+	font-size: 16px;
+	color: #333333;
+	margin-top: 8px;
+}
+
+.list-detail {
+	float: left;
+}
+
+.list-time {
+	font-size: 12px;
+	color: #999999;
+}
+
+.list-detail-img {
+	line-height: 35px
+}
+
+.list-detail-font {
+	margin-left: 12px;
+}
+
+.mui-table-view-cell:after {
+	background-color: #e6e6e6;
+}
+.mui-table-view-cell {
+	padding: 14px 15px;
+}
+.mui-table-view:before,
+.mui-table-view:after {
+	background-color: #e6e6e6;
+	height: 0px;
+}
+.mui-table-view-cell:after{
+	height: 1px !important;
+}
+
+/**
+ * 弹出框样式start
+ */
+input::-webkit-input-placeholder {
+	/* WebKit, Blink, Edge */
+	font-size: 16px;
+	color: #999999;
+	/*background-color: #f2f2f2;*/
+	/*padding: 20px;*/
+	line-height: 20px;
+}
+
+input::-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	font-size: 16px;
+	color: #999999;
+	background-color: #f2f2f2;
+	padding: 20px 0;
+}
+
+input::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	font-size: 16px;
+	color: #999999;
+	background-color: #f2f2f2;
+	padding: 20px 0;
+}
+
+input::-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	font-size: 16px;
+	color: #999999;
+	background-color: #f2f2f2;
+	padding: 20px 0;
+}
+
+.mui-popup{
+	border-radius: 3px;
+	width: 300px;
+}
+.mui-popup-inner{
+    border-radius: 1px 1px 0 0;	
+}
+.mui-popup-button:first-child{
+	    border-radius: 0 0 0 3px;
+}
+
+.mui-popup-button:last-child{
+	border-radius:0 0 3px;
+}
+
+.mui-popup-title{
+    padding: 10px;
+    font-size: 20px;
+	color: #333333;	
+}
+.mui-popup-button{
+	font-size: 16px;
+	color: #666666;
+    font-weight: 100 !important;	
+}
+
+.mui-popup-button-bold{
+	color: #0487d0;
+}
+
+.mui-popup-inner:after{
+	background-color:#E6E6E6;
+}
+.mui-popup-input input{
+    padding: 0px;
+    border: none;
+    margin: 15px 0;	
+    border-radius: 3px;  
+    padding: 20px 0;  
+    border: 1px solid #f2f2f2;
+    margin-top: 8px;  
+	background-color: #f2f2f2;       
+}
+/**
+ * 弹出框样式end
+ */
+

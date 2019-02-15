@@ -1,0 +1,414 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>传输列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/iconfont.css" />
+	</head>
+	<style type="text/css">
+		.mui-slider {
+			position: fixed;
+		}
+		
+		.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar {
+			background-color: #fff;
+		}
+		
+		.mui-slider-progress-bar {
+			height: 1px;
+			top: -15px;
+			border: 1px solid #fff;
+		}
+		
+		.mui-control-content {
+			min-height: -webkit-fill-available;
+		}
+		
+		.mui-control-content {
+			background-color: #fff;
+		}
+		
+		.mui-control-content .mui-loading {
+			margin-top: 50px;
+		}
+		/*标题头end*/
+		
+		.path {
+			height: 35px;
+		}
+		
+		.path2 {
+			height: 15px;
+		}
+		
+		h6 {
+			color: #0486d1;
+			/*line-height: 35px;*/
+			margin-left: 20px;
+			height: 38px;
+			word-break: break-all;
+			margin-top: 0px;
+		}
+		/*.size {
+			margin-left: 20px;
+		}*/
+		/*.dates{
+			display: inline-block;
+		}*/
+		
+		.mui-icon-arrowthinup,
+		.mui-icon-pulldown:before {
+			content: '\e588';
+			color: #cccccc;
+			border: 1px solid #cccccc;
+			border-radius: 50% 50%;
+			text-align: center;
+		}
+		
+		.mui-icon-arrowthinup,
+		.mui-icon-pulldown {
+			float: right;
+			width: 28px;
+			height: 28px;
+		}
+		
+		.mui-radio input[type="radio"] {
+			position: unset;
+		}
+		
+		.mui-radio input[type=radio]:checked:before {
+			content: '\e442';
+		}
+		
+		.mui-radio {
+			float: right;
+			width: 28px;
+			height: 28px;
+		}
+		
+		.mui-popover {
+			height: 145px;
+			width: 100%;
+			position: fixed;
+			bottom: 0;
+			text-align: center;
+			color: #0479bb;
+		}
+		
+		.filling {
+			background: #F2F2F2;
+			height: 0px;
+			padding: 3px;
+		}
+		
+		.scrolls1 {
+			top: 50px
+		}
+		
+		.scrolls {
+			top: 15px;
+		}
+		
+		.mui-table-view-cell:last-child:after,
+		.mui-table-view-cell:last-child:before {
+			height: 1px;
+		}
+		/*底部显示完整*/
+		
+		.mui-table-view {
+			margin-bottom: 100px;
+		}
+		/*去除横杠*/
+		
+		.mui-slider-progress-bar {
+			height: 0;
+		}
+		
+		.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+			border-top: none;
+		}
+		
+		.mui-content {
+			margin-top: -5px;
+		}
+		/*按钮*/
+		
+		.mui-table-view-cell>.mui-btn {
+			top: 33%;
+		}
+		
+		.mui-btn {
+			padding: 5px 10px;
+			background-color: #0486D1;
+			border: 0;
+		}
+		/*选框*/
+		
+		.pio {
+			position: absolute;
+			top: 25px;
+			right: 8px;
+		}
+		/*进度条*/
+		
+		.mui-progressbar {
+			width: 85%;
+			height: 5px;
+			border-radius: 15px;
+			margin-top: 8px;
+			overflow: hidden;
+			box-shadow: 0 0 1px 0px #000 inset;
+		}
+		/*每秒显示*/
+		
+		.secondshow {
+			position: absolute;
+			right: 60px;
+		}
+		
+		.stop2 {
+			font-size: 29px;
+			height: 35px;
+			padding-top: 10px;
+			margin-top: -8px;
+			color: #cccccc;
+		}
+		
+		a {
+			touch-action: none;
+		}
+		
+		.dirOut {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+			word-wrap: break-word;
+			word-break: break-all;
+			line-height: 36px;
+		}
+		.two_h{
+			-webkit-line-clamp: 1;
+		}
+		.localsave{
+			    width: 75%;
+		}
+		.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{
+			    font-size: 21px;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav headstyle">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">传输列表</h1>
+		</header>
+		<!--<div style="border: 1px solid red;height: 50px;width: 100%;">上方距离</div>-->
+		<div class="mui-content" id="trans">
+			<div id="slider" class="mui-slider">
+				<div id="cs_slider" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="#item1mobile">
+						正在下载
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						本地保存
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						正在上传
+					</a>
+					<a class="mui-control-item" href="#item4mobile">
+						上传记录
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>
+
+				<div class="mui-slider-group">
+
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div class="mui-content">
+							<!--file:///-->
+							<h6><span class="dirOut">本地文档保存路径:<span id="localDir"  >storage/emulated/0/Android/data/io.dcloud.HBuilder/downloads/</span></span></h6>
+						</div>
+						<div id="scroll1" class="mui-scroll-wrapper scrolls1">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell fcolor999">
+										正在下载（{{loadings.length}}）
+										<div class="mui-btn mui-btn-primary mui-pull-right" id="downloadtAll">
+											全部下载
+										</div>
+									</li>
+									<li class="mui-table-view-cell mui-media" v-for="(item,index) in loadings" :accesskey="index" v-if="item.fileName!=''&&item.status==true">
+										<a :href="item.nameurl">
+											<img class="mui-media-object mui-pull-left" :src="item | format">
+											<div class="mui-media-body">
+												<p class="list_title hbox" style="display: block;">{{item.fileName | changeName}}</p>
+												<p class="dates">
+													<div class="mui-progressbar mui-progressbar-in" :id="'psb' + item.fileId">
+														<span></span>
+													</div>
+													<span class="size"><span :id="'nowsize' + item.fileId">{{item.havaSize | changeSize}}</span>/{{item.fileSize | changeSize}}</span>
+													<span :secondshow="index" :id="'secondshow' + item.fileId" class="secondshow">{{(item.task.downloadedSize - item.havaSize ) | changeSize }}</span>
+													<span v-show="item.state == 5" :index="index" :fileId="item.fileId" class="mui-input-row  mui-icon mui-icon-pulldown  pio fontclass"></span>
+													<span v-show="item.state == 3" :index="index" :fileId="item.fileId" class="mui-input-row  iconfont icon-pause stop2  pio fontclass"></span>
+												</p>
+
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-content path2"></div>
+						<div id="scroll2" class="mui-scroll-wrapper scrolls">
+
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell fcolor999">本地保存（{{saves.length}}）</li>
+									<li class="mui-table-view-cell mui-media" v-for="(item,index) in saves" :accesskey="index">
+										<a :href="item.nameurl">
+											<img class="mui-media-object mui-pull-left" :src="item | format">
+											<div class="mui-media-body localsave">
+												<p class="list_title two_h">{{item.fileName | changeName}}</p>
+												<p class="dates">
+													<span class="size">{{item.fileSize | changeSize}}</span>
+												</p>
+												<div class="mui-input-row mui-radio pio">
+													<input name="radio" type="radio" v-model="item.state" @click="menu(1,item.id,item.fileName, index)">
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-content path2"></div>
+						<div id="scroll3" class="mui-scroll-wrapper scrolls">
+
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell fcolor999">
+										正在上传（{{uploads.length}}）
+										<div class="mui-btn mui-btn-primary mui-pull-right">
+											全部暂停
+										</div>
+									</li>
+									<li class="mui-table-view-cell mui-media" v-for="(item,index) in uploads" :accesskey="index">
+										<a :href="item.nameurl">
+											<img class="mui-media-object mui-pull-left" :src="item | format2">
+											<div class="mui-media-body">
+												<p class="list_title hbox">{{item.name}}<!--<small class="ban" :class="{kai:k,'zheng':z}">{{item.ban}}</small>--></p>
+												<p class="dates">
+													<div class="mui-progressbar mui-progressbar-in" :id="'psb' + item.id">
+														<span></span>
+													</div>
+													
+													<span class="size"><span :id="'nowsize' + item.id" >5M</span>/{{item.totalSize | changeSize}}</span>
+													<span  class="secondshow" :id="'secondshow' + item.id" >12.kb/s</span>
+													
+													<!--12KB/{{item.size}}-->
+												</p>
+												<!--<div class="mui-input-row  mui-icon  mui-icon-arrowthinup pio">
+												</div>-->
+											</div>
+										</a>
+									</li>
+								</ul>
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div id="item4mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-content path2"></div>
+						<div id="scroll4" class="mui-scroll-wrapper scrolls">
+
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell fcolor999">上传文件（4）</li>
+									<li class="mui-table-view-cell mui-media" v-for="(item,index) in records" :accesskey="index">
+										<a :href="item.nameurl">
+											<img class="mui-media-object mui-pull-left" :src="item | format">
+											<div class="mui-media-body">
+												<p class="list_title hbox">{{item.titname}}<small class="ban" :class="{kai:k,'zheng':z}">{{item.ban}}</small></p>
+												<div class="mui-input-row mui-radio pio">
+													<input name="radio" type="radio" v-model="item.state" @click="menu(2,item.id)">
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div id="popover" class="mui-popover popover1">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" @click="previewFile">
+								<a href="#">预览</a>
+							</li>
+							<li class="mui-table-view-cell" @click="deletes">
+								<a href="#">删除</a>
+							</li>
+							<li class="mui-table-view-cell filling"></li>
+							<li class="mui-table-view-cell" style="color: #333;" @click="cancel">
+								<a>取消</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="popover_delete" class="mui-popover popover2" style="height: 140px;">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" @click="deletes" style="color:#cc0a0a">
+								<a href="#">删除</a>
+							</li>
+							<li class="mui-table-view-cell" style="color:#cc0a0a">清空</li>
+							<li class="mui-table-view-cell filling"></li>
+							<li class="mui-table-view-cell" style="color: #333;" @click="cancel">
+								<a>取消</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../js/transmission.js"></script>
+		<!--<script type="text/javascript" src="../../js/transmission_localSave.js.js" ></script>-->
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

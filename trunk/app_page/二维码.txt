@@ -1,0 +1,11 @@
+Ò»£º
+bimqr.cn/1LvM0
+
+http://bimqr.cn/Public/GetSourceURI?short_url_param=bimqr.cn/1LvM0
+
+http://bimqr.cn/Public/GetSourceURI?short_url_param=1LvM0
+
+{"obj":{"source_url":"http://10.252.26.240:8080/bdms/#/qr/QR-QD-0002092"},"result":true}
+
+http://10.252.26.240:8080/bdms/#/qr/QR-QD-0002092
+_haveToken

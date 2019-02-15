@@ -1,0 +1,643 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>分享内容</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/minirefresh.css" />
+	</head>
+
+	<style>
+		.mui-bar a {
+			line-height: 30px;
+		}
+		
+		#home_scroll .mui-table-view {
+			margin-top: 8px;
+		}
+		
+		.mui-content {
+			background-color: #fff;
+		}
+		
+		.list-img {
+			width: 33px;
+		}
+		
+		.list-title {
+			font-size: 16px;
+			color: #333;
+			margin-top: 8px;
+		}
+		
+		.list-detail {
+			float: left;
+		}
+		
+		.list-time {
+			font-size: 12px;
+			color: #999;
+		}
+		
+		.list-detail-img {
+			line-height: 35px
+		}
+		
+		.list-detail-font {
+			margin-left: 12px;
+		}
+		
+		.mui-table-view-cell:after {
+			background-color: #e6e6e6;
+		}
+		
+		.mui-table-view-cell {
+			padding: 14px 15px;
+		}
+		
+		.mui-table-view:before,
+		.mui-table-view:after {
+			background-color: #e6e6e6;
+			height: 0px;
+		}
+		
+		.mui-table-view-cell:after {
+			height: 1px !important;
+		}
+		/**
+ * 弹出框样式start
+ */
+		
+		input::-webkit-input-placeholder {
+			font-size: 16px;
+			color: #999;
+			line-height: 20px;
+		}
+		
+		input::-moz-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		input::-moz-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		input::-ms-input-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		.mui-popup {
+			border-radius: 3px;
+			width: 300px;
+		}
+		
+		.mui-popup-inner {
+			border-radius: 1px 1px 0 0;
+		}
+		
+		.mui-popup-button:first-child {
+			border-radius: 0 0 0 3px;
+		}
+		
+		.mui-popup-button:last-child {
+			border-radius: 0 0 3px;
+		}
+		
+		.mui-popup-title {
+			padding: 10px;
+			font-size: 20px;
+			color: #333;
+		}
+		
+		.mui-popup-button {
+			font-size: 16px;
+			color: #666;
+			font-weight: 100 !important;
+		}
+		
+		.mui-popup-button-bold {
+			color: #0487d0;
+		}
+		
+		.mui-popup-inner:after {
+			background-color: #E6E6E6;
+		}
+		
+		.mui-popup-input input {
+			padding: 0px;
+			border: none;
+			margin: 15px 0;
+			border-radius: 3px;
+			padding: 20px 0;
+			border: 1px solid #f2f2f2;
+			margin-top: 8px;
+			background-color: #f2f2f2;
+		}
+		/**
+ * 弹出框样式end
+ */
+		/*分享内容文件名*/
+		
+		.mt8 {
+			margin-top: 8px;
+		}
+		
+		.dblock {
+			display: block;
+		}
+		
+		.w80 {
+			width: 80%;
+		}
+		.minirefresh-scroll{
+			    margin-top: 52px;
+		}
+		.minirefresh-theme-default .minirefresh-downwrap{
+			    top: 65px;
+		}
+		/*隐藏点击滚动顶端按钮*/
+		.minirefresh-totop {
+			display: none;
+		}
+		.minirefresh-theme-default .minirefresh-downwrap {
+			display: none;
+		}
+		a{
+			touch-action: none;
+		}
+	</style>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<h1 class="mui-title" id="title">分享内容</h1>
+		</header>
+
+		<!-- 主页面内容容器 -->
+		<div id="content" class="minirefresh-wrap">
+		<div id="home_scroll" >
+
+			<div class="minirefresh-scroll" id="list">
+
+				<ul class="mui-table-view table" id="tableList">
+					<li class="mui-table-view-cell li openfiles" v-for="item in list" :fileId="item.fileId" :fileType="item.fileType" :fileName="item.fileName">
+						<div class="list-detail list-detail-img">
+							<img class="list-img mt8" :src="item | format" />
+						</div>
+						<div class="list-detail list-detail-font fl w80">
+							<p class="list-title hone dblock">{{item.fileName}}</p>
+							<p>
+								<span id="">
+									{{item.fileSize | changeSize}} {{item.fileCreateTime | switchingTime}}
+								</span>
+							</p>
+						</div>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+</div>
+		<script type="text/javascript" src="../../js/minirefresh.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript">
+			
+			// 存放文件夹路径
+			var DIRMAP = new Map();
+			
+			var DIRINDEX = 0;
+			
+			var CURINDEX;
+			
+			$("#back").on('tap',function(e){
+				
+				var index = --CURINDEX;
+				if(index > -2){
+					
+					if(index == -1){
+						DIRINDEX = 0;
+						FLAG = false;
+						pageNums = 1;
+						init_list('down');
+						e.stopPropagation();
+						return;
+					}
+					
+					obj.fileId = DIRMAP.get(index)[0];
+					obj.fileName = DIRMAP.get(index)[1];
+					FLAG = true;	
+					pageNums = 1;
+					miniRefresh.resetUpLoading();
+				    getlist('prev');
+					e.stopPropagation();
+				}
+			})
+			
+			//用来判断执行哪个方法
+			var FLAG = false;
+			//=====================================start=========================================			
+			// 上拉加载下拉刷新
+			var miniRefresh;
+			var pageNums = 1;
+
+			function updown() {
+				var loadFull = new Object();
+				//loadFull.isEnable = false;
+				//loadFull.isAuto = false;
+
+				// 引入任何一个主题后，都会有一个 MiniRefresh 全局变量
+				miniRefresh = new MiniRefresh({
+					container: '#content',
+					//isUseBodyScroll:true,
+					down: {
+						// 是否每次下拉完毕后默认重置上拉，为false时下拉刷新后不会自动重置上拉状态
+						//isAutoResetUpLoading: true,
+						//isAuto: true,
+						callback: function() {
+
+							setTimeout(function() {
+								pageNums = 1;
+								
+								if(FLAG){
+									getlist('down');
+								}else{
+									init_list('down');
+								}
+								
+							}, 500)
+
+						}
+					},
+					up: {
+						//isAuto:false,
+						loadFull: loadFull,
+						callback: function() {
+							// 上拉事件
+							setTimeout(function() {
+								
+								if(FLAG){
+									getlist('up');
+								}else{
+									init_list('up');
+								}
+								
+							}, 500)
+						},
+					}
+				});
+
+			}
+
+			
+			//=====================================end=========================================
+
+			mui.init();
+			/*获取登录数据*/
+			userInfo = getGlobalUserInfo();
+
+			var obj = new Vue({
+				el: '#list',
+				data: {
+					list: [],
+					fileId: null,
+					fileName: "",
+					fieType: null,
+					fileUrl: "",
+				},
+				watch: {
+					list: function() {
+						this.$nextTick(function() {
+							toNextDir();
+						});
+					}
+				},
+			});
+
+			var SHAREID;
+			mui.plusReady(function() {
+               updown();
+            });
+            
+
+			function init_list(arg) {
+				
+				
+				if(arg == undefined){
+					
+					getlist('next');
+					return;
+				}
+				
+				//SHAREID = 602 //plus.webview.currentWebview().shareId;
+				SHAREID = plus.webview.currentWebview().shareId;
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/cloud/getShareFileList?type=json',
+					beforeSend: function(request) {},
+					data: {
+						projectId: userInfo.projId,
+						shareId: SHAREID,
+						pageIndex: pageNums,
+						pageSize: 6,
+						tokenId: userInfo.tokenId,
+					},
+					dataType: 'json',
+					success: function(data) {
+						//登陆失效
+							if(data.responseInfo.responseCode!=1){
+								tokenInvalid(data);
+								return;
+								}
+						console.log("4.17");
+						console.log(data);
+						if(data.responseInfo.responseCode != 1){
+							mui.toast(data.responseInfo.responseMessage);
+							miniRefresh.endUpLoading(true);
+							return;
+						}
+						
+						
+						if(data.fileList != undefined) {
+							if(arg == undefined || arg == 'down') {
+								obj.list = data.fileList;
+							} else {
+								obj.list = obj.list.concat(data.fileList);
+							}
+						}
+						
+						if(arg == 'down') {
+							miniRefresh.endDownLoading();
+						} else if(arg == 'up') {
+							miniRefresh.endUpLoading(data.fileList == undefined);
+						}
+						$('.minirefresh-downwrap').show();
+						pageNums++;
+
+						/*mui.openWindow({
+							url: 'cloud_project_shareContent.html',
+							id: 'cloud_project_shareContent',
+							extras: {
+								datas: data.fileList,
+							},
+						});*/
+					}
+				});
+			}
+
+
+
+			/*获取文件夹中的文件*/
+			function getlist(arg) {
+				
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/cloud/getFileList?type=json',
+					beforeSend: function(request) {
+						request.setRequestHeader('appType', 7);
+					},
+					data: {
+						tokenId: userInfo.tokenId,
+						projectId: userInfo.projId,
+						groupId: userInfo.groupId,
+						dirId: obj.fileId,
+						pageIndex: pageNums,
+						pageSize: 6,
+						filename: obj.fileName
+					},
+					dataType: 'json',
+					success: function(data) {
+//						if(data.responseInfo.responseCode != 1){
+//							mui.toast(data.responseInfo.responseMessage);
+//							miniRefresh.endUpLoading(true);
+//							return;
+//						}
+						//登陆失效
+							if(data.responseInfo.responseCode!=1){
+								tokenInvalid(data);
+								return;
+								}
+						
+						if(data.fileList != undefined) {
+							if(arg == undefined || arg == 'down' || arg == 'next' || arg == 'prev') {
+								obj.list = data.fileList;
+							} else {
+								obj.list = obj.list.concat(data.fileList);
+							}
+						}else{
+							if(arg == undefined || arg == 'next'){
+								//mui.toast('没有查询到数据');
+								//miniRefresh.endUpLoading(true);
+								obj.list = []; 
+								//return;
+							}
+							
+						}
+						
+						
+						if(arg == 'next'){
+							var arr = DIRMAP.get(DIRINDEX);
+							$("#title").html(arr[1]);
+							CURINDEX = DIRINDEX;
+							DIRINDEX++;
+						}
+						
+						if(arg == 'prev'){
+							//var arr = DIRMAP.get(DIRINDEX);
+							$("#title").html(obj.fileName);
+							DIRINDEX--;
+						}
+						
+						
+						
+						
+						if(arg == 'down') {
+							miniRefresh.endDownLoading();
+						} else if(arg == 'up') {
+							miniRefresh.endUpLoading(data.fileList == undefined);
+						}
+						
+						if(data.fileList != undefined) {
+						   $('.minirefresh-downwrap').show();
+						}
+						pageNums++;
+						
+						
+						
+					}
+				});
+			}
+			
+			/*文件进入下一级，文件下载并打开*/
+			function toNextDir(){
+				
+			$(document).unbind();
+			$(document).on('tap', '.openfiles', function() {
+				obj.fileId = $(this).attr("fileId");
+				obj.fileName = $(this).attr("fileName");
+				obj.fileType = $(this).attr("fileType");
+				if(obj.fileType == 1) { //文件夹则进入下一级
+					//getlist();
+					FLAG = true;
+					pageNums = 1;
+					
+					//把文件目录存入Map
+					DIRMAP.set(DIRINDEX, [obj.fileId,obj.fileName]);
+					miniRefresh.resetUpLoading();
+					$('.minirefresh-downwrap').hide();
+					init_list();
+				} else { //文件则下载并打开
+					$.ajax({
+						type: 'POST',
+						url: userInfo.url + '/cloud/downloadFile?type=json',
+						beforeSend: function(request) {},
+						data: {
+							projectId: userInfo.projId,
+							groupId: userInfo.groupId,
+							fileId: obj.fileId,
+							tokenId: userInfo.tokenId
+						},
+						dataType: 'json',
+						success: function(data) {
+							//登陆失效
+							if(data.responseInfo.responseCode!=1){
+								tokenInvalid(data);
+								return;
+								}
+							console.log(JSON.stringify(data));
+							obj.fileUrl = data.fileUrl;
+							createDownload();
+						}
+					});
+				}
+				//console.log("fileId:" + obj.fileId + "--" + "fileName:" + obj.fileName + "--" + "fileType：" + obj.fileType + "--" + "fileUrl:" + obj.fileUrl);
+			});
+			}
+
+			/*下载并打开文件 开始*/
+			function createDownload() {
+				//判断文件是否已经下载
+				plus.io.resolveLocalFileSystemURL('_downloads/' + obj.fileName, function(entry) {
+					if(entry.isFile) {
+						mui.toast('已经下载');
+						plus.runtime.openFile('_downloads/' + obj.fileName, {}, function(e) { //调用第三方应用打开文件
+							alert('打开失败');
+						});
+					}
+				}, function(e) {
+					dBase();
+				});
+			}
+
+			function dBase() {
+				//初始化下载对象
+				plus.nativeUI.showWaiting("加载中...");
+				var dtask = null;
+				if(dtask) {
+					mui.toast('下载任务已经存在,请耐心等待');
+					return;
+				}
+				dtask = plus.downloader.createDownload(obj.fileUrl, {
+					method: 'GET'
+				}, function(d, status) {
+
+					plus.runtime.openFile(d.filename, {}, function(e) { //调用第三方应用打开文件
+						alert('打开失败');
+					});
+				});
+				dtask.addEventListener("statechanged", function(task, status) {
+					if(!dtask) {
+						return;
+					}
+					switch(task.state) {
+						case 1:
+							mui.toast('开始下载...');
+							break; //开始
+						case 2:
+							mui.toast('链接到服务器...');
+							break; //链接到服务器
+						case 3:
+							break;
+						case 4:
+							plus.nativeUI.closeWaiting();
+							mui.toast('下载完成');
+							break;
+					}
+				});
+				dtask.start();
+			}
+			/*下载并打开文件 结束*/
+			
+			
+						/*获取文件图标*/
+			Vue.filter('format', function(value) {
+				var srcs;
+				if(value.fileType == 1) {
+					srcs = '../../icon/gcyp_wjj.png';
+				}
+				if(value.fileType == 2) {
+					var i = tool.getAttachIcon(value.fileName)
+					srcs = "../../" + i.src;
+				}
+				return srcs;
+			});
+
+			/*转换文件大小*/
+			Vue.filter('changeSize', function(value) {
+				return changeSize(value);
+			});
+
+			/*转换日期类型*/
+			Vue.filter('switchingTime', function(time) {
+				var date = new Date(time);
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var hour = date.getHours();
+				var minutes = date.getMinutes();
+				var seconds = date.getSeconds();
+				var finish = year + "年" + month + '月' + day + "日 " + " " + hour + ":" + minutes + ":" + seconds;
+				return finish;
+			});
+			//mui('#home_scroll').scroll();
+
+			/**
+			 * 弹出框
+			 */
+			//document.getElementById("promptBtn")
+			//			var lis = document.getElementsByClassName('li');
+			//			
+			//			for(var i=0; i<lis.length; i++){
+			//				lis[i].addEventListener('tap', function(e) {
+			//				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+			//				var btnArray = ['取消', '确定'];
+			//				mui.prompt('', '请输入密钥', '请输入密钥', btnArray, function(e) {
+			//					if(e.index == 1) {
+			//						//info.innerText = '谢谢你的评语：' + e.value;
+			//					} else {
+			//						//info.innerText = '你点了取消按钮';
+			//					}
+			//				})
+			//			});
+			//			}
+		</script>
+	</body>
+
+</html>

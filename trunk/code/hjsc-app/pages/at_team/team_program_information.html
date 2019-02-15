@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>程序信息</title>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<style>
+			.mui-bar a {
+				line-height: 30px;
+			}
+			
+			.icon-img {
+				width: 60px;
+				height: 60px;
+			}
+			
+			.img-out {
+				margin-top: 40px;
+				text-align: center;
+			}
+			
+			html,
+			body,
+			.mui-content {
+				height: 100%;
+			}
+			
+			.font {
+				font-size: 18px;
+				color: #666666;
+				margin-top: 10px;
+				display: inline-block;
+			}
+			
+			.mui-table-view-cell {
+				padding: 14px 15px;
+			}
+			
+			.right {
+				font-size: 14px;
+				color: #666666;
+				position: absolute;
+				right: 17px;
+				line-height: 24px;
+			}
+			
+			.single {
+				margin-top: 15px;
+			}
+			
+			.mui-table-view:before,
+			.mui-table-view:after {
+				height: 0px;
+			}
+			
+			.buttom {
+				width: 320px;
+				height: 44px;
+				background-color: #0487d0;
+				border-radius: 3px;
+				color: #fff;
+				text-align: center;
+				line-height: 44px;
+				display: inline-block;
+			}
+			
+			.buttom-out {
+				text-align: center;
+				margin-top: 18px;
+			}
+			
+			.before-font {
+				line-height: 24px;
+			}
+			/**
+ * 弹出框样式start
+ */
+			
+			input::-webkit-input-placeholder {
+				font-size: 16px;
+				color: #999;
+				line-height: 20px;
+			}
+			
+			input::-moz-placeholder {
+				font-size: 16px;
+				color: #999;
+				background-color: #f2f2f2;
+				padding: 20px 0;
+			}
+			
+			input::-moz-placeholder {
+				font-size: 16px;
+				color: #999;
+				background-color: #f2f2f2;
+				padding: 20px 0;
+			}
+			
+			input::-ms-input-placeholder {
+				font-size: 16px;
+				color: #999;
+				background-color: #f2f2f2;
+				padding: 20px 0;
+			}
+			
+			.mui-popup {
+				border-radius: 3px;
+				width: 300px;
+			}
+			
+			.mui-popup-inner {
+				border-radius: 1px 1px 0 0;
+			}
+			
+			.mui-popup-button:first-child {
+				border-radius: 0 0 0 3px;
+			}
+			
+			.mui-popup-button:last-child {
+				border-radius: 0 0 3px;
+			}
+			
+			.mui-popup-title {
+				padding: 16px;
+				font-size: 16px;
+				color: #333;
+			}
+			
+			.mui-popup-button {
+				font-size: 16px;
+				color: #666;
+			}
+			
+			.mui-popup-button-bold {
+				color: #0487d0;
+			}
+			
+			.mui-popup-inner:after {
+				background-color: #E6E6E6;
+			}
+			
+			.mui-popup-input input {
+				padding: 0px;
+				border: none;
+				margin: 15px 0;
+				border-radius: 3px;
+				padding: 20px 0;
+				border: 1px solid #f2f2f2;
+				margin-top: 8px;
+				background-color: #f2f2f2;
+			}
+			/**
+ * 弹出框样式end
+ */
+			
+			.mui-popup.mui-popup-in {
+				background: #fff;
+			}
+			
+			.mui-popup-title+.mui-popup-text {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">程序信息</h1>
+		</header>
+		
+		
+		<div class="mui-content">
+
+			<div class="img-out">
+				<img class="icon-img" src="../../icon/hjicon.png" />
+				<br />
+				<span class="font">AT AEC <span class="version"></span></span>
+			</div>
+
+			<div class="single">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media" accesskey="index">
+						<a href="javascript:;">
+							<span class="before-font">发布单位</span>
+							<span class="right">华建数创（上海）科技有限公司</span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media" accesskey="index">
+						<a href="javascript:;">
+							<span class="before-font">发布日期</span>
+							<span class="right datatime"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="buttom-out">
+				<span class="buttom" id="confirmBtn">检查更新</span>
+			</div>
+
+		</div>
+		
+		<!--有更新弹出层-->
+		<!--class:mui-popup-in,显示-->
+		<div class="mui-popup">
+			<div class="mui-popup-inner">
+				<div class="mui-popup-title">是否升级到1.3.1版本</div>
+			</div>
+			<div class="mui-popup-buttons">
+				<span class="mui-popup-button">取消</span>
+				<span class="mui-popup-button mui-popup-button-bold">更新</span>
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script>
+			
+			//获取版本信息
+			//版本号格式1.0不要设v1.0.0之类的，不然合并包会报错
+			$(function() {
+				$('#confirmBtn').trigger('tap');
+			});
+			
+//			var count = 0;
+			$('#confirmBtn').on('tap', function() {
+				userInfo = getGlobalUserInfo();
+				 $.ajax({
+					type:"GET",
+					url:userInfo.url+"//mobile/getNewVersion?upId="+upid+"&productType=1",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('tokenId',userInfo.tokenId);
+					},
+					success:function(data){
+					$('.datatime').text(data.obj.upDataTime);
+					},
+					error:function(){
+						plus.nativeUI.closeWaiting();
+						mui.toast('连接超时');
+					}
+				  });
+	// 获取当前应用的版本号
+	var wgtVer1 = null;
+	function plusReady () {
+	// 获取本地应用资源版本号
+	plus.runtime.getProperty(plus.runtime.appid, function (inf) {
+	wgtVer1 = inf.version;
+	$('.version').text('v'+wgtVer1);
+	});
+	}
+	if (window.plus) {
+	plusReady();
+	} else {
+	document.addEventListener('plusready', plusReady, false);
+	};
+	//获取当前应用的版本号end
+	plus.nativeUI.showWaiting('检测更新…');
+// 发起ajax检测是否有新版本
+	$.ajax({
+			type:"GET",
+			url:userInfo.url+"//mobile/getNewVersion?upId="+upid+"&productType=3",
+			async:true,
+			beforeSend:function(request){
+				request.setRequestHeader('tokenId',userInfo.tokenId);
+			},
+		success:function(data){
+			//登录失效
+						if(data.obj===false) {
+							plus.nativeUI.closeWaiting();
+							tokenInvalid(data);
+							return;
+							}
+			
+			if(data.success===true){
+				plus.nativeUI.closeWaiting();
+				//检测版本
+				var newVer=data.obj.virsion;
+				var wgtVer=$('.version').text();
+//				console.log(newVer+'--'+wgtVer);
+				if (wgtVer && newVer && (wgtVer !== newVer)) {
+//				alert("本机"+wgtVer+"---服务器"+newVer);
+					
+				//升级包地址，差量升级
+				var wgturl=data.obj.androidFileUuid;
+//				var wgturl='http://10.252.26.66:8020/%E5%B0%8F%E9%A1%B9%E7%9B%AE/download/v3.0.wgt'
+				//下载升级包
+				downWgt(wgturl);
+				} else {
+					plus.nativeUI.alert('当前为最新版本');
+				}
+							
+			}else{
+				plus.nativeUI.alert('检测更新失败');
+			}
+						
+		}
+	});
+
+// 下载wgt文件
+function downWgt (wgturl) {
+plus.nativeUI.showWaiting('下载wgt文件…');
+//hbuider下载路径无需更改:_doc/update/
+plus.downloader.createDownload(wgturl, {filename: '_doc/update/'}, function (d, status) {
+if (status === 200) {
+mui.toast(d.filename+'下载成功');
+installWgt(d.filename); // 安装wgt包
+} else {
+plus.nativeUI.alert('下载失败！');
+}
+plus.nativeUI.closeWaiting();
+}).start();
+};
+// 更新应用资源
+function installWgt (path) {
+plus.nativeUI.showWaiting('安装wgt文件…');
+alert('s'+path)
+plus.runtime.install(path, {}, function () {
+plus.nativeUI.closeWaiting();
+plus.nativeUI.alert('更新完成！', function () {
+plus.runtime.restart();
+});
+}, function (e) {
+//alert('e'+path)
+plus.nativeUI.closeWaiting();
+//plus.nativeUI.alert("安装wgt文件失败["+e.code+"]："+e.message);
+console.log("安装wgt文件失败["+e.code+"]："+e.message);
+plus.nativeUI.alert('安装版本不符');
+});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+			})
+
+
+
+        
+        
+			
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>通知设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+
+		<style>
+			.mui-bar {
+				background-color: #43484e;
+			}
+			
+			.mui-bar .mui-title {
+				color: #fff;
+			}
+			
+			.mui-icon-back:before,
+			.mui-icon-left-nav:before {
+				color: #fff;
+			}
+			
+			#add_app {
+				margin-top: 80px;
+			}
+			
+			.mui-switch-blue.mui-active {
+				border: 2px solid #0487D0;
+				background-color: #0487D0;
+			}
+			
+			img {
+				cursor: pointer;
+				touch-action: none;
+			}
+			
+			.three-one-out {
+				width: 21%;
+				/* border: 1px solid red; */
+				height: 12px;
+				position: absolute;
+				right: 70px;
+				top: 38px;
+			}
+			
+			.all-settings {
+				position: relative;
+				margin-top: 92px;
+				margin-bottom: 10px;
+			}
+			
+			.single {
+				position: relative;
+				margin-top: 39px;
+			}
+			
+			.title {
+				height: 38px;
+				position: absolute;
+				top: -39px;
+				line-height: 39px;
+				font-size: 15px;
+				color: #999999;
+				margin-left: 15px;
+			}
+			
+			.mui-table-view-cell {
+				padding: 7px 13px;
+			}
+			
+			.font {
+				margin-left: 4px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">通知设置</h1>
+		</header>
+
+		<!-- 存放所有的 -->
+		<div class="all-settings" id="list">
+
+			<div class="single" v-for="item in list">
+				<div class="title">
+					{{item.title}}
+				</div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media" v-for="secondItem in item.data" accesskey="index">
+						<a href="javascript:;">
+							<label class="font" style="line-height: 54px;">{{secondItem.name}}</label>
+							<div class="mui-switch mui-switch-mini mui-switch-blue" id="zt">
+								<div class="mui-switch-handle"></div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<!--</div>
+		</div>-->
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+
+			//请求接口数据
+			var itemsdata = [{
+					title: '进度计划',
+					data: [{
+							name: '收到新的任务',
+						},
+						{
+							name: '任务即将开始',
+						},
+						{
+							name: '任务临近结束',
+						},
+						{
+							name: '任务已经拖延',
+						},
+						{
+							name: '任务核实产值',
+						},
+					]
+				},
+
+				{
+					title: '设计管理',
+					data: [{
+							name: '新的主题发表',
+						},
+						{
+							name: '收到新的回复',
+						},
+						{
+							name: '有用户提到您',
+						},
+					]
+				},
+				{
+					title: '物资采购',
+					data: [{
+							name: '订单开始发货',
+						},
+						{
+							name: '采购计划拖延',
+						},
+					]
+				},
+				{
+					title: '施工现场',
+					data: [{
+							name: '收到新的联系单',
+						},
+						{
+							name: '质量验收需补充',
+						},
+						{
+							name: '质量验收被驳回',
+						},
+						{
+							name: '质量验收已通过',
+						},
+						{
+							name: '安全检查提醒',
+						},
+						{
+							name: '安全检查提醒',
+						},
+					]
+				},
+			];
+
+			var addapp = new Vue({
+				el: '#list',
+				data: {
+					list: itemsdata,
+				},
+			})
+		</script>
+
+	</body>
+
+</html>

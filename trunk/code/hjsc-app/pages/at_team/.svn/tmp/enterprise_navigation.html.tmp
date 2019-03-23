@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>企业导航</title>
+		
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+
+		<style>
+			.mui-table-view {
+				background-color: #fff;
+			}
+			
+			.area {
+				width: 93px;
+				height: 18px;
+				font-size: 16px;
+				font-weight: normal;
+				font-stretch: normal;
+				line-height: 18px;
+				letter-spacing: 0px;
+				color: #333;
+				border-left: 2px solid #0487d0;
+				margin-left: 18px;
+				display: inline-block;
+				margin-top: 16px;
+				margin-bottom: 13px;
+			}
+			
+			.mui-table-view:after,
+			.mui-table-view:before,
+			.mui-table-view-cell:after {
+				height: 0px;
+			}
+			
+			.img-title {
+				width: 107px;
+				height: auto;
+			}
+			
+			.detail {
+				margin-top: 7px;
+				font-weight: normal;
+				font-stretch: normal;
+				color: #333;
+				font-size: 14px;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				font-size: 28px;
+			}
+			
+			.mui-table-view-cell {
+				padding: 12px 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">企业导航</h1>
+		</header>
+
+		<div class="mui-content" id="content">
+			<div v-for="(item,index) in list">
+				<span class="area" v-show="index == 0" >&nbsp;{{item.type | gettype}}</span>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" :entId="item.companyId">
+						<div>
+							<a class="mui-navigate-right">
+								<img class="img-title" src="../../icon/qydh2.png"/>
+							</a>
+							<div class="detail">{{item.companyName}}</div>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script>
+			   
+				var app=new Vue({
+				el: '#content',
+				data: {
+					list:[]
+				},
+				watch: {
+					list: function() {
+						this.$nextTick(function() {
+							flush();
+						})
+					}
+				},
+
+			})
+				
+				var obj ={
+					1:'华东',
+					2:'华南',
+					3:'华北',
+					4:'西南',
+					5:'东北',
+					6:'西北'
+				}
+			
+			Vue.filter('gettype',function(item){
+				return obj[item];
+			});
+			
+			$(function (){
+				 userInfo = getGlobalUserInfo();
+//				 gurl=getGlobalUrl();
+				//1.2   企业导航
+				$.ajax({
+					type:"GET",
+					url:userInfo.url+"/mobile/getUserLoginInfo",
+					 beforeSend:function(request){
+						request.setRequestHeader('tokenId',userInfo.tokenId);
+					},
+               	  data:{
+               	  	appType:7
+               	  },
+               	  success:function(data){
+               	  	if(data.success==false){
+               	  		mui.toast(data.msg);
+               	  	}else{
+//             	  	console.log(data);
+                    if(data.obj.ents == undefined || data.obj.ents == null){  //假设不存在ents 说明只有一个或者一个都没有
+                    	if(data.obj.companyName == undefined){
+                    		mui.toast('您没有任何权限');
+                    	}else{  //说明存在一个权限
+                              userInfo.entid=data.obj.entId;
+                              setGlobalUserInfo(userInfo)
+               	  		     jumpPage();
+                    	}
+                    }else{
+                    	console.log(data.obj);
+//             	  	var entscount=data.obj.ents.length;
+//             	  	   setGlobalEntId(data.obj.entId);  //将entid绑定
+                       app.list=data.obj.ents; 
+               	  	}
+               	  }
+               	  			
+               	  	}
+				});
+			});
+			
+			function flush(){
+			$('.mui-table-view-cell').on('tap',function(){
+				var entid=$(this).attr('entId');
+				 userInfo.entid=entid;
+                 setGlobalUserInfo(userInfo);
+				jumpPage();
+			});
+			}
+			
+			
+			//跳转下个页面
+			function jumpPage(){
+				mui.openWindow({
+					url:'project_navigation.html',
+					id:'project_navigation'
+				})
+			}
+		
+		</script>
+
+	</body>
+
+</html>

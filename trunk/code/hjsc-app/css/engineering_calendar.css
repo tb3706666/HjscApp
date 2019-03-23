@@ -1,0 +1,288 @@
+.tit-right{
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: #fff;
+		}
+		
+		/*日历容器样式*/
+
+.em-calendar-container,
+.em-calendar-wrapper-week,
+.em-calendar-wrapper,
+.em-calendar {
+	overflow: hidden;
+	background: #ffffff;
+}
+
+.em-calendar-container {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+
+/*标注红色*/
+
+.em-red {
+	color: #E60012;
+}
+
+
+/*最上面一行周历显示*/
+
+.em-week {
+	display: flex;
+	justify-content: space-around;
+	padding-top: 18px;
+	padding-bottom: 15px;
+	color: #999999;
+	font-size: 13px;
+}
+
+.em-calendar-content .em-calendar-item {
+	float: left;
+	width: 14.285vw;
+	height: 14.285vw;
+	text-align: center;
+	/*border:1px solid #000;*/
+	border-radius: 50%;
+	margin-bottom: 5px;
+}
+
+
+/* 周六、周日列字体标红*/
+
+.em-calendar-content .em-calendar-item:nth-child(7n) .day,
+.em-calendar-content .em-calendar-item:nth-child(7n+1) .day {
+	color: #E60012;
+	font-size: 16px;
+}
+
+
+/* 上个月和下个月  置成灰色，不可点击*/
+
+.em-calendar-content .isforbid1.em-calendar-item {}
+
+.em-calendar-content .isforbid0.em-calendar-item {}
+
+.em-calendar-content .isforbid0.em-calendar-item .day {
+	display: block;
+	padding-top: 7px;
+	font-size: 16px;
+	color: #D8D8D8;
+}
+
+.em-calendar-content .isforbid0.em-calendar-item .lunar {
+	font-size: 10px;
+	color: #D8D8D8;
+	margin-top: -3px;
+}
+
+.em-calendar-content .em-calendar-item .day {
+	display: block;
+	padding-top: 2vw;
+	font-size: 16px;
+	color: #333333;
+}
+
+.em-calendar-content .em-calendar-item .lunar {
+	font-size: 10px;
+	color: #666666;
+	margin-top: -3px;
+}
+
+
+/*通用点皮肤*/
+
+.em-calendar-content .em-calendar-item .dot {
+	display: inline-flex;
+	width: 8px;
+	height: 8px;
+	margin-top: -13px;
+	position: absolute;
+	margin-left: -4px;
+}
+
+
+/*皮肤1*/
+
+.em-calendar-content .em-calendar-item .dot-type1 {
+	/*background-image: url(../img/img_sdule_point.png);
+	background-size: 100% 100%;*/
+	background-color: mediumvioletred;
+}
+
+
+/*皮肤2*/
+
+.em-calendar-content .em-calendar-item .dot-type2 {
+	background-image: url(../img/img_success.png);
+	background-size: 100% 100%;
+}
+
+.em-calendar-content .em-calendar-item img {
+	width: 10px;
+	height: 10px;
+	margin-top: -12px;
+	position: absolute;
+	margin-left: -3px;
+}
+
+
+/**
+ * 日历表中的颜色
+ * 日历拓展；四种样式
+ **/
+
+
+/*迟到*/
+
+.em-calendar-late {
+	border: 2px solid #F5B6B6;
+}
+
+
+/*早退*/
+
+.em-calendar-early {
+	border: 2px solid #F5CAB6;
+}
+
+
+/*调休*/
+
+.em-calendar-rest {
+	border: 2px solid #D5E6D4;
+}
+
+
+/*请假*/
+
+.em-calendar-leave {
+	border: 2px solid #AFDDD9;
+}
+
+
+/*点击效果*/
+
+.em-calendar-content .em-calendar-active.em-calendar-item:nth-child(7n) .day,
+.em-calendar-content .em-calendar-active.em-calendar-item:nth-child(7n+1) .day {
+	color: #ffffff;
+}
+
+.em-calendar-active {
+	background-color: #0487D0;
+	width: 14.285%;
+	height: 54px;
+}
+
+.em-calendar-content .em-calendar-active .day,
+.em-calendar-content .em-calendar-active .lunar {
+	color: #FFFFFF;
+}
+
+
+/*日历*/
+
+.em-calendar {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+/*周视图*/
+.zhou,.months{
+	height: 50px;
+	line-height: 50px;
+	color: #fff;
+	float: right;
+}
+/*左右切换*/
+
+.em-journal-title {
+	width: 100%;
+	display: block;
+	/*height: 50px;*/
+	line-height: 50px;
+	background-color: #43484e;
+	margin-left: 24%;
+}
+
+.em-per-block {
+	float: left;
+	width: 33%;
+	color: #fff;
+	font-size: 18px;
+}
+.em-per-block-l{
+	float: left;
+	width: 10%;
+}
+.em-per-block-r{
+	float: left;
+	width: 10%;
+	
+}
+.em-per-block.pre {
+	text-align: right;
+	font-size: 15px;
+}
+.mui-table-view-cell>a:not(.mui-btn).mui-active{
+	background-color: transparent;
+}
+.em-per-block.next:active,
+.em-per-block.pre:active {
+	background-color: transparent;
+	border-radius: 15px;
+	font-weight: 800;
+}
+
+.em-per-block.mid {
+	text-align: center;
+	font-size: 18px;
+}
+
+.em-per-block.next {
+	text-align: left;
+	font-size: 15px;
+}
+.w65{
+	width: 65%;
+}
+.mui-table-view-cell{
+	padding: 16px 15px;
+}
+
+.sright{
+	position: absolute;
+	right: 3%;
+	top: 40%;
+	color: #E5E5E5;
+}
+.sright-l{
+	position: absolute;
+	right: 50px;
+	top: 36%;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 20px;
+    font-size: 15px;
+}
+.bigcircle{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 3;
+}
+.bleft{
+	right: 80px;
+}
+#gcjl{
+	margin-top: 10px;	
+}
+/*左侧图标*/
+.left-media{
+	width: 10px !important;
+	height: 10px !important;
+	margin-top: 12px;
+	border-radius: 50%;
+}

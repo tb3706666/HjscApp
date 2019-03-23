@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>侧滑上下拉</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/minirefresh.css" />
+		
+	</head>
+	<style>
+		.tit-right{
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: #fff;
+		}
+		#minirefresh{
+			width: 100%;
+			margin-top: 60px;
+		}
+		.minirefresh-scroll>div{
+			text-align: center;
+			color: #fff;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">侧滑上下拉</h1>
+		</header>
+		
+		<div id="minirefresh" class="minirefresh-wrap">
+			<div class="minirefresh-scroll">
+				<!--值-->
+				<div class="la">123</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="../../js/minirefresh.js"></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js" ></script>
+		
+		<script type="text/javascript">
+			
+			var i=0;
+var miniRefresh = new MiniRefresh({
+    container: '#minirefresh',
+    down: {
+        callback: function() {
+            // 下拉事件
+            i++;
+           	$('.la').after('<div style="background-color: pink;">'+i+'</div>');
+            miniRefresh.endDownLoading();
+            
+        }
+    },
+    up: {
+        callback: function() {
+            // 上拉事件
+            $('.la').before('<div style="background-color: green;">'+i+'</div>');
+            // 注意，由于默认情况是开启满屏自动加载的，所以请求失败时，请务必endUpLoading(true)，防止无限请求
+            miniRefresh.endUpLoading(true);
+        }
+    }
+});
+		</script>
+	</body>
+
+</html>

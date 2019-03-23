@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>产品实例导航</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.mui-bar {
+			background-color: #43484e;
+		}
+		
+		.mui-bar .mui-title {
+			color: #fff;
+		}
+		
+		.mui-icon-back:before,
+		.mui-icon-left-nav:before {
+			color: #fff;
+		}
+		
+		.mui-table-view {
+			margin-top: 50px;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">产品实例导航</h1>
+		</header>
+
+		<ul class="mui-table-view" id="chanpin_list">
+			<li class="mui-table-view-cell mui-media" v-for="(item,index) in items" :accesskey="index">
+				<a :href="item.nameurl" class="mui-navigate-right">
+					<img class="mui-media-object mui-pull-left" src="../../icon/cpsldh1.png">
+					<div class="mui-media-body">
+						<p class="list_title hbox">{{item.entUser}}<small class="ban" :class="{kai:k,'zheng':z}">{{item.name}}</small></p>
+						<p>ID:{{item.upId}}</p>
+						<p class="mui-ellipsis">用户：{{item.name}}</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript">
+			mui.init();
+
+			//页面
+			var chanpin = new Vue({
+				el: '#chanpin_list',
+				data: function() {
+					return {
+						k: true,
+						z: false,
+						items: [],
+					}
+				}
+
+			})
+<<<<<<< .mine
+				
+=======
+			$(function() {
+				getInstanceList();
+			});
+
+			function getInstanceList() {
+				//得到tonid
+				var userInfo = JSON.parse(getGlobalUserInfo());
+				console.log(userInfo.tokenId);
+				$.ajax({
+					type: 'GET',
+					url: 'http://10.252.26.240:8080/arctron-usercenter/UserApp/getInstanceList.json?pCode=BS1803',
+					headers: {
+						tokenId: userInfo.tokenId
+					},
+					dataType: 'JSON',
+					success: function(data) {
+						console.log(data);
+						chanpin.items = data.userInstance;
+					}
+				});
+			}
+
+			//请求接口数据 
+			//			var itemsdata=[
+			//				{titname:'建筑数据管理系统',ban:'开发版',id:'BS1803IN18006',name:'华建数创',nameurl:'https://www.baidu.com/',imgurl:'icon/cpsldh1.png'},
+			//				{titname:'奇境Q系列产品公共实例奇境Q系列产品公共实例',ban:'正式版',id:'BB1408IN16003',name:'上海奇境信息科技有限公司',nameurl:'https://bdms.arctron.cn/genDist/index2.html',imgurl:'icon/cpsldh2.png'},
+			//				{titname:'Q系列中船重工',ban:'正式版',id:'BB1408IN17017',name:'中船重工国际工程有限公司',nameurl:'33',imgurl:'icon/cpsldh3.png'},
+			//				{titname:'Q系列华润',ban:'正式版',id:'BB1408IN17017',name:'中船重工国际工程有限公司',nameurl:'44',imgurl:'icon/cpsldh4.png'},
+			//				{titname:'建筑数据管理系统',ban:'正式版',id:'BB1408IN17017',name:'中船重工国际工程有限公司',nameurl:'55',imgurl:'icon/cpsldh5.png'},
+			//				{titname:'建筑数据管理系统',ban:'正式版',id:'BB1408IN17017',name:'中船重工国际工程有限公司',nameurl:'66',imgurl:'icon/cpsldh6.png'},
+			//				{titname:'Q系列中船重工',ban:'正式版',id:'BB1408IN17017',name:'中船重工国际工程有限公司',nameurl:'77',imgurl:'icon/cpsldh7.png'},
+			//				{titname:'建筑数据管理系统',ban:'开发版',id:'BS1803IN18006',name:'华建数创',nameurl:'11',imgurl:'icon/cpsldh1.png'},
+			//				{titname:'奇境Q系列产品公共实例奇境Q系列产品公共实例',ban:'正式版',id:'BB1408IN16003',name:'上海奇境信息科技有限公司',nameurl:'22',imgurl:'icon/cpsldh2.png'},
+			//				
+			//			];
+
+			//			var aa=plus.storage.getItem("name");
+			//			alert(aa)
+>>>>>>> .r82
+			//接收参数
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var name = self.name;
+				var pid = self.pid;
+				alert(name + '--' + pid)
+			});
+		</script>
+	</body>
+
+</html>

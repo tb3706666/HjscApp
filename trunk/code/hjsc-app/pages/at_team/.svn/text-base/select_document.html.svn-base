@@ -1,0 +1,892 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>选择文档</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+	</head>
+
+	<style>
+		/*进入样式*/
+		
+		.addSubject {
+			font-size: 15px;
+		}
+		
+		.mui-bar-nav.mui-bar .mui-icon {
+			line-height: 34px;
+			    font-size: 16px;
+		}
+		
+		.title-out {
+			height: 92px;
+			margin-top: 6px;
+			position: fixed;
+			z-index: 11;
+			background: #fff;
+			width: 100%;
+			top: 44px;
+			border-bottom: 1px solid #e6e6e6;
+		}
+		
+		.mui-content {
+			background-color: #fff;
+		}
+		
+		.mui-table-view-cell {
+			padding: 14px 15px;
+		}
+		
+		.list-img {
+			width: 33px;
+		}
+		
+		.list-title {
+			font-size: 16px;
+			color: #333;
+		}
+		
+		.list-detail {
+			float: left;
+		}
+		
+		.list-time {
+			font-size: 12px;
+			color: #999;
+		}
+		
+		.list-detail-img {
+			line-height: 35px
+		}
+		
+		.list-detail-font {
+			width: 80%;
+			margin-left: 12px;
+		}
+		
+		.mui-table-view-cell:after {
+			background-color: #e6e6e6;
+		}
+		
+		.mui-table-view:before,
+		.mui-table-view:after {
+			background-color: #e6e6e6;
+			height: 1px;
+		}
+		
+		.circle {
+			position: absolute;
+			right: 18px;
+			top: 30px;
+			background: #fff;
+			border: 1px solid #ccc;
+			border-radius: 20px;
+			padding: 5px;
+			height: 5px;
+			width: 5px;
+		}
+		
+		.table {
+			margin-top: 100px;
+		}
+		
+		.mui-table-view:before {
+			height: 0px !important;
+		}
+		
+		.title-img {
+			width: 22px;
+			margin-top: 15px;
+			margin-left: 15px;
+		}
+		
+		.mui-plus .plus {
+			display: inline;
+		}
+		
+		.plus {
+			display: none;
+		}
+		
+		#topPopover {
+			position: fixed;
+			top: 16px;
+			right: 6px;
+		}
+		
+		span.mui-icon {
+			font-size: 14px;
+			color: #007aff;
+			margin-left: -15px;
+			padding-right: 10px;
+		}
+		
+		.mui-popover {
+			width: 140px;
+			/*height: 110px;*/
+			border-radius: 3px;
+		}
+		
+		.mui-popover-arrow:after {
+			background-color: #343b43;
+		}
+		/*勾*/
+		.gouleft{
+			padding-left: 5px !important;
+			line-height: 30px;
+		}
+		.condition{
+			position: absolute;
+			top: 12px;
+			right: 5px;
+		}
+		/*箭头*/
+		.mui-popover-arrow{
+			left: 80% !important;
+		}
+		/*弹出框*/
+		#middlePopover {
+			width: 40%;
+			height: 50px;
+			min-height: 45px;
+			font-size: 14px;
+			background-color: #43484e !important;
+			color: #fff;
+			top: 104px !important;
+			left: 55% !important;
+			top: 60px;
+		}
+		#middlePopover .mui-table-view-cell {
+			padding: 11px 15px;
+		}
+		
+		#middlePopover .mui-table-view-cell:after {
+			right: 15px;
+			background-color: #343b43;
+		}
+		
+		#middlePopover .mui-table-view,
+		
+		.mui-popover .mui-popover-arrow:after {
+			background-color: #43484e;
+		}
+		
+		.mui-popover .mui-scroll-wrapper {
+			margin: 2px 0;
+		}
+		
+		#middlePopover .mui-active {
+			background-color: #343b43;
+		}
+		input::-webkit-input-placeholder {
+			font-size: 16px;
+			color: #999;
+			line-height: 20px;
+		}
+		
+		input::-moz-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		input::-moz-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		input::-ms-input-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		.mui-popup {
+			border-radius: 3px;
+			width: 300px;
+		}
+		
+		.mui-popup-inner {
+			border-radius: 1px 1px 0 0;
+		}
+		
+		.mui-popup-button:first-child {
+			border-radius: 0 0 0 3px;
+		}
+		
+		.mui-popup-button:last-child {
+			border-radius: 0 0 3px;
+		}
+		
+		.mui-popup-title {
+			padding: 10px;
+			font-size: 20px;
+			color: #333;
+		}
+		
+		.mui-popup-button {
+			font-size: 16px;
+			color: #666;
+			font-weight: 100 !important;
+		}
+		
+		.mui-popup-button-bold {
+			color: #0487d0;
+		}
+		
+		.mui-popup-inner:after {
+			background-color: #E6E6E6;
+		}
+		
+		.mui-popup-input input {
+			padding: 0px;
+			border: none;
+			margin: 15px 0;
+			border-radius: 3px;
+			padding: 20px 0;
+			border: 1px solid #f2f2f2;
+			margin-top: 8px;
+			background-color: #f2f2f2;
+		}
+		
+		.mui-icon-checkmarkempty {
+			background: #0487d0 !important;
+			padding: 0px !important;
+			width: auto;
+			height: auto;
+			font-size: 16px;
+			color: #fff;
+			border: none;
+		}
+		
+		.mui-bar-nav~.mui-content .mui-pull-top-pocket {
+			top: 140px;
+		}
+		/*文件上传start*/
+		
+		.op {
+			width: 25%;
+			float: left;
+			margin: 10px 0;
+		}
+		
+		.op-img {
+			height: 50px;
+			width: 50px;
+			margin-bottom: 10px;
+		}
+		
+		.op p {
+			font-size: 12px;
+		}
+		/*文件上传end*/
+		/*分享*/
+		
+		.mui-popover.mui-popover-action .mui-table-view {
+			margin: 0;
+		}
+		
+		.mui-popover {
+			/*height: auto;*/
+		}
+		
+		.mui-popover.mui-popover-action .mui-table-view {
+			border-radius: inherit;
+		}
+		
+		.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after {
+			background-color: #fff;
+		}
+		
+		.op {
+			width: 33%;
+		}
+		/*footer*/
+		
+		.footer {
+			width: 100%;
+			height: 50px;
+			z-index: 11;
+			position: absolute;
+			bottom: 0px;
+			background-color: #333;
+			display: none;
+			color: #fff;
+			font-size: 12px;
+			text-align: center;
+		}
+		
+		.footer-img-out {
+			position: initial;
+			bottom: 0;
+			text-align: center;
+			float: left;
+			width: 20%;
+			padding-top: 4px;
+		}
+		
+		.mui-icon-checkmarkempty {
+			background: #0487d0 !important;
+			padding: 0px !important;
+			width: auto;
+			height: auto;
+			font-size: 16px;
+			color: #fff;
+			border: none;
+		}
+		
+		.footer-img {
+			width: 18px;
+			margin-left: 3px;
+		}
+		
+		.footer-font {
+			margin-top: 1px;
+			display: inline-block;
+			color: #fff;
+		}
+		
+		.disabled {
+			pointer-events: none;
+		}
+		
+		.cancel {
+			font-size: 15px !important;
+			line-height: 33px !important;
+		}
+		
+		.selectGroup {
+			background: #f2f2f2;
+			height: 34px;
+			display: inline-block;
+			width: 80%;
+			border-radius: 6px;
+			line-height: 36px;
+			text-align: left;
+			padding-left: 9px;
+			border-top-right-radius: 0px;
+			border-bottom-right-radius: 0px;
+		}
+		
+		.selectGroup2 {
+			background: #f2f2f2;
+			height: 34px;
+			display: inline-block;
+			width: 12%;
+			border-radius: 6px;
+			line-height: 36px;
+			text-align: left;
+			padding-left: 9px;
+			border-top-left-radius: 0px;
+			border-bottom-left-radius: 0px;
+			border-left: 1px solid #dcdcdc;
+		}
+		
+		.selectGroup-out {
+			width: 100%;
+			text-align: center;
+		}
+		
+		.group {
+			background: #f2f2f2;
+			height: 34px;
+			line-height: 35px;
+			display: inline-block;
+			width: 93%;
+			border-radius: 6px;
+			text-align: left;
+			padding-left: 10px;
+			position: relative;
+			margin-top: 10px;
+		}
+		
+		.group2 {
+			border-left: 1px solid #e8e8e8;
+			width: 50px;
+			height: 100%;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+		}
+		
+		.bg_sanjiao {
+			background: url(../../icon/xia_sanjiao.png)no-repeat center;
+			background-size: 16px 10px;
+		}
+		
+		.dir {
+			height: 40px;
+			overflow-x: scroll;
+			overflow-y: hidden;
+			white-space: nowrap;
+			padding-left: 15px;
+		}
+		
+		.dir span {
+			line-height: 44px;
+		}
+		
+		.hide{
+			display: none !important;
+		}
+		
+		.show{
+			display: block !important; 
+		}
+		
+		#middlePopover .mui-scroll-wrapper{
+			overflow: unset;
+		}
+		.list-title{
+			line-height: 36px;
+		}
+		
+	</style>
+
+	<body>
+
+		<div class="cloud">
+			<!-- 主页面标题 -->
+			<header class="mui-bar mui-bar-nav">
+				<a id="cancel" class="mui-action-back mui-icon  mui-pull-left cancel" style="line-height: 40px !important;">取消</a>
+				<!--<span class="mui-icon mui-icon-back mui-pull-left backs" style="display: none;"></span>-->
+				<h1 class="mui-title"><!--{{headName}} -->选择文档</h1>
+				<a id="sure" class="mui-action-back mui-icon  mui-pull-right">确定</a>
+			</header>
+
+			<div class="title-out">
+				
+				<a href="#middlePopover">
+				<div class="selectGroup-out">
+					<div class="group"><span id="text" class="hone w80" style="display: block;">默认群组</span>
+						<span class="group2 bg_sanjiao" id="showGroup"></span>
+					</div>
+				</div>
+				</a>
+
+				<div class="dir" id="dir">
+					<span class="jumpDir" dirId='0'>根目录/</span>
+				</div>
+
+			</div>
+
+			<!-- 主页面内容容器 -->
+			<div id="home_scroll" class="mui-content mui-scroll-wrapper ">
+
+				<div class="mui-scroll" id="list">
+
+					<ul class="mui-table-view table" id="tableList">
+
+						<div v-for="(item,index) in list" style="position: relative;">
+							<li class="mui-table-view-cell files" :fileId="item.fileId" :fileType="item.fileType" :fileName="item.fileName">
+
+								<div class="list-detail list-detail-img">
+									<img class="list-img" :src="item | format">
+								</div>
+								<div class="list-detail list-detail-font hone w80">
+									<p class="list-title hone" style="display: block;">{{item.fileName==null? item.dirName:item.fileName}}</p>
+								</div>
+
+							</li>
+
+							<div v-show="item.fileType != null" class="circle" :fileId="item.fileId == null ? item.dirId:item.fileId " :fileType="item.fileType" :fileName="item.fileName==null? item.dirName:item.fileName"></div>
+						</div>
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<div class="mui-off-canvas-backdrop"></div>
+
+		<!--中间弹出菜单-->
+		<div id="middlePopover" class="mui-popover groupmenu">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" v-for="(groups,index) in group" :groupId="groups.groupId" style="">
+							<a href="javascript:void(0)" class="hone gouleft">{{groups.groupName}}<span class="condition" v-show="index == 0">✓</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js" ></script>
+		<script type="text/javascript">
+			//mui.init();
+			
+			// 选中的样式
+			var CLASSNAME = 'mui-icon mui-icon-checkmarkempty';
+			
+			// 返回页面时，调用发表主题页面的获取本地缓存方法
+			mui.plusReady(function() {
+				var old_back = mui.back;
+				mui.back = function() {
+					var wobj = plus.webview.getWebviewById("published"); //注意 HBuilder 是   1.html 的 ID  你如果1.html 有ID   要替换掉HBuilder，
+					mui.fire(wobj, 'loadFileId');
+					old_back();
+				}
+			});
+			
+			// 获取所有的文件id
+			$(document).on('tap','#sure',function(e){
+				
+				var fileIds = [];
+				$('.mui-icon-checkmarkempty').each(function(){
+					var fileId = $(this).attr('fileId');
+					var fileName = $(this).attr('fileName');
+					fileIds.push({fileId:fileId,fileName:fileName});
+				});
+				userInfo = getGlobalUserInfo();
+				userInfo.fileIds = JSON.stringify(fileIds);
+				setGlobalUserInfo(userInfo);
+			});
+			
+			
+			
+			/*获取登录数据*/
+			userInfo = getGlobalUserInfo();
+			var lists = [{
+					groupName: '1111',
+					groupId: '1'
+				},
+				{
+					groupName: '2222',
+					groupId: '2'
+				},
+				{
+					groupName: '3333',
+					groupId: '3'
+				},
+				{
+					groupName: '4444',
+					groupId: '4'
+				},
+			]
+
+			// 群组
+			var groups = new Vue({
+				el: "#middlePopover",
+				data: {
+					group:[]
+				}
+			})
+
+			$(function() {
+				/*获取群组*/
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/cloud/getGroupList?type=json',
+					data: {
+						'projectId': userInfo.projId,
+						'tokenId': userInfo.tokenId
+					},
+					dataType: 'JSON',
+					success: function(data) {
+						//登录失效
+						if(data.responseInfo.responseCode!=1){
+							tokenInvalid(data);
+							return;
+							}
+						groups.group = data.userGroupList;
+						$.each(data.userGroupList, function(i, m) {
+							if(m.groupName == '默认群组') {
+								obj.groupId = m.groupId;
+							}
+						});
+						getlist();
+					}
+				});
+
+			})
+
+			$(document).on('tap', '#showGroup', function() {})
+
+			$(document).on('tap', '#middlePopover .mui-table-view-cell', function() {
+				
+				    
+				$('.condition').empty().show();
+				$(this).find('.condition').html("✓");
+				var text = $(this).text().replace('✓','');
+                $("#text").html(text);
+ 
+				var groupid = $(this).attr("groupid");
+				obj.groupId = groupid;
+				getlist();
+				mui("#middlePopover ").popover('hide');
+			})
+
+			// 点击目录返回上一级
+			$(document).on('tap', ".jumpDir", function() {
+				var dirId = $(this).attr('dirid');
+				if($(this).hasClass('lastOne')) {
+					return;
+				}
+
+				obj.dirId = dirId; //obj.parentId[obj.parentId.length - 1];
+				obj.headName = obj.parentName[obj.parentName.length - 2];
+				obj.currentPage = 1;
+				getlist();
+				obj.parentId.pop();
+				obj.parentName.pop();
+				$(this).nextAll().remove();
+
+			})
+
+			//点击小圆点，封装方法，监听方法，说明：防止上拉加载时新数据渲染出来后没有执行该方法
+			function xiao() {
+				
+				//坑点:全局tap则全局unbind();否则没解绑，执行两次方法
+				$('.circle').unbind();
+				$('.circle').on('tap', function() {
+
+					/*$(this).toggleClass(CLASSNAME);
+
+					if($('.circle').hasClass(CLASSNAME)) {
+						$('.circle').css('padding', '7px');
+					} else {
+						$('.circle').css('padding', '4px');
+					}*/
+
+					var ctrue = $('.circle').hasClass(CLASSNAME);
+					var share = $(this).hasClass(CLASSNAME);
+					obj.fileId = $(this).attr('fileId');
+					obj.fileName = $(this).attr('fileName');
+					obj.fileType = $(this).attr('fileType');
+					if(share) { //选中
+						if(obj.fileType == undefined) { //文件夹
+							obj.folderIdList = obj.folderIdList + "," + obj.fileId;
+						} else { //文件
+							obj.fileIdList = obj.fileIdList + "," + obj.fileId;
+						}
+						obj.shareName.push(obj.fileName);
+					} else { //取消选中
+						if(obj.fileType == 2) { //文件夹
+							var ids = obj.folderIdList.substring(1);
+							var arr = ids.split(",");
+							var arr2 = [];
+							obj.folderIdList = "";
+							for(i = 0; i < arr.length; i++) {
+								if(obj.fileId != arr[i]) {
+									arr2.push(arr[i]);
+								}
+							}
+							for(var i = 0; i < arr2.length; i++) {
+								obj.folderIdList = obj.folderIdList + "," + arr2[i];
+							}
+
+						} else { //文件
+							var ids = obj.fileIdList.substring(1);
+							var arr = ids.split(",");
+							var arr2 = [];
+							obj.fileIdList = "";
+							for(i = 0; i < arr.length; i++) {
+								if(obj.fileId != arr[i]) {
+									arr2.push(arr[i]);
+								}
+							}
+							for(var i = 0; i < arr2.length; i++) {
+								obj.fileIdList = obj.fileIdList + "," + arr2[i];
+							}
+
+						}
+						obj.fileId = "";
+					}
+				});
+			};
+			$('.addSubject').on('tap', function() {
+				mui.openWindow({
+					url: 'cloud_project_recentFiles.html?groupId=' + obj.groupId,
+					id: 'cloud_1',
+				});
+
+			})
+           mui.init();
+			/*mui.init({
+				pullRefresh: {
+					container: '#home_scroll',
+					down: {
+						style: 'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto: false,
+						contentrefresh: '正在加载...',
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: pullupRefresh
+					}
+				},
+			});*/
+
+			function pulldownRefresh() {
+				mui('#home_scroll').pullRefresh().endPulldownToRefresh();
+				obj.currentPage = 1;
+				getlist();
+			}
+			var isHaveData = false;
+
+			function pullupRefresh() {
+				//setTimeout(function() {
+
+				//mui('#home_scroll').pullRefresh().endPullupToRefresh(isHaveData);
+				obj.currentPage += 1;
+				getlist();
+				
+				$('.mui-pull-bottom-pocket').removeClass('hide');
+				//}, 1000)
+
+			}
+
+			/*列表数据动态绑定*/
+			var obj = new Vue({
+				el: '.cloud',
+				data: {
+					list: [],
+					groupId: 1, //群组id
+					currentPage: 1, //当前页数
+					dirId: 0, //当前目录节点
+					fileName: "", //文件夹名
+					fileId: 1,
+					fileType: 1,
+					fileUrl: "",
+					parentId: [], //按顺序存入父节点
+					parentName: ["工程云盘"], //按顺序存入父节点名称
+					headName: "工程云盘",
+					fileIdList: "", //分享文件存储的id字符串组
+					shareName: [], //分享的名字
+					folderIdList: "", //分享文件夹的id
+					fileIdArry: [], //所有选中的id，用于判断下载和删除
+				},
+				watch: {
+					list: function() {
+						this.$nextTick(function() {
+							xiao();
+						})
+					}
+				},
+			});
+
+			/*获取列表数据*/
+			function getlist() {
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/mobile/getDirectoryDocument.json',
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenId', userInfo.tokenId);
+					},
+					data: {
+						projId: userInfo.projId,
+						ugId: obj.groupId,
+						dirParId: obj.dirId,
+						appType: 7
+					},
+					aysc: true,
+					dataType: 'JSON',
+					success: function(data) {
+						//登录失效
+						if(data.responseInfo.responseCode!=1){
+							tokenInvalid(data);
+							return;
+							}
+						console.log("列表",data);
+						if(data.fileList != undefined &&  data.filedirectoryList != undefined ) {
+							$('.circle').removeClass(CLASSNAME);
+							$('.circle').css('padding','4px');
+							obj.list = data.filedirectoryList.concat(data.fileList);
+							console.log("组合",obj.list);
+							
+						}else if(data.fileList != undefined && data.filedirectoryList == undefined){
+							
+							obj.list = data.fileList;
+						}else if(data.fileList == undefined && data.filedirectoryList != undefined){
+							
+							obj.list = data.filedirectoryList;
+						} else {
+							mui.toast('没有更多数据');
+							obj.list = [];
+						}
+						mui('#home_scroll').scroll().scrollTo(0, 0)
+					}
+				});
+			}
+            
+
+			/*获取文件图标*/
+			Vue.filter('format', function(value) {
+				var srcs;
+				if(value.fileType != null) {
+					var i = tool.getAttachIcon(value.fileName)
+					srcs = "../../" + i.src;
+				}else{
+					srcs = '../../icon/gcyp_wjj.png';
+				}
+				return srcs;
+			});
+
+			/*转换日期类型*/
+			Vue.filter('switchingTime', function(time) {
+				var date = new Date(time);
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var hour = date.getHours();
+				var minutes = date.getMinutes();
+				var finish = month + '-' + day + " " + hour + ":" + minutes;
+				return finish;
+			});
+
+			/*点击列表进入下一级目录或下载文件*/
+			$(document).on('tap', '.files', function() {
+				obj.fileId = $(this).next().attr('fileId');
+				obj.fileType = $(this).next().attr('fileType');
+				obj.fileName = $(this).next().attr('filename');
+				/*查看下一级*/
+				if(obj.fileType == undefined) {
+
+					$(".jumpDir").removeClass('lastOne');
+					$('#dir').append('<span class="jumpDir lastOne" dirId="' + obj.fileId + '">' + obj.fileName + '/</span>')
+
+					obj.dirId = obj.fileId;
+					getlist();
+				}else{
+					$(this).next().toggleClass(CLASSNAME);
+
+					if($('.circle').hasClass(CLASSNAME)) {
+						$('.circle').css('padding', '7px');
+					} else {
+						$('.circle').css('padding', '4px');
+					}
+				}
+			});
+
+			/*返回上一级*/
+			$('.backs').on('tap', function() {
+				obj.dirId = obj.parentId[obj.parentId.length - 1];
+				obj.headName = obj.parentName[obj.parentName.length - 2];
+				obj.currentPage = 1;
+				getlist();
+				obj.parentId.pop();
+				obj.parentName.pop();
+			});
+			
+			//侧边栏滑动
+			mui('#home_scroll').scroll();
+		</script>
+	</body>
+
+</html>

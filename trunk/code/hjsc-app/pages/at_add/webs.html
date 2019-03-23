@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>会议</title>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+
+		<style>
+			
+			
+		</style>
+
+	</head>
+
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		<!-- 侧滑导航根容器 -->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 菜单容器 -->
+				<aside id="offCanvasSide" class="mui-off-canvas-left">
+					<div id="left_scroll" class="mui-scroll-wrapper">
+						<!--菜单内容开始-->
+
+						<div class="mui-scroll">
+							<!--头部-->
+							<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+							<div id="glz_slide">
+								<leftlist :gl='gl' :items='items'></leftlist>
+							</div>
+						</div>
+						<!--菜单内容结束-->
+
+					</div>
+				</aside>
+
+				<!-- 主页面标题 -->
+				<span id="lefts" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" disabled="none"></span>
+				<header class="mui-bar mui-bar-nav">
+					<a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<h1 style="pointer-events: none;" id="title" class="mui-title">测试对话</h1>
+					<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)" id="add"><span class="mui-icon mui-icon-plusempty"></span></a>
+				</header>
+
+				<!-- 主页面内容容器 -->
+				<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll" style="height: 100%;">
+						
+					    <input type="text" id="text"/>
+					    <button onclick="send()">发送</button>
+					    <button onclick="closeWebSocket()">关闭</button>
+						
+						
+						 <!--<div id="text"></div>-->
+						<h4>状态</h4>
+						<p class="shou"></p>
+						<h4>消息</h4>
+						<p class="xx"></p>
+						<h4>发送消息</h4>
+						<p class="fsxx"></p>
+						
+						
+					</div>
+				</div>
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+
+		<!--新建时展开背景 mui-active,display:block触发-->
+		<div class="mui-popup-backdrop mui-active addpop" style="display: none;"></div>
+
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/leftlist.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		
+		<!--<script src="../../js/subject.js"></script>-->
+		<script type="text/javascript">
+	userInfo=getGlobalUserInfo();
+	
+	var ws = null;
+    //判断当前浏览器是否支持WebSocket
+    if('ws' in window){
+	//外网地址：42.159.154.173
+	//文档地址：10.252.26.241
+	var wsurl="ws://42.159.154.173:16800/websocket";
+    ws = new WebSocket(wsurl);
+    console.log(ws)
+    }else{
+        mui.toast('不支持websocket')
+    }
+
+    //连接发生错误的回调方法
+    ws.onerror = function(){
+        mui.toast('连接错误')
+    };
+
+    //连接成功建立的回调方法
+    ws.onopen = function(event){
+        var message = new Object();
+        message.token = userInfo.tokenId;
+        message.projId = userInfo.projId;
+        message.type = "0";
+        ws.send(JSON.stringify(message));
+        console.log('1---'+JSON.stringify(message));
+        $('.xx').append('<p style="color:red">'+JSON.stringify(message)+'</p>')
+        setMessageInnerHTML("open");
+        console.log('当前状态：连接开启')
+    }
+
+    //接收到消息的回调方法
+    ws.onmessage = function(event){
+//      setMessageInnerHTML(JSON.stringify(event.data));
+        $('.shou').append('<p>'+JSON.stringify(event.data)+'</p>')
+    }
+
+    //连接关闭的回调方法
+    ws.onclose = function(){
+        setMessageInnerHTML("close");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+        ws.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML){
+    	$('.xx').append('<p>'+innerHTML+'</p>')
+    }
+
+    //关闭连接
+    function closeWebSocket(){
+        ws.close();
+        console.log('状态：关闭')
+    }
+
+    //发送消息
+    function send(){
+        var value = document.getElementById('text').value;
+        var message = new Object();
+        //私聊
+        message.value = value;
+        message.token = "378d1152-bce5-4648-b63e-8d9536d38ea6";
+        message.type = "1";
+        message.to = "123";
+        message.projId = 12;
+        message.meetingId = "123";
+//      $('.fsxx').append('<p>'+innerHTML+'</p>')
+        console.log(JSON.stringify(message));
+        ws.send(JSON.stringify(message));
+    }
+    
+    //添加会议
+		$.ajax({
+				type:"get",
+				url:userInfo.url+"/message/addMeeting",
+				async:true,
+				beforeSend:function(request){
+					request.setRequestHeader('tokenId',userInfo.tokenId);
+				},
+				data:{
+//					projectId:userInfo.projId,
+//					userId:userInfo.userId,
+					 groupId:userInfo.groupId,
+					 name:userInfo.realName,
+					 userId:userInfo.userId,
+					 projectId:userInfo.projId,
+					 imageUrl:'',
+//					 createUser:
+				},
+					success:function(data){
+					console.log('私聊:'+JSON.stringify(data));
+					}
+				});
+    
+    
+    
+			
+			
+			
+			
+			mui.init();
+		</script>
+	</body>
+
+</html>

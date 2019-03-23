@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>项目名称</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+		<link rel="stylesheet" href="../../css/swiper.min.css" />
+		<link rel="stylesheet" href="../../css/engineering_calendar.css" />
+	</head>
+	<style>
+		#calendar,#weekcalendar{
+			padding-top: 50px;
+		}
+		/*侧边栏概览上部边线*/
+		.mui-table-view:after,.mui-table-view:before{
+			height: 0;
+		}
+		li{
+			list-style: none;
+		}
+		.week>li> .mui-navigate-right:after, .mui-push-right:after{
+			top: 50%;
+		}
+		#weekcalendar{
+			background: #fff;
+		}
+		.mui-scroll-wrapper{
+			z-index: 0;
+		}
+		.mui-bar-nav~.mui-content{
+			padding-top: 0;
+		}
+		/*周视图标题*/
+		.em-per-block{
+			padding-left: 3%;
+		}
+	</style>
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		    <!-- 侧滑导航根容器 -->
+		    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+		        <!-- 主页面容器 -->
+		        <div class="mui-inner-wrap">
+		            <!-- 菜单容器 -->
+		            <aside id="offCanvasSide" class="mui-off-canvas-left">
+		                <div id="left_scroll" class="mui-scroll-wrapper">
+		                <!--菜单内容开始-->
+						<div class="mui-scroll">
+						<!--头部-->
+						<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+						<div id="glz_slide">
+						<leftlist :gl='gl' :items='items'></leftlist>
+						</div>
+						
+						</div>
+						<!--菜单内容结束-->
+		                </div>
+		            </aside>
+		            <!-- 主页面标题 -->
+		            <header class="mui-bar mui-bar-nav">
+		                <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+		                
+		            <!--选择日期-月-->
+					<div class="em-journal-title yue-title">
+							<div class="em-per-block-l ypre">
+								<span class="mui-icon mui-icon-arrowleft"></span>
+								<!--<span>上一月</span>-->
+							</div>
+							<div class="em-per-block ymid">
+								<span>...</span>
+							</div>
+							<div class="em-per-block-r ynext">
+								<!--<span>下一月</span>-->
+								<span class="mui-icon mui-icon-arrowright"></span>
+							</div>
+					</div>
+					
+					<!--选择日期-周-->
+					<div class="em-journal-title zhou-title dnone">
+							<div class="em-per-block-l zpre">
+								<span class="mui-icon mui-icon-arrowleft"></span>
+								<!--<span>上一月</span>-->
+							</div>
+							<div class="em-per-block zmid">
+								<span>当前周视图</span>
+							</div>
+							<div class="em-per-block-r znext">
+								<!--<span>下一月</span>-->
+								<span class="mui-icon mui-icon-arrowright"></span>
+							</div>
+					</div>
+					
+					
+					
+		<!--选择日期end-->
+		<!--周视图-->	
+			<span class="zhou">周视图</span>
+		<!--月视图-->
+		    <span class="months dnone">月视图</span>
+		            </header>
+		              <!--日历容器-月-->
+		            <div id="calendar">
+							
+					</div>
+					<!--日历容器-周-->
+						<div id="weekcalendar" class="dnone">
+							
+						</div>
+		            <!-- 主页面内容容器 -->
+		            <div id="home_scroll" class="mui-content mui-scroll-wrapper rlwrapper">
+		            <div class="mui-scroll">
+						<!--日程记录-->
+		<div id="gcjl">
+			
+		<ul class="mui-table-view">
+			<!--:class="'gourl'+item.id"-->
+		    <li class="mui-table-view-cell mui-media gourl" v-for="(item,index) in gcdate" :key="index" :rlid="item.id">
+		        <p>
+		            <!--<img class="left-media mui-media-object mui-pull-left" :src="item.gcimg">-->
+		            <span class="left-media mui-media-object mui-pull-left leftd" :style="{background:item.eventColor}"></span>
+		            
+		            <div class="mui-media-body">
+		                <span class="hone w65">{{item.eventName}}</span>
+		                <p class="mui-ellipsis">{{item.eventStart | eday }}</p>
+		            </div>
+		        </p>
+		        <span class="sright-l" :style="{background:item.eventColor}">{{item.eventStart | estart }}-{{item.eventEnd | estart}}</span>
+		        <span class="mui-icon mui-icon-arrowright sright"></span>
+		    </li>
+		</ul>
+		
+		</div>
+						
+		    </div>
+		                
+		<a href="javascript:void(0)" target="_blank" class="editcontent"><img class="bigcircle bleft" src="../../icon/calendar_edit.png" /></a>
+		<img class="bigcircle addcontent" src="../../icon/calendar_add.png" />
+		            
+		            </div>
+		       	 <div class="mui-off-canvas-backdrop"></div>
+		        </div>
+		    </div>
+		
+		
+		<!--当前日期模板-->
+		<script type="text/template" id="template">
+			<li class="mui-table-view-cell em-active" date="{{date_frame}}">
+				<a href="javascript:void(0)" class="mui-navigate-right"><span class="week">{{week_frame}}</span><span class="day">{{month_frame}}月{{day_frame}}日</span><span class="status mui-hidden">零</span></a>
+			</li>
+		</script>
+		<!--非当前日期模板-->
+		<script type="text/template" id="template2">
+			<li class="mui-table-view-cell " date="{{date_frame}}">
+				<a href="javascript:void(0)" class="mui-navigate-right"><span class="week">{{week_frame}}</span><span class="day">{{month_frame}}月{{day_frame}}日</span><span class="status mui-hidden">零</span></a>
+			</li>
+		</script>
+	
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/vue2.5.js" ></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="../../components/leftlist.js" ></script>
+	<script type="text/javascript" src="../../js/globalVariable.js"></script>
+	<script type="text/javascript" src="../../js/pub.js" ></script>
+	
+	<script type="text/javascript" src="../../js/swiper.min.js" ></script>
+	<script type="text/javascript" src="../../js/mustache.min.js" ></script>
+	<script type="text/javascript" src="../../js/calendar_base.js" ></script>
+	<script type="text/javascript" src="../../js/calendar_base_week.js" ></script>
+	
+		<script type="text/javascript">
+			setTimeout(function(){
+				$('.rlwrapper').css('top',$('#calendar').height()+50+'px')
+			},500)
+			
+			
+			//周视图月视图切换
+			$('.zhou').on('tap',function(){
+				$('.months,#weekcalendar,.zhou-title').removeClass('dnone');
+				$('.zhou,#calendar,.yue-title').addClass('dnone');
+				//获取高度
+				$('.rlwrapper').css('top',$('#weekcalendar').height()+'px')
+			})
+			//月视图切换
+			$('.months').on('tap',function(){
+				$('.months,#weekcalendar,.zhou-title').addClass('dnone');
+				$('.zhou,#calendar,.yue-title').removeClass('dnone');
+				//获取高度
+				$('.rlwrapper').css('top',$('#calendar').height()+50+'px')
+			})
+			
+			$(document).on('tap','.week>li',function(){
+				var zdate=$(this).attr('date');
+				console.log(zdate)
+			})
+			
+			userInfo = getGlobalUserInfo(); 
+//			mui.init();
+			var defaultDate;
+			//月视图
+			var datas=[];
+//初始化月视图
+var customBiz = {
+	init: function() {
+		var self = this;
+		// 初始化日历
+		var calendar = new Calendar({
+			// swiper滑动容器
+			container: "#calendar",
+			// 上一月节点
+			pre: ".ypre",
+			// 下一月节点
+			next: ".ynext",
+			// 回到今天
+			backToToday: ".backToday",
+			// 业务数据改变
+			dataRequest: function(currdate, callback, _this) {
+				// 无日程安排
+				var data = datas;
+				callback && callback(data);
+			},
+			// 滑动回调
+			swipeCallback: function(item) {
+				defaultDate = item.date;
+				// 设置标题
+				setTitle(defaultDate);
+				// 动态新增点击样式
+				calendar.addActiveStyleFordate(defaultDate);
+			},
+			// 调试
+			isDebug: false
+		});
+		// 设置标题
+		var titleNode = document.querySelector('.ymid span');
+
+		function setTitle(date) {
+			titleNode.innerText = date;
+		}
+
+	}
+}
+// 初始化
+customBiz.init();
+
+//初始化周视图
+// 初始化
+			var weekcalendar = new CalendarWeek({
+				// 默认周历组件容器
+				container: "#weekcalendar",
+				// 上一周元素
+				pre: ".zpre",
+				// 下一周元素
+				next: ".znext",
+				// 开启滑动时间，切换周历
+				isSwipe: false,
+				template: function (value, currdate, key) {
+					// console.log(value.date_frame);
+					// 选中状态
+					if(value.date_frame == currdate) {
+						var template = document.getElementById("template").innerHTML.trim()
+					} else {
+						var template = document.getElementById("template2").innerHTML.trim()
+					}
+					return template;
+				},
+				"preEvent": function (month) {
+					console.log("上周：" + month);
+					setTitle(month);
+				},
+				"nextEvent": function (month) {
+					console.log("下周：" + month);
+					setTitle(month);
+
+				},
+				isDebug: false
+			});
+			// 设置标题
+			var titleNode = document.querySelector('.zmid span');
+
+			function setTitle(date) {
+				titleNode.innerText = date;
+			}
+				
+			$('.ynext,.ypre').on('tap',function(){
+				$(this).click()
+			})
+//			console.log(userInfo)
+			//日期
+			Vue.filter('eday',function(d){
+				var str=d.indexOf('-')-4;
+				var newstr=d.substring(str,d.length-9);
+				return newstr;
+			})
+			//时间
+			Vue.filter('estart',function(e){
+				var str1=e.indexOf(':')-2;
+				var newresult=e.substring(str1,e.length-3);
+				return newresult;
+			})
+			
+			var color;
+			var rili=new Vue({
+				el:'#gcjl',
+				data:{
+					gcdate:[],
+					startdate:'',
+					rlid:'',
+				},
+				created(){
+					this.getcontent();
+				},
+				methods:{
+				getcontent(){
+					$.ajax({
+					type: "POST",
+					url: userInfo.url +"/mobile/"+userInfo.projId+"/calendar/events",
+					async: true,
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenId', userInfo.tokenId);
+						request.setRequestHeader('appType', 7);
+					},
+					data: {
+						"start": '2014-01-01',
+						"end": 0,
+						"projId": userInfo.projId,
+					},
+					success: function(data) {
+//						console.log(JSON.stringify(data))
+						if(data.cd==0){
+							$.each(data.rt, function(e,e1) {
+								rili.gcdate.push(e1);
+								rili.startdate=e1.content;
+						});
+						}else{
+							mui.toast(data.msg)
+						}
+						
+					}
+				});
+				}
+					
+			},
+		})
+		
+//		获取指定
+		function getids(e){
+				 $.ajax({
+					type:"POST",
+					url:userInfo.url+"/mobile/"+userInfo.projId+"/event/"+e,
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('tokenId',userInfo.tokenId);
+						request.setRequestHeader('appType',7);
+					},
+					success:function(data){
+						
+						if(data.cd==0){
+						var newdate=getDiffDate(subtime(data.rt.eventStart),subtime(data.rt.eventEnd));
+						color=data.rt.eventColor;
+		//				console.log(newdate)
+		//				console.log(i)
+						$.each(newdate, function(e,e1) {
+							$("div[date='"+e1+"'],li[date='"+e1+"']").css('background',color);
+						});
+						console.log(newdate)
+				
+						}
+					}
+				})
+			}
+			
+			
+			//事件列表跳转
+			$(document).on('tap',".gourl",function(){
+				$('.em-calendar-item,.week>.mui-table-view-cell').css('background','')
+				//指定编辑事件
+				var staid=$(this).attr('rlid');
+				$('.editcontent').attr('href','event_details.html?id='+staid);
+				//获取区间时间
+				getids(staid);
+			})
+			//判断选中
+			$('.editcontent').on('tap',function(){
+				if($('.editcontent').attr('href')=='javascript:void(0)'){
+					mui.toast('请指定需要修改的事件')
+				}
+			})
+			//添加事件
+			$('.addcontent').on('tap',function(){
+				mui.openWindow({
+					url:'event_details.html?id=',
+					id:'event_details_add',
+				})
+			})
+  	//添加成功		
+	window.addEventListener('adds', function() {
+	    //执行init_replyList方法
+		//或()注意定时函数调用方法写法
+		setTimeout( function(){
+			location.reload();
+	    });
+  });
+
+			
+			mui.init({
+				swipeBack:false
+			});
+			
+			mui.ready(function(){
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true //是否启用回弹
+				});
+			});
+//			头部轮播end
+			mui('#left_scroll').scroll();
+			mui('#home_scroll').scroll();
+			
+			
+	</script>
+	</body>
+
+</html>

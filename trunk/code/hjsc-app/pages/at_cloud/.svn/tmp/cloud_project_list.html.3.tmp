@@ -1,0 +1,1336 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>云盘列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+	</head>
+
+	<style>
+		/*进入样式*/
+		
+		.addSubject {
+			font-size: 15px;
+		}
+		
+		.mui-bar-nav.mui-bar .mui-icon {
+			line-height: 30px;
+		}
+		
+		.title-out {
+			height: 50px;
+			margin-top: 6px;
+			position: fixed;
+			z-index: 11;
+			background: #fff;
+			width: 100%;
+			top: 44px;
+			border-bottom: 1px solid #e6e6e6;
+		}
+		
+		.mui-content {
+			background-color: #fff;
+		}
+		
+		.mui-table-view-cell {
+			padding: 14px 15px;
+		}
+		
+		.list-img {
+			width: 33px;
+		}
+		
+		.list-title {
+			font-size: 16px;
+			color: #333;
+		}
+		
+		.list-detail {
+			float: left;
+		}
+		
+		.list-time {
+			font-size: 12px;
+			color: #999;
+		}
+		
+		.list-detail-img {
+			line-height: 35px
+		}
+		
+		.list-detail-font {
+			width: 80%;
+			margin-left: 12px;
+		}
+		
+		.mui-table-view-cell:after {
+			background-color: #e6e6e6;
+		}
+		
+		.mui-table-view:before,
+		.mui-table-view:after {
+			background-color: #e6e6e6;
+			height: 1px;
+		}
+		/*小圆圈*/
+		.circle {
+			position: absolute;
+		    right: 18px;
+		    top: 30px;
+		    background: #fff;
+		    border: 1px solid #ccc;
+		    border-radius: 20px;
+		    padding: 5px;
+		    height: 5px;
+		    width: 5px;
+		}
+		
+		.table {
+			margin-top: 57px;
+		}
+		
+		.mui-table-view:before {
+			height: 0px !important;
+		}
+		
+		#promptBtn{
+			margin-left: 10px;
+		}
+		.title-img {
+			width: 30px;
+		    margin-top: 10px;
+		    padding: 4px;
+		}
+		
+		.mui-plus .plus {
+			display: inline;
+		}
+		
+		.plus {
+			display: none;
+		}
+		
+		#topPopover {
+			position: fixed;
+			top: 16px;
+			right: 6px;
+		}
+		
+		#topPopover .mui-popover-arrow {
+			left: auto;
+			right: 6px;
+		}
+		.mui-popover-arrow:after {
+			background-color: #343b43;
+		}
+		
+		#middlePopover .mui-popover-arrow {
+		    left: 80px !important;
+		}
+		.groupli p{
+			color: #fff;
+		}
+		
+		#middlePopover .mui-table-view-cell:after{
+			background-color: #343b43 !important;
+			width: 100%;
+			left: 0;
+		}
+		/*群组*/
+		.groupstyle{
+			float: right;
+			height: 50px;
+		    line-height: 50px;
+		    margin-right: 10px;
+		    font-size:14px;
+		    width: 29%;
+		    text-align: right;
+		    display: block;
+		}
+		.w80{
+			width: 90%;
+			display: block;
+			height: 20px;
+			overflow: hidden;
+		}
+		/*勾*/
+		.condition{
+			position: absolute;
+			top: 10px;
+			right: 10px;
+		}
+		/*群显示箭头*/
+		.mui-popover-arrow {
+			left: 25.5px !important;
+		}
+		#middlePopover {
+			margin-top: 15px;
+			left: auto !important;
+			right: 0 !important;
+			font-size: 14px;
+		}
+		.mui-table-view{
+			overflow: auto;
+		}
+		.mui-popover {
+			min-height: 45px !important;
+			/*错乱去除height此处*/
+			height: auto !important;
+			width: auto;
+			border-radius: 3px;
+		}
+		
+		span.mui-icon {
+			font-size: 14px;
+			color: #007aff;
+			margin-left: -15px;
+			padding-right: 10px;
+		}
+		
+		#middlePopover .mui-table-view-cell {
+			padding: 11px 15px;
+		}
+		
+		#middlePopover .mui-table-view-cell:after {
+			right: 15px;
+			background-color: #343b43;
+		}
+		
+		#middlePopover .mui-table-view,
+		#middlePopover {
+			background-color: #43484e !important;
+			color: #fff;
+		}
+		
+		.mui-popover .mui-popover-arrow:after {
+			background-color: #43484e;
+		}
+		/*右侧群组显示*/
+		.mui-popover .mui-scroll-wrapper {
+			margin: 2px 0;
+			overflow: initial;
+		}
+		
+		#middlePopover .mui-active {
+			background-color: #343b43;
+		}
+		
+		input::-webkit-input-placeholder {
+			font-size: 16px;
+			color: #999;
+			line-height: 20px;
+		}
+		
+		input::-moz-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		input::-moz-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		
+		input::-ms-input-placeholder {
+			font-size: 16px;
+			color: #999;
+			background-color: #f2f2f2;
+			padding: 20px 0;
+		}
+		/*新建文件夹 start*/
+		.mui-popup {
+			border-radius: 3px;
+			width: 300px;
+			background-color: #fff;
+		}
+		
+		.mui-popup-inner {
+			border-radius: 1px 1px 0 0;
+		}
+		.mui-popup-button:first-child {
+			border-radius: 0 0 0 3px;
+		}
+		
+		.mui-popup-button:last-child {
+			border-radius: 0 0 3px;
+			color: #0888D0;
+		}
+		
+		.mui-popup-title {
+			padding: 10px;
+			font-size: 20px;
+			color: #333;
+		}
+		
+		.mui-popup-button {
+			font-size: 16px;
+			color: #666;
+			font-weight: 100 !important;
+			width: 50%;
+			float: left;
+		}
+		
+		.mui-popup-button-bold {
+			color: #0487d0;
+		}
+		
+		.mui-popup-inner:after {
+			background-color: #E6E6E6;
+		}
+		
+		.mui-popup-input input {
+			border: none;
+			margin: 15px 0;
+			border-radius: 3px;
+			padding: 20px 5px;
+			border: 1px solid #f2f2f2;
+			margin-top: 8px;
+			background-color: #f2f2f2;
+		}
+		.mui-popup-buttons{
+			height: auto;
+		}
+		/*新建文件夹end*/
+		.mui-icon-checkmarkempty {
+			background: #0487d0 !important;
+			padding: 0px !important;
+			width: auto;
+			height: auto;
+			font-size: 16px;
+			color: #fff;
+			border: none;
+		}
+		
+		.mui-bar-nav~.mui-content .mui-pull-top-pocket {
+			top: 100px;
+		}
+		
+		/*文件上传start*/
+		.op{
+     		width: 25%;
+    		float: left;
+    		margin: 10px 0;
+     	}
+     	.op-img{
+		    height: 50px;
+		    width: 50px;
+		    margin-bottom: 10px;
+		}
+     	.op-font{
+			font-size: 14px;
+			font-weight: normal;
+			color: #666666;
+		}
+     	/*文件上传end*/
+		
+/*分享*/
+.mui-popover.mui-popover-action .mui-table-view{
+	margin: 0;
+}
+.mui-popover{
+	height: auto;
+}
+.mui-popover.mui-popover-action .mui-table-view{
+	border-radius: inherit;
+}
+.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after{
+	background-color: #fff;
+}
+.op{
+	width: 33%;
+}
+/*footer*/
+.footer{
+	width: 100%;
+    height: 50px;
+    z-index: 11;
+    position: absolute;
+    bottom: 0px;
+    background-color: #333;
+    display: none;
+    color: #fff;
+	font-size: 12px;
+	text-align: center;
+}
+.footer-img-out{
+    position: initial;
+	bottom: 0;
+	text-align: center;
+	float: left;
+	width: 25%;
+	padding-top: 4px;
+	margin-left: 0 !important;
+	}
+.mui-icon-checkmarkempty{
+	background: #0487d0 !important;
+	padding:0px !important;
+	width: auto;
+    height: auto;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+}
+.footer-img{
+    width: 18px;
+    margin-left: 3px;
+}
+.footer-font{
+	margin-top: 1px;
+	display: inline-block;
+	color: #fff;
+}
+
+.disabled { pointer-events: none; }
+		
+.mui-popover .mui-popover-arrow.mui-menu-popver.mui-bottom:after{
+	top: 17px;
+    left: 0;
+}
+#middlePopover{
+	margin-top: -13px;
+	left: 220px !important;
+	font-size: 14px;
+	height: 150px;
+}
+.tip{
+	color: #999999 !important;
+}
+.del{
+	color: #CD1010 !important;
+}
+.ypcancel{
+	color: #3C3C3C !important;
+}
+.imgfile{
+	z-index: -9999;
+}
+
+	</style>
+
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		<!-- 侧滑导航根容器 -->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable ">
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 菜单容器 -->
+				<aside id="offCanvasSide" class="mui-off-canvas-left">
+					<div id="left_scroll" class="mui-scroll-wrapper">
+						<!--菜单内容开始-->
+						<div class="mui-scroll">
+							<!--头部-->
+							<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+							<div id="glz_slide">
+								<leftlist :gl='gl' :items='items'></leftlist>
+							</div>
+
+						</div>
+						<!--菜单内容结束-->
+
+					</div>
+				</aside>
+				
+				<div class="cloud">
+				<!-- 主页面标题 -->
+				<header class="mui-bar mui-bar-nav">
+					<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left menus" href="#offCanvasSide"></a>
+					<span class="mui-icon mui-icon-back mui-pull-left backs" style="display: none;"></span>
+					<h1 class="mui-title" >{{headName}}</h1>
+					<a class="mui-icon mui-action-menu mui-pull-right" href="cloud_project_recentFiles.html"><span class="addSubject">最近文档</span></a>
+				</header>
+
+
+					<div class="title-out">
+
+						<img id='promptBtn' class="title-img" data-id="1" src="../../icon/gcyp1.png" />
+						<a href="#c_upload">
+							<img class="title-img" data-id="2" src="../../icon/gcyp2.png" />
+						</a>
+						<img class="title-img" data-id="3" src="../../icon/gcyp3.png" />
+						<!--<a href="#middlePopover">
+							<img class="title-img" data-id="4" src="../../icon/gcyp4.png" />
+						</a>-->
+						<img class="title-img" data-id="5" src="../../icon/gcyp5.png" />
+						<a href="#middlePopover" class="groupstyle hone">默认群组</a>
+					</div>
+
+				<!-- 主页面内容容器 -->
+				<div id="home_scroll" class="mui-content mui-scroll-wrapper ">
+
+					
+
+					<div class="mui-scroll" id="list">
+
+						<ul class="mui-table-view table" id="tableList">
+							
+							<div v-for="(item,index) in list" style="position: relative;">
+								<li class="mui-table-view-cell files" :fileSize="item.fileSize" :fileId="item.fileId" :fileType="item.fileType" :fileName="item.fileName">
+									
+									<div class="list-detail list-detail-img">
+										<img class="list-img" :src="item | format">
+									</div>
+									<div class="list-detail list-detail-font">
+										<p class="list-title hone">{{item.fileName}}</p>
+										<p class="list-time">{{item.fileCreateTime | switchingTime}}</p>
+									</div>
+								
+								</li>
+								
+								<div class="circle" :fileSize="item.fileSize" :fileId="item.fileId" :fileType="item.fileType" :fileName="item.fileName"></div>
+								
+								</div>
+							
+						</ul>
+					</div>
+				</div>
+				
+				
+				<div class="footer">
+					<div class="footer-img-out" id="downloads">
+						<img class="footer-img" src="../../icon/gcyp_ss1.png" />
+						<br />
+						<span class="footer-font">下载</span>
+					</div>
+
+					<div class="footer-img-out">
+						<a href="#share">
+							<img class="footer-img" src="../../icon/gcyp_ss2.png" />
+							<br />
+							<span class="footer-font">分享</span>
+						</a>
+					</div>
+
+					<div class="footer-img-out">
+						<a href="#delete">
+							<img class="footer-img" src="../../icon/gcyp_ss3.png" />
+							<br />
+							<span class="footer-font">删除</span>
+						</a>
+					</div>
+
+					<div class="footer-img-out" id='promptBtn'>
+						<img class="footer-img" src="../../icon/gcyp_ss4.png" />
+						<br />
+						<span class="footer-font">重命名</span>
+					</div>
+
+					<div class="footer-img-out">
+						<img class="footer-img" src="../../icon/gcyp_ss5.png" />
+						<br />
+						<span class="footer-font">更多</span>
+					</div>
+
+				</div>
+				</div>
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+		
+		<div id="c_upload" class="mui-popover mui-popover-action mui-popover-bottom" style="height: 230px;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="nfiles">
+					
+					<div class="op" data-id="1">
+						<img class="op-img" src="../../icon/gcyp_sc1.png" />
+						<p class="op-font">上传文档</p>
+						<input class="textfile dnone" type="file" value="上传text" accept="text/*">
+					</div>
+					
+					<div class="op" data-id="2">
+						<img class="op-img" src="../../icon/gcyp_sc2.png" />
+						<p class="op-font">上传图片</p>
+						<input class="imgfile dnone" type="file" @change="tirggerFile($event)" accept="image/*">
+					</div>
+					
+					<div class="op" data-id="3">
+						<img class="op-img" src="../../icon/gcyp_sc3.png" />
+						<p class="op-font">上传音频</p>
+						<input class="audiofile dnone" type="file" value="上传audio" accept="audio/*">
+					</div>
+					
+					<div class="op" data-id="4">
+						<img class="op-img" src="../../icon/gcyp_sc4.png" />
+						<p class="op-font">上传视频</p>
+						<input class="videofile dnone" type="file" value="上传video" accept="video/*">
+					</div>
+					
+					<div class="op aa1" data-id="5">
+						<img class="op-img" src="../../icon/gcyp_sc5.png" />
+						<p class="op-font">上传其他文件</p>
+						<input class="allfile dnone" type="file" value="上传全部类型" accept="*/*">
+					</div>
+					
+				</li>
+			</ul>
+		</div>
+		
+		
+		<!--分享选项-->
+		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="op ops" data-id = "1">
+						<img class="op-img" src="../../icon/gcyp_fx2.png" />
+						<br />
+						<span class="op-font">用户中转站</span>
+					</div>
+					<div class="op ops" data-id = "2">
+						<img class="op-img" src="../../icon/gcyp_fx3.png" />
+						<br />
+						<span class="op-font">密钥分享</span>
+					</div>
+					<div class="op ops" data-id = "3">
+						<img class="op-img" src="../../icon/gcyp_fx1.png" />
+						<br />
+						<span class="op-font">公共分享</span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell btf2">
+					<a href="#share" style="color: #333;">取消</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!--删除选项-->
+		<div id="delete" class="mui-popover mui-popover-action mui-popover-bottom" style="background-color: #F2F2F2;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="javascript:void(0)" class="tip">删除后，该文件将永久删除！</a>
+				</li>
+				<li class="mui-table-view-cell dels">
+					<a href="#delete" class="del">删除</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view" style="margin-top: 5px;">
+				<li class="mui-table-view-cell">
+					<a href="#delete" class="ypcancel">取消</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!--中间弹出菜单-->
+		<div id="middlePopover" class="mui-popover groupmenu">
+			<div class="mui-popover-arrow mui-menu-popver"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell groupli" v-for="groups in group" :groupId="groups.groupId">
+							<p><span class="w80 hone">{{groups.groupName}}</span><span class="condition"></span></p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!--新建文件夹 mui-popup-in-->
+		<div id="insert" class="mui-popup">
+			<div class="mui-popup-inner">
+				<div class="mui-popup-title">新建文件夹</div>
+				<div class="mui-popup-text"> </div>
+				<div class="mui-popup-input">
+					<input class="iadd" type="text" placeholder="新建文件夹">
+				</div>
+			</div>
+		<div class="mui-popup-buttons">
+			<span class="mui-popup-button cancel">取消</span>
+			<span class="mui-popup-button yes">确定</span>
+		</div>
+		</div>
+		<!--新建时展开背景 mui-active,display:block触发-->
+		<div class="mui-popup-backdrop mui-active addpop" style="display: none;"></div>
+		
+		
+		
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/leftlist.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript">
+			
+//			上传模块
+			var files=new Vue({
+				el:'#c_upload',
+//				data:function(){
+//				return{
+//					mimg:'',
+//				}
+//				},
+				methods:{
+					tirggerFile : function (event) {
+ 					var file = event.target.files; // (利用console.log输出看结构就知道如何处理档案资料)
+ 					console.log(file)
+   					console.log()
+// 					"名称："+file.name+"大小:"+file.size
+}
+				}
+			})
+
+
+			$('#nfiles>div').on('tap',function(){
+				var id = $(this).data("id");
+				var self=$(this).children("input");
+				switch(id){
+//					文档
+					case 1:
+					self.trigger('click');
+//					alert(self.val());
+//					console.log(files.mimg);
+					break;
+//					图片
+					case 2:
+					$(this).children("input").trigger('click');
+//					alert($('.imgfile').val());
+					break;
+//					音频
+					case 3:
+					$(this).children("input").trigger('click');
+					break;
+//					视频
+					case 4:
+					$(this).children("input").trigger('click');
+					break;
+//					其他
+					case 5:
+					$(this).children("input").trigger('click');
+					break;
+				}
+				
+			})
+//			$('.aa1').on('tap',function(){
+//				$('.allfile').trigger('click')
+//			})
+			
+			
+			
+//			before上传
+/*上传文件*/
+//			$('.op_file').on('tap', function() {
+//				plus.io.requestFileSystem(function( fs ) {
+//					// 可通过fs进行文件操作
+//					alert( "Request file system success!" );
+//					fs.root;
+//					}, function ( e ) {
+//					alert( "Request file system failed: " + e.message );
+//				});
+//			});
+			
+			/*上传图片*/
+//			$('.op_img').on('tap', function() {
+//				/*相册上传 开始*/
+//				plus.gallery.pick( function(p){   
+//           	//alert(p);//file:///storage/emulated/0/DCIM/Camera/IMG_20160704_112620.jpg   
+//           	plus.io.resolveLocalFileSystemURL(p, function(entry) {   
+//	              	//alert(entry.toLocalURL());//file:///storage/emulated/0/DCIM/Camera/IMG_20160704_112620.jpg   
+//	     			console.log(p);
+//	     			console.log(entry.name);//IMG_20160704_112620.jpg
+//					var returnUrl=userInfo.url+'/cloud/uploadFile'
+//					returnUrl=encodeURIComponent(returnUrl);
+//					$.ajax({
+//						type:'POST',
+//						url:userInfo.url+'/uploading/uploadFileInfo?type=json',
+//						data:{
+//							projId:userInfo.projId,
+//							type:'1',
+//							userId:userInfo.userId,
+//							modelCode:'002',
+//							groupId:obj.groupId,
+//							tokenId:userInfo.tokenId,
+//							returnUrl:returnUrl,
+//							'file':'///storage/emulated/0/DCIM/Camera/IMG_20181217_013609.jpg',
+//						},
+//						success:function(data){
+//							console.log("4.6",data);
+//						}
+//					});					
+//	    			}, function(e) {   
+//	     				plus.nativeUI.toast("读取拍照文件错误：" + e.message);   
+//  			});   
+//          }, function ( e ) {   
+//          }, {   
+//          	multiple:true,
+//	            filename: "_doc/camera/",   
+//	            filter:"image"   
+//          }); 
+				/*相册上传 结束*/
+				
+				/*拍照上传 开始*/
+//				var c = plus.camera.getCamera();
+//			    c.captureImage(function(e) {
+//			        plus.io.resolveLocalFileSystemURL(e, function(entry) {
+//			            var path = entry.toLocalURL();
+//			            var name = path.substr(path.lastIndexOf('\/') + 1);
+//						console.log(name);
+//			        }, function(e) {
+//			            mui.toast("读取拍照文件错误" + e.message);
+//			        });
+//			    });
+			/*拍照上传结束*/
+//			});
+			
+//			before上传end
+			
+			//mui.init();
+			//点击小圆点，封装方法，监听方法，说明：防止上拉加载时新数据渲染出来后没有执行该方法
+		function xiao(){
+			var CLASSNAME = 'mui-icon mui-icon-checkmarkempty';
+			//坑点:全局tap则全局unbind();否则没解绑，执行两次方法
+			$('.circle').unbind();
+			$('.circle').on('tap',function(){
+				$(this).toggleClass(CLASSNAME);
+				var ctrue=$('.circle').hasClass(CLASSNAME);
+				var share=$(this).hasClass(CLASSNAME);
+				obj.fileId=$(this).attr('fileId');
+				obj.fileName=$(this).attr('fileName');
+				obj.fileType=$(this).attr('fileType');
+				obj.fileSize=$(this).attr('fileSize');
+				if(share){//选中
+					if(obj.fileType==1){//文件夹
+						obj.folderIdList=obj.folderIdList+","+obj.fileId;
+					}else{//文件
+						obj.fileIdList=obj.fileIdList+","+obj.fileId;
+						var infos={fileName:obj.fileName,fileType:obj.fileType,fileSize:obj.fileSize,fileId:obj.fileId,userId:userInfo.userId,status:true,fileUrl:''}
+						obj.downArray.push(infos);
+					}
+					obj.shareName.push(obj.fileName);
+				}else{//取消选中
+					if(obj.fileType==1){//文件夹
+						var ids=obj.folderIdList.substring(1);
+						var arr=ids.split(",");
+						var arr2=[];
+						obj.folderIdList="";
+						for(i=0;i<arr.length;i++){
+							if(obj.fileId!=arr[i]){
+								arr2.push(arr[i]);
+							}
+						}
+						for(var i=0;i<arr2.length;i++){
+							obj.folderIdList=obj.folderIdList+","+arr2[i];
+						}
+						
+						console.log(obj.folderIdList);
+					}else{//文件
+						var ids=obj.fileIdList.substring(1);
+						var arr=ids.split(",");
+						var arr2=[];
+						obj.fileIdList="";
+						for(i=0;i<arr.length;i++){
+							if(obj.fileId!=arr[i]){
+								arr2.push(arr[i]);
+							}
+						}
+						for(var i=0;i<arr2.length;i++){
+							obj.fileIdList=obj.fileIdList+","+arr2[i];
+						}
+						
+						console.log(obj.fileIdList);
+					}
+					obj.fileId="";
+				}
+				if(ctrue){
+					$('.footer').show();
+					$('.files,.title-out').addClass('disabled');
+					$('#list').css('padding-bottom','45px');
+				}else{
+					$('.footer').hide();
+					$('.files,.title-out').removeClass('disabled');
+					$('#list').css('padding-bottom','0')
+				}
+			});
+		};
+			$('.addSubject').on('tap',function(){
+				mui.openWindow({
+					 url:'cloud_project_recentFiles.html?groupId='+obj.groupId,
+					 id:'cloud_1',
+				});
+				
+			})
+			 mui.init();
+//			mui.init({
+//				swipeBack: true,
+//				pullRefresh: {
+//					container: '#home_scroll',
+//					down: {
+//						style: 'circle',
+//						callback: pulldownRefresh
+//					},
+//					up: {
+//						auto: false,
+//						contentrefresh: '正在加载...',
+//						callback: pullupRefresh
+//					}
+//				},
+//				beforeback: function() {
+////					plus.webview.show("cloud_project_list.html");//必须先show再close
+////					plus.webview.currentWebview().close();
+//						 
+//				}
+//			});
+
+//			function pulldownRefresh() {
+//				mui('#home_scroll').pullRefresh().endPulldownToRefresh(true);
+//				obj.currentPage=1;
+////				getlist();
+//			}
+
+//			function pullupRefresh() {
+//				setTimeout(function() {
+//					mui('#home_scroll').pullRefresh().endPullupToRefresh(false);
+//					obj.currentPage+=1;
+////					getlist();
+//				}, 100)
+//			};
+			/*获取登录数据*/
+			userInfo = getGlobalUserInfo();
+			/*列表数据动态绑定*/
+			var obj=new Vue({
+				el: '.cloud',
+				data: {
+					list: [],
+					groupId:1,//群组id
+					currentPage:1,//当前页数
+					dirId:0,//当前目录节点
+					fileName:"",//文件夹名
+					fileId:1,
+					fileType:1,
+					fileUrl:"",
+					parentId:[],//按顺序存入父节点
+					parentName:["工程云盘"],//按顺序存入父节点名称
+					headName:"工程云盘",
+					fileIdList:"",//分享文件存储的id字符串组
+					shareName:[],//分享的名字
+					folderIdList:"",//分享文件夹的id
+					fileIdArry:[],//所有选中的id，用于判断下载和删除
+					fileSize:null,//选中文件的大小用于判断下载进度
+					downArray:[]//用于下载至传输列表，存于本地存储
+				},
+				watch: {
+					list: function() {
+						this.$nextTick(function() {
+							xiao();
+						})
+					}
+				},
+			});
+			/*群组动态绑定*/
+			var obj2=new Vue({
+				el: '.groupmenu',
+				data: {
+					group:[],//全部群组
+					//测试数据
+//					group:[
+//					{groupId:'1',groupName:'1111111111撒大飒飒发沙发宛然各色噶发给各位'},
+//					{groupId:'2',groupName:'2222222fdsfs11111111撒11111111撒11111111撒gdf2'},
+//					{groupId:'3',groupName:'eqwewdssdfsdsdf'},
+//					{groupId:'4',groupName:'adsa2222wcxzcxv2222'},
+//					{groupId:'5',groupName:'wqeqwdsvfxd22222222'},
+//					{groupId:'6',groupName:'agfbefr22222222'},
+//					]
+				},
+			});
+			
+			/*获取群组*/
+			$.ajax({
+				type:'GET',
+				url:userInfo.url+'/cloud/getGroupList?type=json',
+				data:{
+	              'projectId':userInfo.projId,
+	              'tokenId':userInfo.tokenId
+				},
+				success:function(data){
+					var datas=JSON.parse(data)
+					obj2.group=datas.userGroupList;
+					
+//					$.each(datas.userGroupList, function(i,m) {
+//						if(m.groupName=='默认群组'){
+//							obj.groupId=m.groupId;
+//						}
+//					});
+					getlist();
+			    }
+			});
+			
+			/*获取列表数据*/
+			function getlist(){
+				obj.groupId=userInfo.groupId;
+				console.log("当前节点："+obj.dirId);
+				$.ajax({
+					type:'GET',
+					url:userInfo.url+'/cloud/getFileList?type=json',
+	                beforeSend:function(request){
+						request.setRequestHeader('appType',7);
+					},
+					data:{
+						tokenId:userInfo.tokenId,
+						projectId:userInfo.projId,       
+						groupId:obj.groupId,
+						dirId:obj.dirId,
+						pageIndex:obj.currentPage,
+						//显示条数
+						pageSize:11,
+						filename:obj.fileName
+					},
+					success:function(data){
+						var datas=JSON.parse(data)
+						console.log('数据:'+JSON.stringify(datas));
+						if(obj.dirId==0){
+							obj.parentName.push("工程云盘");
+							$(".menus").css("display","block");
+							$(".backs").css("display","none");
+						}else{
+							if(obj.fileType==1){
+								$(".menus").css("display","none");
+								$(".backs").css("display","block");
+							}
+						}
+						if(datas.fileList!=undefined){
+							if(obj.currentPage == 1){
+		        				obj.list=datas.fileList;
+		        			}else{
+		        				obj.list = obj.list.concat(datas.fileList);
+		        			}
+						}else{
+							mui.toast('没有更多数据');
+							obj.list=[];
+						}
+					}
+				});
+			}
+			
+			/*获取文件图标*/
+			Vue.filter('format',function(value){
+				var srcs;
+				if(value.fileType==1){
+					srcs='../../icon/gcyp_wjj.png';
+				}if(value.fileType==2){
+					var i=tool.getAttachIcon(value.fileName)
+					srcs="../../"+i.src;
+				}
+				return srcs;
+			});
+			
+			/*转换日期类型*/
+			Vue.filter('switchingTime', function(time){
+				var date = new Date(time);
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var hour = date.getHours();
+				var minutes = date.getMinutes();
+				var finish =year+"年"+ month + '月' + day+"日 "+hour+":"+minutes;
+				return finish;
+			});
+				
+			/*点击列表进入下一级目录或下载文件*/
+			$(document).on('tap','.files',function(){
+				obj.fileId=$(this).attr('fileId');
+				obj.fileType=$(this).attr('fileType');
+				obj.fileName=$(this).attr('fileName');
+				obj.fileSize=$(this).attr('fileSize');
+				/*查看下一级*/
+				if(obj.fileType==1){
+					obj.parentId.push(obj.dirId);
+					obj.parentName.push(obj.fileName);
+					console.log("查看下一级时获取的父节点名称："+obj.parentName);
+					obj.headName=obj.fileName;
+					obj.dirId=obj.fileId;
+					obj.currentPage=1;
+					getlist();
+				}else{
+					/*文件下载并打开*/
+					$.ajax({
+						type:'POST',
+						url:userInfo.url+'/cloud/downloadFile?type=json',
+		                beforeSend:function(request){
+						},
+						data:{
+							projectId:userInfo.projId,       
+							groupId:obj.groupId,
+							fileId:obj.fileId,
+							tokenId:userInfo.tokenId
+						},
+						success:function(data){
+							var jsons=JSON.parse(data);
+							obj.fileUrl=jsons.fileUrl;
+							createDownload();
+						}
+					});
+				}
+			});
+			
+			/*返回上一级*/
+			$('.backs').on('tap',function(){
+				obj.dirId=obj.parentId[obj.parentId.length-1];
+				obj.headName=obj.parentName[obj.parentName.length-2];
+				obj.currentPage=1;
+				console.log("返回之后剩下的父节点名称："+obj.parentId);
+				console.log("返回上一级时获取的父节点名称:"+obj.headName);
+				getlist();
+				obj.parentId.pop();
+				obj.parentName.pop();
+			});
+			
+			/*文件下载保存至传输列表页面*/
+			$("#downloads").on('tap',function(){
+//				localStorage.removeItem("downInfos");
+				var info=[];
+				var flag=false;
+				if(obj.folderIdList!=""){
+					mui.toast('不能下载文件夹！')
+				}else{
+					$.each(obj.downArray, function(i,e) {
+//						console.log(JSON.stringify(e));
+						var downInfo=localStorage.getItem('downInfos');
+						info=JSON.parse(downInfo);
+						console.log("添加本地存储之前:"+JSON.stringify(info));
+						$.each(info, function(i,m) {
+							if(m.fileId==e.fileId&&m.userId==e.userId){
+								mui.toast('文件已经存在传输列表');
+								flag=false;
+							}else{
+								flag=true;
+							}
+						});
+						if(flag==true){
+							info.push(e);
+						}
+						localStorage.setItem('downInfos',JSON.stringify(info));
+					});
+					var a=localStorage.getItem('downInfos');
+					console.log("添加本地存储之后:"+a);
+				}
+			});
+			
+			/*下载并打开文件 开始*/
+		    function createDownload(){
+		        //判断文件是否已经下载
+				plus.io.resolveLocalFileSystemURL('_downloads/'+obj.fileName,function(entry){
+		            if(entry.isFile){
+		                mui.toast('已经下载');
+		                plus.runtime.openFile('_downloads/'+obj.fileName, {}, function ( e ) {//调用第三方应用打开文件
+							alert('打开失败');
+						});
+		            }
+		        },function(e){dBase();});
+		    }
+			
+			function dBase(){
+				console.log("文件总大小:"+obj.fileSize+"下载路径："+obj.fileUrl+"下载名称："+obj.fileName);
+				//初始化下载对象
+				plus.nativeUI.showWaiting("加载中...");
+				var dtask = null;
+		        if(dtask){
+		            mui.toast('下载任务已经存在,请耐心等待');
+		            return;
+		        }
+		        dtask = plus.downloader.createDownload(obj.fileUrl,{method:'GET'},function(d,status){
+		        	
+					plus.runtime.openFile( d.filename, {}, function ( e ) {//调用第三方应用打开文件
+						alert('打开失败');
+					});
+		        });
+		        dtask.addEventListener("statechanged",function(task,status){
+		            if(!dtask){return;}
+		            switch(task.state){
+		                case 1: mui.toast('开始下载...');break;//开始
+		                case 2: mui.toast('链接到服务器...');break;//链接到服务器
+		                case 3:
+		                	var progressVal=(task.downloadedSize/obj.fileSize)*100
+		                	console.log(progressVal.toFixed(1)+"%");break;
+		                case 4:plus.nativeUI.closeWaiting();mui.toast('下载完成');break;
+		            }
+		        });
+		        dtask.start();
+		    }
+			/*下载并打开文件 结束*/
+			
+			/*新建文件夹*/
+			function addfiles(){
+				$('.iadd').val('');
+				$('.cancel,.yes').off('tap');
+				$('#insert').removeClass().addClass('mui-popup mui-popup-out');
+				$('.addpop').hide();
+			}
+			$(function() {
+				$('.title-img').on('tap', function(){
+					var id = $(this).data("id");
+					switch(id){
+						case 1: 
+						$('#insert').removeClass().addClass('mui-popup mui-popup-in');
+						$('.addpop').show();
+						
+						$('.cancel').on('tap',function(){
+							addfiles();
+						});
+						$('.yes').on('tap',function(){
+//							mui.toast('确定'+$('.iadd').val());
+							$.ajax({
+									type:'POST',
+									url:userInfo.url+'/cloud/addDirectory?type=json',
+					                beforeSend:function(request){
+									},
+									data:{
+										projectId:userInfo.projId, 
+										groupId:obj.groupId,
+										parentDirId:obj.dirId,
+										//文件夹名称
+										dirName:$('.iadd').val(),
+										tokenId:userInfo.tokenId
+									},
+									success:function(data){
+										jsons=JSON.parse(data);
+										console.log(JSON.stringify(data))
+										if(jsons.responseInfo.responseMessage=='新建文件夹成功'){
+											mui.toast(jsons.responseInfo.responseMessage);
+											//刷新
+											obj.currentPage=1;
+											getlist();
+										}else{
+											mui.toast('文件夹已存在');
+										}
+									}
+								});
+							addfiles();
+						});
+						
+						break;
+						case 2: 
+						break;
+						case 3: 
+						mui.openWindow({
+							url:'transmission.html',
+							id:'transmission',
+						})
+						break;
+						case 4: 
+//						mui.toast('默认群组');
+						break;
+						case 5:
+						location.href='cloud_project_search.html?groupId='+obj.groupId
+						break;
+					}
+				})
+				
+				/*切换群组*/
+				$(document).on('tap','.groupli', function() {
+					$('.condition').empty();
+					$(this).find('.condition').html("✓");
+					obj.groupId=$(this).attr('groupId');
+					$('.groupstyle').html($(this).find('.hone').text());
+					
+					obj.dirId=0;
+					obj.currentPage=1;
+					mui('#middlePopover').popover('toggle');
+					getlist();
+				});
+
+			});
+			
+			/*分享*/
+			$('.ops').on('tap', function(e){
+				var id=$(this).data("id");
+				if(obj.fileIdList!=""&&obj.folderIdList==""){//分享文件
+					obj.fileIdList=obj.fileIdList.substring(1)
+					console.log("fileIdList:"+obj.fileIdList);
+					console.log(userInfo.url+'/cloud/shareFile?type=json&tokenId='+userInfo.tokenId+"&projectId="+userInfo.projId+"&groupId="+obj.groupId+"&shareType="+id+"&shareName="+obj.shareName[0]+"&fileIdList="+obj.fileIdList);
+					$.ajax({
+						type:'POST',
+						url:userInfo.url+'/cloud/shareFile?type=json&tokenId='+userInfo.tokenId+"&projectId="+userInfo.projId+"&groupId="+obj.groupId+"&shareType="+id+"&shareName="+obj.shareName[0]+"&fileIdList="+obj.fileIdList,
+			            beforeSend:function(request){
+						},
+						dataType:'json',
+						success:function(data){
+							console.log("4.9",data);
+							mui.toast(data.responseInfo.responseMessage);
+							if(id==2){
+								mui.alert("您的分享链接为："+data.shareInfo.shareUrl+"\n"+"密码为："+data.shareInfo.sharePassword);
+							}
+							if(id==3){
+								mui.alert("您的分享链接为："+data.shareInfo.shareUrl);
+							}
+						}
+					});
+				}else if(obj.fileIdList==""&&obj.folderIdList!=""){//分享文件夹
+					obj.folderIdList=obj.folderIdList.substring(1);
+					console.log("folderIdList:"+obj.folderIdList);
+					$.ajax({
+						type:'POST',
+						url:userInfo.url+'/cloud/shareFile?type=json&tokenId='+userInfo.tokenId+"&projectId="+userInfo.projId+"&groupId="+obj.groupId+"&shareType="+id+"&shareName="+obj.shareName[0]+"&folderIdList="+obj.folderIdList,
+			            beforeSend:function(request){
+						},
+						dataType:'json',
+						success:function(data){
+							console.log("4.9",data);
+							mui.toast(data.responseInfo.responseMessage);
+							if(id==2){
+								mui.alert("您的分享链接为："+data.shareInfo.shareUrl+"\n"+"密码为："+data.shareInfo.sharePassword);
+							}
+							if(id==3){
+								mui.alert("您的分享链接为："+data.shareInfo.shareUrl);
+							}
+							
+							
+						}
+					});
+				}else if(obj.fileIdList!=""&&obj.folderIdList!=""){
+					mui.toast("不能同时分享文件夹和文件！");
+					return;
+				}
+				mui('#share').popover('toggle');
+				obj.fileId="";
+				obj.fileIdList="";
+				obj.folderIdList="";
+//				$('.footer').hide();
+				$('.circle').css('padding', '4px').css('top', '30px').removeClass('padding mui-icon mui-icon-checkmarkempty');
+			}); 
+			
+			/*删除*/
+			$('.dels').on('tap', function(e){
+				console.log(obj.fileId+"--"+obj.fileType)
+				$.ajax({
+					type:'POST',
+					url:userInfo.url+'/cloud/deleteFile?type=json',
+		            beforeSend:function(request){
+					},
+					data:{
+						projectId:userInfo.projId,       
+						groupId:obj.groupId,
+						fileId:obj.fileId,
+						fileType:obj.fileType,
+						tokenId:userInfo.tokenId
+					},
+					dataType:'json',
+					success:function(data){
+						if(data.responseInfo.responseCode==1){
+							mui.toast(data.responseInfo.responseMessage);
+							if(obj.fileType==1){
+								location.reload();
+								plus.nativeUI.showWaiting().close();
+							}else{
+								$('.circle').css('padding', '4px').css('top', '30px').removeClass('padding mui-icon mui-icon-checkmarkempty');
+								//刷新
+								obj.currentPage=1;
+								getlist();
+							}
+						}else{
+							mui.toast(data.responseInfo.responseMessage);
+							return;
+						}
+					}
+				});
+			});
+			//侧边栏滑动
+			mui('#home_scroll').scroll();
+		</script>
+	</body>
+
+</html>

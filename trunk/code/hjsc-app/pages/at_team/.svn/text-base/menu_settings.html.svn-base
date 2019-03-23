@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>菜单设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/dragula.css" />
+
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">菜单设置</h1>
+		</header>
+
+		<div class="top-title">
+
+			<span>主菜单将根据下面排列显示</span>
+			<span>拖动</span>
+			<span>显示/隐藏</span>
+
+		</div>
+		<!-- 主页面内容容器 -->
+		<!--<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll" id="list">-->
+		<ul id="add_app" class="mui-table-view">
+
+			<li v-cloak class="mui-table-view-cell mui-media" v-for="(item,index) in items" :accesskey="index" v-show="item.isShow">
+				<a href="javascript:;">
+					<img class="mui-media-object mui-pull-left" :src="'../../'+item.imgurl">
+					<label style="line-height: 54px;">{{item.name}}</label>
+
+					<div>
+						<img class="three-one" src="../../icon/cdsz_drag.png" />
+					</div>
+
+					<div class="mui-switch mui-switch-mini mui-switch-blue"  v-bind:class="{'mui-active':item.checked}">
+						<div class="mui-switch-handle" v-on:click="checked(index,item.checked)" ></div>
+					</div>
+
+				</a>
+
+			</li>
+
+		</ul>
+		<!--</div>
+		</div>-->
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/dragula.js"></script>
+		<script type="text/javascript">
+			mui.init()
+
+			var itemsdata = JSON.parse(localStorage.getItem("list")); //获取.getItem("list");//获取
+			var addapp = new Vue({
+				el: '#add_app',
+				data: function() {
+					return {
+						items: itemsdata,
+					}
+				},
+				methods: {
+					checked: function(index, isShow) {
+						addapp.items[index].checked = !isShow;
+						localStorage.setItem("list", JSON.stringify(addapp.items));
+					}
+				}
+			})
+
+			//dragula([document.getElementById('add_app')]);
+
+			dragula([document.getElementById('add_app')], {
+				//removeOnSpill: true
+				//防止拖动后屏幕滑动
+				moves: function(el, container, handle) {
+					return handle.className === 'three-one';
+				},
+				copy: function(el, source) {
+				},
+
+			}).on("drop", (el, target, source, sibling) => {
+				// 只有顺序改变时才会触发该方法 sibling没有值，代表是移动了最后一个位置。
+				/*this.props.TicketForm.changeFieldSort(
+					el.dataset.id,
+					sibling.dataset.id
+				)*/
+				
+			    var sortArr = [];
+				$("#add_app li").each(function(index,data){
+					var sortIndex = $(data).attr("accesskey");
+					sortArr.push(addapp.items[sortIndex]);
+				});
+				localStorage.setItem("list", JSON.stringify(sortArr));
+
+			});
+
+			/*$('#add_app').on('change', function() {
+				alert();
+			})*/
+
+			//			$("#add_app").bind('DOMNodeInserted', function(e) {
+			//				//alert('element now contains: ' + $(e.target).html());
+			//				//$('#home_scroll').css('overflow','auto');
+			//				//$('li').css('touch-action','auto');
+			//				console.log("拖动了");
+			//			});
+
+			//mui('#home_scroll').scroll();
+
+			// 获取页面的高度、宽度
+			function getPageSize() {
+				var xScroll, yScroll;
+				if(window.innerHeight && window.scrollMaxY) {
+					xScroll = window.innerWidth + window.scrollMaxX;
+					yScroll = window.innerHeight + window.scrollMaxY;
+				} else {
+					if(document.body.scrollHeight > document.body.offsetHeight) { // all but Explorer Mac    
+						xScroll = document.body.scrollWidth;
+						yScroll = document.body.scrollHeight;
+					} else { // Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari    
+						xScroll = document.body.offsetWidth;
+						yScroll = document.body.offsetHeight;
+					}
+				}
+				var windowWidth, windowHeight;
+				if(self.innerHeight) { // all except Explorer    
+					if(document.documentElement.clientWidth) {
+						windowWidth = document.documentElement.clientWidth;
+					} else {
+						windowWidth = self.innerWidth;
+					}
+					windowHeight = self.innerHeight;
+				} else {
+					if(document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode    
+						windowWidth = document.documentElement.clientWidth;
+						windowHeight = document.documentElement.clientHeight;
+					} else {
+						if(document.body) { // other Explorers    
+							windowWidth = document.body.clientWidth;
+							windowHeight = document.body.clientHeight;
+						}
+					}
+				}
+				// for small pages with total height less then height of the viewport    
+				if(yScroll < windowHeight) {
+					pageHeight = windowHeight;
+				} else {
+					pageHeight = yScroll;
+				}
+				// for small pages with total width less then width of the viewport    
+				if(xScroll < windowWidth) {
+					pageWidth = xScroll;
+				} else {
+					pageWidth = windowWidth;
+				}
+				arrayPageSize = new Array(pageWidth, pageHeight, windowWidth, windowHeight);
+				return arrayPageSize;
+			}
+		</script>
+
+	</body>
+
+</html>

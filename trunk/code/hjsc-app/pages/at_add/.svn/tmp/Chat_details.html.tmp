@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>选择群组</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.tit-right {
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: #fff;
+		}
+		
+		.management {
+			padding: 15px;
+			padding-top: 0;
+			box-sizing: border-box;
+			background: #fff;
+		}
+		
+		.pic_mount {
+			float: left;
+			margin-top: 15px;
+		}
+		
+		.pic_mount .augment,
+		.pic_mount .reduce {
+			width: 2.4rem;
+			height: 2.4rem;
+			border-radius: 8px;
+			border: 1px solid #ccc;
+		}
+		
+		.pic_mount:nth-of-type(2) {
+			margin: 0 0.6rem;
+			margin-top: 15px;
+		}
+		
+		.pic_mount:nth-of-type(4) {
+			margin: 0 0.6rem;
+			margin-top: 15px;
+		}
+		
+		.pic_mount:nth-of-type(7) {
+			margin: 0 0.6rem;
+			margin-top: 15px;
+		}
+		
+		.management .pic_name>img {
+			/*width: 57px;
+			height: 57px;*/
+			width: 2.4rem;
+			height: 2.4rem;
+		}
+		
+		.management .pic_name p {
+			font-size: 14px;
+			color: rgb(102, 102, 102);
+			text-align: center;
+		}
+		
+		.mui-bar-nav~.mui-content {
+			padding-top: 50px;
+		}
+		
+		.fl {
+			float: left;
+		}
+		
+		.fr {
+			float: right;
+		}
+		
+		.meeting_room {
+			margin: 15px 0;
+			background: #fff;
+			font-size: 16px;
+			padding: 0 15px;
+			line-height: 40px;
+		}
+		
+		.meeting_room .fl {
+			color: rgb(51, 51, 51);
+		}
+		
+		.meeting_room .fr {
+			color: rgb(102, 102, 102);
+		}
+		
+		.meeting_room input {
+			border: none;
+			margin-bottom: 0;
+			padding: 0 !important;
+		}
+		.stick{
+			background: #fff;
+		    padding: 0 15px;
+            line-height: 40px;
+		}
+		.discurlb{
+			background: #fff;
+		    padding: 0 15px;
+            line-height: 40px;
+		}
+		.btn_mt{
+			margin-top: 5px;
+		}
+		.clear_meeting{
+			background: #fff;
+		    padding: 0 15px;
+            line-height: 40px;
+            margin: 15px 0;
+		}
+	</style>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">聊天详情</h1>
+		</header>
+		<div class="mui-content">
+			<!--模拟微信添加人物-->
+			<div class="management">
+				<div class="pic_mount">
+					<div class="pic_name">
+						<img src="../../icon/Chat_01.png" />
+						<p>李林</p>
+					</div>
+				</div>
+				<div class="pic_mount">
+					<div class="pic_name">
+						<img src="../../icon/Chat_01.png" />
+						<p>李林</p>
+					</div>
+				</div>
+				<div class="pic_mount">
+					<div class="pic_name">
+						<img src="../../icon/Chat_01.png" />
+						<p>李林</p>
+					</div>
+				</div>
+				<div class="pic_mount">
+					<div class="pic_name">
+						<img src="../../icon/Chat_01.png" />
+						<p>李林</p>
+					</div>
+				</div>
+				<div class="pic_mount">
+					<div class="pic_name">
+						<img src="../../icon/Chat_01.png" />
+						<p>李林</p>
+					</div>
+				</div>
+				<div class="pic_mount">
+					<div class="augment">
+						+
+					</div>
+				</div>
+				<div class="pic_mount">
+					<div class="reduce">
+						-
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--对话详情主体-->
+			<div class="meeting_room">
+				<div class="fl">会议室名称</div>
+				<div class="fr"><input type="text" maxlength="10" value="河南和商品住宅项目..." /><i></i></div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--置顶设置-->
+			<div class="stick">
+				<div class="fl">置顶设置</div>
+				<div class="fr">
+					<!-- 简洁模式开关关闭状态 -->
+					<div class="mui-switch mui-switch-mini btn_mt">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--消息免打扰-->
+			<div class="discurlb">
+				<div class="fl">消息免打扰</div>
+				<div class="fr">
+					<!-- 简洁模式开关关闭状态 -->
+					<div class="mui-switch mui-switch-mini btn_mt">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--清空会议记录-->
+			<div class="clear_meeting">
+				清空会议记录
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript">
+		</script>
+	</body>
+
+</html>

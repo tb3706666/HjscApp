@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>工程任务</title>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+		<link rel="stylesheet" href="../../css/subject.css" />
+		<link rel="stylesheet" href="../../css/minirefresh.css" />
+		<style>
+			.mescroll-upwarp {
+				margin-bottom: 50px;
+			}
+			
+			.mescroll-totop {
+				bottom: 70px;
+			}
+			
+			.minirefresh-theme-default .minirefresh-downwrap {
+				top: 112px;
+			}
+			
+			.minirefresh-theme-default .minirefresh-upwrap {
+				margin-bottom: 0px;
+			}
+			
+			.title {
+				z-index: 14;
+				position: fixed;
+				width: 100%;
+				top: 50px;
+			}
+			
+			.minirefresh-scroll {
+				margin-top: 89px;
+			}
+			
+			.minirefresh-totop {
+				display: none;
+			}
+			
+			.minirefresh-upwrap {
+				background: rgb(245, 245, 245);
+			}
+			
+			.mui-backdrop {
+				background-color: rgba(0, 0, 0, .2);
+			}
+			/*清除浮动*/
+			
+			.mui-card-footer {
+				clear: both;
+			}
+			
+			.phone1>div:nth-of-type(3n-1) {
+				margin: 0 2%;
+			}
+			/*图片*/
+			
+			.ipimg,
+			.ipdoc {
+				width: 32%;
+				height: 3.5rem;
+				display: inline-block;
+				float: left;
+				text-align: center;
+				margin-bottom: 2%;
+				position: relative;
+			}
+			/*#phone1>div:nth-of-type(3n-1){
+	margin: 0 2%;
+}*/
+			
+			.ipimg>img {
+				width: 100%;
+				height: 100%;
+			}
+			/*文本*/
+			
+			.docimg {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+			}
+			
+			.docfont {
+				text-align: center;
+				color: #6B6B6B;
+				font-size: 14px;
+				font-weight: bold;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+				width: 100%;
+				padding: 0 5%;
+			}
+			
+			.go {
+				background: rgba(0, 0, 0, 0.5);
+				color: #fff;
+				font-size: 14px;
+				font-weight: bold;
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+			
+			.detail-img {
+				margin: 0;
+			}
+			/*勾*/
+			
+			.ztgou {
+				position: absolute;
+				top: 12px;
+				right: 8px;
+			}
+			/*筛选*/
+			
+			.ztname1,
+			.ztname2,
+			.ztname3 {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+				height: 45px;
+				line-height: 45px;
+				padding-right: 8px;
+				float: left;
+			}
+			/*筛选箭头*/
+			
+			.other {
+				background-position: 76px 16px;
+			}
+			
+			.mui-scroll-wrapper {
+				overflow: auto;
+			}
+			/*显示菜单*/
+			
+			.max220 {
+				height: 100%;
+				max-height: 220px;
+			}
+			
+			.title-select {
+				width: 40%;
+			}
+			
+			.title {
+				top: 50px;
+			}
+			
+			.minirefresh-scroll {
+				/*margin-top: 144px;*/
+				margin-top: 94px;
+			}
+			
+			.mui-card-media {
+				color: black !important;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				top: 50%;
+			}
+			
+			.mr {
+				margin-right: 10px;
+			}
+			
+			.popover_body {
+				width: 105px;
+				text-align: center;
+			}
+			
+			#completion {
+				background-color: #343b43;
+				overflow: hidden;
+			}
+			
+			.mui-popover .mui-table-view {
+				background-color: #343b43;
+				color: #fff;
+				font-size: 14px;
+			}
+			
+			.mui-popover .mui-popover-arrow:after {
+				background-color: #343b43;
+			}
+			
+			.mui-table-view-cellnew {
+				padding: 13px 15px;
+			}
+			
+			.mui-popup-button {
+				width: 100%;
+			}
+			
+			.loading {
+				width: 50px;
+				height: 50px;
+				z-index: 999999;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -25px;
+				margin-left: -25px;
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="content">
+			<img class="loading" src="../../icon/loading.gif" />
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left menus" id="menus" href="#offCanvasSide"></a>
+				<span class="mui-icon mui-icon-back mui-pull-left backs" style="display: none;" @click="back()">
+				<!--<input id="parentid"></input>-->
+			</span>
+				<!--<span id="menus" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></span>-->
+				<h1 style="pointer-events: none;" id="title" class="mui-title">
+				<!--进行时-->
+					
+				{{title}}
+			</h1>
+				<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)" id="addEvent" @click="addEvent()"><span class="addSubject">我的任务</span></a>
+			</header>
+			<!--<div class="total_date">
+				<div class="fl">
+					{{time}}
+
+				</div>
+				<div class="fr">
+					正常运行
+				</div>
+			</div>-->
+			<div class="title">
+				<div class="title-select">
+					<a href="#projectPopover" class="bg_sanjiao other ztname1">当前群组</a>
+				</div>
+
+				<div class="title-select">
+					<a href="#completion" class="bg_sanjiao other ztname2">全部</a>
+				</div>
+			</div>
+
+			<div id="test" class="minirefresh-wrap">
+
+				<div class="minirefresh-scroll">
+					<div class="mui-card " id="card" style="background: #F5F5F5;">
+						<ul class="mui-table-view mui-table-view-chevron gainIndex">
+							<li class="mui-table-view-cell mui-media" v-for="(item , index) in rtData" :key="index" v-on:click="twoPages(index)" v-cloak>
+								<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left" src="../../icon/cpsldh1.png">
+									<div class="mui-media-body">
+										<span class="taskName">{{item.taskName}}</span>
+										<p>
+											<p class="plan">计划周期：{{item.taskStart | switchingTime7}}~{{item.taskEnd | switchingTime7}}</p>
+											<p class="reality">实际周期：{{item.realTaskStart | switchingTime7}}~{{item.realTaskEnd | switchingTime7}}</p>
+											<!--<span>{{item.actualStatusStr}}</span>-->
+										</p>
+										<p><span class="mr">#{{item.completeTaskCode}}</span><span>{{item.actualStatusStr}}</span></p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!--当前群组-->
+		<div id="projectPopover" class="mui-popover max220">
+			<div class="mui-popover-arrow"></div>
+			<!--<div class="mui-scroll-wrapper">-->
+			<!--<div class="mui-scroll">-->
+
+			<ul class="mui-table-view bag">
+
+				<li class="mui-table-view-cell" v-for="(item,index) in titleList" :groupId="item.groupId">
+					<a href="javascript:void(0)">
+						<span class="hone">{{item.groupName}}</span>
+						<span class="ztgou" :projectId="item.ID" :class="{project:true, project2:index == 0 }">
+									<span v-show="index == 0">✓</span>
+						</span>
+					</a>
+				</li>
+
+			</ul>
+			<!--</div>-->
+		</div>
+		</div>
+
+		<!--全部-->
+		<div id="completion" class="mui-popover max220 popover_body">
+			<div class="mui-popover-arrow"></div>
+			<!--<div class="mui-scroll-wrapper">-->
+			<div class="mui-scroll" id="titleList">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cellnew">
+						<span class="hone">未开始</span>
+					</li>
+					<li class="mui-table-view-cellnew">
+						<span class="hone">正常运行</span>
+					</li>
+					<li class="mui-table-view-cellnew">
+						<span class="hone">进度提前</span>
+					</li>
+					<li class="mui-table-view-cellnew">
+						<span class="hone">进度拖延</span>
+					</li>
+					<li class="mui-table-view-cellnew">
+						<span class="hone">正常完成</span>
+					</li>
+					<li class="mui-table-view-cellnew">
+						<span class="hone">提前完成</span>
+					</li>
+					<li class="mui-table-view-cellnew">
+						<span class="hone">拖延完成</span>
+					</li>
+					<li class="mui-table-view-cellnew">
+						<span class="hone">全部</span>
+					</li>
+				</ul>
+			</div>
+			<!--</div>-->
+		</div>
+
+		<!--<script type="text/javascript" src="../../js/minirefresh.js"></script>-->
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../js/mask.js"></script>
+
+		<!--<script src="../../js/subject.js"></script>-->
+		<script>
+			mui.back = function() {
+				if(window.history && window.history.pushState) {
+					$(window).on('popstate', function() {
+						window.history.pushState('forward', null, '#');
+						window.history.forward(1);
+					});
+				}
+                return false;
+			}
+			//防止冒泡
+			$(document).on("tap", '.go', function() {
+				var infos = $(this).attr('location');
+				mui.openWindow({
+					url: 'Space_container.html',
+					id: 'Space_container',
+					extras: {
+						infos: infos,
+					},
+				});
+			});
+
+			// 全局变量
+			var newRtData = [];
+			var app;
+
+			var newdataArr = [];
+			$(function() {
+				init_GroupId();
+				var app1 = new Vue({
+
+				});
+				var userInfo = getGlobalUserInfo();
+				console.log('userInfo', userInfo);
+				app = new Vue({
+					el: '.content',
+					data() {
+						return {
+							rtData: '',
+							aChildren: '',
+							rtDataflag: 0,
+							threeChildren: '',
+							title: '工程任务',
+							allData: [],
+							allIndex: [],
+							oIndex: 0, //页面
+							newClass: []
+						}
+					},
+					created() {
+						localStorage.setItem('pageIndex', 0);
+						mui.createMask().show();
+						$('.loading,.mui-backdrop').show();
+						var _that = this;
+						console.log(userInfo.groupId);
+
+						$.ajax({
+							type: 'POST',
+							url: userInfo.url + '/mobile/' + userInfo.projId + '/task/list',
+							beforeSend: function(request) {
+								request.setRequestHeader('tokenId', userInfo.tokenId);
+							},
+							data: {
+								'ugId': userInfo.groupId,
+								'taskName': '',
+								'entId': userInfo.entid,
+								'isFinish': userInfo.entid
+							},
+							async: true,
+							dataType: 'JSON',
+							success: function(data) {
+								$('.loading,.mui-backdrop').hide();
+								//								第一次赋值
+								_that.rtData = data.rt;
+								newRtData = _that.rtData;
+								//								var oJson = {};
+								//								oJson['0'] = _that.rtData;
+								_that.allData.push(_that.rtData);
+								//								_that.title=_that.rtData[0].taskName;
+								console.log(data.rt);
+							}
+						})
+					},
+					components: {
+						'twopage': {
+							props: ['childrenData'],
+							template: `<ul class="mui-table-view mui-table-view-chevron gainIndex"><li v-for="(item , index) in childrenData" :key="index" class="mui-table-view-cell mui-media"><a class="mui-navigate-right"><img class="mui-media-object mui-pull-left" src="../../icon/cpsldh1.png"><div class="mui-media-body"><span class="taskName">{{item.taskName}}</span><p><span class="mr">{{item.taskStart | switchingTime7}}~{{item.taskEnd | switchingTime7}}</span><span>{{item.actualStatusStr}}</span></p><p><span class="mr">#{{item.completeTaskCode}}</span><span>*</span></p></div></a></li></ul>`,
+						}
+					},
+					mounted: function() {
+						var _that = this;
+						this.screeningClickFunc()
+//						mui.back = function() {
+//							alert(333);
+//							_that.back();
+//							return false;
+//						}
+					},
+					methods: {
+						twoPages: function(index) {
+							//							switchingTime7
+							console.log(index);
+							$("#parentid").text(index);
+							$(".menus").css("display", "none");
+							$(".backs").css("display", "block");
+							var oRtData = this.rtData;
+
+							console.log('pageIndex', oRtData[index].taskParId);
+							if(oRtData[index].children != null) {
+
+								this.title = this.rtData[index].taskName;
+								this.time = this.changeTime(this.rtData[index].taskStart) + '~' + this.changeTime(this.rtData[index].taskEnd);
+								this.rtData = oRtData[index].children;
+
+								//							拿到的所有数据
+								var lastData = this.rtData;
+
+								//								var pageKey = oRtData[index].taskParId;
+								//								var json = {
+								//
+								//								};
+								//								json[pageKey] = this.rtData;
+								this.allData.push(this.rtData);
+								localStorage.setItem('alldata', JSON.stringify(this.allData));
+								this.newClass = this.rtData;
+								//                          存储当前页面的列表的索引
+								var aJson = {};
+								aJson[this.oIndex] = index;
+								this.allIndex.push(aJson);
+								localStorage.setItem('nowListIndex', JSON.stringify(this.allIndex));
+								this.oIndex += 1;
+								//							存储当前页面层级
+								localStorage.setItem('pageIndex', this.oIndex);
+								console.log('aa', this.rtData);
+								//								console.log('zz', json);
+							} else {
+								mui.toast("没有更多数据了", '提示', function() {});
+							}
+
+							console.log('title', this.title);
+						},
+						// 点击筛选
+						screeningClickFunc: function() {
+							console.log('newrtData', newRtData);
+							var _that = this;
+							$('#completion .mui-table-view-cellnew').each(function(index, element) {
+								$(element).on('tap', function() {
+									mui('#completion').popover('hide');
+									$('.ztname2').html($(this).text().replace('✓'));
+									var _oSpan = $('#completion .mui-table-view-cellnew').eq(index).children().html();
+									console.log(_oSpan);
+
+									var oDataArr = [];
+									var oDataArr1 = [];
+
+									if(localStorage.getItem('pageIndex') == _that.oIndex) {
+
+										console.log(_oSpan);
+										var oallData = newRtData;
+										var oNewRtData = _that.rtData;
+										console.log(oNewRtData);
+										if(_oSpan == '全部') {
+
+											oDataArr = [];
+											for(var j = 0; j < _that.newClass.length; j++) {
+												oDataArr1.push(_that.newClass[j]);
+											}
+
+										} else if(_oSpan == '未开始') {
+
+											for(var k = 0; k < _that.newClass.length; k++) {
+
+												if(_that.newClass[k].actualStatusStr == '未开始') {
+													oDataArr1.push(_that.newClass[k]);
+												}
+											}
+										} else if(_oSpan == '正常运行') {
+
+											for(var l = 0; l < _that.newClass.length; l++) {
+
+												if(_that.newClass[l].actualStatusStr.indexOf("%") != -1) {
+													oDataArr1.push(_that.newClass[l]);
+												}
+											}
+										} else if(_oSpan == '正常完成') {
+
+											for(var h = 0; h < _that.newClass.length; h++) {
+
+												if(_that.newClass[h].actualStatusStr == '全部完成') {
+													oDataArr1.push(_that.newClass[h]);
+												}
+											}
+										} else if(_oSpan == '进度拖延') {
+
+											for(var w = 0; w < _that.newClass.length; w++) {
+
+												if(_that.newClass[w].actualStatusStr == '进度拖延') {
+													oDataArr1.push(_that.newClass[w]);
+												} else {
+													console.log("暂无数据");
+												}
+											}
+										} else if(_oSpan == '拖延完成') {
+
+											for(var p = 0; p < _that.newClass.length; p++) {
+
+												if(_that.newClass[p].actualStatusStr == '拖延完成') {
+													oDataArr1.push(_that.newClass[p]);
+												} else {
+													console.log("暂无数据");
+												}
+											}
+										} else {
+											console.log("暂无数据");
+										}
+										_that.rtData = oDataArr1;
+									}
+									if(localStorage.getItem('pageIndex') == _that.oIndex && localStorage.getItem('pageIndex') == 0) {
+										console.log(_oSpan);
+										var oallData = newRtData;
+										var oNewRtData = _that.rtData;
+										var oDataArr = [];
+										if(_oSpan == '全部') {
+
+											oDataArr = [];
+											for(var j = 0; j < oallData.length; j++) {
+												oDataArr.push(oallData[j]);
+											}
+
+										} else if(_oSpan == '未开始') {
+
+											for(var k = 0; k < oallData.length; k++) {
+
+												if(oallData[k].actualStatusStr == '未开始') {
+													oDataArr.push(oallData[k]);
+												}
+											}
+										} else if(_oSpan == '正常运行') {
+
+											for(var l = 0; l < oallData.length; l++) {
+
+												if(oallData[l].actualStatusStr.indexOf("%") != -1) {
+													oDataArr.push(oallData[l]);
+												}
+											}
+										} else if(_oSpan == '正常完成') {
+
+											for(var h = 0; h < oallData.length; h++) {
+
+												if(oallData[h].actualStatusStr == '全部完成') {
+													oDataArr.push(oallData[h]);
+												}
+											}
+										} else if(_oSpan == '进度拖延') {
+
+											for(var w = 0; w < oallData.length; w++) {
+
+												if(oallData[w].actualStatusStr == '进度拖延') {
+													oDataArr.push(oallData[w]);
+												} else {
+													console.log("暂无数据");
+												}
+											}
+										} else if(_oSpan == '拖延完成') {
+
+											for(var p = 0; p < oallData.length; p++) {
+
+												if(oallData[p].actualStatusStr == '拖延完成') {
+													oDataArr.push(oallData[p]);
+												} else {
+													console.log("暂无数据");
+												}
+											}
+										} else {
+											console.log("暂无数据");
+										}
+										_that.rtData = oDataArr;
+									}
+
+								})
+							})
+
+						},
+						//						pageIndex 确定是哪个页面
+						//						转换时间
+						changeTime: function(time) {
+							console.log(time);
+							var date = new Date(time);
+							var year = date.getFullYear();
+							var month = date.getMonth() + 1;
+							var day = date.getDate();
+							var finish = addZero(year) + '/' + addZero(month) + '/' + addZero(day);
+							console.log('finish', finish);
+							return finish;
+
+						},
+						back: function() {
+							var pageindex = localStorage.getItem('pageIndex') - 1;
+							var nowlistIndex = localStorage.getItem('nowListIndex');
+							var oAlldata = eval('(' + localStorage.getItem('alldata') + ')');
+							var oAllIndex = eval('(' + localStorage.getItem('nowListIndex') + ')');
+
+							this.rtData = oAlldata[pageindex];
+							console.log('alldata1', oAlldata[pageindex - 1]);
+							for(var key in oAllIndex[pageindex - 1]) {
+								var aaindex = oAllIndex[pageindex - 1][key];
+								this.title = oAlldata[key][aaindex].taskName;
+							}
+
+							if(localStorage.getItem('pageIndex') == 1) {
+								this.title = '工程任务';
+								$(".menus").css("display", "block");
+								$(".backs").css("display", "none");
+							}
+							this.oIndex = this.oIndex - 1;
+							console.log('oIndex', this.oIndex)
+							this.time = '2018/10/11~2019/07/21';
+							oAlldata.pop();
+							oAllIndex.pop();
+							this.allData = oAlldata;
+							this.allIndex = oAllIndex;
+							localStorage.setItem('alldata', JSON.stringify(oAlldata));
+							localStorage.setItem('nowListIndex', JSON.stringify(oAllIndex));
+							localStorage.setItem('pageIndex', pageindex);
+						},
+						//						初始化数据
+						dataInit: function() {
+							var _that = this;
+							console.log(userInfo.groupId);
+
+							$.ajax({
+								type: 'POST',
+								url: userInfo.url + '/mobile/' + userInfo.projId + '/task/list',
+								beforeSend: function(request) {
+									request.setRequestHeader('tokenId', userInfo.tokenId);
+								},
+								data: {
+									'ugId': userInfo.groupId,
+									'taskName': '',
+									'entId': userInfo.entid,
+									'isFinish': userInfo.entid
+								},
+								async: true,
+								dataType: 'JSON',
+								success: function(data) {
+									$('.loading,.mui-backdrop').hide();
+									_that.rtData = data.rt;
+									newRtData = _that.rtData;
+									//								_that.title=_that.rtData[0].taskName;
+									console.log(data.rt);
+								}
+							})
+						},
+						addEvent: function() {
+							mui.openWindow({
+								url: '../at_add/mytask.html',
+								id: 'mytask'
+							})
+						}
+					}
+				});
+			});
+
+			//4.1 获取群组列表id  渲染群组
+			function init_GroupId() {
+				var userInfo = getGlobalUserInfo();
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/cloud/getGroupList?type=json',
+					data: {
+						'projectId': userInfo.projId,
+						'tokenId': userInfo.tokenId
+					},
+					async: true,
+					dataType: 'json',
+					success: function(data) {
+						if(data.responseInfo.responseCode == 101) {
+							mui.toast(data.responseInfo.responseMessage);
+						} else {
+							//若用户存在于“质量检查、安全检查和质量验收”群组内，在当前群组下拉框中隐藏这3个群组
+							//				console.log(data.userGroupList);
+							var datas = [];
+							for(var i = 0; i < data.userGroupList.length; i++) {
+
+								if(data.userGroupList[i].groupName == "质量检查" || data.userGroupList[i].groupName == "安全检查" || data.userGroupList[i].groupName == "质量验收" || data.userGroupList[i].groupName == "安全验收") {} else {
+									datas.push(data.userGroupList[i]);
+								}
+
+							};
+							var gids = new Vue({
+								el: '#projectPopover',
+								data: {
+									titleList: datas
+								},
+
+								mounted: function() {
+									console.log(this.titleList);
+									$('.ztname1').html(this.titleList[0].groupName);
+									$("#projectPopover .mui-table-view-cell").on('tap', function() {
+										mui('#projectPopover').popover('hide');
+										$('.ztname1').html($(this).text().replace('✓'));
+										$('.project2').empty();
+										$(".project span").html("");
+										$('.groupId').removeClass('groupId2');
+										$(this).find('.groupId').addClass('groupId2');
+										$(this).find('.project2').html("✓");
+										$(this).find(".project span").html("✓").show();
+										var ugid = $(this).find('span').attr("groupId");
+										userInfo.groupId = ugid;
+										setGlobalUserInfo(userInfo);
+										//										 
+										//										mui('#groupPopover').popover('toggle');
+										ischeck = true;
+										var groupId = $(this).attr("groupId"); //lc1
+
+										$.ajax({
+											type: 'POST',
+											url: userInfo.url + '/mobile/' + userInfo.projId + '/task/list',
+											beforeSend: function(request) {
+												request.setRequestHeader('tokenId', userInfo.tokenId);
+											},
+											data: {
+												'ugId': groupId,
+												'taskName': '',
+												'entId': userInfo.entid,
+												'isFinish': userInfo.entid
+											},
+											async: true,
+											dataType: 'JSON',
+											success: function(data) {
+
+												//_that.rtData = data.rt;
+												app.rtData = data.rt;
+											}
+										});
+									});
+									//									mui('#groupPopover .mui-scroll-wrapper').scroll();
+									var qzh = $('#groupPopover ul li').length * 37 + 'px';
+									$('#groupPopover').height(qzh);
+								}
+							});
+
+						}
+
+					}
+				})
+			}
+			mui('#completion').scroll();
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,620 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>主题</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+		<style>
+			/*进入样式*/
+			
+			.mui-bar {
+				background-color: #43484e;
+			}
+			
+			.mui-bar .mui-title,
+			.mui-bar .mui-icon {
+				color: #fff;
+			}
+			/*新闻滚动*/
+			
+			.root {
+				height: 50px;
+				line-height: 50px;
+				border-top: 1px solid #ccc;
+				font-size: 17px;
+				overflow: hidden;
+				background-color: #fff;
+				position: relative;
+			}
+			
+			.mainleft {
+				float: left;
+				padding: 0 10px;
+				color: #0487d0;
+				width: 35%;
+				text-align: center;
+				font-weight: bold;
+			}
+			
+			.mainleft:after {
+				content: '';
+				height: 30px;
+				top: 10px;
+				width: 1px;
+				position: absolute;
+				left: 35%;
+				background-color: #e6e6e6;
+			}
+			
+			.mainright {
+				float: right;
+				padding: 0 15px;
+				width: 65%;
+			}
+			
+			@media screen and (max-width: 320px) {
+				.mainright {
+					font-size: 16px;
+				}
+			}
+			/*常用应用*/
+			
+			.mui-col-sm-3 {
+				width: 20%;
+			}
+			
+			.mui-grid-view.mui-grid-9 {
+				background-color: #fff;
+				border: 0;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				padding: 3px 0;
+				border: 0;
+			}
+			
+			#application {
+				background-color: #fff;
+				margin-top: 20px;
+			}
+			
+			.addSubject {
+				font-size: 15px;
+			}
+			
+			.mui-bar-nav.mui-bar .mui-icon {
+				line-height: 30px;
+			}
+			
+			.title-select {
+				display: inline-block;
+				width: 25%;
+				margin: 0 12px;
+			}
+			
+			.title {
+				height: 44px;
+				background-color: #fff;
+				text-align: center;
+				line-height: 44px;
+				font-size: 14px;
+				color: #666;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 49px;
+			}
+			
+			.bg_sanjiao {
+				background-position: 65px 6px;
+				background-size: 14px 7px;
+			}
+			
+			.hdead-img {
+				border-radius: 20px;
+				width: 42px !important;
+				height: 42px !important;
+			}
+			
+			.mui-card-header.mui-card-media .mui-media-body {
+				line-height: 21px;
+			}
+			
+			.mui-card {
+				margin: 0px;
+				margin-top: 15px;
+				box-shadow: none;
+				background: transparent;
+			}
+			
+			.mui-card-content {
+				padding: 10px;
+				padding-bottom: 2px;
+			}
+			
+			.username {
+				color: #333;
+			}
+			
+			.time {
+				font-size: 12px;
+				color: #999;
+			}
+			
+			.left_ {
+				margin-left: 10px;
+			}
+			
+			.mui-card-header.mui-card-media .mui-media-body p {
+				font-size: 12px;
+			}
+			
+			.mui-card-footer:before,
+			.mui-card-header:after {
+				height: 0px;
+			}
+			
+			.open_ {
+				color: #0487d0;
+				font-size: 16px;
+			}
+			
+			.detail-img {
+				width: 114px;
+				height: 85px;
+			}
+			
+			.detail-img-out {
+				margin-top: 15px;
+			}
+			
+			.mui-card-footer {
+				margin: 0 10px;
+				/*border-top: 1px solid #e6e6e6;*/
+				margin-top: 12px;
+			}
+			
+			.mui-card-link {
+				font-size: 14px;
+				color: #999;
+			}
+			
+			.footer-img {
+				width: 14px;
+				height: 14px;
+				margin-bottom: 2px;
+			}
+			
+			.time-one {
+				width: 10px;
+				padding-bottom: 3px;
+			}
+			/**
+ * 弹出菜单
+ */
+<<<<<<< .mine
+.mui-plus .plus {
+	display: inline;
+}
+
+.plus {
+	display: none;
+}
+
+#topPopover {
+	position: fixed;
+	top: 16px;
+	right: 6px;
+}
+
+#topPopover .mui-popover-arrow {
+	left: auto;
+	right: 6px;
+}
+span.mui-icon {
+	font-size: 14px;
+	color: #007aff;
+	margin-left: -15px;
+	padding-right: 10px;
+}
+
+.mui-popover {
+    height: 263px;	
+}
+.arrov-out{
+	float: right;
+    position: absolute;
+    right: 14px;
+    top: 8px;
+}
+.arrov-out img{
+	width: 16px;
+    height: 8px;
+}
+#topPopover{
+	width: 100%;
+	right: 0px;
+    left: -5px;
+    border-radius: 0px;    	
+}
+
+.menu-img{
+	width: 18px;
+    height: 18px;
+    margin-bottom: 2px;
+    vertical-align: text-bottom;    
+}
+.menu-font{
+	font-size: 16px;
+}
+.mui-popover .mui-scroll-wrapper{
+	margin: 0px;
+}
+
+.mui-table-view-cell:after{
+	height: 0;
+}
+
+.card-out{
+	margin-bottom: 16px;
+    background-color: #fff;
+}
+
+	</style>
+=======
+			
+			.mui-plus .plus {
+				display: inline;
+			}
+			
+			.plus {
+				display: none;
+			}
+			
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			
+			.mui-popover {
+				height: 263px;
+			}
+			
+			.arrov-out {
+				float: right;
+				position: absolute;
+				right: 14px;
+				top: 8px;
+			}
+			
+			.arrov-out img {
+				width: 16px;
+				height: 8px;
+			}
+			
+			#topPopover {
+				width: 100%;
+				right: 0px;
+				left: -5px;
+				border-radius: 0px;
+			}
+			
+			.menu-img {
+				width: 18px;
+				height: 18px;
+				margin-bottom: 2px;
+				vertical-align: text-bottom;
+			}
+			
+			.menu-font {
+				font-size: 16px;
+			}
+			
+			.mui-popover .mui-scroll-wrapper {
+				margin: 0px;
+			}
+			
+			.mui-table-view-cell:after {
+				height: 0;
+			}
+			
+			.mui-popover .mui-popover-arrow:after {
+				position: absolute;
+				top: 19px;
+				left: 0px;
+				width: 24px;
+				height: 24px;
+				content: ' ';
+				-webkit-transform: rotate(45deg);
+				transform: rotate(45deg);
+				border-radius: 3px;
+				background: #f7f7f7;
+				margin-left: -2px;
+			}
+			
+			.card-out {
+				margin-bottom: 16px;
+				background-color: #fff;
+			}
+		</style>
+>>>>>>> .r112
+	</head>
+
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		<!-- 侧滑导航根容器 -->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 菜单容器 -->
+				<aside id="offCanvasSide" class="mui-off-canvas-left">
+					<div id="left_scroll" class="mui-scroll-wrapper">
+						<!--菜单内容开始-->
+						<div class="mui-scroll">
+							<!--头部-->
+							<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+							<div id="glz_slide">
+								<leftlist :gl='gl' :items='items'></leftlist>
+							</div>
+						</div>
+						<!--菜单内容结束-->
+
+					</div>
+				</aside>
+				<!-- 主页面标题 -->
+				<header class="mui-bar mui-bar-nav">
+					<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+					<h1 class="mui-title">主题</h1>
+					<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)"><span class="addSubject">发表主题</span></a>
+				</header>
+
+				<!-- 主页面内容容器 -->
+				<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+
+						<div class="title">
+							<div class="title-select">
+								<select class="bg_sanjiao">
+									<option>单体/项目</option>
+									<option>111</option>
+									<option>222</option>
+								</select>
+							</div>
+
+							<div class="title-select">
+								<select class="bg_sanjiao">
+									<option>当前群组</option>
+								</select>
+							</div>
+
+							<div class="title-select">
+								<select class="bg_sanjiao">
+									<option>其它筛选</option>
+								</select>
+							</div>
+
+						</div>
+
+						<div class="mui-card" id="card">
+
+							<div v-for="(item, index) in list" class="card-out">
+
+								<div class="mui-card-header mui-card-media ">
+									<img :src="'../../img/' + item.img" class="hdead-img" />
+									<div class="mui-media-body">
+										<span class="username left_">{{item.name}}</span>
+										<p class="time left_"><img class="time-one" src="../../icon/ztzw_2.png" /> {{item.time}} &nbsp;{{item.from}}</p>
+									</div>
+									<!--<span class="mui-navigate-right"  ></span>-->
+									<a href="#topPopover" class="arrov-out" id="arrows"><img src="../../icon/ztzw_1.png" /></a>
+								</div>
+								<div class="mui-card-content">
+									<div>
+										{{item.detail}}
+									</div>
+									<span class="open_">展开</span>
+
+									<div class="detail-img-out">
+										<img class="detail-img" :src="'../../icon/' + item.detail_img" />
+									</div>
+
+								</div>
+
+								<div class="mui-card-footer">
+									<a class="mui-card-link"><img class="footer-img" src="../../icon/zt_1.png" />&nbsp;{{index + 1}}</a>
+									<a class="mui-card-link"><img class="footer-img" src="../../icon/zt_2.png" />&nbsp;{{item.status}}</a>
+									<a class="mui-card-link"><img class="footer-img" src="../../icon/zt_3.png" />&nbsp;{{item.commend}}</a>
+									<a class="mui-card-link"><img class="footer-img" src="../../icon/zt_4.png" />&nbsp;{{item.last_commend}}</a>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+
+		<!--右上角弹出菜单-->
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" data-id="1">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_1.png" />
+								<span class="menu-font">&nbsp;删除</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="2">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_2.png" />
+								<span class="menu-font">&nbsp;收藏</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="3">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_3.png" />
+								<span class="menu-font">&nbsp;再议</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="4">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_4.png" />
+								<span class="menu-font">&nbsp;审核</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="5">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_5.png" />
+								<span class="menu-font">&nbsp;检查</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="6">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_6.png" />
+								<span class="menu-font">&nbsp;提交</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/leftlist.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var list = [{
+<<<<<<< .mine
+				img: 'gailan.png',
+				name: '刘明利',
+				time: '11-19 15:43',
+				from: '来自网页浏览器',
+				detail: '请总包单位把入口西侧的临时模板支架收起来,'+'很多班从这个地方进出的时候不方便…',
+				detail_img: 'office2.jpg',
+				status: '正在处理',
+				commend: '217',
+				last_commend: '张亮亮'
+			},
+			{
+				img: 'gailan.png',
+				name: '钱多多',
+				time: '11-19 11:01 ',
+				from: '来自网页浏览器',
+				detail: '请总包单位把入口西侧的临时模板支架收起来，' +
+					'很多班从这个地方进出的时候不方便…',
+				detail_img: 'office3.jpg',
+				status: '正在处理',
+				commend: '135',
+				last_commend: '王明'
+			},
+			{
+				img: 'gailan.png',
+				name: '钱多多',
+				time: '11-19 11:01 ',
+				from: '来自网页浏览器',
+				detail: '请总包单位把入口西侧的临时模板支架收起来，' +
+					'很多班从这个地方进出的时候不方便…',
+				detail_img: 'office3.jpg',
+				status: '正在处理',
+				commend: '135',
+				last_commend: '王明'
+			},
+			];
+			
+=======
+					img: 'gailan.png',
+					name: '刘明利',
+					time: '11-19 15:43',
+					from: '来自网页浏览器',
+					detail: '请总包单位把入口西侧的临时模板支架收起来,' + '很多班从这个地方进出的时候不方便…',
+					detail_img: 'office2.jpg',
+					status: '正在处理',
+					commend: '217',
+					last_commend: '张亮亮'
+				},
+				{
+					img: 'gailan.png',
+					name: '钱多多',
+					time: '11-19 11:01 ',
+					from: '来自网页浏览器',
+					detail: '请总包单位把入口西侧的临时模板支架收起来，' +
+						'很多班从这个地方进出的时候不方便…',
+					detail_img: 'office3.jpg',
+					status: '正在处理',
+					commend: '135',
+					last_commend: '王明'
+				},
+			];
+
+>>>>>>> .r112
+			new Vue({
+				el: "#card",
+				data: {
+					list: list
+				}
+			});
+
+			$(function() {
+				//正确代码
+				$('.arrov-out').on('tap', function() {
+					setTimeout(function() {
+						$("#topPopover").css('left', '0px');
+					}, 20);
+				});
+			})
+
+			$('#topPopover .mui-table-view-cell').on('tap', function() {
+				var id = $(this).data('id');
+				switch(id) {
+					case 1:
+						alert('删除');
+						break;
+					case 2:
+						alert('收藏');
+						break;
+					case 3:
+						alert('再议');
+						break;
+					case 4:
+						alert('审核');
+						break;
+					case 5:
+						alert('检查');
+						break;
+					case 6:
+						alert('提交');
+						break;
+				}
+				
+				mui('#topPopover').popover('hide') 
+			})
+
+			mui('#home_scroll').scroll();
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>添加应用</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.mui-table-view {
+			margin-top: 50px;
+		}
+		
+		.mui-switch-blue.mui-active {
+			border: 2px solid #0487D0;
+			background-color: #0487D0;
+		}
+		
+		.mui-table-view .mui-media-object {
+			height: 45px;
+			line-height: 45px;
+			width: 45px;
+			max-width: 45px
+		}
+		
+		.fontz {
+			line-height: 45px;
+		}
+		
+		.mui-table-view-cell:after {
+			left: 0;
+		}
+		
+		.mui-table-view:after {
+			background-color: transparent;
+		}
+		/*添加*/
+		.mui-table-view li:last-child{
+			display: none;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">添加应用</h1>
+		</header>
+
+		<ul id="add_app" class="mui-table-view">
+
+			<li class="mui-table-view-cell mui-media" v-for="(item,index) in items" accesskey="index"  >
+				<a href="javascript:;">
+					<img class="mui-media-object mui-pull-left" :src="'../../'+item.imgurl">
+					<label class="fontz">{{item.name}}</label>
+					<div :class="['mui-switch','mui-switch-mini','mui-switch-blue',{'mui-active': item.zt}]" name="myswitch" :index='index'>
+						<div class="mui-switch-handle"></div>
+					</div>
+
+				</a>
+			</li>
+
+		</ul>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				
+				userInfo = getGlobalUserInfo(); //获取对象
+//				console.log(userInfo.itemsdata);
+				var itemsdata=localStorage.getItem('itemsdatas');
+				var info=JSON.parse(itemsdata);
+				var s=[];
+				$.each(info,function(i,e){
+					if(e.userId==userInfo.userId){
+						s=e.infos;
+					}
+				});
+				var addapp = new Vue({
+					el: '#add_app',
+					data: function() {
+						return {
+							items: s,
+						}
+					},
+				})
+				mui.init()
+				//				userInfo.itemsdata=itemsdata;
+				//				setGlobalUserInfo(userInfo);
+
+				$("div[name=myswitch]").on('tap', function() {
+					$(this).toggleClass('mui-active');
+					var index=$(this).attr('index');
+//				    var zt=userInfo.itemsdata[index].zt;
+				    var itemsdatas=localStorage.getItem('itemsdatas');
+					var infos=JSON.parse(itemsdatas);
+					var ss=[];
+					$.each(infos,function(i,e){
+						if(e.userId==userInfo.userId){
+//							s=e.infos;
+							var zt=e.infos[index].zt
+						    if(zt){
+						    	zt=false;
+						    }else{
+						        zt=true;	
+						    }
+						    e.infos[index].zt=zt;
+						    
+						}
+					});
+					localStorage.setItem('itemsdatas',JSON.stringify(infos));
+//				    setGlobalUserInfo(userInfo); 
+				})
+
+			});
+		</script>
+
+	</body>
+
+</html>

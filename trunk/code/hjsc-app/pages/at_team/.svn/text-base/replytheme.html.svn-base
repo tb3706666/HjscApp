@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>回复主题</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+
+	<style>
+		.mui-pull-right {
+			border: none;
+			color: #fff;
+			line-height: 53px;
+			font-size: 16px;
+		}
+		
+		.mui-table-view {
+			margin-top: 50px;
+		}
+		
+		.textarea_style textarea {
+			border: none;
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		
+		#nav {
+			background: #f2f2f2;
+			box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+		}
+		
+		#nav img {
+			width: 25px;
+			height: 25px;
+		}
+		
+		.mui-bar-footer {
+			border: none;
+		}
+		
+		input[type=checkbox] {
+			-webkit-appearance: checkbox;
+			width: 15px;
+			height: 15px;
+		}
+		
+		.checks {
+			margin-left: 10px;
+			    position: relative;
+    			bottom: 50px;
+		}
+		.mui-bar-tab .mui-tab-item {
+			touch-action: none;
+		}
+		
+		#textarea {
+			text-align: justify;
+			padding: 5px;
+			padding-right: 10px;
+		}
+		.mui-action-back {
+			line-height: 30px;
+		}
+		html,body {
+			background-color: #fff;
+		}
+		.mui-table-view:after,
+		.mui-table-view:before {
+			height: 0px;
+		}
+
+/*文档显示*/
+.box{
+	width: 100%;
+	display: inline-block;
+}
+.doc>div:nth-of-type(3n-1),.box>div:nth-of-type(3n-1){
+	margin: 0 2%;
+}
+.docimg{
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+}
+.docfont {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+	word-break: break-all;
+	color: #6B6B6B;
+	font-size: 14px;
+	font-weight: bold;
+}
+/*图片*/
+.ipimg,.ipdoc,.box>div{
+	width: 32%;
+	height: 3.5rem;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	margin-bottom: 2%;
+	position: relative;
+	border: 1px solid #DCDCDC;
+}
+.box>div>img{
+	height: 100%;
+	width: 100%;
+}
+.close {
+	border-radius: 20px;
+	background: #f30e0e;
+	color: #fff;
+	font-size: 16px;
+	position: absolute;
+    top: -7px;
+    right: -5px;
+}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav headstyle">
+			<a id="back" href="javascript:void(0)" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="display: none;"></a>
+			<a  class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">回复主题</h1>
+			<span class="mui-pull-right" id="sub">提交</span>
+		</header>
+
+		<div class="mui-table-view">
+			<div class="mui-input-row textarea_style" id="content">
+				<textarea id="textarea" rows="10" placeholder="写回复..."></textarea>
+			</div>
+		</div>
+		
+
+		<div style="display: inline-block;margin-bottom: 50px;">
+			<div class="box">
+				<!--<div>
+					<img class="img" src="${src}" data-preview-src="" data-preview-group="1" />
+					<span class="mui-icon mui-icon-closeempty close" index=${IMGINDEX}></span>
+				</div>-->
+				
+			</div>
+
+			<div class="doc" id="doc">
+				<div class="docOne ipdoc" v-cloak v-for="(item,index) in docList" :fileId="item.fileId">
+					<img class="docimg" :src="item.fileName | format" />
+					<span class="docfont">{{item.fileName}}</span>
+					<span class="mui-icon mui-icon-closeempty close" @click="rm(index)" :fileId="item.fileId"></span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="checks">
+			<input type="checkbox" id="ischeck" />
+			<label>同时作为新主题发表</label>
+		</div>
+
+		<nav class="mui-bar mui-bar-tab" id="nav">
+			<a id="tab_home" class="mui-tab-item mui-active">
+				<span class="mui-icon "><img src="../../icon/zt_b1.png" /></span>
+			</a>
+			<a id="tab_message" class="mui-tab-item">
+				<span class="mui-icon "><img src="../../icon/zt_b2.png" /></span>
+			</a>
+			<a id="tab_contact" class="mui-tab-item">
+				<span class="mui-icon "><img src="../../icon/zt_b3.png" /></span>
+			</a>
+			<a id="selectdoc" class="mui-tab-item">
+				<span class="mui-icon "><img src="../../icon/zt_b4.png" /></span>
+			</a>
+			<a id="tab_setting" class="mui-tab-item">
+				<span class="mui-icon "><img src="../../icon/zt_b5.png" /></span>
+			</a>
+		</nav>
+		
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/replytheme.js"></script>
+		<script type="text/javascript">
+			$("#selectdoc").on('tap', function() {
+				GoToURL('select_document.html', 'select_document.html');
+			})
+
+			$("#up").on('tap', function() {
+				var file1 = document.getElementById('file').files[0];
+				sumfile(file1);
+			})
+		</script>
+	</body>
+
+</html>

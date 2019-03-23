@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>更多设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.mui-bar {
+			background-color: #43484e;
+		}
+		
+		.mui-bar .mui-title {
+			color: #fff;
+		}
+		
+		.mui-icon-back:before,
+		.mui-icon-left-nav:before {
+			color: #fff;
+		}
+		
+		.mui-table-view {
+			margin-top: 70px;
+		}
+	    .bot{
+	    	margin-top: 27px;
+	    }
+		.mui-navigate-right:after, .mui-push-right:after {
+			    right: 5px;
+			    content: '\e583';
+			    top: 50%;
+			    font-size: 30px;
+			    color: #CCCCCC;
+			    font-size: 26px;
+			}
+	</style>
+
+	<body>
+		<!-- 主页面标题 -->
+				<header class="mui-bar mui-bar-nav">
+					<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+					<h1 class="mui-title">更多设置</h1>
+				</header>
+				
+				<div>
+					<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right" >菜单设置</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right" >锁屏设置</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right" >通知设置</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right" >下载设置</a>
+							</li>
+					</ul>
+					
+					<ul class="mui-table-view mui-table-view-chevron bot">
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right" >用户信息</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right" >程序信息</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right" >帮助与反馈</a>
+							</li>
+					</ul>
+					
+					
+					
+				</div>
+		         
+		
+		
+		
+		
+
+		
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript">
+			mui.init();
+
+			
+		</script>
+	</body>
+
+</html>

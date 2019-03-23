@@ -1,0 +1,343 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>项目名称</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+	</head>
+	<style>
+		#home_scroll{
+			padding-top: 50px;
+		}
+		/*侧边栏概览上部边线*/
+		.mui-table-view:after,.mui-table-view:before{
+			height: 0;
+		}
+		/*轮播图*/
+		.slidp{
+			position:absolute;
+			bottom:0px;
+			left: 0;
+			z-index:22;
+			background-color: rgba(10,20,30,.6); 
+			color: #fff;
+			padding:3px;
+			margin-left: 5px;
+		}
+		/*主图片*/
+		.glhomeimg{
+			width: 100%;
+			height: 9.5rem;
+		}
+		/*常用应用*/
+		.glfont{
+			font-size: 12px !important;
+			color: #666666 !important;
+		}
+		
+		/*新闻滚动*/
+		#usuallyapp{
+			background-color: #fff;
+			margin-top: 20px;
+		}
+		.root{
+		    height: 50px;
+		    line-height: 50px;
+		    /*border-top: 1px solid #ccc;*/
+		    font-size: 17px;
+		    overflow: hidden;
+		    background-color: #fff;
+		    position: relative;
+			}
+		.scrollmain{
+		    padding: 0 15px;
+		    width:100%;
+		}
+		.sleft{
+			color: #0487d0;
+			font-weight: bold;
+			float: left;
+			width: 30%;
+			text-align: center;
+		}
+		.sleft:after{
+			content: '';
+			height:30px;
+			top: 10px;
+			width: 1px;
+			position: absolute;
+			left: 30%;
+			background-color: #e6e6e6;
+		}
+
+		@media screen and (max-width: 320px){
+				.scrollmain{
+					font-size: 16px;
+				}
+		}
+		/*常用应用*/
+		.mui-col-sm-3{
+			width: 20%;
+		}
+		.mui-grid-view.mui-grid-9{
+			background-color: #fff;
+			border: 0;
+		}
+		.mui-grid-view.mui-grid-9 .mui-table-view-cell{
+			padding: 3px 0;
+			border: 0;
+		}
+		#application{
+			background-color: #fff;
+			margin-top: 20px;
+		}
+		/*第一次弹出框*/
+		.mui-popup-buttons{
+			display: block;
+			height: 140px;
+		}
+		.mui-popup-button:first-child{
+			border-radius: initial;
+		}
+		.mui-popup-button:last-child {
+		    border-radius: 0 0 13px 13px;
+		}
+		.loading{
+			width: 50px;
+			height: 50px;
+			z-index: 999999;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -25px;
+			margin-left: -25px;
+			display: none;
+		}
+	</style>
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		    <!-- 侧滑导航根容器 -->
+		    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+		        <!-- 主页面容器 -->
+		        <div class="mui-inner-wrap">
+		            <!-- 菜单容器 -->
+		            <aside id="offCanvasSide" class="mui-off-canvas-left">
+		                <div id="left_scroll" class="mui-scroll-wrapper">
+		                <!--菜单内容开始-->
+						<div class="mui-scroll">
+						<!--头部-->
+						<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+						<div id="glz_slide">
+						<leftlist :gl='gl' :items='items'></leftlist>
+						</div>
+						
+						</div>
+						<!--菜单内容结束-->
+		                </div>
+		            </aside>
+		            <!-- 主页面标题 -->
+		            <header class="mui-bar mui-bar-nav">
+		                <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+		                <h1 class="mui-title" id="headertext">项目名称</h1>
+		                <a class="mui-icon mui-action-menu mui-pull-right" href="tz.html"><img src="../../icon/gl.png" class="cicon"></a>
+		            </header>
+		            
+		            <!-- 主页面内容容器 -->
+		            <div id="home_scroll" class="mui-content mui-scroll-wrapper">
+		                <div class="mui-scroll">
+		                    
+		      <!--轮播-->
+		      
+				<div id="imgsrcoll" class="slid_home">
+					 <!-- 主界面具体展示内容 -->
+		                    <img src="../../img/slider2.png" class="glhomeimg" v-if="state==false"/>
+					
+				<div id="slider" class="mui-slider">
+				  <div class="mui-slider-group mui-slider-loop">
+				 
+				 <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+			        	    <div class="mui-slider-item mui-slider-item-duplicate" v-if="state==true">
+			        	    <p class="slidp">{{prodetail[prodetail.length-1].imgName}}</p>
+			        	    <a href="#"><img class="glhomeimg" :src="prodetail[prodetail.length-1].path"></a>
+			        	    </div>
+			        	    
+			        	    <!-- v-for循环 -->
+			        	    <div class="mui-slider-item" v-for="(item,index) in prodetail">
+			        	    <p class="slidp">{{item.imgName}}</p>
+			        	    <a href="#"><img class="glhomeimg" :src="item.path" /></a>
+			        	    </div>
+			        	    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+			        	    <div class="mui-slider-item mui-slider-item-duplicate" v-if="state==true">
+			        	      <p class="slidp">{{prodetail[0].imgName}}</p>
+			        	      <a href="#"><img class="glhomeimg" :src="prodetail[0].path"></a>
+			        	    </div>
+				  </div>
+				  <!--<div class="mui-slider-indicator">
+				    <div class="mui-indicator mui-active"></div>
+				    <div class="mui-indicator"></div>
+				    <div class="mui-indicator"></div>
+				  </div>-->
+				
+				</div>
+				</div>
+				<!--轮播end-->           
+		                        
+		                    	<div id="newScroll" class="root">
+							    <Ns :items="items"></Ns>
+							 	</div>
+							 	
+							 	<!--常用应用-->
+							 	<div id="usuallyapp">
+							 	<p class="ntitle">常用应用</p>
+							 	<ul class="mui-table-view mui-grid-view mui-grid-9">
+							 	
+							 	<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" :class="'mu'+index" v-for="(item,index) in itemusu" v-show="item.zt==true" :accesskey="index">
+							 	    <a :href="item.appurl" target="_blank" >
+							 	        <img :src="'../../'+item.imgurl" class="dicon">
+							 	        <div class="mui-media-body glfont">{{item.name}}</div>
+							 	    </a>
+							 	</li>
+							 	
+							 	</ul> 
+							 	</div>
+							 	
+		                </div>
+		            </div>
+		       	 <div class="mui-off-canvas-backdrop"></div>
+		        </div>
+		    </div>
+		
+		<!--加载-->
+		
+		<img class="loading" src="../../icon/loading.gif"/>
+	
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/vue2.5.js" ></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="../../components/leftlist.js" ></script>
+    <script type="text/javascript" src="../../components/newscroll.js" ></script>
+	<script type="text/javascript" src="../../js/globalVariable.js"></script>
+	<script type="text/javascript">
+		userInfo = getGlobalUserInfo();
+		//新闻滚动
+		$(function(){
+<<<<<<< .mine
+=======
+//			localStorage.removeItem("itemsdatas");
+			userInfo = getGlobalUserInfo();
+>>>>>>> .r374
+			var itemsdata=localStorage.getItem('itemsdatas');
+			var info=JSON.parse(itemsdata);
+<<<<<<< .mine
+//			console.log(JSON.stringify(info));
+//			console.log(userInfo);
+=======
+			var s=[];
+			console.log(itemsdata)
+			$.each(info,function(i,e){
+				if(e.userId==userInfo.userId){
+					s=e.infos;
+				}
+			});
+>>>>>>> .r374
+			$('#headertext').html(userInfo.project.projName);
+			var glz=new Vue({
+				el:"#usuallyapp",
+				data:function(){
+					return{
+						itemusu:s
+					}
+				}
+			});
+			})
+			
+//			头部轮播
+		var vm = new Vue({
+			el: '#imgsrcoll',
+			data: {
+				//是否有图
+				state:'',
+				//轮播数组
+				prodetail: {}
+			},
+			updated() {
+                var sliderMuiObj = mui(".mui-slider");
+                sliderMuiObj.slider({
+                    interval: 3000
+                });
+
+            },
+			mounted: function() {
+				this.$nextTick(function() {
+					this.getInfors();
+				});
+			},
+			methods: {
+				getInfors: function() {
+					var _this = this;
+					mui.createMask().show();
+					$('.loading,.mui-backdrop').show();
+					$.ajax({
+						type: "get",
+						url: userInfo.url + "/mobile/getProjectImage",
+						async: true,
+						data: {
+						projId: userInfo.projId,
+						token: userInfo.tokenId
+					},
+<<<<<<< .mine
+						success: function(data) {
+							$('.loading,.mui-backdrop').hide();
+//							图片
+							_this.prodetail=data.obj;
+//							状态
+							_this.state=data.success;
+						},
+						error:function(){
+							$('.loading,.mui-backdrop').hide();
+=======
+					success: function(data) {
+						var str = "";
+						for(i = 0; i < data.obj.length; i++) {
+							if(i == 0) {
+								str = '<div class="mui-slider-item mui-slider-item-duplicate"><p class="slidp">'+data.obj[data.obj.length - 1].imgName+'</p><a href="#"><img class="glhomeimg" src="' + data.obj[data.obj.length - 1].path + '" /></a></div>';
+							}
+							str = str + '<div class="mui-slider-item"><p class="slidp">'+data.obj[i].imgName+'</p><a href="#"><img class="glhomeimg" src="' + data.obj[i].path + '" /></a></div>';
+							if(i == data.obj.length - 1) {
+								str = str + '<div class="mui-slider-item mui-slider-item-duplicate"><p class="slidp">'+data.obj[0].imgName+'</p><a href="#"><img class="glhomeimg" src="' + data.obj[0].path + '" /></a></div>';
+							}
+>>>>>>> .r374
+						}
+						
+					});
+				}
+			}
+
+		});
+			
+			mui.init({
+				swipeBack:true 
+			});
+			
+			mui.ready(function(){
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true //是否启用回弹
+				});
+				
+			});
+//			头部轮播end
+				
+
+		
+		
+			mui('#left_scroll').scroll();
+			mui('#home_scroll').scroll();
+			
+	</script>
+	</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script>
+        	
+            var NfcAdapter;
+            var NdefRecord;
+            var NdefMessage;
+            
+            function listenNFCStatus() {
+                try{
+                    var main = plus.android.runtimeMainActivity();
+                    var Intent = plus.android.importClass('android.content.Intent');
+                    var Activity = plus.android.importClass('android.app.Activity');
+                    var PendingIntent = plus.android.importClass('android.app.PendingIntent');
+                    var IntentFilter = plus.android.importClass('android.content.IntentFilter');
+                    NfcAdapter = plus.android.importClass('android.nfc.NfcAdapter');
+                    var nfcAdapter = NfcAdapter.getDefaultAdapter(main);
+                    var intent = new Intent(main, main.getClass());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    var pendingIntent = PendingIntent.getActivity(main, 0, intent, 0);
+                    var ndef = new IntentFilter("android.nfc.action.TECH_DISCOVERED");
+                    ndef.addDataType("*/*");
+                    var intentFiltersArray = [ndef];
+                    var techListsArray = [
+                        ["android.nfc.tech.IsoDep"],
+                        ["android.nfc.tech.NfcA"],
+                        ["android.nfc.tech.NfcB"],
+                        ["android.nfc.tech.NfcF"],
+                        ["android.nfc.tech.Nfcf"],
+                        ["android.nfc.tech.NfcV"],
+                        ["android.nfc.tech.NdefFormatable"],
+                        ["android.nfc.tech.MifareClassi"],
+                        ["android.nfc.tech.MifareUltralight"]
+                    ];
+                    document.addEventListener("newintent",
+                        function() {
+                            console.error('newintent');
+                            setTimeout(handle_nfc_data1, 1000);
+                        }, false);
+                    document.addEventListener("pause", function(e) {
+                        if (nfcAdapter) {
+                            nfcAdapter.disableForegroundDispatch(main);
+                            console.log('pause');
+                        }
+                    }, false);
+                    document.addEventListener("resume", function(e) {
+                        if (nfcAdapter) {
+                            console.log('resume');
+                            nfcAdapter.enableForegroundDispatch(main, pendingIntent, intentFiltersArray, techListsArray);
+                        }
+                    }, false);
+                    nfcAdapter.enableForegroundDispatch(main, pendingIntent, intentFiltersArray, techListsArray);
+                }catch(e){
+                    console.error(e);
+                }
+            }
+
+            function handle_nfc_data1()
+            {
+                NdefRecord = plus.android.importClass("android.nfc.NdefRecord");
+                NdefMessage = plus.android.importClass("android.nfc.NdefMessage");
+                var main = plus.android.runtimeMainActivity();
+                var intent = main.getIntent();
+                console.log("action type:" + intent.getAction());
+                if("android.nfc.action.TECH_DISCOVERED" == intent.getAction()){
+                    if(readyWriteData){
+                        __write(intent);
+                        readyWriteData = false;
+                    }else if(readyRead){
+                        __read(intent);
+                        readyRead = false;
+                    }
+                }
+            }
+            function showToast(msg){
+                plus.nativeUI.toast(msg);
+            }
+
+            function __write(intent){
+                try{
+                    waiting.setTitle('请勿移开标签\n正在写入...');
+                    var text = document.getElementById('text').value;
+                    console.log("text=" + text);
+                    var textBytes = plus.android.invoke(text,"getBytes");
+                    // image/jpeg text/plain
+                    var textRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                            plus.android.invoke("text/plain","getBytes"), plus.android.invoke("","getBytes"), textBytes);
+                    var message = new NdefMessage([textRecord]);
+                    var Ndef = plus.android.importClass('android.nfc.tech.Ndef');
+                    var NdefFormatable = plus.android.importClass('android.nfc.tech.NdefFormatable');
+                    var tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+                    var ndef = Ndef.get(tag);
+                    if (ndef != null) {
+                        var size = message.toByteArray().length;
+                        console.log("size=" + size);
+                        ndef.connect();
+                        if (!ndef.isWritable()) {
+                            showToast("tag不允许写入");
+                            waiting.close();
+                            return ;
+                        }
+                        if (ndef.getMaxSize() < size) {
+                            showToast("文件大小超出容量");
+                            waiting.close();
+                            return ;
+                        }
+
+                        ndef.writeNdefMessage(message);
+                        waiting.close();
+                        showToast("写入数据成功.");
+                        return ;
+                    } else {
+                        var format = NdefFormatable.get(tag);
+                        if (format != null) {
+                            try {
+                                format.connect();
+                                format.format(message);
+                                showToast("格式化tag并且写入message");
+                                waiting.close();
+                                return ;
+                            } catch (e) {
+                                showToast("格式化tag失败.");
+                                waiting.close();
+                                return ;
+                            }
+                        } else {
+                            showToast("Tag不支持NDEF");
+                            waiting.close();
+                            return ;
+                        }
+                    }
+                }catch(e){
+                    console.log("error=" + e);
+                    waiting.close();
+                    alert('写入失败');
+                }
+
+            }
+
+            function __read(intent){
+                waiting.setTitle('请勿移开标签\n正在读取数据...');
+                var Parcelable = plus.android.importClass("android.os.Parcelable");
+                var rawmsgs = intent.getParcelableArrayExtra("android.nfc.extra.NDEF_MESSAGES");
+                records = rawmsgs[0].getRecords();
+                var result = records[0].getPayload();
+                var s = plus.android.newObject("java.lang.String",result);
+                document.getElementById('content').textContent = s;
+                waiting.close();
+            }
+            document.addEventListener('plusready',listenNFCStatus,false);
+
+            var waiting ;
+            var readyWriteData = false;
+            var readyRead = false;
+            
+            function writeData(){
+            	var main = plus.android.runtimeMainActivity();
+            	 //是否支持NFC功能
+            	var nfcAdapter = NfcAdapter.getDefaultAdapter(main);
+				if(nfcAdapter == null){
+				alert("设备不支持NFC！");
+				return;
+				}
+				if (!nfcAdapter.isEnabled()) {
+				alert("请在系统设置中先启用NFC功能！");
+				return;
+				}
+            	
+                var textEle = document.getElementById('text');
+                if(!textEle.value){
+                    alert('请输入要写入的内容');
+                    return;
+                }
+                readyWriteData = true;
+                waiting = plus.nativeUI.showWaiting("请将NFC标签靠近！");
+            }
+            function readData(){
+            	var main = plus.android.runtimeMainActivity();
+            	 //是否支持NFC功能
+            	var nfcAdapter = NfcAdapter.getDefaultAdapter(main);
+				if(nfcAdapter == null){
+				alert("设备不支持NFC！");
+				return;
+				}
+				if (!nfcAdapter.isEnabled()) {
+				alert("请在系统设置中先启用NFC功能！");
+				return;
+				}
+                readyRead = true;
+                waiting = plus.nativeUI.showWaiting("请将NFC标签靠近！");
+            }
+            
+        </script>
+
+        <style>
+            button{
+                width: 50%;
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        输入要写入的内容:<br/><textarea id="text">测是写入NFC</textarea><br/>
+        <button onclick="writeData()">写入</button>
+        <button onclick="readData()">读取</button><br/>
+        读取的内容:
+        <div id="content"/>
+    </body>
+</html>

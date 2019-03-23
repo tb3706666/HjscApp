@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		
+		.range {
+			width: 90%;
+			height: 40px;
+			position: relative;
+			margin: auto;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		}
+		
+		.range:before,
+		.range-bar,
+		.range-text,
+		.range-progress {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			-webkit-transform: translateY(-50%);
+		}
+		
+		.range:before {
+			content: '';
+			display: block;
+			background-color: #ccc;
+			width: 100%;
+		}
+		
+		.range:before,
+		.range-progress {
+			height: 2px;
+			left: 0;
+		}
+		
+		.range-bar {
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			background-color: #ccc;
+		}
+		
+		.range-progress {
+			background-color: #00b3ee;
+		}
+		
+		.range-text {
+			top: 100%;
+			left: 90%;
+			-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+			color: #999;
+		}
+	</style>
+
+	<body>
+		<div class="date btn hjwtime mui-input-row mui-scroll-wrapper"><span class="fl">日期</span></div>
+		<div class="percent">
+			<p>百分比</p>
+			<div class="mui-input-row mui-input-range field-contain">
+				<div style="float:right"><label></label><input type="text" id="field-range-input" value="60%"></div>
+				<div style="margin-right:60px;"> <input type="range" id="field-range" value="60" min="0" max="100" /></div>
+			</div><span></span></p>
+		</div>
+		<div class="range" id="hjw">
+			<div class="range-progress"></div>
+			<span class="range-bar"></span>
+			<span class="range-text"></span>
+		</div>
+
+		</div>
+	</body>
+
+	<script>
+		var range = $('.range');
+		var bar = $('.range-bar');
+		var progress = $('.range-progress');
+		var text = $('.range-text');
+		var maxw = range.offsetWidth - bar.offsetWidth; //计算可滑动的最大距离
+		var rangex = range.offsetLeft;
+		var half = bar.offsetWidth / 2;
+
+		bar.addEventListener('touchstart', function(event) {
+			var left = event.touches[0].pageX - rangex - half;
+			render(left);
+			event.preventDefault();
+		})
+		range.addEventListener('touchmove', function(event) {
+			/*计算滑块的left距离*/
+			var left = event.touches[0].pageX - rangex - half;
+			render(left);
+		});
+		range.addEventListener('touchstart', function(event) {
+			var left = event.touches[0].pageX - rangex - half;
+			render(left);
+		})
+
+		//显示位置
+		function render(value) {
+			var left = value;
+			/*判断left距离不能小于0并且不能大于最大宽度*/
+			if(left <= 0) {
+				left = 0;
+			}
+			if(left >= maxw) {
+				left = maxw;
+			}
+			/*显示滑块的位置、进度条的长度、进度值*/
+			bar.style.left = left + 'px';
+			progress.style.width = left + 'px';
+			text.innerText = Math.ceil(left / maxw * 100) + '%';
+		}
+
+		function $(s) {
+			return document.querySelector(s)
+		}
+	</script>
+
+</html>

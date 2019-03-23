@@ -1,0 +1,854 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>事件详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+
+	</head>
+	<style>
+		.tit-right {
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: #fff;
+		}
+		
+		.w100 {
+			width: 100%;
+			padding: 10px 15px 5px 15px;
+			display: inline-block;
+			border-bottom: 1px solid #EEEEEE;
+		}
+		
+		.list-img {
+			width: 45px;
+			margin-top: 5px;
+		}
+		
+		.list-title {
+			font-size: 14px;
+			color: #333;
+		}
+		
+		.list-detail {
+			float: left;
+			padding-left: 10px;
+			width: 80%;
+		}
+		
+		.fwb {
+			letter-spacing: 1px;
+		}
+		
+		.edit {
+			width: 15px;
+			height: 15px;
+			margin-left: 5px;
+		}
+		
+		.mui-table-view:before,
+		.mui-table-view:after {
+			display: none;
+		}
+		/*右侧箭头*/
+		
+		.mui-navigate-right:after,
+		.mui-push-right:after {
+			top: 50%;
+			right: 35px;
+		}
+		/*右侧文字*/
+		
+		.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+			margin-right: -95px;
+		}
+		
+		.place {
+			background: #fff;
+			margin-top: 15px;
+			padding: 15px;
+		}
+		
+		.place p:nth-of-type(1) {
+			font-size: 15px;
+			color: #333;
+		}
+		
+		.place p:nth-of-type(2) {
+			font-size: 12px;
+			color: #666;
+		}
+		
+		.substace {
+			background: #fff;
+			padding: 15px;
+			border-top: 1px solid #e6e6e6;
+		}
+		
+		.substace p:nth-of-type(1) {
+			font-size: 15px;
+			color: #333;
+		}
+		
+		.substace p:nth-of-type(2) {
+			font-size: 12px;
+			color: #666;
+		}
+		input,textarea{
+			border: 0 !important;
+			margin-bottom: 0 !important;
+		}
+		.sjnr{
+			height: 150px;
+		}
+		.sjdd{
+			padding: 10px 0 !important;
+		}
+		input::-webkit-input-placeholder{
+			color: #666666;
+		}
+		.yanse{
+			background: #87CEFA;
+			width: 15px;
+			height: 15px;
+			margin-right: 5px;
+			display: inline-block;
+		}
+#yanse {
+    position: fixed;
+    top: 62.3%;
+    height: 33%;
+}
+.ysqx{
+	top: 96%;
+}
+/*删除事件*/
+.delsj{
+	width: 80%;
+	padding: 10px 0;
+	margin: 5% auto;
+}
+/*弹出层*/
+.mui-popover.mui-popover-action .mui-table-view{
+	margin: 0;
+}
+/*全天遮罩*/
+.swblock:before{
+	content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background: red;
+}
+.yslist,.cflist,.updatelist,.dellist{
+	color: #0487d0;
+}
+#home_scroll{
+	top: 40px;
+}
+
+	</style>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">事件详情</h1>
+			<a class="mui-pull-right tit-right updatec" href="javascript:void(0)" style="display: none;" onclick="updatecontent()">完成</a>
+			<a class="mui-pull-right tit-right addc" href="javascript:void(0)" onclick="addcontent()">添加</a>
+		</header>
+		
+		
+		<div class="vsj">
+			
+		<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+			
+			<div class="mui-scroll" id="sz_app">
+				<ul class="mui-table-view mui-table-view-chevron mt16">
+					<li>
+						<!--<span></span>-->
+						<input type="text" class="sjname" v-model="sjname" placeholder="事件名称"/>
+					</li>
+				</ul>
+				<!--第一栏-->
+				<ul class="mui-table-view mui-table-view-chevron mt16">
+					<li class="mui-table-view-cell oneli">
+						<span class="qday" v-text="myday"></span>
+						<div id="myswitch" name="myswitch" index="0" class="mui-switch mui-switch-mini mui-switch-blue">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="javascript:void(0)" class="mui-navigate-right">
+							<span>开始</span>
+							<span class="fr btn stime" :stime="stime">请选择日期</span>
+							<span class="nonetime1 dnone"></span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="javascript:void(0)" class="mui-navigate-right">
+							<span>结束</span>
+							<span class="fr btn etime" :etime="etime">请选择日期</span>
+							<span class="nonetime2 dnone"></span>
+						</a>
+					</li>
+					<!--重复-->
+					<li class="mui-table-view-cell cfday">
+						<a href="#picture" class="mui-navigate-right">
+							<span>重复</span>
+							<span class="fr cfzt">{{calltype}}</span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell dblock" v-show="calltypeid!==0?flag:!flag">
+						<a href="javascript:void(0)" class="mui-navigate-right">
+							<span>事件终止日期</span>
+							<span class="fr ztime zzrq" :ztime="ztime">请选择日期</span>
+							<span class="nonetime3 dnone"></span>
+						</a>
+					</li>
+					<!--颜色-->
+					<li class="mui-table-view-cell">
+						<a href="#yanse" class="mui-navigate-right">
+							<span>颜色</span>
+							<span class="fr"><span class="yanse" :sjcolor=sjcolor></span><span class="sjys" :sjcname=sjcname>天蓝色</span></span>
+						</a>
+					</li>
+					
+					<!--修改-->
+					<li class="mui-table-view-cell dnone updatestate">
+						<a href="#updatelist" class="mui-navigate-right">
+							<span>修改</span>
+							<span class="fr">{{updatename}}</span>
+						</a>
+					</li>
+					
+				</ul>
+
+				<!--地点内容-->
+				<div class="place">
+					<p>地点</p>
+					<!--<p>上海市浦东新区灵岩南路</p>-->
+					<input type="text" class="sjdd" value="" v-model="sjdd" placeholder="事件地点"/>
+				</div>
+				<div class="substace">
+					<p>内容</p>
+					<!--<p>立白集团商品房设计图制作</p>-->
+					<!--<input type="text" class="sjname" value="立白集团商品房设计" placeholder="事件名称"/>-->
+					<textarea class="sjnr" placeholder="事件内容" v-model="sjnr"></textarea>
+				</div>
+				<!--删除弹出框-->
+				<a href="#deltype" class="deltype">
+				<!--删除事件-->
+				<button type="button" class="mui-btn mui-btn-blue mui-btn-block delsj">删除事件</button>
+				</a>
+			</div>
+		</div>
+		
+		
+		<!--重复-->
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell cflist">
+					<a href="#picture" data-id="0" data-name="不重复">不重复</a>
+				</li>
+				<li class="mui-table-view-cell cflist">
+					<a href="#picture" data-id="1" data-name="每周">每周</a>
+				</li>
+				<li class="mui-table-view-cell cflist">
+					<a href="#picture" data-id="2" data-name="每月">每月</a>
+				</li>
+				<li class="mui-table-view-cell cflist">
+					<a href="#picture" data-id="3" data-name="每年">每年</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture"><b class="c333">取消</b></a>
+				</li>
+			</ul>
+		</div>
+		
+		<!--删除-->
+		<div id="deltype" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell dellist">
+					<a href="#deltype" data-id="0" data-name="只删除当前的事件">只删除当前的事件</a>
+				</li>
+				<li class="mui-table-view-cell dellist">
+					<a href="#deltype" data-id="1" data-name="删除所有此重复事件">删除所有此重复事件</a>
+				</li>
+				<li class="mui-table-view-cell dellist">
+					<a href="#deltype" data-id="2" data-name="删除当前事件和之后的此重复事件">删除当前事件和之后的此重复事件</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#deltype"><b class="c333">取消</b></a>
+				</li>
+			</ul>
+		</div>
+		
+		<!--修改-->
+		<div id="updatelist" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell updatelist">
+					<a href="#updatelist" data-id="0" data-name="只修改当前的事件">只修改当前的事件</a>
+				</li>
+				<li class="mui-table-view-cell updatelist">
+					<a href="#updatelist" data-id="1" data-name="修改所有此重复事件">修改所有此重复事件</a>
+				</li>
+				<li class="mui-table-view-cell updatelist">
+					<a href="#updatelist" data-id="2" data-name="修改当前事件和之后的此重复事件">修改当前事件和之后的此重复事件</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#updatelist"><b class="c333">取消</b></a>
+				</li>
+			</ul>
+		</div>
+		
+		<!--颜色-->
+		<div id="yanse" class="mui-popover mui-popover-action mui-popover-bottom">
+			<div class="mui-scroll-wrapper">  
+        		<div class="mui-scroll">
+			
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell yslist">
+					<!--<a href="#yanse" data-name="天蓝色" data-color="#87CEFA"><span class="mr10 yanse"></span>天蓝色</a>-->
+					<a href="#yanse" data-name="天蓝色" data-color="lightskyblue">天蓝色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="军蓝色"  data-color="cadetblue">军蓝色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="亮蓝色"  data-color="cornflowerblue">亮蓝色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="深绿色"  data-color="darkseagreen">深绿色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="浅蓝色"  data-color="lightblue">浅蓝色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="浅海绿色"  data-color="lightseagreen">浅海绿色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="黄色"  data-color="yellow">黄色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="绿色"  data-color="green">绿色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="蓝色"  data-color="blue">蓝色</a>
+				</li>
+				<li class="mui-table-view-cell yslist">
+					<a href="#yanse" data-name="蓝紫色"  data-color="violet">蓝紫色</a>
+				</li>
+			</ul>
+			</div>
+			</div>
+			<ul class="mui-table-view ysqx">
+				<li class="mui-table-view-cell">
+					<a href="#yanse"><b class="c333">取消</b></a>
+				</li>
+			</ul>
+		</div>
+		
+		</div>
+		
+		
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+
+		<script type="text/javascript">
+			
+			function colornames(cname){
+				var nyanse=[
+					{name:'天蓝色',value:'lightskyblue'},
+					{name:'军蓝色',value:'cadetblue'},
+					{name:'亮蓝色',value:'cornflowerblue'},
+					{name:'深绿色',value:'darkseagreen'},
+					{name:'浅蓝色',value:'lightblue'},
+					{name:'浅海绿色',value:'lightseagreen'},
+					{name:'黄色',value:'yellow'},
+					{name:'绿色',value:'green'},
+					{name:'蓝色',value:'blue'},
+					{name:'蓝紫色',value:'violet'}
+					];
+			$.each(nyanse, function(e,e1) {
+				if(cname==e1.value){
+					$('.sjys').text(e1.name)
+				}
+			});
+			}
+			
+			
+			//必要参数
+			userInfo = getGlobalUserInfo();
+			
+			var id = getUrlParam('id');
+			//编辑或删除,反之添加
+			if(id) {
+				//编辑页
+				$('.delsj,.updatec').css('display','block');
+				$('.addc').css('display','none');
+				//重复事件无
+				$('.cfday').css('display','none');
+				getids(id);
+				//修改
+				$('.updatestate').removeClass('dnone');
+				
+//				mui.toast('编辑')
+			} else {
+				//添加页
+				$('.delsj,.updatec').css('display','none');
+				$('.addc').css('display','block');
+				//重复有
+				$('.cfday').css('display','block');
+				//修改
+				$('.updatestate').addClass('dnone');
+				
+//				mui.toast('添加')
+			}
+			//获取指定
+			function getids(e){
+				 $.ajax({
+					type:"POST",
+					url:userInfo.url+"/mobile/"+userInfo.projId+"/event/"+e,
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('tokenId',userInfo.tokenId);
+						request.setRequestHeader('appType',7);
+					},
+					success:function(data){
+						if(data.cd==0){
+							console.log(data.rt)
+							//获取到颜色名称
+							colornames(data.rt.eventColor);
+							//数据绑定
+							sj.sjname=data.rt.eventName;
+							sj.myday=data.rt.allDay==0?'时刻':'全天';
+							data.rt.allDay==0?$('#myswitch').removeClass('mui-active'):$('#myswitch').addClass('mui-active')
+							sj.mydaynum=data.rt.allDay;
+							
+//							修改
+							if(id){
+								sj.calltypeid==0
+								//新增
+							}else{
+								sj.calltypeid=data.rt.repeatType;
+							switch(sj.calltypeid){
+								case 0:
+								sj.calltype='不重复'
+								break;
+								case 1:
+								sj.calltype='每周'
+								break;
+								case 2:
+								sj.calltype='每月'
+								break;
+								case 3:
+								sj.calltype='每年'
+								break;
+							}
+							}
+							
+							//终止时间
+							var ctime=timec(data.rt.eventTerminate);
+							var newctime=sj.ztime=subtime(ctime);
+							$('.ztime').text(newctime);
+							
+							
+							$('.nonetime1').text(data.rt.eventStart);
+							$('.nonetime2').text(data.rt.eventEnd);
+							if(sj.mydaynum===0){
+								sj.stime=data.rt.eventStart;
+								sj.etime=data.rt.eventEnd;
+								$('.stime').text(sj.stime);
+								$('.etime').text(sj.etime);
+							}else{
+								sj.stime=data.rt.eventStart;
+								sj.etime=data.rt.eventEnd;
+								$('.stime').text(subtime(sj.stime));
+								$('.etime').text(subtime(sj.etime));
+							}
+							
+							
+							
+							$('.yanse').css('background',data.rt.eventColor);
+							sj.sjdd=data.rt.eventPosition;
+							sj.sjnr=data.rt.content;
+						}else{
+							mui.toast(data.msg);
+						}
+					}
+				});
+			}
+			
+			
+			
+			var sj=new Vue({
+				el:'.vsj',
+				data:{
+					sjname:'',
+					myday:'时刻',
+					mydaynum:0,
+					stime:'',
+					etime:'',
+					calltype:'不重复',
+					calltypeid:0,
+					ztime:'',
+					flag:true,
+					sjcf:'',
+					sjcolor:'lightskyblue',
+					sjcname:'',
+					sjdd:'',
+					sjnr:'',
+					deltype:'',
+					delstate:true,
+					updatename:'只修改当前的事件',
+					updateid:0,
+				},
+				methods:{
+//					aa:function(e){
+//						alert(e)
+//					}
+				}
+			})
+			
+			//重复
+			$('.cflist>a').on('tap',function(){
+				//不重复时显示数据改变
+				if(sj.calltypeid==0){
+						$('.ztime').text('请选择日期');
+					}
+				var name=$(this).data('name');
+				var id=$(this).data('id');
+				sj.calltype=name;
+				sj.calltypeid=id;
+//				mui.toast(name)
+			})
+			//删除
+			$('.dellist>a').on('tap',function(){
+				var name=$(this).data('name');
+				var id=$(this).data('id');
+				sj.deltype=id;
+				delcontent();
+			})
+			
+			//修改
+			$('.updatelist>a').on('tap',function(){
+				var name=$(this).data('name');
+				var id=$(this).data('id');
+				sj.updatename=name;
+				sj.updateid=id;
+			})
+			
+			//颜色
+			var color;
+			$('.yslist>a').on('tap',function(){
+				var name=$(this).data('name');
+				color=$(this).data('color');
+				$('.sjys').text(name);
+				$('.yanse').css('background',color);
+				sj.sjcolor=color;
+				sj.sjcname=name;
+			})
+			//添加
+			function addcontent() {
+				//校验
+				if(sj.sjname===''){
+					mui.toast('事件不能为空')
+					return
+				}else if(sj.stime===''){
+					mui.toast('未选择开始时间')
+					return
+				}else if(sj.etime===''){
+					mui.toast('未选择结束时间')
+					return
+				}else if(sj.etime<=sj.stime){
+					mui.toast('结束时间必须大于开始时间')
+					return
+				}else if(sj.calltypeid!=0){
+					if(sj.ztime==''){
+						mui.toast('请选择终止时间');
+						return
+					}else{
+						if (sj.ztime<=sj.etime) {
+							mui.toast('终止时间必须大于结束时间')
+							return
+						}
+					}
+					
+				}
+				
+				if(sj.mydaynum===1){
+					sj.stime=sj.stime.split(' ')[0]+' 00:00:00';
+					sj.etime=sj.etime.split(' ')[0]+' 00:00:00';
+				}
+				
+				$.ajax({
+					type: "POST",
+					url: userInfo.url+"/mobile/" + userInfo.projId + "/calendar/add",
+					async: true,
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenId', userInfo.tokenId);
+						request.setRequestHeader('appType', 7);
+					},
+					data:JSON.stringify({
+						"allDay": sj.mydaynum, //是否为全天 1 全天 0 不是全天  
+						"callType": 0, //重复方式：0：通知面板，1：邮件
+						"content": sj.sjnr, //内容
+						"entId": userInfo.entid,
+						"eventColor": sj.sjcolor, //事件颜色
+						"eventStart": sj.stime, //开始时间
+						"eventEnd": sj.etime, //结束时间
+						"eventName": sj.sjname, //事件名称
+						"eventPosition": sj.sjdd, //事件地点
+						"eventStatus": 0, //事件状态
+						"eventTerminate": sj.ztime,//终止时间
+						"id": id,
+						"projId": userInfo.projId,
+						"repeatId": "string",
+						"repeatType": sj.calltypeid,//重复方式
+						"userId": userInfo.userId,
+					}),
+					contentType: "application/json",
+					success: function(data) {
+						if(data.cd==='0'){
+							mui.toast('添加成功');
+							var list =plus.webview.currentWebview().opener();
+						　　	// 执行相应的事件
+						　　	mui.fire(list, 'adds', {});
+							plus.webview.currentWebview().close();
+						}else{
+							mui.toast(data.msg+'添加失败')
+						}
+					}
+				});
+			}
+			//删除
+			function delcontent(){
+				$.ajax({
+				type:"post",
+				//调试
+//				url:"http://10.252.29.12:8079/mobile/"+userInfo.projId+"/event/"+id+"/delete",
+				//正常
+				url:userInfo.url+"/mobile/" + userInfo.projId + "/event/"+id+"/delete",
+				async:true,
+				beforeSend:function(request){
+					request.setRequestHeader('tokenId',userInfo.tokenId);
+					request.setRequestHeader('appType',7);
+				},
+				data:{
+					entId:userInfo.entid,
+					deleteType:sj.deltype,
+				},
+					success:function(data){
+					if(data.cd==='0'){
+						mui.toast('删除成功');
+						mui.back(-1);
+					}else{
+						mui.toast('删除失败')
+					}
+					}
+				});
+			}
+			//删除事件触发
+//			$('.delsj').on('tap',function(){
+//				delcontent()
+//			})
+			//修改事件
+			function updatecontent() {
+				//校验
+				if(sj.sjname===''){
+					mui.toast('事件不能为空')
+					return
+				}else if(sj.stime===''){
+					mui.toast('未选择开始时间')
+					return
+				}else if(sj.etime===''){
+					mui.toast('未选择结束时间')
+					return
+				}else if(sj.etime<=sj.stime){
+					mui.toast('结束时间必须大于开始时间')
+					return
+				}else if(sj.calltypeid!=0){
+					if(sj.ztime==''){
+						mui.toast('请选择终止时间');
+						return
+					}else{
+						if (sj.ztime<=sj.etime) {
+							mui.toast('终止时间必须大于结束时间')
+							return
+						}
+					}
+				}
+				
+				//不重复时选中数据置空
+//				if(sj.calltypeid==0){
+//						sj.ztime='';
+//					}
+				
+				$.ajax({
+					type: "POST",
+					url: userInfo.url+"/mobile/"+ userInfo.projId +"/event/update?entId="+userInfo.entid,
+//					url:'https://bdms.arctron.cn/h2-bim-project//project2/schedule/17/event/update',
+					async: true,
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenId', userInfo.tokenId);
+						request.setRequestHeader('appType', 7);
+					},
+					data:JSON.stringify({
+						"event": {
+							"allDay": sj.mydaynum, //是否为全天 1 全天 0 不是全天  
+							"callType": 0, //重复方式：0：通知面板，1：邮件
+							"content": sj.sjnr, //内容
+							"entId": userInfo.entid,
+							"eventColor": sj.sjcolor, //事件颜色
+							"eventStart": sj.stime, //开始时间
+							"eventEnd": sj.etime, //结束时间
+							"eventName": sj.sjname, //事件名称
+							"eventPosition": sj.sjdd, //事件地点
+//							"eventStatus": 0,
+//							"eventTerminate": sj.ztime,
+							"id": id,
+//							"projId": userInfo.projId,
+//							"repeatId": "string",
+//							"repeatType": sj.calltypeid,//重复方式
+//							"userId": userInfo.userId,
+						},
+							"updateType": sj.updateid
+					}),
+					contentType: "application/json",
+					success: function(data) {
+						if(data.cd==='0'){
+						mui.toast('修改成功');
+						mui.back(-1);
+					}else{
+						mui.toast('修改失败')
+					}
+					}
+				});
+			}
+			//全天
+			var isActive;
+			document.getElementById("myswitch").addEventListener('toggle',function (e) {
+
+			isActive = e.detail.isActive;
+			sj.myday=isActive==true?"全天":"时刻";
+			sj.mydaynum=isActive==true?1:0;
+			
+			
+			//全天
+			var ssub=$('.nonetime1').text();
+			var esub=$('.nonetime2').text();
+			if(isActive){
+					if(ssub==='' || esub===''){
+						return;
+					}
+					
+					sj.stime=ssub;
+					var newssub=subtime(ssub);
+					$('.stime').text(newssub);
+					
+					sj.etime=esub;
+					var newesub=subtime(esub);
+					$('.etime').text(newesub);
+			}else{
+			//非全天
+//				$('.stime').text(sj.stime);
+					if(ssub==='' || esub===''){
+						return;
+					}
+					
+				sj.stime=$('.nonetime1').text();
+				$('.stime').text(sj.stime);
+				
+				sj.etime=$('.nonetime2').text();
+				$('.etime').text(sj.etime);
+			}
+			
+			})
+			document.getElementById("myswitch").addEventListener('toggle',function (e) {
+			isActive = e.detail.isActive;
+			sj.myday=isActive==true?"全天":"时刻";
+			sj.mydaynum=isActive==true?1:0;
+			})
+			
+			//日期框
+			//年:e.y.value,月:e.m.value,(同理),日:d,时:h,分:i。(minutes 的第二个字母)
+			//年月日时分
+			$('.btn').on('tap', function() {
+				var dtPicker = new mui.DtPicker();
+				dtPicker.show((selectItems) => {
+			//选择日期
+//			if($(this).hasClass('stime')!==''|| $(this).hasClass('stime')===''){
+//				$('.oneli').addClass('swblock');
+//			}
+//			if($(this).hasClass('stime')!=='' && $(this).hasClass('etime')!==''){
+//				alert(2)
+//			}
+//					selectItems.y.value + '-' + selectItems.m.value + '-' + selectItems.d.value
+//					selectItems.text
+					//年月日,全天
+					if(sj.mydaynum===1){
+//					var qtime=subtime(selectItems.text+':00');
+//					$(this).next().text(qtime);
+					$(this).next().text(selectItems.text+':00');
+					
+					if($(this).hasClass('stime')){
+					var ssub=$('.nonetime1').text();
+					var newssub=subtime(ssub);
+					sj.stime=ssub;
+					$('.stime').text(newssub);
+					}else{
+					var esub=$('.nonetime2').text();
+					var newesub=subtime(esub);
+					sj.etime=esub;
+					$('.etime').text(newesub);
+					}
+					
+					}else{
+//					//年月日时分,半天
+					$(this).next().text(selectItems.text+':00');
+					
+					if($(this).hasClass('stime')){
+						sj.stime=$('.nonetime1').text();
+						$('.stime').text(sj.stime);
+					}else{
+						sj.etime=$('.nonetime2').text();
+						$('.etime').text(sj.etime);
+					}
+					
+					
+					}
+				});
+			})
+			//非不重复
+			$('.zzrq').on('tap',function(){
+			var dtPicker = new mui.DtPicker();
+				dtPicker.show((selectItems) => {
+					$('.ztime').text(selectItems.y.value + '-' + selectItems.m.value + '-' + selectItems.d.value);
+					sj.ztime=$('.ztime').text();
+				})
+			})
+			mui('.mui-scroll-wrapper').scroll();
+			mui('#home_scroll').scroll();
+		</script>
+	</body>
+
+</html>

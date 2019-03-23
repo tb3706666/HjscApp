@@ -1,0 +1,469 @@
+	/**
+	 * 图片标识，拍照和从相册选择通用
+	 */
+	var IMGINDEX = 0;
+
+	/**
+	 * 存放图片对象map
+	 */
+	var IMGMAP = new Map();
+
+//	mui.init();
+	
+
+//	// 文档
+//	var docVue = new Vue({
+//		el: "#doc",
+//		data: {
+//			docList: []
+//		}
+//	})
+
+	//titname数组中文件名称
+	Vue.filter('format', function(value) {
+		var i = tool.getAttachIcon(value)
+		return '../../' + i.src;
+	});
+
+	// 获取选择联系人
+	window.addEventListener('loadMan', function() {
+//		debugger;
+//		userInfo = getGlobalUserInfo(); //获取对象
+//		var selectedMan = userInfo.selectedMan;
+//		$("#textarea").append(selectedMan);
+//		userInfo.selectedMan = "";
+//		setGlobalUserInfo(userInfo);
+//		
+//		
+	userInfo = getGlobalUserInfo(); //获取对象
+	var selectedMan = userInfo.selectedMan;
+	var temp = $("#textarea").val();
+	$("#textarea").val(temp + selectedMan);
+	userInfo.selectedMan = "";
+	setGlobalUserInfo(userInfo);
+	});
+
+   // 文档
+	var docVue = new Vue({
+		el: "#doc",
+		data: {
+			docList: []
+		},
+		methods: {
+		rm: function(index){
+			this.docList.splice(index,1);
+		}
+	}
+	})
+
+	// 获取文件id
+	window.addEventListener('loadFileId', function() {
+		userInfo = getGlobalUserInfo(); //获取对象
+		var fileIds = userInfo.fileIds;
+		docVue.docList = JSON.parse(fileIds);
+		userInfo.fileIds = "";
+		setGlobalUserInfo(userInfo);
+	});
+
+	// 跳转到选择联系人 
+	$("#tab_home").on('tap', function() {
+		GoToURL('select_linkman.html', 'select_linkman');
+	})
+
+	//			$('#tab_home').on('tap', function() {
+	//				alert('打开联系人');
+	//			});
+
+	$('#tab_message').on('tap', function() {
+
+		getpic();
+	});
+
+	// 显示图片并上传
+	function showAndUpload(src) {
+
+		add(src);
+		var img = new Image();
+		img.src = src;
+		img.onload = function() {
+			var imgData = getBase64Image(img);
+			var suffix = src.substring(src.lastIndexOf("/") + 1, src.length);
+			var file = dataURLtoFile(imgData, suffix);
+			console.log("文件大小：==============》" + (Math.ceil(file.size / 1024)));
+			sumfile(file)
+		}
+	mui.previewImage();
+	}
+
+	// 打开相机拍照
+	function getpic() {
+		var cameraObj = plus.camera.getCamera();
+		cameraObj.captureImage(function(e) {
+			plus.io.resolveLocalFileSystemURL(e, function(entry) {
+				var src = entry.toLocalURL();
+				showAndUpload(src);
+			}, function(e) {
+				console.log("读取拍照文件错误" + e.message)
+			})
+		}, function(s) {
+			console.log("error" + s);
+		}, {
+			filname: "_doc/head.png"
+		})
+	}
+
+	//将base64转换为文件 
+	function dataURLtoFile(dataurl, filename) {
+		var arr = dataurl.split(','),
+			mime = arr[0].match(/:(.*?);/)[1],
+			bstr = atob(arr[1]),
+			n = bstr.length,
+			u8arr = new Uint8Array(n);
+		while(n--) {
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, {
+			type: mime
+		});
+	}
+
+	// 图片大小
+	var imgSize = 500;
+
+	//将图片压缩转成base64 
+	function getBase64Image(img) {
+		var canvas = document.createElement("canvas");
+		var width = img.width;
+		var height = img.height;
+		// calculate the width and height, constraining the proportions 
+		if(width > height) {
+			if(width > imgSize) {
+				height = Math.round(height *= imgSize / width);
+				width = imgSize;
+			}
+		} else {
+			if(height > imgSize) {
+				width = Math.round(width *= imgSize / height);
+				height = imgSize;
+			}
+		}
+
+		canvas.width = width; /*设置新的图片的宽度*/
+		canvas.height = height; /*设置新的图片的长度*/
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0, width, height); /*绘图*/
+		var dataURL = canvas.toDataURL("image/png", 0.8);
+		return dataURL; //.replace("data:image/png;base64,", ""); 
+	}
+
+	// 回复主题：显示图片到页面
+	function add(src) {
+
+		var html = `<div>
+						<img class="img" src="${src}" data-preview-src="" data-preview-group="1" />
+						<span class="mui-icon mui-icon-closeempty close" index=${IMGINDEX}></span>
+					</div>
+					`;
+		$(".box").append(html);
+	
+		remove();
+	}
+
+	// 删除图片,并从图片map中根据key删除数据
+	function remove() {
+		$('.close').on('tap', function() {
+			var index = $(this).attr('index');
+			IMGMAP.delete(parseInt(index));
+			$(this).parent().remove();
+		})
+	}
+
+	/**
+	 * 打开手机相册
+	 */
+	$('#tab_contact').on('tap', function() {
+		/*var isAndroid = getfromin();
+		var fromIn = '';
+		if(isAndroid) {
+			fromIn = '安卓客户端';
+		} else {
+			fromIn = 'ios客户端';
+		}
+		alert(fromIn);*/
+		//galleryImg();
+		galleryImg()
+	});
+
+	// 从相册添加文件
+	function appendByGallery() {
+		plus.gallery.pick(function(path) {
+			document.getElementById("headimg").src = path;
+
+		});
+	}
+
+	// 从相册中选择图片 
+	function galleryImg() {
+		// 从相册中选择图片
+		plus.gallery.pick(function(e) {
+			//showAndUpload(e);
+
+			for(var i in e.files) {
+				var fileSrc = e.files[i];
+				// 其他操作,比如预览展示
+				//console.log(fileSrc + "===============")
+				showAndUpload(fileSrc);
+			}
+		}, function(e) {
+			console.log("取消选择图片");
+		}, {
+			filter: "image",
+			multiple: true,
+			maximum: 5,
+			system: true,
+			onmaxed: function() {
+				plus.nativeUI.alert('最多只能选择5张图片');
+			}
+		});
+	}
+
+	userInfo = getGlobalUserInfo(); //获取对象
+
+//关闭当前页面，触发方法
+    $("#sub").on('tap',function(){
+    Reply();
+    });
+
+    //获取建筑容器信息  渲染项目名称
+function init_project() {
+	userInfo = getGlobalUserInfo(); //获取对象
+	//1.6 && 1.7 方法一样
+	$.ajax({
+		type: 'GET',
+		url: userInfo.url + '/mobile/getAllSubProject',
+		beforeSend: function(request) {
+			request.setRequestHeader('tokenId', userInfo.tokenId);
+		},
+		data: {
+			entId: userInfo.entid,
+			userId: userInfo.userId,
+			projId: userInfo.projId
+		},
+		async: true,
+		dataType: 'JSON',
+		success: function(data) {
+			//登陆失效
+			if(!data.success || !data.obj) {
+				tokenInvalid(data);
+			} else {
+				Reply();
+//				sumbitzt(data.obj.DefaultSubProjId);
+
+			}
+
+		}
+	});
+}
+
+//提交发表回复
+function Reply() {
+	userInfo = getGlobalUserInfo(); 
+					//判断从哪里进来
+//					console.log(userInfo);
+					var content = $('#textarea').val().trim();
+					if(content!=""){
+					var themeStatus = "";
+					var checked=$("#ischeck").is(':checked')
+//					alert(checked);
+					if(dcStatus == 1) {
+						themeStatus = "正在处理";
+					} else if(dcStatus == 4) {
+						themeStatus = "等待审核";
+					} else if(dcStatus == 5) {
+						themeStatus = "修改补充";
+					} else if(dcStatus == 8) {
+						themeStatus = "等待整改";
+					} else if(dcStatus == 9) {
+						themeStatus = "等待检查";
+					} else if(dcStatus == 10) {
+						themeStatus = "继续整改";
+					} else if(dcStatus == 13) {
+						themeStatus = "等待初审";
+					} else if(dcStatus == 14) {
+						themeStatus = "等待复审";
+					}
+//					console.log(dcStatus);
+
+		// 存放图片对象数组，循环map存放入数组
+		var AttachImageInfos = [];
+		IMGMAP.forEach(function (item, key, mapObj) {
+			AttachImageInfos.push(item);
+        });
+        
+        // 文件id数组,循环选择的文档
+        var fileIdList = [];
+        for(var i=0; i<docVue.docList.length; i++){
+        	fileIdList.push(docVue.docList[i].fileId);
+        }
+
+					var jsonData = {
+						dcReview: {
+							dcId: dcId,
+							fromIn: userInfo.platformType, //安卓还是
+							rvContent: content
+						},
+						vpList: [],
+						newDC: checked, //是否作为新的主题发布
+						attachList: AttachImageInfos,
+						fileIdList: fileIdList
+					}
+					
+					var str="userId="+userInfo.userId+"&checked=false&type=1&entId="+userInfo.entid+"&dcId="+dcId+"&themeStatus="+themeStatus+"&jsonData="+JSON.stringify(jsonData);  
+//					           console.log();
+					          $.ajax({        //2.13
+										type:"POST",
+										url:userInfo.url+"/mobile/reviewDC?"+encodeURI(str),
+//                                      url:"http://10.252.29.15:8079/mobile/reviewDC?"+encodeURI(str),
+										async:true,
+										beforeSend:function(request){ 
+											request.setRequestHeader('tokenId',userInfo.tokenId);
+											request.setRequestHeader('appType',7);
+										},
+										success:function(data){
+											
+											console.log(JSON.stringify(data));
+											if(data.success){
+												mui.toast("回复成功");
+												
+												var list =plus.webview.currentWebview().opener();
+											　　mui.fire(list, 'refresh1', {});
+												plus.webview.currentWebview().close();
+												
+											}else{
+												mui.toast("回复异常")
+											}
+//										console.log("2.13",data);
+										}
+									  });
+									  	
+					}else{
+						mui.toast("请输入回复内容");
+					}
+					
+				}
+
+	// 上传图片
+	function sumfile(file) {
+
+		//var returnUrl = 'http://10.252.26.240:8080/h2-bim-project/mobile/uploadFileTeam.json?ugId='+
+		//userInfo.groupId +'&dirId=0&entId=' + userInfo.entid;
+
+		var returnUrl = userInfo.url + '/mobile/uploadFileTeam.json?ugId=' +
+			userInfo.groupId + '&dirId=0&entId=' + userInfo.entid;
+		returnUrl = encodeURIComponent(returnUrl);
+
+		var formdata = new FormData();
+		formdata.append('projId', userInfo.projId);
+		formdata.append('type', 1);
+		formdata.append('userId', userInfo.userId);
+		formdata.append('modelCode', '004');
+		formdata.append('token', userInfo.tokenId);
+		formdata.append('returnUrl', returnUrl);
+		formdata.append('file', file);
+              
+              console.log("=========="+userInfo.fileUrl);
+              
+		$.ajax({
+			type: "POST",
+			//url: "http://10.252.26.240:8080/qjbim-file/uploading/uploadFileInfo",
+			url: userInfo.fileUrl + "/uploading/uploadFileInfo",
+			async: true,
+			//secureuri: false,
+			data: formdata,
+			dataType: "JSON",
+			/**
+			 *必须false才会自动加上正确的Content-Type
+			 */
+			contentType: false,
+			/**
+			 * 必须false才会避开jQuery对 formdata 的默认处理
+			 * XMLHttpRequest会对 formdata 进行正确的处理
+			 */
+			processData: false,
+			success: function(data, status) {
+				
+				console.log(JSON.stringify(data));
+				console.log("上传图片status:", status);
+				if(status == "success") {
+//                 alert('上传成功');
+					// getFileInfo();
+					var AttachImageInfo = {
+					fileUuid: data.attachImageInfo.fileUuid,
+					fileName: data.attachImageInfo.fileName,
+					fileExtension: data.attachImageInfo.fileExtension,
+					fileSize: data.attachImageInfo.fileSize,
+					fileMd5: data.attachImageInfo.fileMd5,
+					relativePath: data.attachImageInfo.relativePath
+				  }
+
+				// 把图片对象放进map
+				IMGMAP.set(IMGINDEX, AttachImageInfo);
+					IMGINDEX++;
+				
+				}
+				
+				
+				//返回的data 转换为AttachImageInfo
+				
+			},
+			error: function(data, status, e) {
+				console.log("上传图片报错data", data);
+				console.log("上传图片报错status", status);
+				console.log("上传图片报错e", e);
+			}
+		})
+
+	}
+
+	//获取当前的设备
+	function getfromin() {
+		var u = navigator.userAgent;
+		var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+		var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		//				alert('是否是Android：' + isAndroid);
+		return isAndroid;
+	}
+	
+	//获取页面中带过来的参数
+	mui.plusReady(function() {
+     var self = plus.webview.currentWebview();
+      dcId = self.dcId;
+      dcStatus=self.dcStatus;
+//alert(dcId);
+//   console.log("sssssssss"+self);
+ })
+	
+// 返回页面时，调用发表主题页面的获取本地缓存方法
+			mui.plusReady(function() {
+				var old_back = mui.back;
+				mui.back = function() {
+					var wobj = plus.webview.getWebviewById("published"); //注意 HBuilder 是   1.html 的 ID  你如果1.html 有ID   要替换掉HBuilder，
+					mui.fire(wobj, 'initReplyList');
+					old_back()
+				}
+			});
+			
+
+//监听input框中的内容是否输入@
+document.getElementById("textarea").addEventListener('input',function(){
+  var zfc=this.value;
+  fz=zfc.substring(0,zfc.length-1);
+  zfc=zfc.substring(zfc.length,zfc.length-1);
+  if(zfc=="@"){
+  	//清楚掉这个@ 不管有没有选中
+  	$('#textarea').val(fz);
+  	GoToURL('select_linkman.html', 'select_linkman');
+  }
+//console.log(zfc);
+
+});

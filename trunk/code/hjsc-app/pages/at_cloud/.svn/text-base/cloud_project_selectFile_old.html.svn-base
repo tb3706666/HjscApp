@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>选择文件</title>
+		<link rel="stylesheet" href="../../css/mui.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style type="text/css">
+		.mui-btn {
+			display: block;
+			width: 90%;
+			height: 50px;
+			margin: 0px auto;
+			margin-top: 100px;
+		}
+		
+		.list-img {
+			width: 33px;
+		}
+		
+		.list-title {
+			font-size: 16px;
+			color: #333;
+		}
+		
+		.list-detail {
+			float: left;
+		}
+		
+		.list-time {
+			font-size: 12px;
+			color: #999;
+		}
+		
+		.list-detail-img {
+			line-height: 12px
+		}
+		
+		.list-detail-font {
+			width: 80%;
+			margin-left: 12px;
+			margin-top: 7px;
+		}
+		/*小圆圈*/
+		
+		.circle {
+			position: absolute;
+			right: 18px;
+			top: 23px;
+			background: #fff;
+			border: 1px solid #ccc;
+			border-radius: 20px;
+			padding: 7px;
+			height: 5px;
+			width: 5px;
+		}
+		
+		.mui-icon-checkmarkempty {
+			background: #0487d0 !important;
+			padding: 0px !important;
+			width: auto;
+			height: auto;
+			font-size: 16px;
+			color: #fff;
+			border: none;
+		}
+		
+		.red {
+			color: red;
+		}
+		
+		.finish {
+			font-size: 16px !important;
+			color: black;
+			margin-top: 8px;
+		}
+		
+		#back {
+			position: fixed;
+			width: 100%;
+			top: 51px;
+			background: #fff;
+			z-index: 10;
+			border: 0px;
+		}
+		
+		.one {
+			margin-top: 57px;
+		}
+		
+		.mui-content>.mui-table-view:first-child {
+			margin-top: 7px;
+		}
+		
+		.mui-table-view:before,
+		.mui-table-view:after {
+			height: 0px !important;
+		}
+		
+		.mui-table-view {
+			border: 0px;
+		}
+		
+		a {
+			touch-action: none;
+		}
+	</style>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择文件</h1>
+			<a class=" mui-icon mui-pull-right finish" id="finish">上传</a>
+		</header>
+
+		<!--<button id="btn" type="button" class="mui-btn mui-btn-blue mui-btn-block">按钮</button>-->
+		<!--<button onclick="test()" type="button" class="mui-btn mui-btn-blue mui-btn-block">输出根目录</button>-->
+
+		<div class="mui-content">
+			<ul class="mui-table-view" id="list">
+
+				<li id="back" class="mui-table-view-cell" @click="back()" v-show="false">
+
+					<div class="list-detail list-detail-img">
+						<img class="list-img" src="../../img/totop.png">
+					</div>
+					<div class="list-detail list-detail-font">
+						<span class="list-title hone">返回上一级</span>
+					</div>
+
+				</li>
+
+				<li :id="'li'+ index" class="mui-table-view-cell choose" @click="open(item)" v-for="(item,index) in list">
+
+					<div class="list-detail list-detail-img">
+						<img class="list-img" :src="item | format">
+					</div>
+					<div class="list-detail list-detail-font">
+						<span class="list-title hone">{{item.name}}</span>
+					</div>
+					<div class="circle" :path="item.fullPath" :show="item.isFile" v-show="item.isFile"></div>
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript" src="../../js/mui.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript">
+			/*获取登录数据*/
+			userInfo = getGlobalUserInfo();
+
+			var parentDirId = "";
+			var dirid = ""
+			$(function() {
+				parentDirId = GetQueryString("parentDirId");
+				dirid = GetQueryString("dirid");
+			});
+
+			var CLASSNAME = 'mui-icon mui-icon-checkmarkempty';
+			var url = userInfo.fileUrl + "/uploading/uploadFileInfo";
+
+			function init() {
+				$('.choose').unbind();
+				$('.choose').on('click', function() {
+					var isShow = $(this).find(".circle").attr("show");
+					if(isShow == "true") {
+						$(this).find(".circle").toggleClass(CLASSNAME);
+					}
+				});
+
+				//上传文件
+				$("#finish").unbind();
+				$("#finish").on("click", function() {
+
+					//清除所有上传任务
+					plus.uploader.clear();
+					localStorage.setItem('uploads', null);
+
+					mui.toast('已加入到传入列表');
+					var uploadTask = [];
+					$(".mui-icon-checkmarkempty").each(function(item, i) {
+
+						var task = plus.uploader.createUpload(url, {
+								method: "POST",
+								blocksize: 0 //204800,
+								//priority: 100
+							},
+							function(t, status) {
+								//console.log("上传信息:" + JSON.stringify(t.responseText));
+								// 上传完成
+								if(status == 200) {
+									//alert("Upload success: " + t.url);
+									var finishId = t.__UUID__;
+									var uploads = JSON.parse(localStorage.getItem('uploads'));
+									if(uploads == null) {
+										uploads = [];
+									}
+									uploads.forEach((data, index) => {
+										if(data.id == finishId) {
+											uploads.splice(index, 1);
+										}
+									});
+									localStorage.setItem('uploads', JSON.stringify(uploads));
+
+								} else {
+									alert("Upload failed: " + status);
+								}
+							}
+						);
+
+						task.addData('projId', userInfo.projId + "");
+						task.addData('type', "1");
+						task.addData('userId', userInfo.userId);
+						task.addData('modelCode', '002');
+						task.addData('token', userInfo.tokenId);
+						task.addData('returnUrl', uploadfiles(dirid));
+						task.addData('groupId', userInfo.groupId);
+						task.addData('parentDirId', obj.dirId);
+						task.addData('fgId', '');
+						var path = $(this).attr("path");
+						task.addFile(path, {
+							key: "file"
+						});
+
+						//获取任务名称
+						var name = path.substring(path.lastIndexOf("/") + 1, path.length);
+						//任务id
+						var id = task.__UUID__;
+
+						uploadTask.push({
+							name: name,
+							id: id
+						});
+
+						//task.addEventListener("statechanged", onStateChanged, false);
+						task.addEventListener("statechanged", function(task, status) {
+							if(window['obj' + task.__UUID__] == null) {
+								window['obj' + task.__UUID__] = new onStateChanged(null, null, task.__UUID__, task.totalSize, name);
+								console.log(JSON.stringify(task));
+							} else {
+								window['obj' + task.__UUID__].task = task;
+								window['obj' + task.__UUID__].status = status;
+								window['obj' + task.__UUID__].totalSize = task.totalSize;
+								window['obj' + task.__UUID__].check();
+							}
+						}, false);
+
+						task.resume();
+					});
+
+					plus.uploader.enumerate(function(muploads) {
+						console.log("任务个数：" + muploads.length);
+					});
+
+					//把上传信息存储到本地缓存
+					var uploads = JSON.parse(localStorage.getItem('uploads'));
+					if(uploads == null) {
+						uploads = [];
+					}
+					localStorage.setItem('uploads', JSON.stringify(uploadTask.concat(uploads)));
+
+					//console.log("任务"+JSON.stringify(uploadTask));
+
+					//关闭当前页面
+					//plus.webview.currentWebview().close();
+
+				});
+			}
+
+			//监听器，用来显示实时显示下载信息 
+			function onStateChanged(task, status, num, totalSize, name) {
+				var o = new Object();
+				o.name = name;
+				o.task = task;
+				o.status = status;
+				o.num = num;
+				o.totalSize = totalSize;
+				o.nowSize = 0;
+				o.timeTask = null;
+				o.check = function() {
+					switch(o.task.state) {
+						case 1: // 开始
+							mui.toast("开始上传...");
+							break;
+						case 2: // 已连接到服务器
+							mui.toast("链接到服务器...");
+							break;
+						case 3: // 已接收到数据
+							if(o.nowSize == 0) {
+								o.nowSize = o.task.uploadedSize;
+
+								o.timeTask = setInterval(function() {
+									showing(o.num, o.task.uploadedSize, o.nowSize, o.totalSize, o.name);
+									o.nowSize = o.task.uploadedSize;
+								}, 1000);
+
+								if(o.nowSize == 0) {
+									o.nowSize = 1;
+								}
+							}
+							break;
+						case 4: // 下载完成
+							//清除定时函数
+							clearInterval(o.timeTask);
+							if(o.status == 200){
+								mui.toast("上传完成！");
+								alert("上传完成！");
+							}else{
+								mui.toast("上传失败！");
+								alert("上传失败！");
+							}
+							
+							break;
+					}
+				}
+				return o;
+			}
+
+			//实时显示下载进度
+			function showing(num, uploadedSize, nowSize, totalSize, name) {
+				var progressVal = (uploadedSize / totalSize) * 100;
+               
+				//if($('#secondshow' + num).css('display') != 'none') {
+					/*mui('#psb' + num).progressbar({
+						progress: progressVal
+					}).show();*/
+					//已经下载多少
+					//$('#nowsize' + num).html(changeSize(downloadedSize));
+					//显示网速
+					//$('#secondshow' + num).html(changeSize(downloadedSize - nowSize) + '/s');
+                    console.log(name+"已经上传了多少:"+changeSize(uploadedSize)+" == 总大小："+totalSize +"== 当前网速:"+changeSize(uploadedSize - nowSize)+"/s" +"  当前进度："+progressVal );
+				//}
+			}
+
+			// 监听上传任务状态
+			/*function onStateChanged(upload, status) {
+				if(upload.state == 4 && status == 200) {
+					// 上传完成
+					alert("Upload success: " + upload.getFileName());
+				} else {
+					console.log("已经上传：" + upload.uploadedSize + "   总共大小：" + upload.totalSize);
+				}
+			}*/
+
+			function uploadfiles(urldirid) {
+				return userInfo.url + '/cloud/uploadFile?projId=' + userInfo.projId + '&groupId=' + userInfo.groupId + '&parentDirId=' + urldirid + '&fgId=';
+			}
+
+			var imgType = {
+				'jpeg': true,
+				'jpg': true,
+				'gif': true,
+				'png': true
+			};
+
+			//获取文件图标
+			Vue.filter('format', function(value) {
+				var srcs;
+				if(value.isDirectory == true) {
+					srcs = '../../icon/gcyp_wjj.png';
+				} else {
+					var i = tool.getAttachIcon(value.name)
+					srcs = "../../" + i.src;
+				}
+				return srcs;
+			});
+
+			mui.plusReady(test);
+
+			function test() {
+				plus.io.requestFileSystem(plus.io.PUBLIC_DOWNLOADS, function(fs) {
+					fs.root.getParent(function(entries2) {
+						var directoryReader = entries2.createReader();
+						directoryReader.readEntries(function(entries) {
+							deep(entries2);
+						}, function(e) {
+							alert("Read entries failed: " + e.message);
+						});
+					}, function(e) {
+						alert("Read entries failed: " + e.message);
+					});
+				});
+			}
+
+			var list = [{
+					name: '1111',
+					isDirectory: true,
+					isFile: false,
+				}, {
+					name: '222',
+					isDirectory: true,
+					isFile: false,
+				}, {
+					name: '333',
+					isDirectory: false,
+					isFile: true,
+				},
+				{
+					name: '444',
+					isDirectory: false,
+					isFile: true,
+				}
+			];
+
+			//list.concat(list).concat(list)
+			var list2 = [];
+			var count = 0;
+			var obj = new Vue({
+				el: "#list",
+				data: {
+					list: []
+				},
+				methods: {
+					open: function(item) {
+						if(item.isDirectory) {
+
+							ENTRIES.getDirectory(item.fullPath, {
+								create: false,
+								exclusive: false
+							}, function(entriesOut) {
+								var directoryReader = entriesOut.createReader();
+								directoryReader.readEntries(function(entries) {
+									$("#back").show();
+									$("#li0").addClass('one');
+									var i;
+									var fileList = [];
+									var dirList = [];
+									for(i = 0; i < entries.length; i++) {
+										if(entries[i].isDirectory) {
+											dirList.push(entries[i]);
+										} else {
+											fileList.push(entries[i]);
+										}
+									}
+									ENTRIES = entriesOut;
+									obj.list = dirList.concat(fileList);
+								}, function(e) {
+									alert("111Read entries failed: " + e.message);
+								});
+
+							}, function(e) {
+								alert("222Read entries failed: " + e.message);
+							});
+
+						} else {}
+					},
+					back: function() {
+
+						ENTRIES.getParent(function(entriesOut) {
+							var directoryReader = entriesOut.createReader();
+							directoryReader.readEntries(function(entries) {
+
+								//判断是否到达根目录
+								entriesOut.getParent(function(isTop) {
+									var directoryReader = isTop.createReader();
+									directoryReader.readEntries(function(isHave) {
+										if(isHave.length == 0) {
+											$("#back").hide();
+											$("#li0").removeClass('one');
+											//return;
+										}
+
+										var i;
+										var fileList = [];
+										var dirList = [];
+										for(i = 0; i < entries.length; i++) {
+											if(entries[i].isDirectory) {
+												dirList.push(entries[i]);
+											} else {
+												fileList.push(entries[i]);
+											}
+										}
+										ENTRIES = entriesOut;
+										obj.list = dirList.concat(fileList);
+
+									});
+								});
+
+							}, function(e) {
+								alert("back 111 Read entries failed: " + e.message);
+							});
+						}, function(e) {
+							alert("back Read entries failed: " + e.message);
+						});
+
+					},
+				},
+				watch: {
+					list: function() {
+						this.$nextTick(function() {
+							$('.choose').find(".circle").removeClass(CLASSNAME);
+							init();
+						})
+					}
+				},
+				mounted: function() {
+					init();
+				}
+			})
+
+			var ENTRIES;
+			//递归到根目录
+			function deep(entries2) {
+
+				entries2.getParent(function(entries3) {
+						var directoryReader = entries3.createReader();
+						directoryReader.readEntries(function(entries) {
+
+								if(entries.length <= 0) {
+									var directoryReader = entries2.createReader();
+									directoryReader.readEntries(function(entries) {
+										ENTRIES = entries3
+										var i;
+										var fileList = [];
+										for(i = 0; i < entries.length; i++) {
+											if(entries[i].isDirectory) {
+												list2.push(entries[i]);
+											} else {
+												fileList.push(entries[i]);
+											}
+
+											//console.log(entries[i].name);
+										}
+
+										obj.list = list2.concat(fileList);
+									}, function(e) {
+										alert("Read entries failed: " + e.message);
+									});
+
+									return;
+								}
+								deep(entries3);
+							},
+							function(e) {
+								alert("Read entries failed: " + e.message);
+							})
+					},
+					function(e) {
+						alert("Read entries failed: " + e.message);
+					});
+
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>工程项目导航</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!--css-->
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/project_navigation.css" />
+		<!--css-->
+
+		<!--js-->
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<!--js-->
+		<style>
+			a{
+				touch-action: none;
+			}
+			</style>
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav head">
+			
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<div id="heads">
+			<h1 class="mui-title" id="ti" style="display: none;">{{companyName}}</h1>
+			</div>
+		</header>
+
+		<div class="mui-content">
+			<div style="padding: 10px 10px;" class="title">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a class="mui-control-item mui-active" href="#item1">卡片视图</a>
+					<a class="mui-control-item " href="#item2">地图视图</a>
+				</div>
+			</div>
+			<div>
+				<div id="item2" class="mui-control-content ">
+					<div id="container" tabindex="0">
+					</div>
+				</div>
+				<div id="item1" class="mui-control-content mui-active">
+					<ul class="mui-table-view" id="ds" style="display: none;">
+
+						<li class="mui-table-view-cell" v-for="(item,index) in list" :id="item.projId" :index="index">
+
+							<div class="detail-out">
+
+								<div class="detail-left ">
+									<img class="img-title"  :src="item.imgPath" onerror="this.src='../../icon/office5.png';this.onerror=null"/><!--:src="../../icon/office1.jpg" -->
+								</div>
+
+								<div class="detail-left right-left ">
+									<a class="mui-navigate-right">{{item.projName}}</a>
+									<div class="detail">工程账号：{{item.projCode}}</div>
+									<div class="detail">工程管理员：{{item.projAdminName}}</div>
+									<div class="detail" v-show="item.overviewList != null">
+										<div class="detail" v-for="(lists,index) in item.overviewList">
+											<div class="detail" v-if="index<3">
+												{{lists.viewKey}}:{{lists.viewVal}}
+											</div>
+										</div>
+									</div> 
+									<!--<div class="detail" v-show="item.overviewList != null">工程规模：{{item.scale}}</div>
+									<div class="detail" v-show="item.overviewList != null">建设单位：{{item.unit}}</div>-->
+								</div>
+
+							</div>
+						</li>
+
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.7&key=9f48aaba22a351f6f9bb8b42c163210c"></script>
+        <script src="../../js/globalVariable.js"></script>
+        <script type="text/javascript" src="../../js/project_navigation.js" ></script>	
+        <script>
+        	function change(e){
+        		console.log(e);
+        		/*var parent = $(e).parent();
+        		parent.empty();
+        		parent.html(big);*/
+        	}
+        	
+        	$("#back").on("tap",function(){
+				var opener = plus.webview.currentWebview().opener();
+					mui.fire(opener, 'letuse', {}); 
+			});
+        	
+        	
+        </script>
+	</body>
+
+</html>

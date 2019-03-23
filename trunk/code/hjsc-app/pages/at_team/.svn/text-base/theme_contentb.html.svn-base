@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>主题正文</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		img{
+			margin-top: 130px;
+			width: 70px;
+			height: 70px;
+		}
+		.mui-content{
+			height: 500px;
+			text-align: center;
+		}
+		.menu{
+			position: fixed;
+			bottom: 50px;
+			width: 100%;
+		}
+		.menu li{
+			text-align: center;
+			color: #0479bb;
+		}
+		.cancel{
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+		}
+		.cancel li{
+			text-align: center;
+			color: #666666;
+		}
+	</style>
+	<body>
+		<div id="themes">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			    <h1 class="mui-title">主题正文</h1>
+			</header>
+			
+			<div class="mui-content">
+				<div class="files">
+					<p >
+						<img id="imgs" src="../../img/word.png"/>
+					</p>
+					<p>工程准备阶段文件.pdf</p>
+				</div>
+			</div>
+			
+			<ul class="mui-table-view menu">
+			    <li class="mui-table-view-cell" @click="previews()">预览</li>
+			    <li class="mui-table-view-cell">下载</li>
+			    <li class="mui-table-view-cell">定位</li>
+			</ul>
+			<ul class="mui-table-view cancel">
+			    <li class="mui-table-view-cell">取消分享</li>
+			</ul>
+		</div>
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/vue2.5.js" ></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="../../js/mui.previewimage.js" ></script>
+    <script type="text/javascript" src="../../js/mui.zoom.js" ></script>
+		<script type="text/javascript">
+			mui.init()
+			//图片数据
+			//var contents={imgUrl:"img/gailan.png",imgName:"gailan"}
+			var theme=new Vue({
+				el:"#themes",
+				data:function(){
+					return{
+						content:contents
+					}
+				},
+				methods:{
+					
+				}
+			});
+			
+		</script>
+	</body>
+
+</html>

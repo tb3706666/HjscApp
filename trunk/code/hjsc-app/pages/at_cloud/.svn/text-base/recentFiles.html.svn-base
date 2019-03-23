@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>最近文档</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/mui.min.css"/>
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<style>
+		.mui-bar {
+			background-color: #43484e;
+		}
+		.mui-bar .mui-title {
+			color: #fff;
+		}
+		.mui-icon-back:before, .mui-icon-left-nav:before{
+			color: #fff;
+		}
+		#recent_file {
+			margin-top: 50px;
+		}
+		.size{
+			margin-left: 40px;
+		}
+		.dates{
+			
+			display: inline-block;
+		}
+		.mui-radio{
+			float: right;
+			width: 28px;
+			height: 28px;
+		}
+		.mui-radio input[type="radio"]{
+			position: unset;
+		}
+		.mui-popover{
+			height: 230px;
+		    width: 100%;
+		    position: fixed;
+		    bottom: 0;
+		    text-align: center;
+		    color: #0479bb;
+		}
+		.filling{
+		    background: #F2F2F2;
+		    height: 0px;
+		    padding: 3px;
+		}
+		.mui-radio input[type=radio]:checked:before {
+			content: '\e442';
+		}
+	</style>
+	<body>
+		<div id="files">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			    <h1 class="mui-title">最近文档</h1>
+			</header>
+			
+			<ul class="mui-table-view" id="recent_file">
+			    <li class="mui-table-view-cell mui-media" v-for="(item,index) in items" :accesskey="index">
+			        <a :href="item.nameurl" >
+			            <img class="mui-media-object mui-pull-left" :src="item | format">
+			            <div class="mui-media-body">
+			                <p class="list_title hbox">{{item.titname}}<small class="ban" :class="{kai:k,'zheng':z}">{{item.ban}}</small></p>
+			                <p class="dates">
+			                	{{item.date}}
+			                	<span class="size">{{item.size}}</span>
+			                </p>
+			                <div class="mui-input-row mui-radio ">
+			                    <input name="radio" type="radio" v-model="item.state" @click="menu(item,item.id)">
+			                </div>
+			                <p class="mui-ellipsis">{{item.actions}}</p>
+			            </div>
+			        </a>
+			    </li>
+			    <li>
+			    	<div id="popover" class="mui-popover popover1">
+						<div class="mui-scroll-wrapper">
+						    <div class="mui-scroll">
+							    <ul class="mui-table-view">
+							    	<li class="mui-table-view-cell"><a href="#">打开</a></li>
+							    	<li class="mui-table-view-cell"><a href="#">下载</a></li>
+							    	<li class="mui-table-view-cell"><a href="#">分享</a></li>
+							    	<li class="mui-table-view-cell" @click="showdeletes"><a href="#">删除</a></li>
+							    	<li class="mui-table-view-cell filling"></li>
+							    	<li class="mui-table-view-cell" style="color: #333;" @click="cancel"><a>取消</a></li>
+							    </ul>
+							</div>
+						</div>
+					</div>	
+					<div id="popover_delete" class="mui-popover popover2" style="height: 140px;">
+						<div class="mui-scroll-wrapper">
+						    <div class="mui-scroll">
+							    <ul class="mui-table-view">
+							    	<li class="mui-table-view-cell"><h5>只从最近文档列表里删除，不删除原目录内的文档</h5></li>
+							    	<li class="mui-table-view-cell" @click="deletes" style="color:#cc0a0a"><a href="#">删除</a></li>
+							    	<li class="mui-table-view-cell filling"></li>
+							    	<li class="mui-table-view-cell" style="color: #333;" @click="cancel"><a>取消</a></li>
+							    </ul>
+							</div>
+						</div>
+					</div>	
+			    </li>
+			</ul>
+			
+		</div>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/vue2.5.js" ></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="components/attachIcon.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui('.mui-scroll-wrapper').scroll()
+			//请求接口数据
+			var itemsdata=[
+				{titname:'立白办公大楼施工文件.doc',ban:'版本1',date:'2018-09-04 13:31:01',actions:'下载了立白办公大楼施工文件夹下载了立白',size:'311.04KB',id:1,imgurl:'icon/cpsldh1.png'},
+				{titname:'立白施工数据表.xls',ban:'版本1',date:'2018-09-04 17:01:31',actions:'下载了立白施工大楼',size:'249MB',id:2,imgurl:'icon/cpsldh2.png'},
+				{titname:'华润施工方案.pdf',ban:'版本2',date:'2018-09-04 16:11:21',actions:'下载了华润施工方案',size:'311.04KB',id:3,imgurl:'icon/cpsldh3.png'},
+				{titname:'顺丰资料管理.rar',ban:'版本1',date:'2018-09-04 13:31:01',actions:'下载了顺丰速运施工数据表.xls',size:'311.04KB',id:4,imgurl:'icon/cpsldh4.png'},
+				{titname:'立白仓储图片.jpg',ban:'版本1',date:'2018-09-04 13:31:01',actions:'下载了立白仓储图片.jpg',size:'311.04KB',id:5,imgurl:'icon/cpsldh5.png'},
+				{titname:'设计文件.txt',ban:'版本1',date:'2018-09-04 13:31:01',actions:'下载了设计文件.txt',size:'311.04KB',id:6,imgurl:'icon/cpsldh6.png'},
+				{titname:'立白办公大楼施工文件.doc',ban:'版本1',date:'2018-09-04 13:31:01',actions:'下载了立白办公大楼施工文件夹下载了立白',size:'311.04KB',id:7,imgurl:'icon/cpsldh7.png'},
+				{titname:'中国电信.mp3',ban:'版本1',date:'2018-09-04 13:31:01',actions:'下载了中国电信.mp3',size:'311.04KB',id:8,imgurl:'icon/cpsldh1.png'},
+				
+			];
+			
+			/*获取文件的图标样式*/
+			Vue.filter('format',function(value){
+				var i=tool.getAttachIcon(value.titname)
+			     return i.src;
+			 });
+			 
+			//页面
+			var obj=new Vue({
+				el:'#files',
+				data:function(){
+					return{
+						k:true,
+						z:false,
+						items:itemsdata,
+						fileId:"",
+					}
+				},
+				methods:{
+					menu:function(item,n){
+						var status=!item.state;
+						if(status==true){
+							mui('.popover1').popover('toggle');//toggle参数，mui自己判断隐藏还是显示
+						}
+						obj.fileId=n;
+					},
+					cancel:function(){
+						$("input[name='radio']").each(function(){
+							this.checked=false;
+						});
+						mui('.mui-popover').popover('hide');
+					},
+					showdeletes:function(){
+						mui('.popover2').popover('toggle');
+					},
+					deletes:function(){
+						alert(obj.fileId);
+					},
+				},
+				
+			});
+			
+		</script>
+	</body>
+
+</html>

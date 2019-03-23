@@ -1,0 +1,1025 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>主题正文</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/subject.css" />
+	</head>
+	<style>/*头像*/
+
+.mui-table-view .mui-media-object {
+	max-width: 42px !important;
+	height: 42px !important;
+	width: 42px !important;
+}
+
+/*主题*/
+#detailContent{
+	margin-bottom: 2%;
+}
+.ipdoc{
+	border: 1px solid #e5e5e5;
+}
+.ipimg,.ipdoc{
+	width: 32%;
+	height: 3.5rem;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	margin-bottom: 2%;
+	position: relative;
+}
+/*视点*/
+		#go{
+		    background: rgba(0,0,0,0.5);
+		    color: #fff;
+		    font-size: 14px;
+		    font-weight: bold;
+		    position: absolute;
+		    bottom: 0;
+		    width: 100%;
+		}
+		.detail-img{
+			margin: 0;
+		}
+/*视点end*/
+#phone1>li:nth-of-type(3n-1){
+	margin: 0 2%;
+}
+.ipimg>img{
+	width: 100%;
+	height: 100%;
+}
+/*文档显示start*/
+		.docimg {
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+		}
+		.docfont {
+		    text-align: center;
+		    color: #6B6B6B;
+		    font-size: 14px;
+		    font-weight: bold;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    display: -webkit-box;
+		    -webkit-line-clamp: 1;
+		    -webkit-box-orient: vertical;
+		    width: 100%;
+		    padding: 0 5%;
+		}
+/*文档显示end*/
+.mui-table-view:before{
+	background-color: transparent;
+}
+
+/*正文*/
+
+.list_title {
+	font-size: 15px;
+	padding: 5px 0;
+}
+
+.imgbq {
+	width: 20px !important;
+	height: 10px;
+	float: right;
+	vertical-align: bottom;
+}
+
+.lou {
+	font-size: 15px;
+	color: #8f8f94;
+	float: right;
+}
+
+.icon_nz {
+	width: 12px !important;
+	height: 12px;
+	vertical-align: baseline;
+	margin-right: 5px;
+}
+#phone {
+	margin-top: 10px;
+}
+#phone li img {
+	float: left;
+	width: 32%;
+	height: 3.5rem;
+	margin:2% 0;
+}
+#phone li:nth-of-type(3n-1) img {
+	margin: 0 2%;
+}
+
+.zk {
+	font-size: 15px;
+	color: #0487D0;
+}
+
+
+/*正文下部分*/
+
+.mui-col-xs-4 {
+	width: 12.5%;
+}
+
+.zw_xiaoxi {
+	display: inline-block;
+}
+
+.zw_xiaoxi p {
+	color: #333;
+	font-size: 16px;
+}
+.mui-table-view:after{
+	background-color: transparent;
+}
+
+/*回复,流程*/
+
+#slider {
+	background-color: #fff;
+	height: -webkit-fill-available;
+	margin-bottom: 60px;
+}
+
+.mui-control-content {
+	background-color: white;
+}
+
+.mui-control-content .mui-loading {
+	margin-top: 50px;
+}
+
+.mui-bar-nav~.mui-content {
+	padding-top: 0;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted {
+	width: 25%;
+}
+
+.hf_xiaoxi {
+	display: inline-block;
+	padding-left: 50px;
+}
+
+.hf_xiaoxi p {
+	color: #333;
+	font-size: 14px;
+}
+
+
+/*底部回复*/
+
+.liedit {
+	width: 100%;
+}
+
+.liedit img {
+	margin: 0 8px;
+}
+
+.liedit input {
+	border-radius: 30px;
+	margin: 0 auto;
+	height: 35px;
+	padding-left: 35px;
+	color: #43484e;
+}
+
+.iedit {
+	background-image: url(../../icon/ztzw_4.png);
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: 10px;
+}
+
+#navli {
+	padding-top: 7.5px;
+}
+
+#navli li {
+	float: left;
+}
+
+.zt_bottom {
+	background: #E5E5E5;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+	color: inherit;
+	border: 0;
+	touch-action: none;
+}
+
+.shu {
+	width: 1px !important;
+	height: 50px !important;
+	margin-left: 20px;
+	margin-bottom: 5px;
+}
+
+.liucheng {
+	height: 35px;
+	line-height: 35px;
+	width: 100%;
+	display: inline-block;
+}
+
+.mui-table-view-cell.mui-active {
+	background-color: transparent;
+}
+/*还没有评论*/
+.noReply {
+	text-align: center;
+	line-height: 224px;
+}
+.mui-slider .mui-slider-group .mui-slider-item img {
+	width: auto;
+	/* height: auto; */
+	max-width: 100%;
+	max-height: 100%;
+}
+#topPopover {
+	height: 135px;
+	border-radius: 3px;
+}
+			
+/*回复框*/
+@media only screen and (max-width: 320px) {
+	.liedit img {
+    	margin: 0 5px;
+	}
+}
+			
+</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">主题正文</h1>
+		</header>
+
+		<ul id="ztzw" class="mui-table-view mt50">
+			<li class="mui-table-view-cell mui-media">
+				<!--<a href="item.nameurl">-->
+				<img class="mui-media-object mui-pull-left bdr30" :src="myzt.createUserImg" onerror="this.src='../../img/timg.jpg';this.onerror=null" />
+				<div class="mui-media-body">
+					<p class="list_title">{{myzt.createUserStr}}
+						<a href="#topPopover" class="arrov-out stop" :ztstatus="myzt.dcStatus" :collect="''+myzt.collect" ><img src="../../icon/ztzw_1.png" /></a>
+					</p>
+					<p><img class="icon_nz" src="../../icon/ztzw_2.png" /><small>{{myzt.createTime | switchingTime}} &emsp;{{myzt.from}}</small><small style="color: #0487D0;">{{myzt.dcStatus | transformStatus}}</small></p>
+				</div>
+				<div class="zw_xiaoxi">
+					<!--{{myzt.dcContent}}-->
+					<p id="detailContent" v-html="myzt.dcContent"></p>
+					<span class="zk" v-show="false" @click="toggle()">{{tog?'展开':'收起'}}</span>
+					<!--放入图片-->
+					<ul id="phone1">
+						<!--图片-->
+						<li v-for="(item,index) in myzt.attachList" class="ipimg">
+							<img :src="item.path" data-preview-src="" data-preview-group="1" />
+							<p v-show="item.locationInfo" id="go"  :location='item.locationInfo'>视点</p>
+						</li>
+						<!--文档-->
+						<li v-for="file in myzt.fileList" class="ipdoc">
+							<img class="docimg" :src="file.fileFullName | format" />
+							<span class="docfont">{{file.fileFullName}}</span>
+						</li>
+					</ul>
+					
+			</li>
+				<!--<div class="doc" id="doc">
+					<div class="docOne" v-for="file in myzt.fileList">
+						<img class="docimg" :src="file.fileFullName | format" />
+						<span class="docfont">{{file.fileFullName}}</span>
+					</div>
+				</div>-->
+		</ul>
+			
+
+		<div class="mui-content mt10">
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active hflist">
+						回复
+					</a>
+					<a class="mui-control-item lclist">
+						流程
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group hflc">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active" style="border-top: 1px solid #e6e6e6;margin-top: 10px;">
+						<div id="scroll1">
+							<div class="mui-scroll">
+								<!--回复内容 start-->
+
+								<ul id="hf1" class="mui-table-view">
+									<li class="mui-table-view-cell mui-media" v-for="(item,index) in items">
+										<!--<a href="item.nameurl">-->
+										<img class="mui-media-object mui-pull-left bdr30" :src="item.rvUserImg" onerror="this.src='../../img/timg.jpg';this.onerror=null">
+										<div class="mui-media-body">
+											<p class="list_title">{{item.rvUserStr}}</p>
+											<p><img class="icon_nz" src="../../icon/ztzw_2.png" /><small>{{item.rvTime | switchingTime}}&emsp;{{item.fromIn | fromInglq}}</small></p>
+										</div>
+										<div class="hf_xiaoxi mt10 pl70" :class="'zt'+index">
+											<!--<p class="two_h">{{item.maintext}}</p><span class="zk"></span> {{item.rvContent}}-->
+											<p :id="'rv'+index" v-html="item.rvContent"></p>
+											<span class="zk" v-show="false" @click="toggles(index)">{{hfzt?'展开':'收起'}}</span>
+											<!--放入图片-->
+											<ul id="phone">
+												<li v-for="item1 in item.attachList"><img :src="item1.path"  data-preview-src="" :data-preview-group="index"/></li> <!--data-preview-src="" :data-preview-group="index"-->
+											</ul>
+											<!--</a>-->
+									</li>
+								</ul>
+								<!--回复内容end-->
+								</div>
+							</div>
+						</div>
+						<div id="item2mobile" class="mui-slider-item mui-control-content">
+							<div id="scroll2">
+								<div class="mui-scroll">
+
+									<ul class="mui-table-view" id="liu">
+										<li class="mui-table-view-cell mui-media">
+											<!--<a href="item.nameurl" class="mui-navigate-right">-->
+											<div v-for="(item,index) in itemlist">
+												
+												<div class="liucheng">
+													<img class="mui-media-object mui-pull-left" :src="item.imgtp">
+													<span class="list_title">{{item.userName}}</span><small class="ban fr">{{item.operateTime |switchingTime}}</small>
+												</div>
+												<p class="mt10"><small>{{item.dcStatus}}</small></p>
+												<img src="../../icon/ztlc_2.png" class="shu" v-show="itemlist.length-1!=index" />
+											</div>
+										</li>
+									</ul>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!--右上角弹出菜单-->
+			<div id="topPopover" class="mui-popover">
+				<div class="mui-popover-arrow"></div>
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" data-id="1">
+								<a href="#">
+									<img class="menu-img" src="../../icon/ztg_1.png" />
+									<span class="menu-font">&nbsp;<span id="delete">删除</span></span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell" data-id="2">
+								<a href="#">
+									<img class="menu-img" src="../../icon/ztg_2.png" />
+									<span class="menu-font">&nbsp;<span id="collect">收藏</span></span>
+								</a>
+							</li>
+							<li class="mui-table-view-cell" data-id="3">
+								<a href="#">
+									<img class="menu-img" src="../../icon/ztg_3.png" />
+									<span class="menu-font">&nbsp;<span id="zaiyi">完成</span></span>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<!--底部输入框-->
+			<nav class="mui-bar mui-bar-tab nav zt_bottom bsnone">
+				<ul id="navli">
+					<li class="liedit">
+						<img src="../../icon/ztzw_3.png" class="yicon fl" id="hrefhtml" />
+						<input type="text" class="iedit fl" style="width: 70%;" id="content" />
+						<img src="../../icon/ztzw_5.png" class="yicon fr" onclick="Reply()" />
+					</li>
+				</ul>
+			</nav>
+
+			<script type="text/javascript" src="../../js/mui.min.js"></script>
+			<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+			<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+			<script type="text/javascript" src="../../js/vue2.5.js"></script>
+			<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+			<script src="../../js/globalVariable.js"></script>
+			<script type="text/javascript" src="../../components/attachIcon.js"></script>
+			<script type="text/javascript" src="../../js/pub.js"></script>
+
+			<script type="text/javascript">
+				mui.init();
+				//禁止侧滑
+				mui('#slider').slider().stopped = true;
+				//默认获取回复高度
+				$('#slider,.hflc').height($('#hf1').height()+50);
+				
+////				回复
+//				mui('#sliderSegmentedControl').on('tap','.hflist',function(){
+//					$('#item2mobile').removeClass();
+//					$('#item1mobile').addClass('mui-control-content mui-active mui-slider-item');
+//					$('.mui-slider-progress-bar').css('margin-left','0');
+//					$('#scroll2').hide();
+//				})
+////				流程
+//				mui('#sliderSegmentedControl').on('tap','.lclist',function(){
+//					$('#item1mobile').removeClass();
+//					$('#item2mobile').addClass('mui-control-content mui-active mui-slider-item');
+//					$('.mui-slider-progress-bar').css('margin-left','12.5%');
+//					$('#scroll2').show();
+//				})
+//				回复
+				mui('#sliderSegmentedControl').on('tap','.hflist',function(){
+					$('#item2mobile').removeClass();
+					$('#item1mobile').addClass('mui-control-content mui-active mui-slider-item');
+					$('.mui-slider-progress-bar').css('margin-left','0');
+					//回复点击时且渲染完毕后获取回复外层,内层高度
+					$('#scroll2').hide();
+					$('#slider,.hflc').height($('#hf1').height()+50);
+				})
+//				流程
+				mui('#sliderSegmentedControl').on('tap','.lclist',function(){
+					$('#item1mobile').removeClass();
+					$('#item2mobile').addClass('mui-control-content mui-active mui-slider-item');
+					$('.mui-slider-progress-bar').css('margin-left','12.5%');
+					//流程点击时且渲染完毕后获取回复外层,内层高度
+					$('#scroll2').show();
+					$('#slider,.hflc').height($('#liu').height()+50);
+				})
+
+				//滑动方块
+//				mui('#sliderSegmentedControl').on('tap','.lclist',function(){
+//					
+//				})
+				
+				
+//				$(function(){
+//					$('.hflist').click(function(){
+//						alert(1)
+//					})
+//				})
+//				回复--流程
+
+             //回复的过滤器
+             Vue.filter('fromInglq', function(data) {
+             	if(data==2){
+             		return "来自Android";
+             	}else{
+             			return "来自ios";
+             	}
+          })
+
+
+/**
+ * 是否收藏标识  false 为未收藏
+ */
+
+               
+var ISCOLLECT;
+
+var dcId = GetQueryString('dcId');
+var subProjId = GetQueryString('subProjId');
+//上方内容
+var ztzw = new Vue({
+	el: '#ztzw',
+	data: {
+		myzt: {},
+		tog: true
+	},
+	methods: {
+		toggle: function() {
+			this.tog = !this.tog;
+			$('.zw_xiaoxi p').toggleClass('two_h');
+		}
+	},
+	watch: {
+		myzt: function() {
+			this.$nextTick(function() {
+				isShow();
+				operation();
+				init_replyList();
+			})
+		}
+	},
+});
+
+function isShow() {
+	var cur = $("#detailContent");
+	var rowNum = Math.round(cur.height() / parseFloat(cur.css('line-height')));
+	if(rowNum > 2) {
+		cur.addClass("two_h")
+		cur.next().show();
+	} else {
+		cur.next().hide();
+	}
+}
+
+function isShow2() {
+	//rv
+
+	for(var i = 0; i < reply.items.length; i++) {
+		var cur2 = $("#rv" + i);
+		var rowNum = Math.round(cur2.height() / parseFloat(cur2.css('line-height')));
+		if(rowNum > 2) {
+			cur2.addClass("two_h")
+			cur2.next().show();
+		} else {
+			cur2.next().hide();
+		}
+	}
+
+}
+
+var reply = new Vue({
+	el: '#hf1',
+	data: {
+		items: [],
+		hfzt: true
+	},
+	methods: {
+		toggles: function(index) {
+			this.hfzt = !this.hfzt;
+			$('#rv' + index).toggleClass('two_h');
+		}
+	},
+	watch: {
+		items: function() {
+			this.$nextTick(function(){
+				isShow2();
+				//默认进入触发回复高度
+				$('#slider,.hflc').height($('#hf1').height()+50);
+				//回复点击时且渲染完毕后获取回复外层,内层高度
+				mui('#sliderSegmentedControl').on('tap','.hflist',function(){
+				$('#slider,.hflc').height($('#hf1').height()+50);
+				})
+				//流程点击时且渲染完毕后获取回复外层,内层高度
+				mui('#sliderSegmentedControl').on('tap','.lclist',function(){
+				$('#slider,.hflc').height($('#liu').height()+50);
+				})
+			})
+		}
+	},
+});
+
+//流程
+(function($) {
+	$('.mui-scroll-wrapper').scroll({
+		indicators: true //是否显示滚动条
+	});
+})(mui);
+
+$(function() {
+	init_localdata();
+})
+
+/**
+ * 加载本地缓存数据
+ */
+function init_localdata() {
+	userInfo = getGlobalUserInfo();
+	init_data();
+	//					init_replyList();
+	init_flow();
+}
+
+// 显示主题详情
+function init_data() {
+	//alert(userInfo.projId+" "+userInfo.entid+" "+userInfo.tokenId);
+	//2.7  ok
+	$.ajax({
+		type: "get",
+		url: userInfo.url + "/mobile/showSubject",
+		async: true,
+		beforeSend: function(request) {
+			request.setRequestHeader('tokenId', userInfo.tokenId);
+			request.setRequestHeader('appType', 7);
+		},
+		data: {
+			userId: userInfo.userId,
+			projId: userInfo.projId,
+			entId: userInfo.entid,
+			subProjId: subProjId,
+			dcId: dcId
+		},
+		success: function(data) {
+			console.log(data);
+			//							console.log("2.7", data);
+			ztzw.myzt = data.obj.subInfo;
+			mui.previewImage();
+		}
+	});
+}
+//点击回复跳转
+$('#hrefhtml').on('tap', function() {
+	//					alert('ss');
+	//					mui.openWindow(replytheme.html);
+	if(ztzw.myzt.dcStatus==1){
+		mui.openWindow({
+		url: 'replytheme.html',
+		id: 'published',
+		extras: {
+			dcId: dcId,
+			dcStatus: ztzw.myzt.dcStatus
+		}
+	});
+	}else{
+		mui.toast("当前状态无法回复");
+	}
+	
+});
+
+
+//input框监听事件
+$('#content').on('tap',function(){
+    if(ztzw.myzt.dcStatus==2){
+      mui.toast("主题已经解决，不可回复");
+       $("#content").attr("disabled",true);
+    }else if(ztzw.myzt.dcStatus==3){
+    	mui.toast("主题已关闭，不可回复");
+    	 $("#content").attr("disabled",true);
+    }else{
+      $("#content").attr("disabled",false);
+    }
+})
+
+
+//回复
+function Reply() {
+	//判断从哪里进来
+//	console.log(userInfo);
+	var content = $('#content').val().trim();
+	if(ztzw.myzt.dcStatus==1){
+	if(content != "") {
+		var dcStatus = ztzw.myzt.dcStatus;
+		var themeStatus = "";
+		if(dcStatus == 1) {
+			themeStatus = "正在处理";
+		} else if(dcStatus == 4) {
+			themeStatus = "等待审核";
+		} else if(dcStatus == 5) {
+			themeStatus = "修改补充";
+		} else if(dcStatus == 8) {
+			themeStatus = "等待整改";
+		} else if(dcStatus == 9) {
+			themeStatus = "等待检查";
+		} else if(dcStatus == 10) {
+			themeStatus = "继续整改";
+		} else if(dcStatus == 13) {
+			themeStatus = "等待初审";
+		} else if(dcStatus == 14) {
+			themeStatus = "等待复审";
+		}
+		//					console.log(dcStatus);
+	      console.log(userInfo.platformType);
+	      
+
+		var jsonData = {
+			dcReview: {
+				dcId: dcId,
+				fromIn:userInfo.platformType, //安卓还是ios
+				rvContent: content
+			},
+			vpList: [],
+			newDC: false, //是否作为新的主题发布
+			attachList: [],
+			fileIdList: []
+		}
+
+		var str = "userId=" + userInfo.userId + "&checked=false&type=1&entId=" + userInfo.entid + "&dcId=" + dcId + "&themeStatus=" + themeStatus + "&jsonData=" + JSON.stringify(jsonData);
+		//
+		$.ajax({ //2.13
+			type: "POST",
+			url: userInfo.url + "/mobile/reviewDC?" + encodeURI(str),
+			async: true,
+			beforeSend: function(request) {
+				request.setRequestHeader('tokenId', userInfo.tokenId);
+				request.setRequestHeader('appType', 7);
+			},
+			/*data:{
+			userId:userInfo.userId,
+			checked:false, //false/true
+			type:1, //1：设计协调页签，2：质量验收页签，3：质量检查页签，4：安全验收页签
+			entId:userInfo.entId,
+			dcId:dcId,         
+			themeStatus:themeStatus
+			jsonData:JSON.stringify(jsonData)       
+			},*/
+			success: function(data) {
+				if(data.success) {
+					console.log(data);
+					mui.toast("回复成功")
+					$('#content').val("");
+					//成功后获取列表
+					init_replyList();
+//					prePage.reload(true);
+				} else {
+					mui.toast("回复异常")
+				}
+				//										console.log("2.13",data);
+			}
+		});
+
+	} else {
+		mui.toast("请输入回复内容");
+	}
+	}else if(ztzw.myzt.dcStatus==2){
+		 mui.toast("主题已经解决，不可回复");
+	}else if(ztzw.myzt.dcStatus==3){
+		 mui.toast("主题已经关闭，不可回复");
+	}
+	//
+}
+
+// 初始化回复列表
+function init_replyList() {
+	//2.8
+	$.ajax({
+		type: "get",
+		url: userInfo.url + "/mobile/getReviewList",
+		async: true,
+		beforeSend: function(request) {
+			request.setRequestHeader('tokenId', userInfo.tokenId);
+			request.setRequestHeader('appType', 7);
+		},
+		data: {
+			userId: userInfo.userId,
+			dcId: dcId //需要从2.9中获取
+		},
+		success: function(data) {
+			 
+//			console.log("2.8", data);
+			if(data.obj.subReview == null) {
+				$("#hf1").append('<li class="noReply">还没有人回复。</li>');
+			} else {
+				reply.items = data.obj.subReview;
+				mui.previewImage();
+				$(".noReply").css('display','none');
+			}
+		}
+	});
+}
+
+// 初始化流程
+function init_flow() {
+	$.ajax({
+		type: "GET",
+		url: userInfo.url + "/mobile/getFlowChartsByDcId",
+		data: {
+			dcId: dcId,
+			token: userInfo.tokenId
+		},
+		success: function(data) { //(item,index) in items
+
+			for(i = 0; i < data.obj.length; i++) {
+				if(data.obj[i].dcStatus == "发表") {
+					data.obj[i].imgtp = "../../icon/ztlc_5.png";
+				} else if(data.obj[i].dcStatus == "正在处理") {
+					data.obj[i].imgtp = "../../icon/ztlc_4.png";
+				} else if(data.obj[i].dcStatus == "解决完成") {
+					data.obj[i].imgtp = "../../icon/ztlc_3.png";
+				} else { //结束
+					data.obj[i].imgtp = "../../icon/ztlc_1.png";
+				}
+			}
+			console.log('初始化流程', data.obj);
+			new Vue({
+				el: '#item2mobile',
+				data: {
+					itemlist: data.obj,
+				}
+			});
+		}
+	});
+}
+
+// 渲染操作标签点击事件
+function operation() {
+
+	$('.arrov-out').unbind();
+	$('.arrov-out').on('tap', function() {
+
+		setTimeout(function() {
+			$("#topPopover").css('left', '0px');
+		}, 20);
+
+		//false 为未收藏
+		ISCOLLECT = $(this).attr('collect');
+		INDEX = $(this).attr('index');
+		CUR = $(this);
+		DCID = $(this).attr('dcId');
+		if(ISCOLLECT == 'true') {
+			$("#collect").html('取消收藏');
+			$("#collect").parent().prev().prop('src', '../../icon/ztg_2_1.png')
+		} else {
+			$("#collect").html('收藏');
+			$("#collect").parent().prev().prop('src', '../../icon/ztg_2.png')
+		}
+		
+		//完成点击事件  获取当前的状态
+	ztstatus = $(this).attr('ztstatus');
+	console.log('状态', ztstatus);
+	ztupd = "";
+	if(ztstatus == 2) {
+		ztupd = "再议";
+	} else if(ztstatus == 3) {
+		ztupd = "开启";
+	} else {
+		ztupd = "完成";
+	}
+	$('#zaiyi').html(ztupd);
+	})
+}
+
+$('#topPopover .mui-table-view-cell').on('tap', function() {
+	var id = $(this).data('id');
+	switch(id) {
+		case 1:
+			var btn = ['确定', '取消'];
+			mui.confirm('确定删除嘛?', ' ', btn, function(e) {
+				if(e.index == 0) {
+					$.ajax({ //  2.11 
+						type: "get",
+						url: userInfo.url + "/mobile/deleteDC",
+						async: true,
+						beforeSend: function(request) {
+							request.setRequestHeader('tokenId', userInfo.tokenId);
+							request.setRequestHeader('appType', 7);
+						},
+						data: {
+							userId: userInfo.userId,
+							dcId: dcId, //执行2.9方法
+							type: 1, //1：设计协调页签，2：质量验收页签，3：质量检查页签，4：安全验收页签
+							entId: userInfo.entid
+						},
+						success: function(data) {
+							if(data.success) {
+								mui.toast("删除成功");
+								GoToURL("subject.html");
+								//												Window.open("subject.html");
+								//移除掉这个div
+								//												vueList.list.splice(INDEX, 1);
+							} else {
+								mui.toast('删除失败，发生异常');
+							}
+							//							console.log("2.10", data);
+						}
+					});
+				}
+			})
+			break;
+		case 2:
+			//2.10
+			$.ajax({
+				type: "POST",
+				url: userInfo.url + "/mobile/collect",
+				async: true,
+				beforeSend: function(request) {
+					request.setRequestHeader('tokenId', userInfo.tokenId);
+					request.setRequestHeader('appType', 7);
+				},
+				data: {
+					userId: userInfo.userId,
+					dcId: dcId, //执行2.9
+					isCollect: ISCOLLECT == 'false' ? 1 : 0, //1:收藏  其他
+					entId: userInfo.entid
+				},
+				success: function(data) {
+					// console.log("2.10",data);
+					if(data.success) {
+						if(ISCOLLECT == 'false') {
+							mui.toast('收藏成功');
+							CUR.attr('collect', 'true');
+							$("#collect").html('取消收藏');
+						} else {
+							mui.toast('取消收藏成功');
+							CUR.attr('collect', 'false');
+							$("#collect").html('收藏');
+						}
+					} else {
+						mui.toast('收藏失败，发生异常');
+					}
+				}
+			});
+			// 阻止冒泡
+
+			break;
+		case 3:
+			  //获取里面的值
+		    zaiyi=$('#zaiyi').html();
+		   //zaiyis="";
+		   teststatus="";
+		   if(zaiyi=='完成'){
+		     //弹出框框进行选择
+             var btnArray = ['终结讨论', '解决完成'];
+                mui.confirm('请选择你的操作', ' ', btnArray, function(e) {
+                //debugger;
+                    if (e.index == 1) {
+                    	 $('#zaiyi').html('再议');
+                    	 teststatus=2;
+                    	  CUR.attr('ztstatus',teststatus);
+                    	zaiyis='再议';
+                      	wancheng();
+                    	mui.toast('解决完成');
+                    }else{
+                    	 $('#zaiyi').html('开启');
+                    	teststatus=3;
+                    	CUR.attr('ztstatus',teststatus);
+                    	zaiyis='开启';
+                    	wancheng();
+                    	mui.toast('终结讨论');
+                    }
+                })
+               
+		   }else{
+		   		$('#zaiyi').html('完成');
+		   	//正在处理  1
+		   	zaiyis='完成';
+		   	teststatus=1;
+		   	CUR.attr('ztstatus',teststatus);
+		   	wancheng();
+		    mui.toast('正在处理');
+		    
+		   }
+			break;
+			/*case 4:
+				mui.toast('审核');
+				break;
+			case 5:
+				mui.toast('检查');
+				break;
+			case 6:
+				mui.toast('提交');
+				break;*/
+	}
+
+	mui('#topPopover').popover('hide')
+})
+		
+	
+	 function wancheng(){
+		   
+//		   return;
+			$.ajax({
+					type:"GET",
+					url:userInfo.url+"/mobile/finishDC",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('tokenId',userInfo.tokenId);
+						request.setRequestHeader('appType',7);
+					},
+                   data:{
+			     	userId:userInfo.userId,
+					type:1,// 1：设计协调页签，2：质量验收页签，3：质量检查页签，4：安全验收页签
+					entId:userInfo.entid,
+					dcId:dcId, //查询2.9返回值
+					operate:zaiyi,    
+					dcStatus:teststatus,
+					     
+					},
+					success:function(data){
+//				        console.log('ajax',zaiyis);
+                    $('#zaiyi').html(zaiyis);
+					}
+				  });
+				
+}
+		//恢复视点
+$(document).on("tap",'#go',function(){
+	var infos=$(this).attr('location');
+	mui.openWindow({
+		url: 'Space_container.html',
+        id: 'Space_container',
+        extras: {
+            infos: infos,
+        },
+	});
+});	
+
+
+
+
+// 获取选择联系人
+window.addEventListener('initReplyList', function() {
+	init_replyList();
+});
+	</script>
+	</body>
+
+</html>

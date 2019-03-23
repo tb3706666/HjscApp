@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>空间容器名称</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.hid_switch {
+			color: #fff;
+			float: right;
+			margin-top: 15px;
+			font-size: 14px;
+		}
+		
+		.zy_rq {
+			position: absolute;
+			top: 60px;
+			right: 20px;
+			z-index: 99999;
+		}
+		.zy_rq ul li{
+			margin-top: 8px;
+		}
+		.rq_img {
+			background:rgba(0,0,0,.6);
+			width: 70px;
+			height: 70px;
+			text-align: center;
+		}
+		.rq_img img{
+			width: 30px;
+			height: 30px;
+			margin-top: 5px;
+		}
+		.rq_img p{
+			margin-top: 5px;
+			letter-spacing: 2px;
+			font-size: 18px;
+		}
+		.text_img{
+			color: #fff;
+		}
+	</style>
+
+	<body>
+		<!-- 主页面标题 -->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+			<h1 class="mui-title">空间容器名称</h1><span class="hid_switch">切换容器</span>
+		</header>
+		
+		<div id="rqicon" class="zy_rq">
+			<ul v-for="item in space">
+				  <li class="rq_img">
+                   <img :src="'../../icon/'+item.img">
+				    <p class="text_img">{{item.name}}</p>
+				</li>
+			</ul>
+		</div>
+
+<iframe src="https://bdms.arctron.cn/genDist/index2.html" width="100%" height="736" frameborder="0" scrolling="no" onload="webiframe()"></iframe>
+
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/leftlist.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			function webiframe(){
+				var height=window.innerHeight;
+				var width=window.innerWidth;
+				$('#webiframe').height(height).width(width);
+			}
+
+			var items = [{
+					name: '层级',
+					img: 'xncj1.png'
+				},
+				{
+					name: '培切',
+					img: 'xncj2.png'
+				},
+				{
+					name: '相机',
+					img: 'xncj3.png'
+				},
+				{
+					name: '测量',
+					img: 'xncj4.png'
+				},
+				{
+					name: '属性',
+					img: 'xncj5.png'
+				},
+			]
+
+			new Vue({
+				el: '#rqicon',
+				data: {
+					space: items
+				}
+			});
+			
+			
+		</script>
+	</body>
+
+</html>

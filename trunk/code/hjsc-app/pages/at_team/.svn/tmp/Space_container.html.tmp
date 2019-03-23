@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>空间容器名称</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+	</head>
+	<style>
+		
+		.hid_switch {
+			color: #fff;
+			float: right;
+			margin-top: 15px;
+			font-size: 14px;
+		}
+		.zy_rq {
+			position: absolute;
+			top: 60px;
+			right: 20px;
+			z-index: 99999;
+		}
+		.zy_rq ul li{
+			margin-top: 8px;
+		}
+		.rq_img {
+			background:rgba(0,0,0,.6);
+			width: 70px;
+			height: 70px;
+			text-align: center;
+		}
+		.rq_img img{
+			width: 30px;
+			height: 30px;
+			margin-top: 5px;
+		}
+		.rq_img p{
+			margin-top: 5px;
+			letter-spacing: 2px;
+			font-size: 18px;
+		}
+		.text_img{
+			color: #fff;
+		}
+	</style>
+	<body>
+		
+		<!-- 主界面菜单同时移动 -->
+		    <!-- 侧滑导航根容器 -->
+		    		
+					
+		    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+		        <!-- 主页面容器 -->
+		        <div class="mui-inner-wrap">
+		            <!-- 菜单容器 -->
+		            <aside id="offCanvasSide" class="mui-off-canvas-left">
+		                <div id="left_scroll" class="mui-scroll-wrapper">
+		                <!--菜单内容开始-->
+						<div class="mui-scroll">
+						<!--头部-->
+						<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+						<div id="glz_slide">
+						<leftlist :gl='gl' :items='items'></leftlist>
+						</div>
+						
+						</div>
+						<!--菜单内容结束-->
+		                </div>
+		            </aside>
+		            
+		            <header class="mui-bar mui-bar-nav">
+						<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+						<h1 class="mui-title">空间容器名称</h1><span class="hid_switch" >切换容器</span>
+					</header>
+		            
+		            <!-- 主页面内容容器 -->
+		            <div id="home_scroll" class="mui-content mui-scroll-wrapper" style="width: 100%; height: 100%;">
+<<<<<<< .mine
+							<iframe src="https://bdms.arctron.cn/genDist/index2.html" width="100%" height="100%" frameborder="0" scrolling="no" onload="webiframe()"></iframe>
+						<!--<div id="rqicon" class="zy_rq">
+							<ul v-for="item in space">
+								  <li class="rq_img">
+				                   <img :src="'../../icon/'+item.img">
+								    <p class="text_img">{{item.name}}</p>
+								</li>
+							</ul>
+						</div>-->
+=======
+							<iframe src="http://10.252.29.17:8081/" width="100%" height="100%" frameborder="0" scrolling="no" onload="webiframe()" id = "webgl"></iframe>
+>>>>>>> .r129
+		            </div>
+		       	 <div class="mui-off-canvas-backdrop"></div>
+		        </div>
+		    </div>
+		
+		
+	
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/vue2.5.js" ></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="../../components/leftlist.js" ></script>
+	<script type="text/javascript" src="../../js/globalVariable.js"></script>
+	<script src="../../js/md5.js"></script>
+		<script type="text/javascript">
+			
+			var ID="";
+			var app;
+			
+			var tokenId='';
+			$(function(){
+				login();
+			});
+			/**
+			 * 登录
+			 */
+			
+			function login(){	
+				
+				var body = {
+						email:'spring',//mike
+						password: hex_md5('123654'),
+						platformType: 2,     // 平台类型 1:web, 2:android, 3:ios
+					    appType: 7         //应用类型  aec：7
+					}
+					
+				//1.1
+				$.ajax({
+					type:"POST",
+					url:"http://10.252.26.240:8080/arctron-usercenter/api/server/userVerify.json",
+					data:body,
+					dataType:'JSON',
+					async:false,
+				    success:function(res){
+				    	tokenId=res.userInfo.tokenId;
+//				    	console.log(res);
+				   }
+				});
+				
+				//1.6 && 1.7 方法一样
+	            $.ajax({
+	              	type:'GET',
+	              	url:'http://10.252.26.240:8080/h2-bim-project/mobile/getAllSubProject',
+					beforeSend:function(request){
+						request.setRequestHeader('tokenId',tokenId);
+					},
+	              	data:{
+	              		entId:57,
+	              		userId:191,
+	              		projId:189
+	              	},
+	              	dataType:'JSON',
+	              	success:function(data){
+	              		ID=data.obj.DefaultSubProjId;
+	              		let Horder = {"ID":ID};
+	              	}
+	            });
+			}
+			
+			
+			function webiframe(){
+				var height=window.innerHeight;
+				var width=window.innerWidth;
+				$('#webiframe').height(height).width(width);
+				timer=setInterval(function () {
+					app = document.getElementById("webgl").contentWindow;
+					app.postMessage({command:"Init",parameter:null},"*");
+				}, 1000);//每隔一秒发送一次连接，直到连接成功
+				window.addEventListener("message", (e)=>{if(e!=''){callback(e);clearInterval(timer)}})
+			}
+
+			function callback(e){
+				console.log(e);
+				switch(e.data.command){
+					case "EngineReady":
+						{		
+							let Horder = {"ID":ID};
+							Horder = {"ID":"5b9f59d0acc05f4a9ac0ca1b"};	//	彩虹湾测试
+							let para = {User:"",TokenID:"",Setting:{BIMServerIP:"http://10.252.26.240",BIMServerPort:"8080",MidURL:"qjbim-mongo-instance",RootHolder:Horder}}
+							app.postMessage({command:"EnterProject",parameter:para},"*");
+						}
+						break;
+					case "CurrentSelectedEnt":
+						break;
+					case "ViewpointSubmited":
+						ScreenPara = e.data.parameter;
+						localStorage.ScreenPara = JSON.stringify(ScreenPara);
+						break;
+					case "IntoFullscreen":
+						{
+							if(document.getElementById("webgl").requestFullscreen){
+			                    document.getElementById("webgl").requestFullscreen();
+			                }
+			                else if(document.getElementById("webgl").mozRequestFullScreen) {
+			                    document.getElementById("webgl").mozRequestFullScreen();
+			                }
+			                else if(document.getElementById("webgl").webkitRequestFullscreen) {
+			                    document.getElementById("webgl").webkitRequestFullscreen();
+			                }
+			                else if(document.getElementById("webgl").msRequestFullscreen) {
+			                    document.getElementById("webgl").msRequestFullscreen();
+			                }
+						}
+						break;
+					case "OutFullscreen":
+						break;
+				}
+			}
+			
+			var obj=new Vue({
+				el: "#webgl",
+				data:function(){
+					return{
+						flag:true
+					}
+				},
+		});
+		
+			$(document).on('tap','.hid_switch',function(){
+				if(obj.flag==true){//打开菜单
+					app.postMessage({command:"openMenu",parameter:null},"*");							
+					obj.flag=false;
+				}else{
+					app.postMessage({command:"closeMenu",parameter:null},"*");
+					obj.flag=true;
+				}
+			});
+			mui('#home_scroll').scroll();
+		</script>
+	</body>
+
+</html>

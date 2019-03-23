@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>工程任务</title>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+		<link rel="stylesheet" href="../../css/subject.css" />
+		<link rel="stylesheet" href="../../css/minirefresh.css" />
+		<style>
+			.mescroll-upwarp {
+				margin-bottom: 50px;
+			}
+			
+			.mescroll-totop {
+				bottom: 70px;
+			}
+			
+			.minirefresh-theme-default .minirefresh-downwrap {
+				top: 112px;
+			}
+			
+			.minirefresh-theme-default .minirefresh-upwrap {
+				margin-bottom: 0px;
+			}
+			
+			.title {
+				z-index: 14;
+				position: fixed;
+				width: 100%;
+				top: 50px;
+			}
+			
+			.minirefresh-scroll {
+				margin-top: 89px;
+			}
+			
+			.minirefresh-totop {
+				display: none;
+			}
+			
+			.minirefresh-upwrap {
+				background: rgb(245, 245, 245);
+			}
+			
+			.mui-backdrop {
+				background-color: rgba(0, 0, 0, .2);
+			}
+			/*清除浮动*/
+			
+			.mui-card-footer {
+				clear: both;
+			}
+			
+			.phone1>div:nth-of-type(3n-1) {
+				margin: 0 2%;
+			}
+			/*图片*/
+			
+			.ipimg,
+			.ipdoc {
+				width: 32%;
+				height: 3.5rem;
+				display: inline-block;
+				float: left;
+				text-align: center;
+				margin-bottom: 2%;
+				position: relative;
+			}
+			/*#phone1>div:nth-of-type(3n-1){
+	margin: 0 2%;
+}*/
+			
+			.ipimg>img {
+				width: 100%;
+				height: 100%;
+			}
+			/*文本*/
+			
+			.docimg {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+			}
+			
+			.docfont {
+				text-align: center;
+				color: #6B6B6B;
+				font-size: 14px;
+				font-weight: bold;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+				width: 100%;
+				padding: 0 5%;
+			}
+			
+			.go {
+				background: rgba(0, 0, 0, 0.5);
+				color: #fff;
+				font-size: 14px;
+				font-weight: bold;
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+			
+			.detail-img {
+				margin: 0;
+			}
+			/*勾*/
+			
+			.ztgou {
+				position: absolute;
+				top: 12px;
+				right: 8px;
+			}
+			/*筛选*/
+			
+			.ztname1,
+			.ztname2,
+			.ztname3 {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+				height: 45px;
+				line-height: 45px;
+				padding-right: 8px;
+				float: left;
+			}
+			/*筛选箭头*/
+			
+			.other {
+				background-position: 76px 16px;
+			}
+			
+			.mui-scroll-wrapper {
+				overflow: auto;
+			}
+			/*显示菜单*/
+			
+			.max220 {
+				height: 100%;
+				max-height: 220px;
+			}
+			
+			.title-select {
+				width: 40%;
+			}
+			
+			.title {
+				top: 94px;
+			}
+			
+			.total_date {
+				z-index: 14;
+				width: 100%;
+				position: fixed;
+				height: 44px;
+				background-color: #fff;
+				text-align: center;
+				line-height: 44px;
+				font-size: 14px;
+				color: #666;
+				top: 50px;
+				background: #43484e;
+				color: #fff;
+				padding: 0 15px;
+			}
+			
+			.minirefresh-scroll {
+				margin-top: 144px;
+			}
+			
+			.mui-card-media {
+				color: black !important;
+			}
+			
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				top: 50%;
+			}
+			
+			.mr {
+				margin-right: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<span id="menus" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></span>
+			<h1 style="pointer-events: none;" id="title" class="mui-title">企业办公楼</h1>
+			<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)" id="addEvent"><span class="addSubject">我的任务</span></a>
+		</header>
+
+		<div class="content">
+			<div class="total_date">
+				<div class="fl">
+					2018/10/11~2019/07/21
+				</div>
+				<div class="fr">
+					正常运行
+				</div>
+			</div>
+			<div class="title">
+				<div class="title-select">
+					<a href="#projectPopover" class="bg_sanjiao other ztname1">当前群组</a>
+				</div>
+
+				<div class="title-select">
+					<a href="#groupPopover" class="bg_sanjiao other ztname2">全部</a>
+				</div>
+			</div>
+
+			<div id="test" class="minirefresh-wrap">
+
+				<div class="minirefresh-scroll">
+					<div class="mui-card " id="card" style="background: #F5F5F5;">
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell mui-media">
+								<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left" src="../../icon/cpsldh1.png">
+									<div class="mui-media-body">
+										CBD
+										<p><span class="mr">2018/10/11~2019/07/21</span><span>未开始</span></p>
+										<p><span class="mr">#2.2.1</span><span>*</span></p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--项目名称-->
+		<div id="projectPopover" class="mui-popover max220">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll" id="titleList">
+
+					<ul class="mui-table-view bag">
+
+						<li class="mui-table-view-cell" v-for="(item,index) in titleList">
+							<a href="javascript:void(0)">
+								<span class="hone">{{item.Name}}</span>
+								<span class="ztgou" :projectId="item.ID" :class="{project:true, project2:index == 0 }">
+									<span v-show="index == 0">✓</span>
+								</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--群组列表-->
+		<div id="groupPopover" class="mui-popover max220">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll" id="titleList">
+					<ul class="mui-table-view">
+
+						<li class="mui-table-view-cell" v-for="(item,index) in titleList">
+							<a href="javascript:void(0)">{{item.groupName}}&nbsp;
+								<span class="ztgou" :groupId="item.groupId" :class="{groupId:true, groupId2: index == 0}">
+									<span v-show="index == 0">✓</span>
+								</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--<script type="text/javascript" src="../../js/minirefresh.js"></script>-->
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../js/mask.js"></script>
+
+		<!--<script src="../../js/subject.js"></script>-->
+		<script>
+			function ff() {
+				//调用下拉刷新方法
+				miniRefresh.triggerDownLoading();
+			}
+
+			//防止冒泡
+			$(document).on("tap", '.go', function() {
+				var infos = $(this).attr('location');
+				mui.openWindow({
+					url: 'Space_container.html',
+					id: 'Space_container',
+					extras: {
+						infos: infos,
+					},
+				});
+			});
+
+			$(function() {
+				var userInfo = getGlobalUserInfo();
+				console.log('userInfo',userInfo);
+				$.ajax({
+					type: 'POST',
+					url: userInfo.url + '/mobile/'+ userInfo.projId +'/task/list',
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenId', userInfo.tokenId);
+					},
+					data: {
+						'ugId' : userInfo.groupId,
+						'taskName' : userInfo.groupName,
+						'entId' : userInfo.entid
+					},
+					async: true,
+					dataType: 'JSON',
+					success: function(data) {
+						console.log(data);
+//						if(!data.success || !data.obj) {
+//							mui.toast(data.msg);
+//						} else {
+//							sumbitzt(data.obj.DefaultSubProjId)
+//						}
+
+					}
+				})
+			})
+//			我的任务
+			$('#addEvent').on('tap',function(){
+				mui.openWindow({
+					url:'../at_add/mytask.html',
+					id:'mytask'
+				})
+			})
+		</script>
+	</body>
+
+</html>

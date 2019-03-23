@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+		<link rel="stylesheet" href="../../css/subject.css" />
+		<link rel="stylesheet" href="../../css/minirefresh.css" />
+		<style>
+			.mescroll-upwarp {
+				margin-bottom: 50px;
+			}
+			
+			.mescroll-totop {
+				bottom: 70px;
+			}
+			
+			.minirefresh-theme-default .minirefresh-downwrap {
+				top: 112px;
+			}
+			s
+			.minirefresh-theme-default .minirefresh-upwrap {
+				margin-bottom: 0px;
+			}
+			.title {
+				z-index: 14;
+				position: fixed;
+				width: 100%;
+				top: 50px;
+			}
+			
+			.minirefresh-scroll {
+				margin-top: 89px;
+			}
+			
+			.minirefresh-totop {
+				display: none;
+			}
+			
+			.minirefresh-upwrap {
+				background: rgb(245, 245, 245);
+			}
+			.mui-backdrop {
+			    background-color: rgba(0, 0, 0, .2);
+		    }
+/*清除浮动*/
+.mui-card-footer{
+	clear: both;
+}
+.phone1>div:nth-of-type(3n-1){
+	margin: 0 2%;
+}
+/*图片*/
+.ipimg,.ipdoc{
+	width: 32%;
+	height: 3.5rem;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	margin-bottom: 2%;
+	position: relative;
+}
+/*#phone1>div:nth-of-type(3n-1){
+	margin: 0 2%;
+}*/
+.ipimg>img{
+	width: 100%;
+	height: 100%;
+}
+		   /*文本*/
+		  .docimg {
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+		}
+		.docfont {
+		    text-align: center;
+		    color: #6B6B6B;
+		    font-size: 14px;
+		    font-weight: bold;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    display: -webkit-box;
+		    -webkit-line-clamp: 1;
+		    -webkit-box-orient: vertical;
+		    width: 100%;
+		    padding: 0 5%;
+		}
+		.go{
+		    background: rgba(0,0,0,0.5);
+		    color: #fff;
+		    font-size: 14px;
+		    font-weight: bold;
+		    position: absolute;
+		    bottom: 0;
+		    width: 100%;
+		}
+		.detail-img{
+			margin: 0;
+		}
+		/*勾*/
+		.ztgou{
+			position: absolute;
+		    top: 12px;
+		    right: 8px;
+		}
+		/*筛选*/
+		.ztname1,.ztname2,.ztname3{
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+			height: 45px;
+			line-height: 45px;
+			padding-right: 5px;
+		}
+		/*筛选箭头*/
+		.other{
+			background-position: 76px 16px;
+		}
+		/*菜单显示*/
+		/*.bag{
+			height: 150px;
+			 overflow: auto;
+		}*/
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<span id="menus" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></span>
+			<h1 style="pointer-events: none;" id="title" class="mui-title">主题</h1>
+			<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)" id="add"><span class="addSubject">发表主题</span></a>
+		</header>
+
+		<div class="content">
+
+			<div class="title">
+				<div class="title-select">
+					<a href="#projectPopover" class="bg_sanjiao other ztname1">项目名称</a>
+				</div>
+
+				<div class="title-select">
+					<a href="#groupPopover" class="bg_sanjiao other ztname2">群组列表</a>
+				</div>
+
+				<div class="title-select" id="otherChoose">
+					<a href="#middlePopover" class="bg_sanjiao other ztname3">其他筛选</a>
+				</div>
+			</div>
+
+			<div id="test" class="minirefresh-wrap">
+
+				<div class="minirefresh-scroll">
+
+					<div class="mui-card " id="card" style="background: #F5F5F5;">
+
+						<div v-for="(item, index) in list" class="card-out" :index="index">
+
+							<div class="mui-card-header mui-card-media ">
+								<img :src="item.createUserImg" class="hdead-img" onerror="this.src='../../img/timg.jpg';" />
+								<div class="mui-media-body">
+									<span class="username left_">{{item.createUserStr}}</span>
+									<p class="time left_"><img class="time-one" src="../../icon/ztzw_2.png" /> {{item.createTime | switchingTime}} &nbsp;{{item.from}}</p>
+								</div>
+								<!--<span class="mui-navigate-right"  ></span>-->
+								<a href="#topPopover" class="arrov-out stop" :index="index" :ztstatus="item.dcStatus" :collect="''+item.collect" :dcId="item.dcId"><img class="stop" src="../../icon/ztzw_1.png" /></a>
+							</div>
+							<div class="mui-card-content">
+
+								<div :id="'Ndetail' + index" v-html="item.dcContent" style="display: none;"></div>
+
+								<div :id="'detail' + index" v-html="item.dcContent" class="two_h">
+								</div>
+								<span class="open_ stop">展开</span>
+							
+							<div class="phone1" id="doc">
+								<!--图片-->
+								<div class="ipimg" v-for="(item2,innerindex) in item.attachList">
+									<img class="detail-img stop" :src="item2.path" data-preview-src="" :data-preview-group="index" />
+									<p v-show="item2.locationInfo" class="go stop"  :location='item2.locationInfo'>视点</p>
+								</div>
+								<!--文本-->
+								<div class="ipdoc" class="docOne" v-for="(file,index) in item.fileList" v-show="index == 0">
+									<img class="docimg" :src="file.fileFullName | format" />
+									<span class="docfont">{{file.fileFullName}}</span>
+								</div>
+							
+							</div>
+
+							</div>
+
+							<div class="mui-card-footer">
+								<span class="mui-card-link"><img class="footer-img" src="../../icon/zt_1.png" />&nbsp;{{item.floor.substring(1,item.floor.length) }}</span>
+								<span class="mui-card-link"><img class="footer-img" src="../../icon/zt_2.png" />&nbsp;{{item.dcStatus | transformStatus }}</span>
+								<span class="mui-card-link reviewCount" :dcId="item.dcId"><img class="footer-img" src="../../icon/zt_3.png" />&nbsp;{{item.reviewCount}}</span>
+								<span class="mui-card-link"><img class="footer-img" src="../../icon/zt_4.png" />&nbsp;{{item.reviewName == null ? "" : item.reviewName}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--其他筛选菜单-->
+		<div id="middlePopover" class="mui-popover" style="height: 220px; overflow: auto;">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll" id="titleList">
+					
+					<ul class="mui-table-view bag">
+
+						<li class="mui-table-view-cell" v-for="(item,index) in titleList" :class="{titleColor: item.status }">
+							
+							<a href="javascript:void(0)">{{item.text}} &nbsp;
+								<span :type="item.type" :class="{relation: item.title=='相关性',status: item.title=='主题状态',condition:true,
+									  relation2: item.title=='相关性' && index==1, status2: item.title!='相关性' && index==7 }">
+									<span v-show="index == 1 || index == 7">✓</span>
+								</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--项目菜单-->
+		<div id="projectPopover" class="mui-popover" style="height: 220px; overflow: auto;">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll" id="titleList">
+					
+					<ul class="mui-table-view bag">
+
+						<li class="mui-table-view-cell" v-for="(item,index) in titleList">
+							<a href="javascript:void(0)">
+								<span class="hone">{{item.Name}}</span>
+								<span class="ztgou" :projectId="item.ID" :class="{project:true, project2:index == 0 }">
+									<span v-show="index == 0">✓</span>
+								</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<!--<div id="projectPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll" id="titleList">
+					<ul class="mui-table-view bag">
+
+						<li class="mui-table-view-cell" v-for="(item,index) in titleList">
+							<a href="javascript:void(0)">
+								<span class="hone">{{item.Name}}</span>
+								<span class="ztgou" :projectId="item.ID" :class="{project:true, project2:index == 0 }">
+									<span v-show="index == 0">✓</span>
+								</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>-->
+
+		<!--<div style="border: 1px solid red; position: absolute;top: 0; left: 0; width: 500px;height: 300px;z-index: 999999999999; height: 150px; overflow: hidden;" >
+			<ul>
+				<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+<li style="float: left; width: 100%;border: 1px solid green;">1</li>
+			</ul>
+		</div>-->
+
+
+		<!--群组列表-->
+		<div id="groupPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll" id="titleList">
+					<ul class="mui-table-view">
+
+						<li class="mui-table-view-cell" v-for="(item,index) in titleList">
+							<a href="javascript:void(0)">{{item.groupName}}&nbsp;
+								<span class="ztgou" :groupId="item.groupId" :class="{groupId:true, groupId2: index == 0}">
+									<span v-show="index == 0">✓</span>
+								</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--右上角弹出菜单-->
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" data-id="1">
+							<a href="">
+								<img class="menu-img" src="../../icon/ztg_1.png" />
+								<span class="menu-font">&nbsp;<span id="delete">删除</span></span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="2">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_2.png" />
+								<span class="menu-font">&nbsp;<span id="collect">收藏</span></span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="3">
+							<a href="javascript:void(0)">
+								<img class="menu-img" src="../../icon/ztg_3.png" />
+								<span class="menu-font">&nbsp;<span id="zaiyi">完成</span></span>
+							</a>
+						</li>
+						<!--<li class="mui-table-view-cell" data-id="4" style="display: none;">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_3.png" />
+								<span class="menu-font">&nbsp;开启</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="5" style="display: none;">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_3.png" />
+								<span class="menu-font">&nbsp;再议</span>
+							</a>
+						</li>-->
+						<!--<li class="mui-table-view-cell" data-id="4">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_4.png" />
+								<span class="menu-font">&nbsp;审核</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="5" >
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_5.png" />
+								<span class="menu-font">&nbsp;检查</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell" data-id="6">
+							<a href="#">
+								<img class="menu-img" src="../../icon/ztg_6.png" />
+								<span class="menu-font">&nbsp;提交</span>
+							</a>
+						</li>
+-->
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../../js/minirefresh.js"></script>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../js/mask.js" ></script>
+
+		<script src="../../js/subject.js"></script>
+		<script>
+			//超出滚动
+			mui('.mui-scroll-wrapper').scroll();
+			
+//防止冒泡
+$(document).on("tap",'.go',function(){
+	var infos=$(this).attr('location');
+	mui.openWindow({
+		url: 'Space_container.html',
+        id: 'Space_container',
+        extras: {
+            infos: infos,
+        },
+	});
+});
+
+		</script>
+
+	</body>
+
+</html>

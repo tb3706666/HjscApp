@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<!--<link rel="stylesheet" href="../../css/index.css" />-->
+		<style>
+			.mui-bar,
+			#cs_slider {
+				height: 50px;
+				background-color: #43484e;
+			}
+			.mui-bar .mui-title, .mui-bar .mui-icon, #cs_slider a{
+				color: #fff;
+			}
+			.mui-bar .mui-title{
+				height: 50px;
+                line-height: 50px;
+			}
+			#facebox{
+				left: 4px !important;
+				padding-top: 10px;
+				position: relative !important;
+				top: 10px !important;
+			}
+			body {
+				overflow-x: hidden;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 50px;
+			}
+			
+			.sender {
+				clear: both;
+				/*margin-left: 15px;*/
+				padding-left: 15px;
+				width: 100%;
+				margin-top: 2px;
+				display: inline-block;
+				box-sizing: border-box;
+			}
+			
+			.sender div:nth-of-type(1) {
+				float: left
+			}
+			
+			.sender div:nth-of-type(2) {
+				background-color: #ffffff;
+				float: left;
+				margin: 0px 20px 10px 10px;
+				padding: 4px 10px 10px 0;
+				border-radius: 7px;
+				max-width: 63%;
+			}
+			
+			.receiver div:first-child img,
+			.sender div:first-child img {
+				width: 42px;
+				height: 42px
+			}
+			
+			.receiver {
+				box-sizing: border-box;
+				clear: both;
+				padding-right: 15px;
+				/*margin-right: 15px;*/
+				margin-top: 2px;
+				display: inline-block;
+			}
+			
+			.receiver div:nth-child(1) {
+				float: right
+			}
+			
+			.receiver div:nth-of-type(2) {
+				float: right;
+				background-color: #ffffff;
+				margin: 0 10px 10px 20px;
+				padding: 4px 0 10px 10px;
+				border-radius: 7px;
+				max-width: 66%;
+				margin-right: 10px;
+			}
+			
+			.left_triangle {
+				height: 0;
+				width: 0;
+				border-width: 8px;
+				border-style: solid;
+				border-color: transparent #ffffff transparent transparent;
+				position: relative;
+				left: -16px;
+				top: 9px
+			}
+			
+			.right_triangle {
+				height: 0;
+				width: 0;
+				border-width: 8px;
+				border-style: solid;
+				border-color: transparent transparent transparent #ffffff;
+				position: relative;
+				right: -16px;
+				top: 9px
+			}
+			
+			.head-img {
+				border-radius: 10px;
+			}
+			
+			.last-time {
+				font-size: 12px;
+				color: #999999;
+				text-align: center;
+				margin: 15px;
+			}
+			
+			.left-right {
+				display: block;
+				padding-top: 8px;
+				font-size: 16px;
+				color: #333333;
+				text-align: justify;
+				word-wrap: break-word;
+				word-break: break-all;
+				display: -webkit-box;
+			}
+			
+			.mui-content {
+				background-color: transparent;
+			}
+			
+			.left {
+				padding-left: 0px;
+				margin-right: 5px;
+			}
+			
+			.dialogue-other {
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+			
+			.right {
+				padding-right: 0px;
+				margin-left: 5px;
+			}
+			
+			.footer {
+				width: auto;
+				border-top: 1px solid rgb(229, 229, 229);
+				padding: 0.4rem 0.75rem;
+				overflow: hidden;
+			}
+			
+			.footer span {
+				display: inline-block;
+				width: 1.5rem;
+				height: 1.5rem;
+				background: #fff;
+				border-radius: 50%;
+				float: left;
+			}
+			
+			.footer .entry {
+				float: left;
+				/*width: 225px;*/
+				width: 9.7rem;
+				height: 1.65rem;
+				float: left;
+				margin-bottom: 0;
+				margin-left: 0.15rem;
+				border-radius: 16.5px;
+				border: none;
+			}
+			
+			.footer .smile {
+				float: left;
+				margin-left: 0.15rem;
+				background: url('../../img/smile.png')no-repeat center;
+				background-size: 1.5rem 1.5rem;
+			}
+			
+			.footer .raise {
+				float: left;
+				background: url('../../icon/ztzw_3.png')no-repeat center;
+				background-size: 1.5rem 1.5rem;
+			}
+			#facebox td img{
+				width: 28px !important;
+			}
+			.footer .arrow {
+				float: right;
+				background: url('../../icon/ztzw_5.png')no-repeat center;
+				background-size: 1.5rem 1.5rem;
+			}
+			
+			.footer .import {
+				overflow: hidden;
+				box-sizing: border-box;
+				/*padding: 0 0.75rem;*/
+			}
+			
+			.classify {
+				padding: 0.75rem;
+				padding-bottom: 5px !important;
+			}
+			
+			.classify .list {
+				float: left;
+			}
+			
+			.classify .list:nth-of-type(2) {
+				margin: 0 2.2rem;
+			}
+			
+			.classify .list:nth-of-type(3) {
+				/*margin-right: 1.85rem*/
+			}
+			
+			.classify .list>div {
+				/*width: 57px;
+				height: 59.5px;*/
+				width: 2.85rem;
+				height: 2.85rem;
+				border-radius: 8px;
+			}
+			
+			.use {
+				margin-top: 5px;
+				border-top: 1px solid rgb(229, 229, 229);
+			}
+			
+			.classify .picture {
+				background: url('../../icon/zt_b3.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .photo {
+				background: url('../../icon/zt_b2.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .viewpoint {
+				background: url('../../icon/zt_b5.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .document {
+				background: url('../../icon/zt_b4.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .list p {
+				font-size: 14px;
+				color: rgb(153, 153, 153);
+				text-align: center;
+				margin-top: 5px;
+			}
+			
+			.active {
+				display: block !important;
+			}
+			
+			.footer .use {
+				display: none;
+			}
+			
+			.next {
+				display: inline-block;
+				position: absolute;
+				right: 15px;
+				top: 15px;
+			}
+			
+			.next img {
+				width: 18px;
+				height: 20px;
+			}
+			.biaoqing{
+				width: 100%;
+				height: 6rem;
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">标题</h1>
+			<span id="next" class="next"><img src="../../icon/gcyp_ss5.png"/></span>
+		</header>
+
+		<div class="mui-content">
+
+			<div class="main-content">
+
+				<div class="dialogue-content">
+
+					<div class="last-time">
+						<!--昨天 14:27-->
+					</div>
+
+					<!-- Left -->
+					<div class="sender">
+						<div>
+							<img class="head-img" src="../../icon/office4.jpg">
+						</div>
+						<div>
+							<div class="left_triangle"></div>
+							<span class="left-right left"> hello, man!放声大哭分手就分手荆防颗粒健身房还很舒服很舒服开始的金凤凰，手就分手荆防颗粒健身房还很舒服很舒服开始的金凤凰。</span>
+						</div>
+					</div>
+
+					<!-- Right -->
+					<div class="receiver">
+						<div>
+							<img class="head-img" src="../../icon/office5.png">
+						</div>
+						<div>
+							<div class="right_triangle"></div>
+							<span class="left-right right">don't understand don't understanddon't understanddon't understanddon't understanddon't understanddon't understand</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!--footer-->
+		<div class="dialogue-other">
+			<div class="footer">
+				<div class="import">
+					<span class="raise"></span>
+					<input id="saytext" class="entry" type="text" name="saytext"/>
+					<span class="smile emotion"></span>
+					<span class="arrow ub_btn"></span>
+				</div>
+				<div style="clear: both;"></div>
+				<div class="use">
+					<div class="classify">
+						<div class="list" id="tab_picture">
+							<div class="picture"></div>
+							<p>图片</p>
+						</div>
+						<div class="list" id="tab_photo">
+							<div class="photo"></div>
+							<p>拍照</p>
+						</div>
+						<!--<div class="list" id="tab_viewpoint">
+							<div class="viewpoint"></div>
+							<p>视点</p>
+						</div>-->
+						<div class="list" id="tab_document">
+							<div class="document"></div>
+							<p>文档</p>
+						</div>
+						<div style="clear: both;"></div>
+					</div>
+				</div>
+				<!--<div class="biaoqing">
+					
+				</div>-->
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.qqFace.js" ></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		
+		<script type="text/javascript">
+			//			声明websocket服务
+			//			var wsServer = 'ws://10.252.26.241:16800/websocket'; //服务器地址
+			//			var websocket = new WebSocket(wsServer); //创建WebSocket对象	
+			//			userInfo = getGlobalUserInfo();
+			//          var otoken=userInfo.tokenId;
+			//          var oproj=userInfo.projId;
+			//			//连接成功建立的回调方法
+			//			websocket.onopen = function() {
+			//				setMessageInnerHTML("WebSocket连接成功");
+			//			}
+			//			input标签拿植
+			$('.footer .arrow').on('tap', function() {
+				var str = $("#saytext").val();
+                $("#show").html(replace_em(str));
+				
+				var _$val = $('.footer .entry').val();
+				console.log(_$val);
+				websocket.send(_$val); //向服务器发送消息
+				//           	alert(websocket.readyState);//查看websocket当前状态
+				var _$date = new Date();
+				var _$hour = _$date.getHours();
+				var _$minute = _$date.getMinutes();
+
+				websocket.onclose = function(evt) {
+					//已经关闭连接
+				};
+				websocket.onmessage = function(evt) {
+					//收到服务器消息，使用evt.data提取
+				};
+				websocket.onerror = function(evt) {
+					//产生异常
+				};
+			})
+			// 从相册中选择图片 
+			function galleryImg() {
+				// 从相册中选择图片
+				plus.gallery.pick(function(e) {
+					//showAndUpload(e);
+
+					for(var i in e.files) {
+						var fileSrc = e.files[i];
+						// 其他操作,比如预览展示
+						//console.log(fileSrc + "===============")
+						showAndUpload(fileSrc);
+					}
+				}, function(e) {
+					console.log("取消选择图片");
+				}, {
+					filter: "image",
+					multiple: true,
+					maximum: 5,
+					system: true,
+					onmaxed: function() {
+						plus.nativeUI.alert('最多只能选择5张图片');
+					}
+				});
+			}
+			// 打开相机拍照
+			function getpic() {
+				var cameraObj = plus.camera.getCamera();
+				cameraObj.captureImage(function(e) {
+					plus.io.resolveLocalFileSystemURL(e, function(entry) {
+						var src = entry.toLocalURL();
+						showAndUpload(src);
+					}, function(e) {
+						console.log("读取拍照文件错误" + e.message)
+					})
+				}, function(s) {
+					console.log("error" + s);
+				}, {
+					filname: "_doc/head.png"
+				})
+			}
+			mui.init();
+			$('.footer .raise').on('tap', function() {
+				$('.footer .use').addClass('active');
+//				$('.footer .biaoqing').removeClass('active');
+			})
+			$('#tab_picture').on('tap', function() {
+				galleryImg();
+			})
+			$('#tab_photo').on('tap', function() {
+				getpic();
+			})
+			//			$('#tab_viewpoint').on('tap', function() {
+			//				galleryImg();
+			//			})
+			$('#tab_document').on('tap', function() {
+				GoToURL('../at_team/select_document.html', 'select_document');
+			})
+			$('#next').on('tap', function() {
+				mui.openWindow({
+					url: 'Chat_details.html',
+					id: 'Chat_details'
+				})
+			})
+			//          调用qq表情			
+			$(function() {
+
+				$('.emotion').qqFace({
+
+					id: 'facebox',
+
+					assign: 'saytext',
+
+					path: '../../icon/' //表情存放的路径,
+				});
+
+
+			});
+
+			//查看结果
+
+			function replace_em(str) {
+
+				str = str.replace(/\</g, '&lt;');
+
+				str = str.replace(/\>/g, '&gt;');
+
+				str = str.replace(/\n/g, '<br/>');
+
+				str = str.replace(/\[em_([0-9]*)\]/g, '<img src="icon/$1.gif" border="0" />');
+
+				return str;
+
+			}
+		</script>
+	</body>
+
+</html>

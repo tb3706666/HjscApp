@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>选择群组</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+
+	</head>
+	<style>
+		.tit-right {
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: #fff;
+		}
+		#usergroup{
+			 margin-top: 50px;
+		}
+	     .usergroup {
+				color: #333333;
+				font-size: 16px;
+	   }
+	   .group{
+	   	float: right;
+	   	color: #7DC1E7;
+	   }
+	</style>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择群组</h1>
+		</header>
+		<div id='usergroup'>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" v-for="(item,index) in guroplist" v-on:click="getgroup(index)"><!--{{item.name}}-->
+					<p class="usergroup">{{item.name}}<small class="yesicon group" :id="'g' + index" ><span v-show="item.check" >✓</span></small></p>
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript">
+			
+			
+			var list=[  {name:'群组1',id:'1',check:true},
+		             	{name:'群组2',id:'222',check:false},
+		            	{name:'群组3',id:'3',check:false},
+			            ]
+			
+			var groups=new Vue({
+				el: '#usergroup',
+				data: {
+                  guroplist:list
+				},methods: {
+					getgroup: function(index) {
+								$('.group').empty();
+								$('#g' + index).html("✓");
+								alert(list[index].id);
+//                              alert($('#groupid').val())
+//								//将这个存入userinfo里面的groupid
+//								console.log(userInfo);
+////								userInfo = getGlobalUserInfo(); //获取对象
+//								userInfo.groupId=groupNames[index].groupid;
+//								userInfo.groupName=groupNames[index].groupName;
+//								setGlobalUserInfo(userInfo);
+							},
+						}
+			})
+
+			
+			
+			
+			
+		</script>
+	</body>
+	
+	
+	
+	
+	
+
+</html>

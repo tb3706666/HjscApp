@@ -1,0 +1,430 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>会议</title>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/imageviewer.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/leftlist.css" />
+
+		<style>
+			/*进入样式*/
+			
+			.addSubject {
+				font-size: 15px;
+			}
+			
+			.mui-bar-nav.mui-bar .mui-icon {
+				line-height: 30px;
+			}
+			
+			.title-select {
+				display: inline-block;
+				width: 25%;
+				margin: 0 12px;
+			}
+			
+			.title {
+				height: 44px;
+				background-color: #fff;
+				text-align: center;
+				line-height: 44px;
+				font-size: 14px;
+				color: #666;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 49px;
+			}
+			/*子调父侧边栏*/
+			
+			.furight {
+				transform: translate3d(70%, 0px, 0px);
+			}
+			
+			.fushow {
+				visibility: visible;
+			}
+			
+			.mui-icon-plusempty {
+				font-size: 44px !important;
+				line-height: 11px !important;
+				margin-right: -20px !important;
+			}
+			
+			.head-img,
+			.title-detail {
+				float: left;
+			}
+			
+			.head-img {
+				width: 18%;
+				position: relative;
+			}
+			
+			.title-detail {
+				width: 80%;
+			}
+			
+			.head-img img {
+				width: 50px;
+				height: 50px;
+				border-radius: 10px;
+			}
+			
+			.list-out {
+				width: 98%;
+				height: 67px;
+				margin-top: 18px;
+				margin-left: 10px;
+				border-bottom: 1px solid #E6E6E6;
+			}
+			
+			.name {
+				float: left;
+			}
+			
+			.time {
+				float: right;
+				font-size: 12px;
+				color: #999999;
+				margin-top: 4px;
+			}
+			
+			.name div:nth-of-type(1) {
+				font-size: 16px;
+				margin-top: 3px;
+			}
+			
+			.name div:nth-of-type(2) {
+				font-size: 14px;
+				color: #666666;
+				margin-top: 5px;
+			}
+			
+			.time img {
+				width: 16px;
+				height: 16px;
+				margin-top: 6px;
+				position: absolute;
+				right: 10px;
+			}
+			
+			.mui-scroll {
+				background-color: #ffffff;
+			}
+			
+			.circle {
+				background: red;
+				border-radius: 40px;
+				width: 11px;
+				height: 11px;
+				position: absolute;
+				right: lef;
+				left: 42px;
+				top: -4px;
+			}
+			/*发群聊*/
+			/*.rtlist{
+				position: fixed;
+				top: 49px;
+				right: 0;
+				height: 45px;
+				line-height: 45px;
+				width: 30%;
+				background: #43484E;
+				color: #fff;
+				text-align: center;
+				letter-spacing: 2px;
+				display: none;
+			}*/
+			
+		</style>
+
+	</head>
+
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		<!-- 侧滑导航根容器 -->
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 菜单容器 -->
+				<aside id="offCanvasSide" class="mui-off-canvas-left">
+					<div id="left_scroll" class="mui-scroll-wrapper">
+						<!--菜单内容开始-->
+
+						<div class="mui-scroll">
+							<!--头部-->
+							<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+							<div id="glz_slide">
+								<leftlist :gl='gl' :items='items'></leftlist>
+							</div>
+						</div>
+						<!--菜单内容结束-->
+
+					</div>
+				</aside>
+
+				<!-- 主页面标题 -->
+				<span id="lefts" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" disabled="none"></span>
+				<header class="mui-bar mui-bar-nav">
+					<a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<h1 style="pointer-events: none;" id="title" class="mui-title">会议</h1>
+					<!--<a class="mui-icon mui-action-menu mui-pull-right" href="javascript:void(0)" id="add"><span class="mui-icon mui-icon-plusempty radd"></span></a>-->
+				</header>
+
+				<!-- 主页面内容容器 -->
+				<div id="home_scroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll qunlist">
+						
+						<!--群组-->
+						<div class="list-out qunzu_list" v-for="(item,index) in groupitems" :data-gid=item.groupid>
+							<!--头像-->
+							<div class="head-img">
+								<img :src="item.userImg" />
+								<span class="circle dnone"></span>
+							</div>
+							
+							<div class="title-detail">
+							<!--名称-->
+								<div class="name">
+									<div>{{item.realName}}</div>
+									<div>{{item.groupnames}}</div>
+								</div>
+							<!--消息状态-->
+								<div class="time dnone">
+									<span>40分钟前</span>
+									<br />
+									<img src="../../icon/dhpb.png" />
+								</div>
+							</div>
+						</div>
+						<!--群组结束-->
+						
+						
+						
+						
+						<!--会议-->
+						<div class="list-out huiyi_list" v-for="(item,index) in chatitems" :data-id="item.id" :data-name="item.name" :key=index>
+							<!--头像-->
+							<div class="head-img">
+								<!--<img :src="item.userImg" />-->
+								<img :src="item.imageurl" />
+								<span class="circle dnone"></span>
+							</div>
+							
+							<div class="title-detail">
+							<!--名称-->
+								<div class="name">
+									<div>{{item.name}}</div>
+									<div>会议</div>
+								</div>
+							<!--消息状态-->
+								<div class="time dnone">
+									<span>40分钟前</span>
+									<br />
+									<img src="../../icon/dhpb.png" />
+								</div>
+							</div>
+						</div>
+						<!--会议结束-->
+						<!--发起群聊-->
+						<!--<ul class="rtlist">
+							<li>发起群聊</li>
+						</ul>-->
+						
+						
+					</div>
+				</div>
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+
+		<!--新建时展开背景 mui-active,display:block触发-->
+		<div class="mui-popup-backdrop mui-active addpop" style="display: none;"></div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../components/leftlist.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../components/attachIcon.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<!--<script src="../../js/subject.js"></script>-->
+		<script type="text/javascript">
+			
+			userInfo=getGlobalUserInfo();
+			var groupnames;
+			var vm=new Vue({
+				el:'.qunlist',
+				data:{
+					//默认群组名称
+					groupnames:'',
+					//群组列表
+					groupitems:[],
+					//会议列表
+					chatitems:[],
+					//标识,1群组,2会议
+//					qzimg:'',
+//					qzname:'',
+//					qzxx:'',
+//					qzsj:'',
+//					qzzt:'',
+				},
+//				watch:{
+//					groupitems:function(){
+//						mui.toast('变化')
+//					}
+//				},
+				created(){
+					this.hylist();
+					this.qzlist();
+				},
+				methods:{
+//						mui.openWindow({
+//							url:'hy_chat_details.html',
+//							id:'hy_chat_details'
+//						})
+				//获取群组列表
+			qzlist(){
+				var self=this;
+				$.ajax({
+					type:"GET",
+					url:userInfo.url+"/mobile/showUserInfoNew",
+					async:true,
+					beforeSend:function(request){
+					request.setRequestHeader('tokenID',userInfo.tokenId);
+					},
+					dataType: 'JSON',
+					data:{
+					   projId:userInfo.projId,
+                       userId:userInfo.userId, 
+					},
+					success:function(data){
+						//群组图片
+						userInfo.chathead=data.obj.userImg;
+						setGlobalUserInfo(userInfo);
+						//默认群组名称
+						$.each(data.obj.groupNames, function(e,e1) {
+//							userInfo.groupnames=self.groupnames=e1;
+//							setGlobalUserInfo(userInfo);
+						self.groupitems.push({realName:userInfo.realName,groupid:e,groupnames:e1,userImg:data.obj.userImg})
+						});
+						
+						//登录失效
+//						if(data.obj===false) {
+//							tokenInvalid(data);
+//							return;
+//							}
+					}
+				})
+			},
+			//获取会议列表
+			hylist(){
+				$.ajax({
+					type:"get",
+					url:userInfo.chaturl+"/message/getMeetings",
+					//测试
+					//url:"http://10.252.26.117:8079/message/getMeetings",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						projectId:userInfo.projId,
+						userId:userInfo.userId
+					},
+					success:function(data){
+						if(data.cd==0){
+							$.each(data.rt, function(e,e1) {
+								console.log(e1)
+								vm.chatitems.push(e1)
+							});
+						}
+						
+//						console.log(JSON.stringify(data.rt))
+						
+					}
+				});
+			},
+			//获取置顶列表
+			zdlist(){
+				$.ajax({
+					type:"get",
+					url:userInfo.chaturl+"/message/getTopList",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						userId:userInfo.userId
+					},
+					success:function(data){
+						if(data.cd==0){
+							console.log(JSON.stringify(data))
+						}
+						
+					},
+				});
+			}
+			
+			
+				},
+				mounted(){
+//					this.zdlist();
+				}
+			})
+			//群组列表
+//			flag:0 群组 1私聊 2群聊
+			$(document).on('tap','.qunzu_list',function(){
+				var gid=$(this).data('gid');
+				mui.openWindow({
+					url:'hy_chat_details.html?flag=0&addflag=0&groupid='+gid,
+					id:'hy_chat_details'
+				})
+			})
+
+			//会议列表
+			$(document).on('tap','.huiyi_list',function(){
+				var id=$(this).data('id');
+				var name=$(this).data('name');
+				mui.openWindow({
+					url:'hy_dialogue_content.html?flag=2&id='+id+'&mettingname='+name,
+					id:'hy_dialogue_content'
+				})
+			})
+			//删除后触发，刷新
+			window.addEventListener('rlist', function() {
+			    //执行init_replyList方法
+				//或()注意定时函数调用方法写法
+				setTimeout( function(){
+					location.reload();
+			    });
+		  });
+			
+			//群聊显隐
+//			$('.radd').on('tap',function(){
+//				$('.rtlist').toggle('fast')
+//			})
+//			
+//			$('.rtlist').on('tap',function(){
+//				mui.openWindow({
+//					url:'hy_dialogue_content.html',
+//					id:'hy_dialogue_content'
+//				})
+//			})
+			
+			mui.init();
+			
+			mui('#home_scroll').scroll();
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,1407 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>聊天室</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<style>
+		.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+
+
+			body {
+				overflow-x: hidden;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 50px;
+				padding-bottom: 60px;
+			}
+			
+			.sender {
+				clear: both;
+				/*margin-left: 15px;*/
+				padding-left: 15px;
+				width: 100%;
+				margin-top: 2px;
+				display: inline-block;
+				box-sizing: border-box;
+				position: relative;
+			}
+			
+			.sender div:nth-of-type(1) {
+				float: left
+			}
+			
+			.sender div:nth-of-type(2) {
+				background-color: #ffffff;
+				float: left;
+				margin: 17px 10px 10px 17px;
+				padding: 4px 10px 10px 0;
+				border-radius: 7px;
+				max-width: 63%;
+			}
+			
+			.receiver div:first-child img,
+			.sender div:first-child img {
+				width: 42px;
+				height: 42px
+			}
+				.receivers div:first-child img,
+			.sender div:first-child img {
+				width: 42px;
+				height: 42px
+			}
+			
+			.receiver {
+				box-sizing: border-box;
+				clear: both;
+				padding-right: 15px;
+				/*margin-right: 15px;*/
+				margin-top: 2px;
+				display: inline-block;
+				width: 100%;
+				position: relative;
+			}
+			.receivers {
+				box-sizing: border-box;
+				clear: both;
+				padding-right: 15px;
+				/*margin-right: 15px;*/
+				margin-top: 2px;
+				display: inline-block;
+				width: 100%;
+				position: relative;
+			}
+			.receiver div:nth-child(1) {
+				float: right
+			}
+			.receivers div:nth-child(1) {
+				float: right
+			}
+			/*发送者消息框，右侧*/
+			.receiver div:nth-of-type(2) {
+				float: right;
+				background-color: #ffffff;
+				margin: 17px 17px 10px 20px;
+				padding: 4px 0 10px 10px;
+				border-radius: 7px;
+				max-width: 66%;
+				background-color: #9EEA6A;
+			}
+			.right_triangle {
+				height: 0;
+				width: 0;
+				border-width: 8px;
+				border-style: solid;
+				border-color: transparent transparent transparent #9EEA6A;
+				position: relative;
+				right: -16px;
+				top: 9px
+			}
+			/*图片就强制白*/
+			.bcf{
+			border-color: transparent transparent transparent #ffffff !important;
+			}
+			.left_triangle {
+				height: 0;
+				width: 0;
+				border-width: 8px;
+				border-style: solid;
+				border-color: transparent #ffffff transparent transparent;
+				position: relative;
+				left: -16px;
+				top: 9px
+			}
+			
+			.head-img {
+				border-radius: 10px;
+			}
+			
+			.last-time {
+				font-size: 12px;
+				text-align: center;
+				max-width: 40%;
+				background-color: rgba(0, 0, 0, .1);
+				margin: 20px auto;
+				padding: 3px;
+				color: #fff;
+				letter-spacing: 1px;
+				border-radius: 3px;
+			}
+			
+			.left-right {
+				display: block;
+				padding-top: 8px;
+				font-size: 16px;
+				color: #333333;
+				text-align: justify;
+				word-wrap: break-word;
+				word-break: break-all;
+				display: -webkit-box;
+			}
+			
+			.mui-content {
+				background-color: transparent;
+			}
+			
+			.left {
+				padding-left: 0px;
+				margin-right: 5px;
+			}
+			
+			.dialogue-other {
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+			
+			.right {
+				padding-right: 0px;
+				margin-left: 5px;
+			}
+			
+			.footer {
+				width: auto;
+				border-top: 1px solid rgb(229, 229, 229);
+				background: #F2F2F2;
+				padding: 0.4rem 0.75rem;
+				overflow: hidden;
+			}
+			
+			.footer span {
+				display: inline-block;
+				width: 1.5rem;
+				height: 1.5rem;
+				background: #fff;
+				border-radius: 50%;
+				float: left;
+			}
+			
+			.footer .entry {
+				float: left;
+				width: 9.7rem;
+				/*width: 12rem;*/
+				height: 1.65rem;
+				float: left;
+				margin-bottom: 0;
+				margin-left: 0.15rem;
+				border-radius: 16.5px;
+				border: none;
+			}
+			
+			.footer .smile {
+				float: left;
+				margin-left: 0.15rem;
+				/*表情背景*/
+				background: url('../../img/smile.png')no-repeat center;
+				background-size: 1.5rem 1.5rem;
+			}
+			
+			.footer .raise {
+				float: left;
+				background: url('../../icon/ztzw_3.png')no-repeat center;
+				background-size: 1.5rem 1.5rem;
+			}
+			
+			.footer .arrow {
+				float: right;
+				background: url('../../icon/ztzw_5.png')no-repeat center;
+				background-size: 1.5rem 1.5rem;
+			}
+			
+			.footer .import {
+				overflow: hidden;
+				box-sizing: border-box;
+			}
+			
+			.classify {
+				padding: 0.75rem;
+				padding-bottom: 5px !important;
+			}
+			
+			.classify .list {
+				float: left;
+			}
+			
+			.classify .list:nth-of-type(2) {
+				margin: 0 2.2rem;
+			}
+			
+			.classify .list:nth-of-type(3) {
+				/*margin-right: 1.85rem*/
+			}
+			
+			.classify .list>div {
+				width: 2.85rem;
+				height: 2.85rem;
+				border-radius: 8px;
+			}
+			
+			.use {
+				margin-top: 5px;
+				border-top: 1px solid rgb(229, 229, 229);
+			}
+			
+			.classify .picture {
+				background: url('../../icon/zt_b3.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .photo {
+				background: url('../../icon/zt_b2.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .viewpoint {
+				background: url('../../icon/zt_b5.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .document {
+				background: url('../../icon/zt_b4.png')no-repeat center #fff;
+				background-size: 22px 22px;
+			}
+			
+			.classify .list p {
+				font-size: 14px;
+				color: rgb(153, 153, 153);
+				text-align: center;
+				margin-top: 5px;
+			}
+			
+			.active {
+				display: block !important;
+			}
+			
+			.next {
+				display: inline-block;
+				position: absolute;
+				right: 15px;
+				top: 15px;
+			}
+			
+			.next img {
+				width: 18px;
+				height: 20px;
+			}
+			
+			.lchatname {
+				position: absolute;
+				top: -6px;
+				left: 74px;
+				width: 30%;
+				text-align: left;
+				color: #999;
+			}
+			
+			.rchatname {
+				position: absolute;
+				top: -6px;
+				right: 74px;
+				width: 30%;
+				text-align: right;
+				color: #999;
+			}
+			
+			.imgss{
+				max-width: 100%;
+				height: auto;
+				max-height: 100%;
+				border-radius: 7px;
+				margin-top: -17px;
+			}
+			/*左侧发送的图片*/
+			.sleftimg{
+				background: transparent !important;
+			}
+			/*左侧消息记录接收的图片*/
+			.glmsgimg{
+				max-width: 100%;
+			    height: auto;
+			    max-height: 100%;
+			    border-radius: 7px;
+			    margin-top: -10px;
+			    margin-left: -16px;
+    		}
+    		/*右侧消息记录发送的图片*/
+    		.grmsgimg{
+    			max-width: 100%;
+			    height: auto;
+			    max-height: 100%;
+			    border-radius: 7px;
+			    margin-top: -20px;
+    		}
+    		/*表情*/
+    		#facebox td img {
+				width: 1rem !important;
+			}
+			
+			#facebox {
+				left: 4px !important;
+				padding-top: 10px;
+				position: relative !important;
+				top: 10px !important;
+			}
+			th,td {
+				height: none;
+				line-height: none;
+				text-align: none;
+				width: none;
+				border: none;
+			}
+    		
+		</style>
+	</head>
+
+	<body>
+		 
+		<div class="wscontent">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">会议室</h1>
+				<span id="next" class="next"><img src="../../icon/gcyp_ss5.png"/></span>
+			</header>
+
+			<div class="mui-content" id="sctop">
+
+				<div class="main-content">
+
+					<div class="dialogue-content">
+
+						<div class="last-time dnone">
+							<!--昨天 14:27-->
+							<!--头像-->
+							<input type="text" v-model="limg" />
+							<!--姓名-->
+							<input type="text" v-model="lname" />
+						</div>
+
+						<!-- Left -->
+						<div class="sender dnone">
+							<div>
+								<img class="head-img" src="">
+							</div>
+							<small class="lchatname hone">123</small>
+							<div>
+								<div class="left_triangle"></div>
+								<span class="left-right left leftcontent">
+								左边
+							</span>
+							</div>
+						</div>
+
+						<!-- Right -->
+						<div class="receiver dnone">
+							<div>
+								<img class="head-img" src="">
+							</div>
+							<small class="rchatname hone">123</small>
+							<div>
+								<div class="right_triangle"></div>
+								<span class="left-right right rightcontent ">
+								右边
+								
+								</span>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!--footer-->
+			<div class="dialogue-other">
+				<div class="footer">
+					<div class="import">
+						<span class="raise"></span>
+						<input id="saytext" class="entry" type="text"/>
+						<span class="smile emotion"></span>
+						<span class="arrow ub_btn"></span>
+					</div>
+					<div style="clear: both;"></div>
+					<div class="use footer3 dnone">
+						<div class="classify">
+							<div class="list" id="tab_picture">
+								
+								<div class="picture">
+									
+								</div>
+							
+								<p>图片</p>
+							</div>
+							<div class="list" id="tab_photo">
+								<div class="photo"></div>
+								<p>拍照</p>
+							</div>
+							<!--<div class="list" id="tab_viewpoint">
+							<div class="viewpoint"></div>
+							<p>视点</p>
+						</div>-->
+							<div class="list dnone" id="tab_document">
+								<div class="document"></div>
+								<p>文档</p>
+							</div>
+							<div style="clear: both;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.qqFace.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../js/mui.previewimage.js"></script>
+			
+		<script type="text/javascript">
+			 	userInfo = getGlobalUserInfo(); //获取对象
+			var fileIds = userInfo.fileIds;
+			var imgurl='http://42.159.154.173:8079/message';
+			if(fileIds == null || fileIds == 'null' || fileIds == "") {
+				console.log("null");
+			} else {
+			
+				
+			var newfileIds=JSON.parse(fileIds);
+				for(var i=0;i<newfileIds.length;i++){
+//					alert(JSON.stringify());
+           
+				showAndUpload(newfileIds[i].fileName);
+
+				}
+				userInfo.fileIds = "";
+				setGlobalUserInfo(userInfo);
+			}
+				
+				mui.previewImage();
+			var vm = new Vue({
+				el: '.wscontent',
+				data: {
+					//左侧图片
+					limg: '',
+					//左侧姓名
+					lname: '',
+				}
+			})
+
+			userInfo = getGlobalUserInfo();
+			//会议id
+			var meetingid = GetQueryString('id');
+			//图片存放至map
+			var IMGMAP = new Map();
+			//图片后缀
+			var lastimg;
+			//获取私聊聊天记录
+			//					function privatechat(){
+			//						$.ajax({
+			//							type: "get",
+			//							url: userInfo.chaturl + "/message/singleHistory",
+			//							async: true,
+			//							beforeSend: function(request) {
+			//								request.setRequestHeader('token', userInfo.tokenId);
+			//							},
+			//							data: {
+			//								userId: userInfo.userId,
+			//								toId:3,//对话人:wzq
+			//								pageSize: 20, //页数
+			//								pageNum: 1, //数量
+			//								times: new Date().getTime()
+			//							},
+			//							success: function(data) {
+			//								if(data.cd==0){
+			//									console.log(JSON.stringify(data))
+			//								}
+			//
+			//							}
+			//						});
+			//					}
+			
+			//滚动到底
+			function scrollb() {
+				var sctop = document.getElementById('sctop').scrollHeight;
+				$(window).scrollTop(sctop);
+			}
+			//排序↑
+			function sortarr(a, b) {
+				return a - b;
+			}
+			//转换时间
+			function chattime(date) {
+				var dateee = new Date(date).toJSON();
+				return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+			}
+			//当前时间
+			var mytime = new Date();
+			var formatDateTime = function(date) {
+				var y = date.getFullYear();
+				var m = date.getMonth() + 1;
+				m = m < 10 ? ('0' + m) : m;
+				var d = date.getDate();
+				d = d < 10 ? ('0' + d) : d;
+				var h = date.getHours();
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				return y + '-' + m + '-' + d + ' ' + h + ':' + minute;
+			};
+
+			//获取用户
+			function getuser(uid) {
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/mobile/showUserInfo',
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenID', userInfo.tokenId);
+						request.setRequestHeader('appType', 7);
+					},
+					data: {
+						'projId': userInfo.projId,
+						'userId': uid
+					},
+					async: false,
+					success: function(data) {
+						vm.limg = data.obj.userImg;
+						vm.lname = data.obj.realName;
+					}
+				})
+			}
+			
+			
+			//调用qq表情			
+			$(function() {
+				$('.emotion').qqFace({
+					id: 'facebox',
+					assign: 'saytext',
+					path: '../../icon/' //表情存放的路径,
+				});
+			});
+
+			//查看结果
+			function replace_em(str) {
+				str = str.replace(/\</g, '&lt;');
+				str = str.replace(/\>/g, '&gt;');
+				str = str.replace(/\n/g, '<br/>');
+				str = str.replace(/\[em_([0-9]*)\]/g, '<img src="../../icon/$1.gif" border="0" />');
+				return str;
+			}
+			
+			//获取群聊
+			var arr = [];
+			function groupchat() {
+				arr = [];
+				$.ajax({
+					type: "get",
+					url: userInfo.chaturl + "/message/groupHistory",
+					async: true,
+					beforeSend: function(request) {
+						request.setRequestHeader('token', userInfo.tokenId);
+					},
+					data: {
+						//群聊id
+						groupId: meetingid,
+						pageSize: 5, //数据量
+						pageNum: 1, //页数
+						times: new Date().getTime()
+					},
+					success: function(data) {
+						if(data.cd == 0) {
+							$.each(data.rt, function(e, e1) {
+								arr.unshift(e1);
+							});
+							//							console.log(arr)
+							$.each(arr, function(e, e1) {
+								//console.log('默认时间：'+chattime(e1.date))
+								if(e1.fromid == userInfo.userId) {
+									//判断发送类型
+									var imgtype=e1.content.substring(e1.content.lastIndexOf(".") + 1, e1.content.length).toLowerCase();
+									if(imgtype.indexOf("jpg") > -1 || imgtype.indexOf("jpeg") > -1 || imgtype.indexOf("gif") > -1 || imgtype.indexOf("png") > -1){
+										setTimeout(function(){
+											$('.'+e1.id).addClass('fr');
+											$('.'+e1.id).prev().addClass('bcf');
+											$('.'+e1.id).text('');
+											$('.'+e1.id).parent().css('background','transparent');
+											$('.'+e1.id).append(
+												`
+												<img class="grmsgimg" src="${e1.content}" data-preview-src="" data-preview-group="1" /> 
+												`
+											)
+										})
+									}
+									
+									
+									//右
+									$('.dialogue-content').append(
+										`
+					<div class="last-time">
+						${chattime(e1.date)}
+					</div>
+					
+					<div class="receiver">
+							<div>
+								<img class="head-img" src="${userInfo.chathead}">
+							</div>
+							<small class="rchatname hone">${userInfo.realName}</small>
+							<div>
+								<div class="right_triangle"></div>
+								<span class="left-right right rightcontent ${e1.id}">
+								${replace_em(e1.content)}
+								</span>
+							</div>
+						</div>
+					`
+									)
+								} else {
+									//左侧接收到消息记录
+									//根据fromid获取姓名,头像
+									getuser(e1.fromid);
+									leftimg = vm.limg;
+									leftname = vm.lname;
+									//判断发送类型
+									var imgtype=e1.content.substring(e1.content.lastIndexOf(".") + 1, e1.content.length).toLowerCase();
+									if(imgtype.indexOf("jpg") > -1 || imgtype.indexOf("jpeg") > -1 || imgtype.indexOf("gif") > -1 || imgtype.indexOf("png") > -1){
+										setTimeout(function(){
+											//文字置空
+											$('.'+e1.id).text('');
+//											$('.'+e1.id).prev().addClass('bcf');
+											//背景透明
+											$('.'+e1.id).parent().css('background','transparent');
+											$('.'+e1.id).append(
+												`
+												<img class="glmsgimg" src="${e1.content}" data-preview-src="" data-preview-group="1" /> 
+												`
+											)
+										})
+									}
+									
+									
+									$('.dialogue-content').append(
+										`
+					<div class="last-time">
+						${chattime(e1.date)}
+					</div>
+					<div class="sender">
+							<div>
+								<img class="head-img" src="${leftimg}">
+							</div>
+							<small class="lchatname hone">${leftname}</small>
+							<div>
+								<div class="left_triangle"></div>
+								<span class="left-right left leftcontent ${e1.id}">
+								${replace_em(e1.content)}
+							</span>
+							</div>
+						</div>
+					`
+									)
+									//									})
+									//					},600)↑
+								}
+
+							});
+
+						}
+
+					}
+				})
+			}
+
+			groupchat();
+			//进入聊天
+			var ws = null;
+			//判断当前浏览器是否支持WebSocket
+			if('ws' in window) {
+				//正式
+				var wsurl = "ws://42.159.154.173:16800/websocket";
+				//测试
+				//var wsurl = "ws://10.252.26.117:16800/websocket";
+				ws = new WebSocket(wsurl);
+				//				console.log(ws)
+			} else {
+				mui.toast('不支持websocket')
+			}
+			//连接发生错误的回调方法
+			ws.onerror = function() {
+				mui.toast('连接错误')
+			};
+
+			//连接成功建立的回调方法
+			//左侧头像
+			var leftimg;
+			//左侧姓名
+			var leftname;
+			//发送的消息
+			var sends;
+			//谁发的
+			var suserid;
+			//发送的类型:1文字(默认),2表情,3图片
+			var sendtype=1;
+			ws.onopen = function(event) {
+				var message = new Object();
+				message.token = userInfo.tokenId;
+				message.projId = userInfo.projId;
+				message.type = "0";
+				console.log(JSON.stringify(message));
+				ws.send(JSON.stringify(message));
+//				mui.toast('建立成功');
+				//alert(meetingid)
+				//'sendm'+meetingid
+				$('.arrow').on('tap', function() {
+					if($('.entry').val() == '') return;
+					//滚动到底
+					scrollb();
+					var message = new Object();
+					message.value = $('.entry').val();
+					message.token = userInfo.tokenId;
+					message.type = 2;
+					message.from = userInfo.userId;
+					//发送的类型：文字
+					message.sendtype=1;
+					//message.projId = userInfo.projId;
+					//message.to = '10672'//userInfo.userId
+					message.meetingId = meetingid;
+					var msg = JSON.stringify(message);
+					//					console.log(msg)
+					ws.send(msg);
+					sends = message.value;
+					//发送者userid
+					suserid = message.from;
+					//根据userid获取头像
+					//发送后清空消息框
+					$('.entry').val('');
+					$('.dialogue-content').append(
+						`
+					<div class="last-time">
+						${formatDateTime(mytime)}
+					</div>
+					<div class="receiver">
+							<div>
+								<img class="head-img" src="${userInfo.chathead}">
+							</div>
+							<small class="rchatname hone">${userInfo.realName}</small>
+							<div>
+								<div class="right_triangle"></div>
+								<span class="left-right right rightcontent">
+								${replace_em(sends)}
+								</span>
+							</div>
+						</div>
+					`
+					)
+
+				})
+
+				//接收到消息的回调方法
+				var smsg = '';
+				var sfrom = '';
+				var mid = '';
+				var eimg='';
+				ws.onmessage = function(event) {
+					//发送人的meetingid
+					mid = JSON.parse(event.data).meetingId;
+					//来自谁发的
+					sfrom = JSON.parse(event.data).from;
+					//发送类型
+					sendtype = JSON.parse(event.data).sendtype;
+//					alert(sendtype)
+					eimg=JSON.parse(event.data).value;
+					//群组相同才接收消息
+					if(mid == meetingid) {
+//						alert(mid+'->'+meetingid)
+						getuser(sfrom);
+						//setTimeout(function() {
+						leftimg = vm.limg;
+						leftname = vm.lname;
+						//						}, 500)
+//						console.log(JSON.stringify(event.data));
+						//接收的消息
+						smsg = JSON.parse(event.data).value;
+						//setTimeout(function() {
+						console.log(smsg);
+					if(sendtype==1){
+						//文字
+						$('.dialogue-content').append(
+							`
+					<div class="sender">
+							<div>
+								<img class="head-img" src="${leftimg}">
+							</div>
+							<small class="lchatname hone">${leftname}</small>
+							<div>
+								<div class="left_triangle"></div>
+								<span class="left-right left leftcontent">
+								${replace_em(smsg)}
+							</span>
+							</div>
+						</div>
+					`
+						)
+						
+					}else if(sendtype==3){
+						$('.dialogue-content').append(
+	           	`
+					<div class="last-time">
+						${formatDateTime(mytime)}
+					</div>
+					<div class="sender">
+							<div>
+								<img class="head-img" src="${leftimg}">
+							</div>
+							<small class="lchatname hone accsss">${leftname}</small>
+							<div class='sleftimg'>
+								<div class="right_triangle bcf"></div>
+								<img class="imgss" src="${eimg}" data-preview-src="" data-preview-group="1" />
+							</div>
+						</div>
+					`
+					)
+				}
+						
+						//						}, 600)
+						//当前用户和
+					}
+				}
+
+			}
+			//发送图片
+               	function add(src) {
+               		var mimg = new Object();
+					mimg.token = userInfo.tokenId;
+					mimg.type = 2;
+					mimg.from = userInfo.userId;
+					mimg.value = src;
+					mimg.sendtype= 3;
+					mimg.meetingId = meetingid;
+					var smimg = JSON.stringify(mimg);
+					ws.send(smimg);
+					
+					$('.dialogue-content').append(
+	           	`
+					<div class="last-time">
+						${formatDateTime(mytime)}
+					</div>
+					<div class="receiver">
+							<div>
+								<img class="head-img" src="${userInfo.chathead}">
+							</div>
+							<small class="rchatname hone accsss">${userInfo.realName}</small>
+							
+							<div class='sleftimg'>
+								<div class="right_triangle bcf"></div>
+								<img class="imgss" src="${src}" data-preview-src="" data-preview-group="1" />
+							</div>
+						</div>		
+					`
+					)
+	
+	}
+			//连接关闭的回调方法
+			ws.onclose = function() {
+				mui.toast("连接关闭");
+			}
+
+			//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+			window.onbeforeunload = function() {
+				ws.close();
+			}
+
+			//关闭连接
+			function closeWebSocket() {
+				ws.close();
+				mui.toast('关闭连接')
+			}
+
+			// 从相册中选择图片 
+			function galleryImg() {
+				// 从相册中选择图片
+				plus.gallery.pick(function(e) {
+					//showAndUpload(e);
+
+					for(var i in e.files) {
+						var fileSrc = e.files[i];
+						// 其他操作,比如预览展示
+
+						var src = JSON.stringify();
+
+						showAndUpload(fileSrc);
+					}
+				}, function(e) {
+					console.log("取消选择图片");
+				}, {
+					filter: "image",
+					multiple: true,
+					maximum: 5,
+					system: true,
+					onmaxed: function() {
+						plus.nativeUI.alert('最多只能选择5张图片');
+					}
+				});
+			}
+			
+
+		// 图片大小
+var imgSize = 500;
+
+//将图片压缩转成base64 
+function getBase64Image(img) {
+	var canvas = document.createElement("canvas");
+	var width = img.width;
+	var height = img.height;
+	// calculate the width and height, constraining the proportions 
+	if(width > height) {
+		if(width > imgSize) {
+			height = Math.round(height *= imgSize / width);
+			width = imgSize;
+		}
+	} else {
+		if(height > imgSize) {
+			width = Math.round(width *= imgSize / height);
+			height = imgSize;
+		}
+	}
+
+	canvas.width = width; /*设置新的图片的宽度*/
+	canvas.height = height; /*设置新的图片的长度*/
+	var ctx = canvas.getContext("2d");
+	ctx.drawImage(img, 0, 0, width, height); /*绘图*/
+	var dataURL = canvas.toDataURL("image/png", 0.8);
+	return dataURL; //.replace("data:image/png;base64,", ""); 
+}
+
+//将base64转换为文件 
+function dataURLtoFile(dataurl, filename) {
+	var arr = dataurl.split(','),
+		mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]),
+		n = bstr.length,
+		u8arr = new Uint8Array(n);
+	while(n--) {
+		u8arr[n] = bstr.charCodeAt(n);
+	}
+	return new File([u8arr], filename, {
+		type: mime
+	});
+}
+
+
+
+	// 显示图片并上传
+function showAndUpload(src) {
+	var img = new Image();
+	img.src = src;
+	img.onload = function() {
+		var imgData = getBase64Image(img);
+		var suffix = src.substring(src.lastIndexOf("/") + 1, src.length);
+		var file = dataURLtoFile(imgData, suffix);
+		console.log("文件大小：==============》" + (Math.ceil(file.size / 1024)));
+		sumfile(file);
+	}
+
+}
+			// 打开相机拍照
+			function getpic() {
+				var cameraObj = plus.camera.getCamera();
+				cameraObj.captureImage(function(e) {
+					plus.io.resolveLocalFileSystemURL(e, function(entry) {
+						var src = entry.toLocalURL();
+						showAndUpload(src);
+					}, function(e) {
+						console.log("读取拍照文件错误" + e.message)
+					})
+				}, function(s) {
+					console.log("error" + s);
+				}, {
+					filname: "_doc/head.png"
+				})
+			}
+
+			//map数组
+			var subimgitems = [];
+			IMGMAP.forEach(function(item, key, mapObj) {
+				subimgitems.push(item);
+			});
+
+			//上传图片
+			function sumfile(file) {
+				//var returnUrl = 'http://10.252.26.240:8080/h2-bim-project/mobile/uploadFileTeam.json?ugId='+
+				//userInfo.groupId +'&dirId=0&entId=' + userInfo.entid;
+				var returnUrl = userInfo.url + '/mobile/uploadFileTeam.json?ugId=' +
+					userInfo.groupId + '&dirId=0&entId=' + userInfo.entid;
+				returnUrl = encodeURIComponent(returnUrl);
+				
+				var formdata = new FormData();
+				
+				formdata.append('file',file);
+				
+				//url:"http://10.252.26.40:8079/message/uploadFile",
+				//url: "http://10.252.26.40:8079/message/uploadFile",
+				//发送图片
+				$.ajax({
+					type: "POST",
+					//url: "http://10.252.26.240:8080/qjbim-file/uploading/uploadFileInfo",
+				    url: userInfo.chaturl+"/message/uploadFile",
+					async: true,
+					//secureuri: false,
+					beforeSend: function(request) {
+						request.setRequestHeader('token', userInfo.tokenId);
+					},
+					data: formdata,
+
+					dataType: "JSON",
+					/**
+					 *必须false才会自动加上正确的Content-Type
+					 */
+					contentType: false,
+					/**
+					 * 必须false才会避开jQuery对 formdata 的默认处理
+					 * XMLHttpRequest会对 formdata 进行正确的处理
+					 */
+					processData: false,
+					success: function(data, status) {
+						console.log(JSON.stringify(data));
+						console.log("上传图片status:", status);
+						if(status == "success") {
+							add(imgurl+data.fileurl);
+						}
+
+					},
+					error: function(data, status, e) {
+						console.log("上传图片报错data", data);
+						console.log("上传图片报错status", status);
+						console.log("上传图片报错e", e);
+					}
+				})
+			}
+		$('#tab_picture').on('tap', function() {
+//			 $('#file').click();
+				galleryImg();
+//
+//				//	plus.gallery.pick(function(e) {
+//				//		  console.log(e,"==========================");
+//				//	});
+		})
+			$('#tab_photo').on('tap', function() {
+				getpic();
+			})
+			//			$('#tab_viewpoint').on('tap', function() {
+			//				galleryImg();
+			//			})
+
+			//打开文档
+//			$('#tab_document').on('tap', function() {
+//				GoToURL('../at_team/select_document.html', 'select_document');
+//			})
+			//选择人员
+			//获取会议id
+			var meetingid = getUrlParam('id');
+			//获取会议names
+			var meetingname = getUrlParam('mettingname');
+			//设置标题
+			$('.mui-title').text(meetingname);
+			//0群组,1私聊,2会议
+			var flag = getUrlParam('flag');
+			$('#next').on('tap', function() {
+				mui.openWindow({
+					url: 'hy_chat_details.html?flag=2&addflag=0&id=' + meetingid + '&mettingname=' + meetingname,
+					id: 'hy_chat_details'
+				})
+			})
+
+			//输入框
+			$('.entry').focus(function() {
+				$('.footer3').addClass('dnone').removeClass('active');
+			})
+			$('.raise').on('tap', function() {
+				$('.footer3').toggleClass('dnone active');
+			})
+			//发送时输入框状态
+			//			$('.arrow').on('tap',function(){
+			//				$('.footer3').addClass('dnone');
+			//			})
+
+			//			mui.back=function(){
+			//				return false
+			//			}
+			mui.init({
+			
+				beforeback: function() {
+					var list = plus.webview.currentWebview().opener();
+					mui.fire(list, 'rlist');
+					return true;
+				},
+
+				pullRefresh: {
+					container: ".main-content", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						style: 'circle',
+						color: '#2BD009',
+						height: '30px',
+						range: '50px',
+						offset: '55px',
+						auto: false,
+						callback: drefresh
+					}
+				},
+			});
+			//有无数据
+			var farr = 1;
+
+			function drefresh() {
+				setTimeout(function() {
+					mui('.main-content').pullRefresh().endPulldownToRefresh((farr == 0));
+					dchat();
+					//					mui.toast('success');
+				}, 1500);
+			}
+
+			var dnum = 1;
+			var darr = [];
+
+			function dchat() {
+				dnum += 1;
+				darr = [];
+				$.ajax({
+					type: "get",
+					url: userInfo.chaturl + "/message/groupHistory",
+					async: true,
+					beforeSend: function(request) {
+						request.setRequestHeader('token', userInfo.tokenId);
+					},
+					data: {
+						//群聊id
+						groupId: meetingid,
+						pageSize: 5, //页数
+						pageNum: dnum, //数量
+						times: new Date().getTime()
+					},
+					success: function(data) {
+												
+						if(data.cd == 0) {
+							if(data.rt == '') {
+								farr = 0;
+								mui.toast('没有更多数据了')
+							}
+							//							console.log(JSON.stringify(darr))
+							$.each(data.rt, function(e, e1) {
+								if(e1.fromid == userInfo.userId) {
+									//右
+									$('.dialogue-content').prepend(
+										`
+					<div class="last-time">
+						${chattime(e1.date)}
+					</div>
+					
+					<div class="receiver">
+							<div>
+								<img class="head-img" src="${userInfo.chathead}">
+							</div>
+							<small class="rchatname hone">${userInfo.realName}</small>
+							<div>
+								<div class="right_triangle"></div>
+								<span class="left-right right rightcontent">
+								${e1.content}
+								</span>
+							</div>
+						</div>
+					`
+									)
+								} else {
+									//根据fromid获取姓名,头像
+									getuser(e1.fromid);
+									leftimg = vm.limg;
+									leftname = vm.lname;
+									//						},500)↑
+
+									//左
+									//							setTimeout(function() {
+									$('.dialogue-content').prepend(
+										`
+					<div class="last-time">
+						${chattime(e1.date)}
+					</div>
+					<div class="sender">
+							<div>
+								<img class="head-img" src="${leftimg}">
+							</div>
+							<small class="lchatname hone">${leftname}</small>
+							<div>
+								<div class="left_triangle"></div>
+								<span class="left-right left leftcontent">
+								${e1.content}
+							</span>
+							</div>
+						</div>
+					`
+									)
+									//									})
+									//					},600)↑
+								}
+
+							});
+
+						} else {
+							mui.toast('没有更多数据了')
+						}
+
+					},
+				})
+
+			}
+		</script>
+	</body>
+
+</html>

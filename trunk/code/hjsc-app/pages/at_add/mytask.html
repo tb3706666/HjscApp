@@ -1,0 +1,1192 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的任务</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<link rel="stylesheet" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	</head>
+	<style type="text/css">
+		.mui-col-xs-3 {
+			width: 20%;
+		}
+		
+		.mui-slider {
+			position: fixed;
+		}
+		
+		.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar {
+			background-color: #fff;
+		}
+		
+		.mui-slider-progress-bar {
+			height: 1px;
+			top: -15px;
+			border: 1px solid #fff;
+		}
+		
+		.mui-control-content {
+			min-height: -webkit-fill-available;
+		}
+		
+		.mui-control-content {
+			background-color: #fff;
+		}
+		
+		.mui-control-content .mui-loading {
+			margin-top: 50px;
+		}
+		/*标题头end*/
+		
+		.path {
+			height: 35px;
+		}
+		
+		.path2 {
+			height: 15px;
+		}
+		
+		h6 {
+			color: #0486d1;
+			/*line-height: 35px;*/
+			margin-left: 20px;
+			height: 38px;
+			word-break: break-all;
+		}
+		/*.size {
+			margin-left: 20px;
+		}*/
+		/*.dates{
+			display: inline-block;
+		}*/
+		
+		.mui-icon-arrowthinup,
+		.mui-icon-pulldown:before {
+			content: '\e588';
+			color: #cccccc;
+			border: 1px solid #cccccc;
+			border-radius: 50% 50%;
+			text-align: center;
+		}
+		
+		.mui-icon-arrowthinup,
+		.mui-icon-pulldown {
+			float: right;
+			width: 28px;
+			height: 28px;
+		}
+		
+		.mui-radio input[type="radio"] {
+			position: unset;
+		}
+		
+		.mui-radio input[type=radio]:checked:before {
+			content: '\e442';
+		}
+		
+		.mui-radio {
+			float: right;
+			width: 28px;
+			height: 28px;
+		}
+		
+		.mui-popover {
+			height: 145px;
+			width: 100%;
+			position: fixed;
+			bottom: 0;
+			text-align: center;
+			color: #0479bb;
+		}
+		
+		.filling {
+			background: #F2F2F2;
+			height: 0px;
+			padding: 3px;
+		}
+		
+		.scrolls {
+			top: 15px;
+		}
+		
+		.mui-table-view-cell:last-child:after,
+		.mui-table-view-cell:last-child:before {
+			height: 1px;
+		}
+		/*底部显示完整*/
+		
+		.mui-table-view {
+			margin-bottom: 100px;
+		}
+		/*去除横杠*/
+		
+		.mui-slider-progress-bar {
+			height: 0;
+		}
+		
+		.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+			border-top: none;
+		}
+		
+		.mui-content {
+			margin-top: -5px;
+		}
+		/*按钮*/
+		
+		.mui-table-view-cell>.mui-btn {
+			top: 33%;
+		}
+		
+		.mui-btn {
+			padding: 5px 10px;
+			background-color: #0486D1;
+			border: 0;
+		}
+		/*选框*/
+		
+		.pio {
+			position: absolute;
+			top: 30px;
+			right: 8px;
+		}
+		/*进度条*/
+		
+		.percent {
+			overflow: hidden;
+		}
+		
+		.mui-progressbar {
+			width: 85%;
+			height: 5px;
+			border-radius: 15px;
+			margin-top: 8px;
+			overflow: hidden;
+			box-shadow: 0 0 1px 0px #000 inset;
+			float: left;
+		}
+		
+		.percent b {
+			float: right;
+		}
+		/*每秒显示*/
+		
+		.secondshow {
+			position: absolute;
+			right: 60px;
+		}
+		
+		.stop2 {
+			font-size: 29px;
+			height: 35px;
+			padding-top: 10px;
+			margin-top: -8px;
+			color: #cccccc;
+		}
+		
+		a {
+			touch-action: none;
+		}
+		
+		.dirOut {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+			word-wrap: break-word;
+			word-break: break-all;
+			line-height: 36px;
+		}
+		/*.mui-media-body{
+			pointer-events: none;
+		}*/
+		
+		.floor_task .head {
+			padding: 12px 15px;
+			font-size: 12px;
+			color: #666;
+			overflow: hidden;
+			border-bottom: 1px solid #e6e6e6;
+		}
+		
+		.floor_task .side {
+			overflow: hidden;
+			padding: 15px;
+			border-bottom: 1px solid #e6e6e6;
+		}
+		
+		.floor_task .side>img {
+			width: 49px !important;
+			float: left;
+			margin-right: 10px;
+		}
+		
+		.floor_task .side .section .building {
+			overflow: hidden;
+		}
+		
+		.floor_task .side .section .fl {
+			color: black;
+		}
+		
+		.floor_task .side .section .reality {
+			color: #12b828;
+		}
+		
+		.floor_task .foot .bg_tp {
+			overflow: hidden;
+			padding: 15px;
+		}
+		
+		.floor_task .foot .bg_tp span {
+			float: left;
+			width: 24%;
+			height: 33px;
+			border-radius: 5px;
+			border: 1px solid #0487d0;
+			text-align: center;
+			line-height: 33px;
+			color: #0487d0;
+		}
+		
+		.floor_task .foot .bg_tp span:nth-of-type(2) {
+			margin: 0 1%;
+		}
+		
+		.floor_task .foot .bg_tp span:nth-of-type(3) {
+			margin-right: 1%;
+		}
+		
+		.foot .bg_bom {
+			padding: 0 15px 15px 15px;
+		}
+		
+		.foot .bg_bom .mask_list {
+			display: none;
+		}
+		
+		.foot .bg_bom .mask_list .imgSrc {
+			overflow: hidden;
+		}
+		
+		.foot .bg_bom .mask_list .imgSrc img {
+			width: 32%;
+			height: 80px;
+			float: left;
+		}
+		
+		.foot .bg_bom .mask_list .imgSrc img:nth-of-type(2) {
+			margin: 0 1%;
+		}
+		
+		.active {
+			color: #fff !important;
+			background: #0487d0 !important;
+		}
+		
+		.cur {
+			display: block !important;
+		}
+		
+		.foot .bg_bom .mask_list .tab_map .list {
+			padding: 15px;
+			background: #f5f5f5;
+			overflow: hidden;
+		}
+		
+		.foot .bg_bom .mask_list .tab_map .list:nth-of-type(2) {
+			margin: 10px 0;
+		}
+		
+		.foot .bg_bom .mask_list .tab_map .list .mid {
+			margin-left: 50px;
+		}
+		
+		.foot .bg_bom .mask_list .tab_btn {
+			margin: 13px;
+			height: 45px;
+			line-height: 45px;
+			font-size: 15px;
+			color: #0487d0;
+			text-align: center;
+			border: 1px solid #0487d0;
+			border-radius: 5px;
+		}
+		
+		.box .date {
+			font-size: 16px;
+			overflow: hidden;
+			padding: 10px;
+			border-radius: 5px;
+			background: url('../../icon/close.png')no-repeat right 10px center #e6e6e6;
+			background-size: 18px 18px;
+			margin: 0 15px;
+		}
+		
+		.box .date span {
+			font-size: 16px;
+			color: #a6a6a6;
+		}
+		
+		.mui-popup {
+			text-align: left;
+		}
+		
+		.mui-progressbar-success span {
+			background-color: #4cd964;
+		}
+		
+		.mui-progressbar span {
+			transform: translate3d(-80%, 0, 0);
+		}
+		
+		.mui-popup {
+			top: 40%;
+		}
+		
+		.field-contain label {
+			width: auto;
+			padding-right: 0;
+		}
+		
+		.field-contain input[type='text'] {
+			width: 100px;
+			height: 30px;
+			padding: 5px 0;
+			float: none;
+			text-align: center;
+		}
+		
+		#content,
+		#item1mobile,
+		.mui-slider,
+		.mui-scroll-wrapper {
+			overflow: scroll;
+		}
+		
+		.mui-input-row.mui-input-range {
+			padding-right: 0;
+		}
+		
+		#field-range-input {
+			width: 45px;
+		}
+		
+		.mui-backdrop {
+			z-index: 10009;
+		}
+		
+		.cur {
+			display: block !important;
+		}
+		
+		.range {}
+		
+		.range:before,
+		.range-bar,
+		.range-text,
+		.range-progress {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			-webkit-transform: translateY(-50%);
+		}
+		
+		.range:before {
+			content: '';
+			display: block;
+			background-color: #ccc;
+			width: 100%;
+		}
+		
+		.range:before,
+		.range-progress {
+			height: 2px;
+			left: 0;
+		}
+		
+		.range-bar {
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			background-color: #ccc;
+		}
+		
+		.range-progress {
+			background-color: #00b3ee;
+		}
+		
+		.range-text {
+			top: 100%;
+			left: 90%;
+			-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+			color: #999;
+		}
+		
+		.box {
+			position: fixed;
+			width: 270px;
+			background: #fff;
+			border-radius: 6px;
+			left: 50%;
+			margin-left: -135px;
+			top: 40%;
+			transform: translateY(-50%);
+		}
+		
+		.box .title {
+			font-size: 18px;
+			color: black;
+			font-weight: bold;
+			text-align: center;
+			height: 75px;
+			line-height: 75px;
+		}
+		
+		.box .huakuai {
+			margin: 0 15px;
+			margin-top: 10px;
+		}
+		
+		.box .huakuai p {
+			font-size: 16px;
+		}
+		
+		.box .button {
+			overflow: hidden;
+		}
+		
+		.fl {
+			float: left;
+		}
+		
+		.fr {
+			float: right;
+		}
+		
+		.box .button .close {
+			text-align: center;
+			width: 50%;
+			font-size: 18px;
+			height: 50px;
+			line-height: 50px;
+			border-top: 1px solid #eee;
+			border-right: 1px solid #eee;
+		}
+		
+		.box .button .agree {
+			text-align: center;
+			width: 50%;
+			font-size: 18px;
+			height: 50px;
+			line-height: 50px;
+			border-top: 1px solid #eee;
+			color: #0487d0;
+		}
+		
+		.el-slider__runway {
+			margin-top: 0 !important;
+		}
+		
+		.mask {
+			position: fixed;
+			background: rgba(0, 0, 0, .4);
+			z-index: 998;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			display: none;
+		}
+		
+		.cur {
+			display: block !important;
+		}
+		
+		.loading {
+			width: 50px;
+			height: 50px;
+			z-index: 999999;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -25px;
+			margin-left: -25px;
+			display: none;
+		}
+		
+		.kk {
+			text-align: center;
+			display: none;
+		}
+	</style>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav headstyle">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left menus" id="menus" href="#offCanvasSide"></a>
+			<h1 class="mui-title">我的任务</h1>
+		</header>
+
+		<!--<div style="border: 1px solid red;height: 50px;width: 100%;">上方距离</div>-->
+		<div class="mui-content" id="trans">
+			<div id="slider" class="mui-slider">
+				<div id="cs_slider" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="javascript:;">全部</a>
+					<a class="mui-control-item" href="javascript:;">未开始</a>
+					<a class="mui-control-item" href="javascript:;">已开始</a>
+					<a class="mui-control-item" href="javascript:;">已拖延</a>
+					<a class="mui-control-item" href="javascript:;">已完成</a>
+				</div>
+				<!--<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>-->
+
+				<div class="mui-slider-group" id="content">
+
+					<!--自写消息框-->
+					<div class="mask" id="myModal">
+
+						<div class="box">
+
+							<div class="title">
+								添加核实记录
+							</div>
+							<div class="date btn" id="llll">
+								<span>日期</span>
+							</div>
+							<div class="huakuai">
+								<p>百分比</p>
+								<div class="ranger">
+									<div class="block" style="float: left;width: 80%;">
+										<span class="demonstration">默认</span>
+										<el-slider v-model="value1"></el-slider>
+									</div>
+									<div id="percent" style="font-size: 16px;float: right;margin-top: 14px;">
+										{{value1}}%
+									</div>
+									<div style="clear: both;"></div>
+								</div>
+							</div>
+							<div class="button">
+								<div id="close" class="close fl">取消</div>
+								<div class="agree fr" @click="funooo()">确定</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div class="mui-content path2"></div>
+						<div id="scroll1" class="mui-scroll-wrapper scrolls">
+							<div class="kk">暂无数据</div>
+							<div class="floor_task" v-for="(item,index) in rtData" :key="index" v-cloak>
+
+								<div class="head">
+									<span class="fl">#{{item.completeTaskCode}}</span>
+									<span class="fr">{{item.actualStatusStr}}</span>
+								</div>
+								<div class="side" @click="funsss(item.taskId)">
+									<img src="../../icon/cpsldh2.png">
+									<div class="section">
+										<p class="building"><span class="fl">{{item.taskName}}</span><span class="fr">***</span></p>
+										<p class="plan">计划周期：{{item.taskStart | switchingTime7}}~{{item.taskEnd | switchingTime7}}</p>
+										<p class="reality">实际周期：{{item.realTaskStart | switchingTime7}}~{{item.realTaskEnd | switchingTime7}}</p>
+									</div>
+								</div>
+								<div class="foot">
+									<div class="bg_tp">
+										<span v-for="(item1,index1) in footData" :key="index1" @click="footerFunc(index,index1,item.taskId)">{{item1.name}}</span>
+									</div>
+									<div class="bg_bom">
+										<div class="mask_list hjws">
+											
+										</div>
+										<div class="mask_list">
+											暂无数据
+										</div>
+										<div class="mask_list">
+											暂无数据
+										</div>
+										<div class="mask_list">
+											<div class="tab_map hjw">
+
+											</div>
+											<!--											<div class="tab_btn" id="confirmBtn" @click="funooo(item.taskId)">-->
+											<div class="tab_btn" id="confirmBtn" @click="ceshi(item.taskId)">
+												添加核实记录
+											</div>
+
+											<div id="info">
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<img class="loading" src="../../icon/loading.gif" />
+				<!--<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-content path2"></div>
+						<div id="scroll2" class="mui-scroll-wrapper scrolls">
+
+							<div class="mui-scroll">
+
+								模块二
+
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-content path2"></div>
+						<div id="scroll3" class="mui-scroll-wrapper scrolls">
+
+							<div class="mui-scroll">
+
+								模块三
+
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div id="item4mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-content path2"></div>
+						<div id="scroll4" class="mui-scroll-wrapper scrolls">
+
+							<div class="mui-scroll">
+
+								模块四
+
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>-->
+
+				<!--已完成-->
+				<!--<div id="item5mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-content path2"></div>
+						<div id="scroll5" class="mui-scroll-wrapper scrolls">
+
+							<div class="mui-scroll">
+								模块五
+								<div class="mui-loading">
+									<div class="mui-spinner ">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>-->
+
+			</div>
+
+		</div>
+		</div>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+
+		<script type="text/javascript" src="../../js/mytask.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/pub.js"></script>
+		<script src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/mui.picker.min.js"></script>
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+		<script type="text/javascript">
+			mui.init();
+
+			//			mui.init({
+			//				swipeBack: true //启用右滑关闭功能
+			//			});
+			//			//监听input事件，获取range的value值，也可以直接element.value获取该range的值
+			//			var rangeList = document.querySelectorAll('input[type="range"]');
+			//			for(var i = 0, len = rangeList.length; i < len; i++) {
+			//				rangeList[i].addEventListener('input', function() {
+			//					if(this.id.indexOf('field') >= 0) {
+			//						document.getElementById(this.id + '-input').value = this.value + '%';
+			//					}
+			//				});
+			//			}
+
+			// 全局变量
+			var newRtData = [];
+
+			$(function() {
+				init_GroupId();
+
+				var userInfo = getGlobalUserInfo();
+
+				console.log('userInfo', userInfo);
+				var app = new Vue({
+					el: '#content',
+					data() {
+						return {
+							rtData: newRtData,
+							aChildren: '',
+							rtDataflag: 0,
+							threeChildren: '',
+							footData: [{
+								'name': '图片'
+							}, {
+								'name': '清单'
+							}, {
+								'name': '文档'
+							}, {
+								'name': '核实'
+							}],
+							renWuArr: [],
+							newrtDatas: [],
+							newClass: [],
+							value1: 0,
+							newStkId: "",
+							aaa: false
+
+						}
+					},
+					created() {
+						var _that = this;
+						console.log(userInfo.groupId);
+						mui.createMask().show();
+						$('.loading,.mui-backdrop').show();
+						//请求所有工程
+						$.ajax({
+							type: 'POST',
+							url: userInfo.url + '/mobile/' + userInfo.projId + '/task/list',
+							beforeSend: function(request) {
+								request.setRequestHeader('tokenId', userInfo.tokenId);
+							},
+							data: {
+								'ugId': userInfo.groupId,
+								'taskName': '',
+								'entId': userInfo.entid,
+								'isFinish': userInfo.entid
+							},
+							async: true,
+							dataType: 'JSON',
+							success: function(data) {
+								$('.loading,.mui-backdrop').hide();
+								_that.rtData = data.rt;
+								console.log(_that.rtData);
+								newRtData = _that.rtData;
+								//存最底层子节点
+								var newhjw = [];
+								//找最底层子节点
+								fundigui(_that.rtData, newhjw);
+
+								_that.rtData = newhjw;
+								_that.newClass = newhjw;
+								//                           let loadingInstance = Loading.service(true);
+								//                   this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+								//                    loadingInstance.close();
+								//                   });
+							}
+
+						})
+
+						$("#cs_slider .mui-control-item").eq(0).css("color", "#ffaa00");
+					},
+					components: {
+						'twopage': {
+							props: ['childrenData'],
+							template: `<ul class="mui-table-view mui-table-view-chevron gainIndex"><li v-for="(item , index) in childrenData" :key="index" class="mui-table-view-cell mui-media"><a class="mui-navigate-right"><img class="mui-media-object mui-pull-left" src="../../icon/cpsldh1.png"><div class="mui-media-body"><span class="taskName">{{item.taskName}}</span><p><span class="mr">{{item.taskStart | switchingTime7}}~{{item.taskEnd | switchingTime7}}</span><span>{{item.actualStatusStr}}</span></p><p><span class="mr">#{{item.completeTaskCode}}</span><span>*</span></p></div></a></li></ul>`,
+						}
+					},
+					mounted: function() {
+						this.screeningClickFunc()
+
+					},
+					methods: {
+
+						formatTooltip(val) {
+							return val / 100;
+						},
+						funooo: function() {
+							var modal = document.getElementById('myModal');
+							var timeskk = $("#llll").text();
+
+							if(timeskk == "" || timeskk == "日期") {
+								mui.alert("请选择时间", '提示', function() {});
+							} else {
+								var timeNew = timeskk.substring(0, 10);
+								//添加工程任务
+								$.ajax({
+									contentType: "application/json",
+									type: "POST",
+									url: userInfo.url + "/mobile/" + userInfo.projId + "/task/addVerify",
+									async: true,
+									beforeSend: function(request) {
+										request.setRequestHeader('tokenId', userInfo.tokenId);
+										request.setRequestHeader('appType', 7);
+									},
+									data: JSON.stringify({
+										"taskVerify": {
+											taskId: this.newStkId,
+											tvDate: timeNew,
+											tvRate: this.value1
+										}
+									}),
+									success: function(data) {
+										console.log("5.15", data);
+										//工程任务核实成功之后刷新
+										if(data.rt == null) {
+											mui.alert(data.msg, '提示', function() {});
+										} else {
+											if(data.rt.taskId == null) {
+												mui.alert(data.msg, '提示', function() {});
+											} else {
+												$.ajax({
+													type: "GET",
+													url: userInfo.url + "/mobile/" + userInfo.projId + "/task/verifyList",
+													async: true,
+													beforeSend: function(request) {
+														request.setRequestHeader('tokenId', userInfo.tokenId);
+														request.setRequestHeader('appType', 7);
+													},
+													data: {
+														taskId: data.rt.taskId
+													},
+													success: function(data) {
+														$(".hjw").text("");
+														$(".hjws").text("");
+														this.renWuArr = data.rt;
+														console.log("5.13", this.renWuArr);
+														var accp = "";
+
+														for(var i = 0; i < this.renWuArr.verifyList.length; i++) {
+															var timestamp4 = new Date(this.renWuArr.verifyList[i].tvDate);
+															var dates = timestamp4.toLocaleDateString().replace(/\//g, "-") + " " + timestamp4.toTimeString().substr(0, 8);
+															accp += `<div class="list">
+										      <span class="fl">${dates}</span>
+									         	<span class="mid">${this.renWuArr.verifyList[i].tvRate}%</span>
+									       	<span class="fr">${this.renWuArr.verifyList[i].tvUserName}</span>
+										</div>`
+														}
+														$(".hjw").append(accp);
+													}
+												});
+											}
+										}
+
+									}
+								});
+
+							}
+							modal.style.display = "none";
+						},
+						//触发函数打开任务详情页面
+						funsss: function(i) {
+							var taskIdss = i;
+							//						window.location.href='tasks_details.html?rwId='+i;
+					
+							for(var i = 0; i < this.rtData.length; i++) {
+
+								if(this.rtData[i].taskId == taskIdss) {
+
+									window.localStorage.setItem("completeTaskCode", JSON.stringify(this.rtData[i]));
+									$.ajax({
+										type: "GET",
+										url: userInfo.url + "/mobile/" + userInfo.projId + "/task/verifyList",
+										async: true,
+										beforeSend: function(request) {
+											request.setRequestHeader('tokenId', userInfo.tokenId);
+											request.setRequestHeader('appType', 7);
+										},
+										data: {
+											taskId: taskIdss
+										},
+										success: function(data) {
+											if(data.rt.verifyList != null) {
+												console.log(data.rt)
+												  window.localStorage.removeItem('verifyList');
+												window.localStorage.setItem("verifyList", data.rt.verifyList.length);
+											} else {
+												window.localStorage.setItem("verifyList", 0);
+											}
+											if(data.rt.attachList != null) {
+												 window. localStorage.removeItem('attachList');
+												window.localStorage.setItem("attachList", data.rt.attachList.length);
+											} else {
+												window.localStorage.setItem("attachList", 0);
+											}
+											if(data.rt.fileList != null) {
+												  window.localStorage.removeItem('fileList');
+												window.localStorage.setItem("fileList", data.rt.fileList.length);
+											} else {
+												window.localStorage.setItem("fileList", 0);
+											}
+										}
+									});
+									mui.openWindow({
+										url: 'tasks_details.html',
+										id: 'tasks_details',
+									})
+								}
+							}
+
+						},
+						twoPages: function(index) {
+							var oRtData = this.rtData;
+							if(this.rtDataflag == 0) {
+								this.rtDataflag = 1;
+								this.aChildren = oRtData[index].children;
+							} else if(this.rtDataflag == 1) {
+								this.rtDataflag = 2;
+								this.threeChildren = this.aChildren[index].children;
+							}
+							//							this.aChildren = oRtData[index].children;
+							//							this.rtDataflag = 1;
+							console.log('aChildren', this.aChildren);
+							console.login(this.rtData);
+						},
+
+						// 点击筛选
+						screeningClickFunc: function() {
+							var _that = this;
+							$('#cs_slider .mui-control-item').each(function(index, element) {
+								$(element).on('tap', function() {
+									//									console.log(index);
+									$("#cs_slider .mui-control-item").css("color", "white");
+									$("#cs_slider .mui-control-item").eq(index).css("color", "#ffaa00");
+									var _oSpan = $('#cs_slider .mui-control-item').eq(index).html();
+									//									console.log(_oSpan);
+									var oallData = newRtData;
+									var oNewRtData = _that.rtData;
+									var oDataArr = [];
+									if(_oSpan == '全部') {
+										$("#sliderProgressBar").css("margin-left", "0px");
+										oDataArr = [];
+										console.log(_that.newClass);
+										for(var j = 0; j < _that.newClass.length; j++) {
+											oDataArr.push(_that.newClass[j]);
+										}
+
+									} else if(_oSpan == '未开始') {
+										$(".kk").css("display", "none");
+										$("#sliderProgressBar").css("margin-left", "75px");
+										for(var k = 0; k < _that.newClass.length; k++) {
+											//												  	console.log(_that.newClass[k].actualStatusStr);
+											if(_that.newClass[k].actualStatusStr == '未开始') {
+												oDataArr.push(_that.newClass[k]);
+
+											}
+										}
+									} else if(_oSpan == '已开始') {
+
+										$("#sliderProgressBar").css("margin-left", "150px");
+										for(var l = 0; l < _that.newClass.length; l++) {
+											//												  	console.log(_that.newClass[l].actualStatusStr);
+											if(_that.newClass[l].actualStatusStr.indexOf("%") != -1) {
+												oDataArr.push(_that.newClass[l]);
+
+											} else {
+												console.log("暂无数据");
+
+											}
+										}
+									} else if(_oSpan == '已完成') {
+
+										$("#sliderProgressBar").css("margin-left", "300px");
+										for(var h = 0; h < _that.newClass.length; h++) {
+											//												  	console.log(_that.newClass[h].actualStatusStr);
+											if(_that.newClass[h].actualStatusStr == '全部完成') {
+
+												oDataArr.push(_that.newClass[h]);
+											} else {
+												console.log("暂无数据");
+
+											}
+										}
+									} else if(_oSpan == '已拖延') {
+										$("#sliderProgressBar").css("margin-left", "225px");
+										for(var w = 0; w < _that.newClass.length; w++) {
+
+											if(_that.newClass[w].actualStatusStr == '进度拖延' || _that.newClass[w].actualStatusStr == '拖延完成') {
+												oDataArr.push(_that.newClass[w]);
+
+											} else {
+												console.log("暂无数据");
+												$(".kk").css("display", "block");
+											}
+										}
+									} else {
+										console.log("暂无数据");
+									}
+									console.log(oDataArr);
+									if(oDataArr == "") {
+										$(".kk").css("display", "block");
+										_that.rtData = oDataArr;
+									} else {
+										$(".kk").css("display", "none");
+										_that.rtData = oDataArr;
+									}
+
+								})
+							})
+						},
+
+						//每一个列表下表点击
+						footerFunc: function(index, index1, index2) {
+							console.log('index', index)
+							console.log('index1', index1)
+							console.log('index1', index2)
+							$.ajax({
+								type: "GET",
+								url: userInfo.url + "/mobile/" + userInfo.projId + "/task/verifyList",
+								async: true,
+								beforeSend: function(request) {
+									request.setRequestHeader('tokenId', userInfo.tokenId);
+									request.setRequestHeader('appType', 7);
+								},
+								data: {
+									taskId: index2
+								},
+								success: function(data) {
+									$(".hjw").text("");
+									$(".hjws").text("");
+
+									this.renWuArr = data.rt;
+
+									console.log("5.13", this.renWuArr);
+									var accp = "";
+									var accp1 = "";
+
+									if(this.renWuArr.verifyList != null) {
+										for(var i = 0; i < this.renWuArr.verifyList.length; i++) {
+											var timestamp4 = new Date(this.renWuArr.verifyList[i].tvDate);
+											var dates = timestamp4.toLocaleDateString().replace(/\//g, "-") + " " + timestamp4.toTimeString().substr(0, 8);
+											accp += `<div class="list">
+										<span class="fl">${dates}</span>
+										<span class="mid">${this.renWuArr.verifyList[i].tvRate}%</span>
+										<span class="fr">${this.renWuArr.verifyList[i].tvUserName}</span>
+										</div>`
+										}
+									} else {
+										console.log("暂无数据11");
+									}
+									if(this.renWuArr.attachList != null) {
+
+										for(var i = 0; i < this.renWuArr.attachList.length; i++) {
+											accp1 += `<div class="imgSrc">
+									<img src="https://file.arctron.cn/qjbim-file/${this.renWuArr.attachList[i].relativePath}">
+									</div>`
+										}
+									} else {
+										console.log("暂无数据");
+									}
+
+									$(".hjw").append(accp);
+									$(".hjws").append(accp1);
+								}
+							});
+
+							$('.foot').find('span').removeClass('active');
+							$('.foot').eq(index).find('.bg_tp').find('span').eq(index1).addClass('active');
+							$('.foot').find('.mask_list').removeClass('cur');
+							$('.foot').eq(index).find('.bg_bom').find('.mask_list').eq(index1).addClass('cur');
+
+						},
+						ceshi: function(i) {
+							console.log(i);
+							$(".hjwtime").text("");
+							this.newStkId = i;
+							var oclose = document.getElementById('close');
+							var modal = document.getElementById('myModal');
+
+							modal.style.display = "block";
+							window.onclick = function(event) {
+								if(event.target == modal) {
+									modal.style.display = "none";
+								}
+							}
+							oclose.onclick = function() {
+								modal.style.display = "none";
+							}
+						}
+
+					}
+				});
+
+			});
+
+			//年月日时分
+			$(document).on('tap', '.btn', function() {
+				var dtPicker = new mui.DtPicker();
+				dtPicker.show((selectItems) => {
+					$(this).text(selectItems.text);
+				});
+			})
+			//4.1 获取群组列表id  渲染群组
+			function init_GroupId() {
+				var userInfo = getGlobalUserInfo();
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/cloud/getGroupList?type=json',
+					data: {
+						'projectId': userInfo.projId,
+						'tokenId': userInfo.tokenId
+					},
+					async: true,
+					dataType: 'json',
+					success: function(data) {
+						if(data.responseInfo.responseCode == 101) {
+							mui.toast(data.responseInfo.responseMessage);
+						} else {
+							//若用户存在于“质量检查、安全检查和质量验收”群组内，在当前群组下拉框中隐藏这3个群组
+							//				console.log(data.userGroupList);
+							var datas = [];
+							for(var i = 0; i < data.userGroupList.length; i++) {
+								//				console.log(data.userGroupList[i].groupName);
+								//
+								if(data.userGroupList[i].groupName == "质量检查" || data.userGroupList[i].groupName == "安全检查" || data.userGroupList[i].groupName == "质量验收" || data.userGroupList[i].groupName == "安全验收") {} else {
+									datas.push(data.userGroupList[i]);
+								}
+							};
+
+						}
+
+					}
+				})
+			}
+			//递归所以的最底层节点,页面创建时调用...
+			function fundigui(data, arr) {
+
+				for(var i = 0; i < data.length; i++) {
+
+					if(data[i].children != null) {
+						var sonList = data[i].children;
+
+						if(sonList.children == 'null') {
+							arr.push(data[i]);
+						} else {
+							fundigui(sonList, arr);
+						}
+					} else {
+						arr.push(data[i]);
+					}
+
+				}
+
+				return arr;
+
+			}
+		</script>
+	</body>
+
+</html>

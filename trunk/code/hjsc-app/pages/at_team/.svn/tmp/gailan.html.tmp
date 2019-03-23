@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>项目名称</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		/*侧滑,菜单栏样式*/
+		/*滚动*/
+		.mui-table-view{
+			margin-top: 0;
+		}
+		/*去除滚动条*/
+		.mui-scrollbar-vertical{
+			display: none;
+		}
+		.mui-off-canvas-left, .mui-off-canvas-right{
+			background: #f5f5f5;
+		}
+		.mui-off-canvas-wrap.mui-active .mui-off-canvas-backdrop{
+			background: rgba(0,0,0,.2);
+			box-shadow:none;
+		}
+		.glz_tit .mui-table-view{
+			background:linear-gradient(-30deg,#045a8d 0%,#008999 100%);
+		}
+		.glz_tit .mui-media-body p{
+			color: #fff;
+			opacity: .9;
+		}
+		.glz_tit .mui-table-view .mui-media-object{
+			border: 2px solid #fff;
+			border-radius: 30px;
+		}
+		.glz_tit .mui-table-view-cell {
+    		padding: 40px 15px;
+		}
+		.glz_tit .mui-table-view-cell>a:not(.mui-btn){
+			margin: -40px -15px;
+		}
+		.glz_tit .mui-table-view-cell>a:not(.mui-btn).mui-active{
+			background-color: rgba(0,0,0,.1);
+		}
+		.glz_list .mui-table-view-cell {
+    		padding: 13px 15px;
+		}
+		.glz_list .mui-table-view-cell:after{
+			left: 0;
+		}
+		/*侧边栏,主页背景*/
+		.glz_list .mui-table-view,.mui-content{
+			background-color: #f5f5f5;
+		}
+		.glz_list .mui-table-view li{
+			background-color: #fff;
+		}
+		.glz_list .mui-table-view li:nth-last-of-type(2){
+			margin-top: 10px;
+		}
+		@media screen and (max-width: 360px){
+			.glz_tit .mui-table-view-cell{
+				padding: 40px 8px;
+			}
+			.mui-table-view .mui-media-object.mui-pull-left{
+				margin: 0 10px;
+			}
+		}
+		
+		/*新闻滚动*/
+		#usuallyapp{
+			background-color: #fff;
+			margin-top: 20px;
+		}
+		.root{
+		    height: 50px;
+		    line-height: 50px;
+		    border-top: 1px solid #ccc;
+		    font-size: 17px;
+		    overflow: hidden;
+		    background-color: #fff;
+		    position: relative;
+			}
+		.scrollmain{
+		    padding: 0 15px;
+		    width:100%;
+		}
+		.sleft{
+			color: #0487d0;
+			font-weight: bold;
+			float: left;
+			width: 30%;
+			text-align: center;
+		}
+		.sleft:after{
+			content: '';
+			height:30px;
+			top: 10px;
+			width: 1px;
+			position: absolute;
+			left: 30%;
+			background-color: #e6e6e6;
+		}
+
+		@media screen and (max-width: 320px){
+				.scrollmain{
+					font-size: 16px;
+				}
+		}
+		/*常用应用*/
+		.mui-col-sm-3{
+			width: 20%;
+		}
+		.mui-grid-view.mui-grid-9{
+			background-color: #fff;
+			border: 0;
+		}
+		.mui-grid-view.mui-grid-9 .mui-table-view-cell{
+			padding: 3px 0;
+			border: 0;
+		}
+		#application{
+			background-color: #fff;
+			margin-top: 20px;
+		}
+		/*第一次弹出框*/
+		.mui-popup-buttons{
+			display: block;
+			height: 140px;
+		}
+		.mui-popup-button:first-child{
+			border-radius: initial;
+		}
+		.mui-popup-button:last-child {
+		    border-radius: 0 0 13px 13px;
+		}
+	</style>
+	<body>
+		<!-- 主界面菜单同时移动 -->
+		    <!-- 侧滑导航根容器 -->
+		    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+		        <!-- 主页面容器 -->
+		        <div class="mui-inner-wrap">
+		            <!-- 菜单容器 -->
+		            <aside id="offCanvasSide" class="mui-off-canvas-left">
+		                <div id="left_scroll" class="mui-scroll-wrapper">
+		                <!--菜单内容开始-->
+						<div class="mui-scroll">
+						<!--头部-->
+						<!--坑点: 不能把id定义在 mui-scroll中，不能将此当做父容器，需要重新定一个div作为父容器-->
+						<div id="glz_slide">
+						<leftlist :gl='gl' :items='items'></leftlist>
+						</div>
+						
+						</div>
+						<!--菜单内容结束-->
+		                </div>
+		            </aside>
+		            <!-- 主页面标题 -->
+		            <header class="mui-bar mui-bar-nav">
+		                <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+		                <h1 class="mui-title" id="headertext">项目名称</h1>
+		                <a class="mui-icon mui-action-menu mui-pull-right" href="tz.html"><img src="../../icon/gl.png" class="cicon"></a>
+		            </header>
+		            
+		            <!-- 主页面内容容器 -->
+		            <div id="home_scroll" class="mui-content mui-scroll-wrapper">
+		                <div class="mui-scroll">
+		                    <!-- 主界面具体展示内容 -->
+		                    <img src="../../img/gailan.png" height="232px" width="100%"/>
+		                        
+		                    	<div id="newScroll" class="root">
+							    <Ns :items="items"></Ns>
+							 	</div>
+							 	
+							 	<!--常用应用-->
+							 	<div id="usuallyapp">
+							 	<p class="ntitle">常用应用</p>
+							 	<ul class="mui-table-view mui-grid-view mui-grid-9">
+							 	
+							 	<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" :class="'mu'+index" v-for="(item,index) in itemusu" :accesskey="index">
+							 	    <a :href="item.appurl" target="_blank">
+							 	        <img :src="'../../'+item.imgurl" class="dicon">
+							 	        <div class="mui-media-body fs13">{{item.name}}</div>
+							 	    </a>
+							 	</li>
+							 	
+							 	</ul> 
+							 	</div>
+							 	
+		                </div>
+		            </div>
+		       	 <div class="mui-off-canvas-backdrop"></div>
+		        </div>
+		    </div>
+		
+		
+	
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/vue2.5.js" ></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="../../components/leftlist.js" ></script>
+    <script type="text/javascript" src="../../components/newscroll.js" ></script>
+<<<<<<< .mine
+    <script type="text/javascript" src="../../js/globalVariable.js" ></script>
+		<script type="text/javascript">
+=======
+	<script type="text/javascript" src="../../js/globalVariable.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			userInfo = getGlobalUserInfo();
+			
+			console.log(userInfo);
+			$('#headertext').html(userInfo.project.projName);
+			
+		})
+		
+>>>>>>> .r219
+//			 window.user = {
+//                 badge:'83324',
+//                 loginId:'atian16',
+//                 userName:'田青',
+//                 userDep:'信息技术部',
+//                 userTitle:'应用系统工程师'
+//             }
+			
+			mui('#left_scroll').scroll();
+			mui('#home_scroll').scroll();
+//			常用应用
+//			请求数据
+			var usudata=[
+//				{imgurl:'icon/gl1.png',name:'查询',appurl:'javascript:void(0)'},
+//				{imgurl:'icon/gl2.png',name:'跟踪',appurl:'javascript:void(0)'},
+//				{imgurl:'icon/gl3.png',name:'检查',appurl:'javascript:void(0)'},
+				{imgurl:'icon/gl4.png',name:'主题',appurl:'subject.html'},
+//				{imgurl:'icon/gl5.png',name:'对话',appurl:'javascript:void(0)'},
+//				{imgurl:'icon/gl6.png',name:'会议',appurl:'javascript:void(0)'},
+				{imgurl:'icon/gl7.png',name:'虚拟场景',appurl:'../at_team/Space_container.html'},
+//				{imgurl:'icon/gl8.png',name:'工程日历',appurl:'javascript:void(0)'},
+				{imgurl:'icon/gl9.png',name:'工程任务',appurl:'javascript:void(0)'},
+				{imgurl:'icon/gl10.png',name:'工程云盘',appurl:'../at_cloud/cloud_project_list.html'},
+				{imgurl:'icon/gl11.png',name:'工程分享',appurl:'../at_cloud/cloud_project_share.html'},
+				{imgurl:'icon/gl12.png',name:'中转站',appurl:'../at_cloud/cloud_project_station.html'},
+				{imgurl:'icon/gl13.png',name:'联系人',appurl:'../at_team/linkman.html'},
+				{imgurl:'icon/gl14.png',name:'设置',appurl:'../at_team/setup.html'},
+				{imgurl:'icon/gl15.png',name:'添加',appurl:'../at_team/gailan_add.html'},
+			];
+			var glz=new Vue({
+				el:"#usuallyapp",
+				data:function(){
+					return{
+						itemusu:usudata
+					}
+				}
+			})
+			
+			
+			//请求数据
+			console.log(getGlobalUserInfo())
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>通知</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.mui-table-view {
+			margin-top: 50px;
+		}
+		.sampfont {
+			color: #494949;
+			font-size: 16px;
+			line-height: 30px;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
+		.sampdata {
+			float: right;
+		}
+		.mui-table-view-cell:after{
+			left: 0;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">通知</h1>
+		</header>
+       <div id="tz">
+       	<ul class="mui-table-view">
+			<li class="mui-table-view-cell mui-media" v-for="tz in items">
+				<a href="javascript:;">
+					<img class="mui-media-object mui-pull-left bdr30" :src="'../../'+tz.imgurl">
+					<div class="mui-media-body">
+						<p><span class="sampfont">{{tz.titname}}</span><small class="sampdata">{{tz.date}}</small></p>
+						<p class='mui-ellipsis'>{{tz.actions}}</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+       	
+       </div>
+		
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+				var itemsdata=[
+				{titname:'收到新的任务',date:'40分钟前',actions:'办公室大楼效果图修改',imgurl:'icon/tz1.png'},
+			    {titname:'任务即将开始',date:'3个小时前',actions:'珠海格力电器股份有限公司办公大楼设...',imgurl:'icon/tz2.png'},
+			    {titname:'任务临近结束',date:'昨天',actions:'立白集团项目原型图',imgurl:'icon/tz3.png'},
+			    {titname:'任务已经拖延',date:'2018-11-29',actions:'顺丰速运物流管理系统设计图 ',imgurl:'icon/tz4.png'},
+			    {titname:'任务核实产值',date:'2018-11-28',actions:'上海城投后勤区效果图修改',imgurl:'icon/tz5.png'},
+			    {titname:'新的主题发表',date:'2018-11-28',actions:'华润万家超市效果图',imgurl:'icon/tz6.png'},
+			    {titname:'收到新的回复',date:'2018-11-28',actions:'中国电信办公系统优化',imgurl:'icon/tz7.png'},
+			    {titname:'有用户提到你',date:'2018-11-27',actions:'华创值班室结构图华创值班室结构图',imgurl:'icon/tz8.png'},
+			    {titname:'任务临近结束',date:'昨天',actions:'立白集团项目原型图',imgurl:'icon/tz3.png'},
+			    {titname:'任务已经拖延',date:'2018-11-29',actions:'顺丰速运物流管理系统设计图 ',imgurl:'icon/tz4.png'},
+				];
+			/*获取文件的图标样式*/
+			Vue.filter('format',function(value){
+				var i=tool.getAttachIcon(value.titname)
+			     return i.src;
+			 });
+			
+			//页面
+			var obj=new Vue({
+				el:'#tz',
+				data:function(){
+					return{
+						items:itemsdata,
+					}
+				},
+				
+			});
+			
+			
+			
+			
+			
+		</script>
+
+	</body>
+
+</html>

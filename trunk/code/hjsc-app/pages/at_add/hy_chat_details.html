@@ -1,0 +1,842 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>选择群组</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+	</head>
+	<style>
+		.tit-right {
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: #fff;
+		}
+		
+		.management {
+			padding: 15px;
+			padding-top: 0;
+			box-sizing: border-box;
+			background: #fff;
+		}
+		
+		.pic_mount {
+			float: left;
+			margin-top: 15px;
+			position: relative;
+			width: 20%;
+			height: 70px;
+			text-align: center;
+		}
+		.pic_mount .augment,
+		.pic_mount .reduce {
+			width: 2.4rem;
+			height: 2.4rem;
+			border-radius: 8px;
+			border: 1px solid #ccc;
+			margin-left: 10%;
+		}
+		.augment>img,.reduce>img{
+			width: 100%;
+			height: 100%;
+		}
+		
+		/*.pic_mount:nth-of-type(2) {
+			margin: 0 0.6rem;
+			margin-top: 15px;
+		}*/
+		
+		/*.pic_mount:nth-of-type(4) {
+			margin: 0 0.6rem;
+			margin-top: 15px;
+		}*/
+		
+		/*.pic_mount:nth-of-type(7) {
+			margin: 0 0.6rem;
+			margin-top: 15px;
+		}*/
+		
+		.management .pic_name>img {
+			/*width: 57px;
+			height: 57px;*/
+			width: 2.4rem;
+			height: 2.4rem;
+		}
+		
+		.management .pic_name p {
+			font-size: 14px;
+			color: rgb(102, 102, 102);
+			text-align: center;
+			width: 2.4rem;
+			margin-left: 6px;
+		}
+		
+		.mui-bar-nav~.mui-content {
+			padding-top: 50px;
+		}
+		
+		.meeting_room {
+			margin: 15px 0;
+			background: #fff;
+			font-size: 16px;
+			padding: 0 15px;
+			line-height: 40px;
+		}
+		
+		.meeting_room .fl {
+			color: rgb(51, 51, 51);
+		}
+		
+		.meeting_room .fr {
+			color: rgb(102, 102, 102);
+		}
+		
+		.meeting_room input {
+			border: none;
+			margin-bottom: 0;
+			padding: 0 !important;
+		}
+		.stick{
+			background: #fff;
+		    padding: 0 15px;
+            line-height: 40px;
+		}
+		.discurlb{
+			background: #fff;
+		    padding: 0 15px;
+            line-height: 40px;
+		}
+		.btn_mt{
+			margin-top: 5px;
+		}
+		.clear_meeting{
+			background: #fff;
+		    padding: 0 15px;
+            line-height: 40px;
+            margin: 15px 0;
+		}
+		
+		/*复选框*/
+		.checkman{
+		    width: 2.4rem;
+		    height: 2.4rem;
+		    position: absolute;
+		    top: 0;
+		    left: 6px;
+		    z-index: 9;
+		    background: rgba(0,0,0,.4) !important;
+		}
+		.checkman>input{
+			top: .5rem !important;
+    		left: .6rem !important;
+		}
+		/*建立完成*/
+		.subadd,.subupdate,.addman,.subdel{
+			font-size: 16px !important;
+    		margin-top: 8px;
+		}
+		.mui-btn-block {
+		    font-size: 18px;
+		    display: block;
+		    width: 80%;
+		    margin-bottom: 0;
+		    padding: 10px 0;
+		    margin: 40px auto;
+		}
+		.textr{
+			text-align: right;
+		}
+	</style>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">聊天详情</h1>
+			<span class="mui-icon mui-action-menu mui-pull-right subadd dnone">完成</span>
+			<span class="mui-icon mui-action-menu mui-pull-right subupdate dnone">修改</span>
+			<span class="mui-icon mui-action-menu mui-pull-right addman dnone">添加</span>
+			<span class="mui-icon mui-action-menu mui-pull-right subdel dnone">移除</span>
+		</header>
+		<div class="mui-content ltdetails">
+			<!--群聊人员-->
+			<div class="management">
+				
+				<div class="pic_mount manlist" v-for="(item,index) in items1" :key=index >
+					<div class="pic_name">
+						<img :src="item.imgUuid ==null ? item.userImg: item.imgUuid" onerror="this.src='../../img/defaultimg.png'"/>
+						<p class="hone" v-if="item.userName!=null">{{item.userName | subname}}</p>
+						<p class="hone" v-else>{{item.account | subname}}</p>
+						<!--<div>群组联系人userId：{{item.userId}}</div>-->
+						<!--<div>当前账号userid{{thisuserid}}</div>-->
+					</div>
+					
+					<!--群组进来复选-->
+						<div v-if="addflag==0 && flag==0">					<!--自身则不做选择-->
+						<div class="mui-input-row mui-checkbox addql" v-if="item.userId!==thisuserid"><!--:ref="item.userName | subname"-->
+							<input value="Item" type="checkbox" @click="manlist(index)">
+						</div>
+						</div>
+							<!--{{item.userId+'-'+item1}}-->
+							<!--<div class="mui-input-row mui-checkbox addhy" v-for="(item1,index) in muserid" :key="index" :class="item.userId==item1?'thism':''"><!-- v-if="item.userId==item1"     v-if="item.userId!==muserid[index]"-->
+								<!--{{item.userId+'--'+muserid[index]}}-->
+								<!--<input value="Item" type="checkbox">-->
+							<!--</div>-->
+						<!--会议进群组中添加联系人-->
+						<div v-if="addflag==2 && flag==0">
+						<div class="mui-input-row mui-checkbox addhy" >
+							<input value="Item" type="checkbox" @click="manlist(index)">
+							<p :class="'u'+item.userId" class="dnone">{{item.userId}}</p>
+						</div>
+						</div>
+						<!--会议进群组中移除联系人-->
+						<div v-if="addflag==0 && flag==2">
+						<div class="mui-input-row mui-checkbox delhy" v-if="item.userid!==thisuserid">
+							<!--<div>错误做法：{{muserid[index].userid}}--正确做法：{{item.userid}}--{{thisuserid}}</div>-->
+							<input value="Item" type="checkbox" @click="delman(index)">
+							<!--会议联系人userid：muserid[index].userid-->
+							<!--<p>{{item.userid}}</p>-->
+						</div>
+						</div>
+				</div>
+				
+				<!--添加,移除-->
+				<div class="pic_mount">
+					<!--添加群组-->
+					<div class="augment groupment" v-if="flag==0" v-show="glength<2?'':'!glengs'">
+						<img src="../../icon/hy_add.png" />
+					</div>
+					<!--会议添加联系人-->
+					<div class="augment meetment" v-else>
+						<img src="../../icon/hy_add.png" />
+					</div>
+					
+				</div>
+				<div class="pic_mount">
+					<!--群组移除联系人-->
+					<div class="reduce groupremove dnone" v-if="flag==0">
+						<img src="../../icon/hy_remove.png"/>
+					</div>
+					<!--会议移除联系人-->
+					<div class="reduce meetingmove" v-else :class="muserid.length<=1?'dnone':''">
+						<img src="../../icon/hy_remove.png" />
+					</div>
+					
+					
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--对话详情主体-->
+			<div class="meeting_room">
+				<div class="fl">会议室名称</div>
+				<div class="fr"><input type="text" class="textr" :value="addflag==2?names:meetingname" :class="ispointer?'pointern':''"/><i></i></div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--置顶设置-->
+			<!--<div class="stick" :class="flag==0?'dnone':''">-->
+				<div class="stick dnone">
+				<div class="fl">置顶设置</div>
+				<div class="fr">
+					<!-- 简洁模式开关关闭状态 -->
+					<div id="myzd" class="mui-switch mui-switch-mini btn_mt">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--消息免打扰-->
+			<!--<div class="discurlb" :class="flag==0?'dnone':''">-->
+				<div class="discurlb dnone">
+				<div class="fl">消息免打扰</div>
+				<div class="fr">
+					<!-- 简洁模式开关关闭状态 -->
+					<div class="mui-switch mui-switch-mini btn_mt">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<!--清空会议记录-->
+			<div class="clear_meeting" :class="flag==0?'dnone':''">
+				清空会议记录
+			</div>
+			
+			<button type="button" class="mui-btn mui-btn-danger mui-btn-block" :class="flag==0?'dnone':''" @click="deletechat()">删除并退出</button>
+																					   <!--getmeetingman(),deletechat()-->
+		</div>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue2.5.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/globalVariable.js"></script>
+		<script type="text/javascript" src="../../js/pub.js" ></script>
+		<script type="text/javascript">
+			userInfo=getGlobalUserInfo();
+			
+			Vue.filter('subname',function(name){
+				if(name.length>5){
+					name=name.substring(0,6)
+				}
+				return name
+			})
+			
+			//获取群组names
+			var groupname=getUrlParam('groupname');
+			//获取群组id
+			var gid=getUrlParam('groupid');
+			//0群组,1私聊,2会议
+			var flag=getUrlParam('flag');
+			//从会议添加联系人->群组页
+			var addflag=getUrlParam('addflag');
+			//获取会议names
+			var meetingname=getUrlParam('mettingname');
+			//获取会议id
+			var meetingid=getUrlParam('id');
+			//添加群聊数组
+			var addchats=[];
+			var vm=new Vue({
+				el:'.ltdetails',
+				data:{
+					//当前登陆用户名
+					thisuserid:userInfo.userId,
+					items:[],
+					glength:'',
+					glengs:true,
+					addprop:false,
+					//群组名
+					names:groupname,
+					//从群组创建会议名
+					addmeetname:'',
+					//会议名
+					meetingname:meetingname,
+					//标识
+					flag:flag,
+					//会议到群组标识
+					addflag:addflag,
+					//名称允许修改
+					ispointer:true,
+					//删除id(会议id)
+					meetingid:meetingid,
+					//当前会议人员信息
+					muserid:[],
+				},
+				created(){
+					//获取联系人
+					this.alllinkman();
+					//匹配联系人
+//					this.grounpmanpp();
+				},
+				computed:{
+					items1:function(){
+						//进群组||进会议
+						if(this.flag==0 && this.addflag==0 || this.flag==2 && this.addflag==0){
+							return this.items;
+						}else{
+						$.each(this.muserid, function(e,e1) {
+							setTimeout(function(){
+								$('.u'+e1).parent().addClass('dnone')
+							})
+						});
+						return this.items;
+						}
+						
+					}
+				},
+				methods:{
+			//名称是否允许修改
+			ispoint(){
+				if(this.addflag==2){
+					this.ispointer=true
+				}else{
+					this.ispointer=false
+				}
+			},
+			
+			//获取联系人
+			alllinkman(){
+				//群组联系人
+				if(this.flag==0){
+					this.grounpman();
+				//个人
+				}else if(this.flag==1){
+					
+				}
+				//会议联系人
+				else{
+					this.meetingman();
+				}
+			},
+			
+			//获取群组联系人
+			grounpman(){
+//				if(this.addflag==0){
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/mobile/showUserList',
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenID', userInfo.tokenId);
+					},
+					data: {
+						'projId': userInfo.projId,
+						'entId': userInfo.entid,
+						'ugId': gid, //组群id需要先获取组群列表   4.1的接口中获取
+						'pageNo': 1,
+						'pageSize': 1000
+					},
+					async: true,
+					success: function(data) {
+						//登录失效
+						if(data.obj === false) {
+							tokenInvalid(data);
+							return;
+						}
+						//	if(data.obj.length==0){
+						//		isHave=true;
+						//	}else{
+						//	   isHave=false;
+						//	}
+						vm.items = data.obj;
+						vm.glength=vm.items.length;
+					}
+				})
+//				}
+			},
+
+			//获取用户
+			getuser(uid) {
+				$.ajax({
+					type: 'GET',
+					url: userInfo.url + '/mobile/showUserInfo',
+					beforeSend: function(request) {
+						request.setRequestHeader('tokenID', userInfo.tokenId);
+						request.setRequestHeader('appType', 7);
+					},
+					data: {
+						'projId': userInfo.projId,
+						'userId': uid
+					},
+					async: false,
+					success: function(data) {
+						vm.items.push({'userName':data.obj.realName,'imgUuid':data.obj.userImg,'userid':uid});
+					}
+				})
+			},
+
+			
+			//获取会议联系人
+				meetingman(){
+					$.ajax({
+					type:"get",
+					url:userInfo.chaturl+"/message/getUsers",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						meetingId:this.meetingid,
+					},
+					success:function(data){
+						$.each(data.rt, function(e,e1) {
+							vm.getuser(e1.userid)
+						});
+						//获取群组内联系人
+						vm.muserid=data.rt;
+						
+					}
+				});
+				},
+			//从群组创建会议
+					manlist(index){
+//						选中就添加数据
+						if(this.addprop===true){
+							addchats.push(vm.items[index].userId);
+							console.log(JSON.stringify(addchats))
+//							console.log(vm.items[index].userId)
+						}else{
+							//反之
+							$.each(addchats, function(e,e1) {
+								if(e1==vm.items[index].userId){
+									addchats.splice(e,1)
+								}
+							});
+							console.log(JSON.stringify(addchats))
+						}
+					
+					},
+			//会议删除联系人
+				delman(index){
+//						选中就添加数据
+						if(this.addprop===true){
+							addchats.push(vm.items[index].userid);
+							console.log(JSON.stringify(addchats))
+						}else{
+							//反之
+							$.each(addchats, function(e,e1) {
+								if(e1==vm.items[index].userid){
+									addchats.splice(e,1)
+								}
+							});
+							console.log(JSON.stringify(addchats))
+						}
+					
+					},
+					
+				//删除会议
+				deletechat(){
+					$.ajax({
+					type:"get",
+					url:userInfo.chaturl+"/message/deleteMeeting",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						meetingId:this.meetingid,
+						userId:userInfo.userId,
+					},
+					success:function(data){
+						if(data.cd==0){
+							mui.toast(data.msg);
+//							成功后触发列表页
+							var list =plus.webview.currentWebview().opener().opener();
+							// 执行相应的事件
+						　　	mui.fire(list, 'rlist', {});
+							plus.webview.currentWebview().opener().close();
+							plus.webview.currentWebview().close()
+						}else{
+							mui.toast('删除失败');
+						}
+						
+					},
+				});
+				},
+				
+				//聊天置顶
+					truetop(){
+				$.ajax({
+					type:"get",
+					url:userInfo.chaturl+"/message/setTop",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						userId:userInfo.userId,
+						targetId:meetingid,
+						isMeeting:1 //0.私聊 1.会议
+					},
+					success:function(data){
+						console.log(data);
+					},
+					error:function(e){
+						console.log(e.statusText);
+					}
+				});
+			},
+			//取消置顶
+				canceltop(){
+				$.ajax({
+					type:"get",
+					url:userInfo.chaturl+"/message/cancelTop",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						//置顶内的id值
+						topId:37,
+					},
+					success:function(data){
+						console.log(data)
+						mui.toast(data.msg);
+					},
+					error:function(e){
+						console.log(e.statusText);
+					}
+				});
+			},
+					
+				},
+				mounted(){
+//					this.qzlist();
+//					this.hylist();
+//					this.canceltop();
+					this.ispoint();
+					
+				}
+			})
+			//置顶点击
+//			document.getElementById("myzd").addEventListener('toggle',function (e) {
+//			var isActive = e.detail.isActive;
+			//置顶
+//				if(isActive==true){
+//					vm.truetop();
+//				}else{
+//					vm.canceltop();
+//					//不置顶
+//				}
+//			})
+			
+			//修改会议
+			$('.textr').on('tap', function() {
+				if(flag==0){
+					$('.subupdate').addClass('dnone');
+				}else{
+					$('.subupdate').removeClass('dnone');
+				}
+			});
+			//添加会议
+//			addflag=0:从群组进添加会议 addflag=2:从会议进添加人
+			if(addflag==0){
+			$('.groupment').on('tap',function(){
+				$('.addql').toggleClass('checkman');
+				$('.subadd').toggleClass('dnone');
+			})
+			}else if(addflag==1){
+				
+			}else{
+//				mui.toast('从会议进到群组选择联系人');
+				var meetingintoid=getUrlParam('meetingid');
+				//获取进入群组的联系人
+				$.ajax({
+					type:"get",
+					url:userInfo.chaturl+"/message/getUsers",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						meetingId:meetingintoid,
+					},
+					success:function(data){
+						$.each(data.rt, function(e,e1) {
+//							vm.muserid.push({userid:e1.userid})
+							vm.muserid.push(e1.userid)
+						});
+					}
+				});
+				
+				
+				
+				//获取所有
+//				vm.getmeetman();
+//				vm.manlist()
+				
+				$('.groupment').on('tap',function(){
+					$('.addhy').toggleClass('checkman');
+//					$('div').hasClass('thism').addClass('checkman')
+//					if($('.addhy').hasClass('thism')){
+//						$('.addhy').removeClass('checkman');
+//					}
+					
+					if(addflag==2){
+						$('.addman').toggleClass('dnone')
+					}
+					
+				})
+				
+			}
+			//会议添加联系人
+			$('.meetment').on('tap',function(){
+				mui.openWindow({
+					url:'hy_chat_details.html?flag=0&addflag=2&meetingid='+meetingid+'&groupname='+meetingname,
+					id:'addman_hy_chat_details',
+				})
+			})
+			//添加联系人到会议
+			$('.addman').on('tap',function(){
+				if(addchats.length==0){
+					mui.toast('请选择联系人');
+					return
+				}
+				
+				var addman='';
+				$.each(addchats, function(e,e1) {
+					addman+='&userIds='+e1;
+				});
+				var meetingid=getUrlParam('meetingid');
+				$.ajax({
+					type:"get",
+					//正式
+					url:userInfo.chaturl+"/message/addUser?meetingid="+meetingid+addman,
+					//调试
+//					url:"http://10.252.26.117:8079/message/addUser?meetingid="+meetingid+addman,
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						meetingId:meetingid,
+					},
+					success:function(data){
+						mui.toast(data.msg);
+						
+//						成功后触发列表页
+						var list =plus.webview.getWebviewById('hy_chat_details');
+//						// 执行相应的事件
+						mui.fire(list, 'addlist', {});
+						plus.webview.getWebviewById('addman_hy_chat_details').close();
+						
+					}
+				});
+			})
+			//添加联系人之后刷新
+			window.addEventListener('addlist', function() {
+			    //执行init_replyList方法
+				//或()注意定时函数调用方法写法
+				setTimeout( function(){
+					location.reload();
+			    });
+		  });
+		  
+			//会议删除联系人减号
+			$('.meetingmove').on('tap',function(){
+				$('.delhy ').toggleClass('checkman');
+				$('.subdel').toggleClass('dnone');
+			})
+			//提交删除
+			$('.subdel').on('tap',function(){
+				if(addchats.length==0){
+					mui.toast('请选择联系人');
+					return
+				}
+				var delman='';
+				$.each(addchats, function(e,e1) {
+					delman+='&userIds='+e1;
+				});
+				var meetingid=getUrlParam('id');
+				$.ajax({
+					type:"get",
+					//正式
+					url:userInfo.chaturl+"/message/deleteUser?meetingid="+meetingid+delman,
+					//调试
+//					url:"http://10.252.26.117:8079/message/addUser?meetingid="+meetingid+addman,
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader('token',userInfo.tokenId);
+					},
+					data:{
+						meetingId:meetingid,
+						deleteUserId:vm.thisuserid
+					},
+					success:function(data){
+						console.log(data)
+						mui.toast(data.msg);
+					}
+				})
+				
+			})
+			
+			
+			
+			//选择人员
+			$(document).on('tap','.addql>input,.addhy>input,.delhy>input',function(){
+//				状态
+				var zt=$(this).prop("checked");
+//				选中：zt==false
+				if(!zt){
+					vm.addprop=true
+//					mui.toast('选中')
+				}else{
+					vm.addprop=false
+//					mui.toast('非选中')
+				}
+//				console.log($(this).prop("checked"))
+			})
+			
+			//提交添加会议
+			$('.subadd').on('tap',function(){
+//				var i=Math.random()
+			//创建群聊获取url
+			var mani;
+			var adduserid='';
+			$.each(addchats, function(e,e1) {
+				adduserid+='&userId='+e1;
+				mani=e+2;
+			});
+//			console.log('addchats:'+addchats+'--mani:'+mani);
+			
+			//校验
+				if(mani==undefined){
+					mui.toast('至少选择1个用户')
+					return
+				}else if($('.textr').val()==''){
+					mui.toast('请输入会议名称')
+					return
+				}
+			//创建会议
+//			console.log(mani)
+			//正式
+			var addchaturl=userInfo.chaturl+"/message/addMeeting?userId="+userInfo.userId+adduserid;
+			//测试
+//			var addchaturl="http://10.252.26.117:8079/message/addMeeting?userId="+userInfo.userId+adduserid;
+//			console.log('url:'+"http://10.252.26.117:8079/message/addMeeting?userId="+userInfo.userId+adduserid)
+//			console.log(addchaturl)
+				//多人聊天>2
+				$.ajax({
+				type:"get",
+//				url:userInfo.chaturl+"/message/addMeeting",
+				//？userId=18972
+				url:addchaturl,
+				async:true,
+				beforeSend:function(request){
+					request.setRequestHeader('token',userInfo.tokenId);
+				},
+				data:{
+					//自己建的，groupId不传
+//					groupId:userInfo.groupId,
+					groupId:'',
+					name:$('.textr').val()+'-群聊('+mani+')',
+//					userId:['18972','5626','19665'],
+					projectId:userInfo.projId,
+					imageUrl:userInfo.chathead,
+					createUser:userInfo.userId
+				},
+					success:function(data){
+					if(data.cd==0){
+						mui.toast('创建成功');
+//						成功后触发列表页
+						var list =plus.webview.currentWebview().opener();
+						// 执行相应的事件
+						mui.fire(list, 'rlist', {});
+						plus.webview.currentWebview().close();
+						
+					}else{
+						mui.toast('创建失败或群聊已存在')
+					}
+					
+					}
+				});
+				
+			})
+			
+			//修改会议
+			$('.subupdate').on('tap',function(){
+				$.ajax({
+				type:"get",
+				url:userInfo.chaturl+"/message/updateMeeting",
+				async:true,
+				beforeSend:function(request){
+					request.setRequestHeader('token',userInfo.tokenId);
+				},
+				data:{
+					meetingId:meetingid,
+					name:$('.textr').val(),
+				},
+					success:function(data){
+					if(data.cd=="0"){
+						mui.toast('修改成功')
+					}else{
+						mui.toast('修改失败')
+					}
+					
+					}
+				});
+			})
+			
+		</script>
+	</body>
+
+</html>
